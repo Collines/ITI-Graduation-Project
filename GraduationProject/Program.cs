@@ -1,4 +1,3 @@
-using GraduationProject;
 using GraduationProject_DAL.Data.Context;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -15,7 +14,7 @@ internal class Program
         builder.Services.AddDbContext<HospitalBDContext>(options => options.UseSqlServer(
                 builder.Configuration.GetConnectionString("DefaultConnectionString")
                 ));
-
+        // Add reference loop handling
         builder.Services.AddControllers().AddNewtonsoftJson(o => o.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
 
         // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
