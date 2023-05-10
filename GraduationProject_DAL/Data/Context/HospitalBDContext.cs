@@ -1,4 +1,4 @@
-﻿using GraduationProject_DAL.Data.Modeles;
+﻿using GraduationProject_DAL.Data.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;

@@ -6,7 +6,7 @@ using System.Text;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
-namespace GraduationProject_DAL.Data.Modeles
+namespace GraduationProject_DAL.Data.Models
 {
     public class Department
     {
@@ -25,7 +25,6 @@ namespace GraduationProject_DAL.Data.Modeles
         [Required, MaxLength(500)]
         public string DescriptionAR { get; set; }
 
-        [JsonIgnore]
         public virtual IEnumerable<Doctor> Doctors { get; set; }
     }
 }

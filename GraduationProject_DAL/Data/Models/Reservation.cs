@@ -7,7 +7,7 @@ using System.Text;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
-namespace GraduationProject_DAL.Data.Modeles
+namespace GraduationProject_DAL.Data.Models
 {
     public class Reservation
     {
@@ -23,13 +23,11 @@ namespace GraduationProject_DAL.Data.Modeles
         [ForeignKey("Patient")]
         public string PId { get; set; }
 
-        [JsonIgnore]
         public virtual Patient? Patient  { get; set; }
 
         [ForeignKey("Doctor")]
         public int DocId { get; set; }
 
-        [JsonIgnore]
         public virtual Doctor? Doctor { get; set; }
 
 

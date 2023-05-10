@@ -7,7 +7,7 @@ using System.Text;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
-namespace GraduationProject_DAL.Data.Modeles
+namespace GraduationProject_DAL.Data.Models
 {
     public class Doctor
     {
@@ -42,10 +42,9 @@ namespace GraduationProject_DAL.Data.Modeles
 
         [ForeignKey("Department")]
         public int DeptId { get; set; }
-        [JsonIgnore]
+
         public virtual Department? Department { get; set; }
 
-        [JsonIgnore]
         public virtual IEnumerable<Reservation> Reservations { get; set; }
     }
 }

@@ -8,7 +8,7 @@ using System.Text;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
-namespace GraduationProject_DAL.Data.Modeles
+namespace GraduationProject_DAL.Data.Models
 {
     public class Patient
     {
@@ -46,7 +46,6 @@ namespace GraduationProject_DAL.Data.Modeles
         [MaxLength(500)]
         public string? MedicalHistory { get; set; }
 
-        [JsonIgnore]
         public virtual IEnumerable<Reservation> Reservations { get; set; }
     }
 }
