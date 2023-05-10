@@ -46,6 +46,6 @@ namespace GraduationProject_DAL.Data.Models
         [MaxLength(500)]
         public string? MedicalHistory { get; set; }
 
-        public virtual IEnumerable<Reservation> Reservations { get; set; }
+        public virtual IEnumerable<Reservation>? Reservations { get; set; }
     }
 }

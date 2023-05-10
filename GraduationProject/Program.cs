@@ -1,4 +1,6 @@
 using GraduationProject_DAL.Data.Context;
+using GraduationProject_DAL.Interfaces;
+using GraduationProject_DAL.Repositories;
 using Microsoft.EntityFrameworkCore;
 using System;
 
@@ -10,10 +12,13 @@ internal class Program
 
 
         // Add services to the container.
-
         builder.Services.AddDbContext<HospitalBDContext>(options => options.UseSqlServer(
                 builder.Configuration.GetConnectionString("DefaultConnectionString")
                 ));
+
+        //Add Repo Services
+        builder.Services.AddScoped<IDoctorRepo, DoctorRepo>();
+
         // Add reference loop handling
         builder.Services.AddControllers().AddNewtonsoftJson(o => o.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
 

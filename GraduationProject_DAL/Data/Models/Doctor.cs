@@ -45,6 +45,6 @@ namespace GraduationProject_DAL.Data.Models
 
         public virtual Department? Department { get; set; }
 
-        public virtual IEnumerable<Reservation> Reservations { get; set; }
+        public virtual IEnumerable<Reservation>? Reservations { get; set; }
     }
 }

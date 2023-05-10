@@ -25,6 +25,6 @@ namespace GraduationProject_DAL.Data.Models
         [Required, MaxLength(500)]
         public string DescriptionAR { get; set; }
 
-        public virtual IEnumerable<Doctor> Doctors { get; set; }
+        public virtual IEnumerable<Doctor>? Doctors { get; set; }
     }
 }
