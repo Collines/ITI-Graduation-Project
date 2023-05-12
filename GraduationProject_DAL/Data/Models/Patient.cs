@@ -10,12 +10,17 @@ using System.Threading.Tasks;
 
 namespace GraduationProject_DAL.Data.Models
 {
+    public enum Gender
+    {
+        Female = 1,
+        Male
+    }
     public class Patient
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [Key]
         public int Id { get; set; }
 
-        [Key,StringLength(14)]
+        [StringLength(14)]
         public string SSN { get; set; }
 
         [Required, MaxLength(50)]
@@ -29,6 +34,10 @@ namespace GraduationProject_DAL.Data.Models
 
         [Required, MaxLength(50)]
         public string LNameAR { get; set; }
+
+        [Required]
+        [EnumDataType(typeof(Gender))]
+        public Gender gender { get; set; }
 
         [Required, DataType(DataType.EmailAddress)]
         public string Email { get; set; }
