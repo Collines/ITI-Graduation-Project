@@ -41,12 +41,12 @@ namespace GraduationProject_DAL.Repositories
             pat.FNameAR=patient.FNameAR;
             pat.LName= patient.LName;
             pat.LNameAR=patient.LNameAR;
+            pat.gender = patient.gender;
             pat.Email=patient.Email;
             pat.Password=patient.Password;
             pat.DOB = patient.DOB;
             pat.PhoneNumber= patient.PhoneNumber;
             pat.MedicalHistory=patient.MedicalHistory;
-            pat.Reservations=patient.Reservations;
             context.SaveChanges();
         }
         public void DeletePatient(int id)
