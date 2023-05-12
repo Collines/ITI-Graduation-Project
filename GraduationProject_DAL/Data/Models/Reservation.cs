@@ -21,7 +21,7 @@ namespace GraduationProject_DAL.Data.Models
         public int? Queue { get; set; }
 
         [ForeignKey("Patient")]
-        public string PId { get; set; }
+        public int PId { get; set; }
 
         public virtual Patient? Patient  { get; set; }
 
