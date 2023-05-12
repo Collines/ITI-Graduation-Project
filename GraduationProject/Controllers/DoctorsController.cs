@@ -53,7 +53,7 @@ namespace GraduationProject.Controllers
         }
 
         [HttpDelete("/Doctors/Delete/{id:int}")]
-        public ActionResult<Doctor> deleteCourse(int id)
+        public ActionResult<Doctor> DeleteDoctor(int id)
         {
             var doctor = doctorRepo.GetDoctorDetails(id);
 
@@ -65,13 +65,13 @@ namespace GraduationProject.Controllers
         }
 
         [HttpPut("/Doctors/Update/{id:int}")]
-        public ActionResult<Doctor> put(int id, Doctor doctor)
+        public ActionResult<Doctor> UpdateDoctor(int id, Doctor doctor)
         {
             if (id != doctor.Id)
                 return BadRequest();
-            var updatedcourse = doctorRepo.GetDoctorDetails(id);
+            var updatedDoctor = doctorRepo.GetDoctorDetails(id);
 
-            if (updatedcourse == null)
+            if (updatedDoctor == null)
                 return NotFound();
             doctorRepo.UpdateDoctor(id, doctor);
 

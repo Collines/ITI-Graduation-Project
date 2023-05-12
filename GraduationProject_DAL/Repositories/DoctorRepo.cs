@@ -56,8 +56,13 @@ namespace GraduationProject_DAL.Repositories
 
         public void DeleteDoctor(int id)
         {
-            context.Remove(context.Doctors.Find(id));
-            context.SaveChanges();
+            var doctor = context.Doctors.Find(id);
+            if (doctor != null)
+            {
+                context.Remove(doctor);
+                context.SaveChanges();
+            }
+            
         }
     }
 }
