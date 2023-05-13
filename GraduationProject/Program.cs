@@ -2,6 +2,7 @@ using GraduationProject_DAL.Data.Context;
 using GraduationProject_DAL.Interfaces;
 using GraduationProject_DAL.Repositories;
 using Microsoft.EntityFrameworkCore;
+using AutoMapper;
 using System;
 
 internal class Program
@@ -19,6 +20,7 @@ internal class Program
         //Add Repo Services
         builder.Services.AddScoped<IDoctorRepo, DoctorRepo>();
         builder.Services.AddScoped<IPatientRepo, PatientRepo>();
+        builder.Services.AddScoped<IReservationRepo, ReservationRepo>();
 
         // Add reference loop handling
         builder.Services.AddControllers().AddNewtonsoftJson(o => o.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);

@@ -21,10 +21,12 @@ namespace GraduationProject_DAL.Repositories
         }
         public List<Reservation> GetAllReservation()
         {
-            return context.Reservations.Include(r => r.Doctor).Include(p=>p.Patient).ToList();
+            return context.Reservations.Include(r => r.Doctor)
+                                       .Include(p=>p.Patient)
+                                       .ToList();
         }
 
-        public Reservation GetReservationDetails(int id)
+        public Reservation? GetReservationDetails(int id)
         {
              return context.Reservations.Include(r => r.Doctor)
                                         .Include(p => p.Patient)
@@ -39,13 +41,26 @@ namespace GraduationProject_DAL.Repositories
 
         public void UpdateReservation(int id, Reservation reservation)
         {
-            context.Reservations.Update(reservation);
-            context.SaveChanges();
+            Reservation oldReservation = context.Reservations.Find(id);
+            if (oldReservation != null)
+            {
+                oldReservation.DateTime = reservation.DateTime;
+                oldReservation.Queue = reservation.Queue;
+                oldReservation.PId = reservation.PId;
+                oldReservation.DocId = reservation.DocId;
+                context.SaveChanges();
+            //context.Reservations.Update(reservation);
+            //context.SaveChanges();
+            }
         }
         public void DeleteReservation(int id)
         {
-            context.Remove(context.Reservations.Find(id));
-            context.SaveChanges();
+            var reservation = context.Reservations.Find(id);
+            if (reservation != null)
+            {
+                context.Remove(context.Reservations.Find(id));
+                context.SaveChanges();
+            }
         }
     }
 }
