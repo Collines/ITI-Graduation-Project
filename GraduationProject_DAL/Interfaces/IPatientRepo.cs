@@ -10,7 +10,7 @@ namespace GraduationProject_DAL.Interfaces
     public interface IPatientRepo
     {
         public List<Patient> GetAllPatients();
-        public Patient GetPatientDetails(int id);
+        public Patient? GetPatientDetails(int id);
         public void InsertPatient(Patient patient);
         public void UpdatePatient(int id, Patient patient);
         public void DeletePatient(int id);

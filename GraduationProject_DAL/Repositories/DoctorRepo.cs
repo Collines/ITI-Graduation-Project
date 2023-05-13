@@ -25,7 +25,7 @@ namespace GraduationProject_DAL.Repositories
             return context.Doctors.Include(d => d.Department).ToList();
         }
 
-        public Doctor GetDoctorDetails(int id)
+        public Doctor? GetDoctorDetails(int id)
         {
             return context.Doctors.Include(d => d.Department).FirstOrDefault(d => d.Id == id);
         }
@@ -39,19 +39,22 @@ namespace GraduationProject_DAL.Repositories
         public void UpdateDoctor(int id, Doctor doctor)
         {
             Doctor OldDoctor = context.Doctors.Find(id);
-            OldDoctor.FName = doctor.FName;
-            OldDoctor.FNameAR = doctor.FNameAR;
-            OldDoctor.LName = doctor.LName;
-            OldDoctor.LNameAR = doctor.LNameAR;
-            OldDoctor.Title = doctor.Title;
-            OldDoctor.TitleAR = doctor.TitleAR;
-            OldDoctor.Bio = doctor.Bio;
-            OldDoctor.BioAR = doctor.BioAR;
-            if(doctor.Image != null )
-                OldDoctor.Image = doctor.Image;
-            OldDoctor.DeptId = doctor.DeptId;
+            if (OldDoctor != null)
+            {
+                OldDoctor.FName = doctor.FName;
+                OldDoctor.FNameAR = doctor.FNameAR;
+                OldDoctor.LName = doctor.LName;
+                OldDoctor.LNameAR = doctor.LNameAR;
+                OldDoctor.Title = doctor.Title;
+                OldDoctor.TitleAR = doctor.TitleAR;
+                OldDoctor.Bio = doctor.Bio;
+                OldDoctor.BioAR = doctor.BioAR;
+                if (doctor.Image != null)
+                    OldDoctor.Image = doctor.Image;
+                OldDoctor.DeptId = doctor.DeptId;
 
-            context.SaveChanges();
+                context.SaveChanges();
+            }
         }
 
         public void DeleteDoctor(int id)

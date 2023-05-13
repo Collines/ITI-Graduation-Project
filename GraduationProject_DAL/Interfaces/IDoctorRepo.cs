@@ -10,7 +10,7 @@ namespace GraduationProject_DAL.Interfaces
     public interface IDoctorRepo
     {
         public List<Doctor> GetAllDoctors();
-        public Doctor GetDoctorDetails(int id);
+        public Doctor? GetDoctorDetails(int id);
         public void InsertDoctor(Doctor doctor);
         public void UpdateDoctor(int id, Doctor doctor);
         public void DeleteDoctor(int id);
