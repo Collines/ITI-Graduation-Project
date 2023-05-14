@@ -6,9 +6,9 @@ using GraduationProject_DAL.Interfaces;
 
 namespace GraduationProject.Controllers
 {
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     [ApiController]
-    public class PatientController : Controller
+    public class PatientController : ControllerBase
     {
         private readonly IPatientRepo patientRepo;
 
@@ -28,7 +28,7 @@ namespace GraduationProject.Controllers
             return Ok(patients);
         }
 
-        [HttpGet("/Patient/{id}")]
+        [HttpGet("{id}")]
         public ActionResult<Patient> GetPatientDetails(int id)
         {
             if (id == null)
@@ -53,7 +53,7 @@ namespace GraduationProject.Controllers
             }
             return BadRequest();
         }
-        [HttpDelete("/Patient/Delete/{id}")]
+        [HttpDelete("{id}")]
         public ActionResult<Patient> DeletePatient(int id) 
         {
             var patients = patientRepo.GetPatientDetails(id);
@@ -64,7 +64,7 @@ namespace GraduationProject.Controllers
             patientRepo.DeletePatient(id);
             return Ok(patients);
         }
-        [HttpPut("/Patient/Update/{id}")]
+        [HttpPatch("{id}")]
         public ActionResult <Patient> UpdatePatient(int id,Patient patient)
         {
             if (ModelState.IsValid)
