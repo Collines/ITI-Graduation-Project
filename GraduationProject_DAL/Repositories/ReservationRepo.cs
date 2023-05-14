@@ -24,7 +24,7 @@ namespace GraduationProject_DAL.Repositories
             return context.Reservations.Include(r => r.Doctor).Include(p=>p.Patient).ToList();
         }
 
-        public Reservation GetReservationDetails(int id)
+        public Reservation? GetReservationDetails(int id)
         {
              return context.Reservations.Include(r => r.Doctor)
                                         .Include(p => p.Patient)
