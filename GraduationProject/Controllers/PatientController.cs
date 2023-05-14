@@ -6,7 +6,7 @@ using GraduationProject_DAL.Interfaces;
 
 namespace GraduationProject.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
     public class PatientController : Controller
     {
