@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 
 namespace GraduationProject_DAL.Interfaces
 {
-    public interface IDepartmentRepo
+    public interface GeneralRepo<T>
     {
-        public List<Department> GetAllDept();
-        public Department GetDeptDetails(int id);
-        public void InsertDept(Department Dept);
-        public void UpdateDept(int id, Department Dept);
+        public List<T> GetAllDept();
+        public T GetDeptDetails(int id);
+        public void InsertDept(T Dept);
+        public void UpdateDept(int id, T Dept);
         public void DeleteDept(int id);
     }
 }

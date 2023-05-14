@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace GraduationProject_DAL.Repositories
 {
-    internal class DeptRepo : IDepartmentRepo
+    internal class DeptRepo : IDepartmentRepo //:GeneralRepo<Department>
     {
         private readonly HospitalBDContext context;
         public DeptRepo(HospitalBDContext _context)
@@ -27,7 +27,8 @@ namespace GraduationProject_DAL.Repositories
 
         public List<Department> GetAllDept()
         {
-            return context.Departments.Include(s=>s.Id).ToList();
+            return context.Departments.ToList();
+
         }
 
         public Department GetDeptDetails(int id)

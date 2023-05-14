@@ -11,7 +11,12 @@ namespace GraduationProject.Controllers
     public class DoctorsController : ControllerBase
     {
         private readonly IDoctorRepo doctorRepo;
+        // private readonly GeneralRepo<Docotr> patientRepo;
 
+        //public DoctorsController(GeneralRepo<Doctor> _repo)
+        //{
+        //    doctorRepo = _repo;
+        //}
         public DoctorsController(IDoctorRepo _repo)
         {
             doctorRepo = _repo;

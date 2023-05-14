@@ -11,6 +11,12 @@ namespace GraduationProject.Controllers
     public class PatientController : Controller
     {
         private readonly IPatientRepo patientRepo;
+        // private readonly GeneralRepo<Patient> patientRepo;
+
+        //public PatientController(GeneralRepo<Patient> Prepo)
+        //{
+        //    patientRepo = Prepo;
+        //}
 
         public PatientController(IPatientRepo Prepo)
         {
@@ -78,7 +84,7 @@ namespace GraduationProject.Controllers
                 {
                     return NotFound();
                 }
-                patientRepo.UpdatePatient(id, updatePatient);
+                patientRepo.UpdatePatient(id, patient);
                 return Ok(updatePatient);
 
             }

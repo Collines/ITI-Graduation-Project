@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace GraduationProject_DAL.Repositories
 {
-    public class DoctorRepo : IDoctorRepo
+    public class DoctorRepo : IDoctorRepo //:GeneralRepo<Department>
     {
         private readonly HospitalBDContext context;
 
