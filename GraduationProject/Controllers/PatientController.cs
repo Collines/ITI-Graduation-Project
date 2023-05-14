@@ -8,7 +8,7 @@ namespace GraduationProject.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class PatientController : Controller
+    public class PatientController : ControllerBase
     {
         private readonly IPatientRepo patientRepo;
 
