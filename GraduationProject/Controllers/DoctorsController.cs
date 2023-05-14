@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace GraduationProject.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
     public class DoctorsController : ControllerBase
     {
