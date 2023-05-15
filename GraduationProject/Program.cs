@@ -19,7 +19,7 @@ internal class Program
         // Add services to the container.
         builder.Services.AddDbContext<HospitalBDContext>(options => options.UseSqlServer(
                 builder.Configuration.GetConnectionString("DefaultConnectionString")
-                ),contextLifetime:ServiceLifetime.Singleton);
+                )/*,contextLifetime:ServiceLifetime.Singleton*/);
 
         //Add Repo Services
         builder.Services.AddScoped<IDoctorRepo, DoctorRepo>();
@@ -45,9 +45,20 @@ internal class Program
                 IssuerSigningKey = new SymmetricSecurityKey(Key),
                 ClockSkew = TimeSpan.Zero
 			};
-            
+            o.Events = new JwtBearerEvents
+			{
+				OnAuthenticationFailed = context => {
+					if (context.Exception.GetType() == typeof(SecurityTokenExpiredException))
+					{
+						context.Response.Headers.Add("IS-TOKEN-EXPIRED", "true");
+					}
+					return Task.CompletedTask;
+				}
+			};
+
 		});
-		builder.Services.AddSingleton<IJWTManagerRepository, JWTManagerRepository>();
+		builder.Services.AddScoped<IJWTManagerRepository, JWTManagerRepository>();
+		builder.Services.AddScoped<IPatientServiceRepository, Patients>();
         // End of JWT Authentication
 
 		// Add reference loop handling
