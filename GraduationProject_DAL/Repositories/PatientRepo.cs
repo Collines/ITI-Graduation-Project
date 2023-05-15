@@ -36,24 +36,40 @@ namespace GraduationProject_DAL.Repositories
 
         public void UpdatePatient(int id, Patient patient)
         {
-            Patient pat= context.Patients.Find(id);
-            pat.FName = patient.FName;
-            pat.FNameAR=patient.FNameAR;
-            pat.LName= patient.LName;
-            pat.LNameAR=patient.LNameAR;
-            pat.Gender = patient.Gender;
-            pat.Email=patient.Email;
-            pat.Password=patient.Password;
-            pat.DOB = patient.DOB;
-            pat.PhoneNumber= patient.PhoneNumber;
-            pat.MedicalHistory=patient.MedicalHistory;
-            context.SaveChanges();
+            Patient? pat= context.Patients.Find(id);
+            if(pat !=null)
+            {
+				pat.FName = patient.FName;
+				pat.FNameAR = patient.FNameAR;
+				pat.LName = patient.LName;
+				pat.LNameAR = patient.LNameAR;
+				pat.Gender = patient.Gender;
+				pat.Email = patient.Email;
+				pat.Password = patient.Password;
+				pat.DOB = patient.DOB;
+				pat.PhoneNumber = patient.PhoneNumber;
+				pat.MedicalHistory = patient.MedicalHistory;
+				context.SaveChanges();
+			}
         }
         public void DeletePatient(int id)
         {
-            context.Remove(context.Patients.Find(id));
-            context.SaveChanges();
-            
+            Patient? P = context.Patients.Find(id);
+            if(P!=null)
+            {
+				context.Remove(P);
+				context.SaveChanges();
+			}
         }
-    }
+
+		public bool IsExist(string email)
+		{
+			return context.Patients.Any(p=> p.Email == email);
+		}
+
+		public bool IsExist(int id)
+		{
+			return context.Patients.Any(p => p.Id == id);
+		}
+	}
 }

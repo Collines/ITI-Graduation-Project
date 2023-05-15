@@ -1,22 +1,27 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Http;
 using GraduationProject_DAL.Data.Models;
 using GraduationProject_DAL.Interfaces;
+using GraduationProject_DAL.Handlers;
+using GraduationProject_DAL.Interfaces.Authentication;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.IdentityModel.Tokens;
+using GraduationProject_DAL.Data.DTO;
 
 namespace GraduationProject.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class PatientController : ControllerBase
     {
         private readonly IPatientRepo patientRepo;
+		private readonly IJWTManagerRepository JWTManager;
 
-        public PatientController(IPatientRepo Prepo)
+		public PatientController(IPatientRepo Prepo, IJWTManagerRepository jWTManager)
         {
             patientRepo = Prepo;
-        }
-
+			JWTManager = jWTManager;
+		}
         [HttpGet]
         public ActionResult<List<Patient>> GetAll()
         {
@@ -31,10 +36,6 @@ namespace GraduationProject.Controllers
         [HttpGet("{id}")]
         public ActionResult<Patient> GetPatientDetails(int id)
         {
-            if (id == null)
-            {
-                return BadRequest();
-            }
             var patients = patientRepo.GetPatientDetails(id);
             if (patients == null)
             {
@@ -43,15 +44,20 @@ namespace GraduationProject.Controllers
             return Ok(patients);
         }
 
-        [HttpPost]
-        public ActionResult<Patient> CreatePatient(Patient patient)
+        [HttpPost("Register")]
+		[AllowAnonymous]
+		public ActionResult<Patient> Register(Patient patient)
         {
+            if (patientRepo.IsExist(patient.Email))
+                ModelState.AddModelError("Email", "Email Already Exist");
             if (ModelState.IsValid)
             {
+                patient.Password = PasswordHandler.Hash(patient.Password, out byte[] salt);
+                patient.PasswordSalt = Convert.ToHexString(salt);
                 patientRepo.InsertPatient(patient);
-                return Ok(patient);
+                return Ok(JWTManager.Authenticate(patient));
             }
-            return BadRequest();
+            return BadRequest("Email Already Exist");
         }
         [HttpDelete("{id}")]
         public ActionResult<Patient> DeletePatient(int id) 
@@ -85,8 +91,21 @@ namespace GraduationProject.Controllers
             return NotFound();
         }
 
-
-
-
-    }
+		[HttpPost("Login")]
+        [AllowAnonymous]
+		public ActionResult<Patient> Login(PatientLoginDTO p)
+		{
+            if (!String.IsNullOrEmpty(p.Email) && !String.IsNullOrEmpty(p.Password))
+            {
+                Patient patient = new Patient() { Email = p.Email, Password = p.Password };
+                Token? token = JWTManager.Authenticate(patient);
+				if (token != null)
+				{
+					return Ok(token);
+				}
+				else return Unauthorized();
+			}
+            else return BadRequest();
+		}
+	}
 }

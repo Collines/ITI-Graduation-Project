@@ -1,14 +1,8 @@
 ﻿using GraduationProject_DAL.Data.Enums;
-using GraduationProject_DAL.Data.Models;
 using GraduationProject_DAL.Data.Validators;
-using System;
-using System.Collections.Generic;
+using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Text.Json.Serialization;
-using System.Threading.Tasks;
+
 
 namespace GraduationProject_DAL.Data.Models
 {
@@ -41,6 +35,9 @@ namespace GraduationProject_DAL.Data.Models
 
         [Required, DataType(DataType.Password)]
         public string Password { get; set; }
+
+        [HiddenInput]
+        public string? PasswordSalt { get; set; }
 
         [Required, DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}")]
