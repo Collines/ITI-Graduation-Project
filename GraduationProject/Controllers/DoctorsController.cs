@@ -28,7 +28,7 @@ namespace GraduationProject.Controllers
             return Ok(doctors);
         }
 
-        [HttpGet("/Doctors/{id:int}")]
+        [HttpGet("{id:int}")]
         public ActionResult<Doctor> GetById(int id)
         {
             if (id == null)
@@ -52,7 +52,7 @@ namespace GraduationProject.Controllers
             return BadRequest();
         }
 
-        [HttpDelete("/Doctors/Delete/{id:int}")]
+        [HttpDelete("{id:int}")]
         public ActionResult<Doctor> DeleteDoctor(int id)
         {
             var doctor = doctorRepo.GetDoctorDetails(id);
@@ -64,7 +64,7 @@ namespace GraduationProject.Controllers
             return Ok(doctor);
         }
 
-        [HttpPut("/Doctors/Update/{id:int}")]
+        [HttpPatch("{id:int}")]
         public ActionResult<Doctor> UpdateDoctor(int id, Doctor doctor)
         {
             if (id != doctor.Id)

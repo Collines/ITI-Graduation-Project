@@ -9,6 +9,7 @@ internal class Program
 {
     private static void Main(string[] args)
     {
+        string CorsPolicy = "";
         var builder = WebApplication.CreateBuilder(args);
 
 
@@ -29,6 +30,17 @@ internal class Program
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();
 
+        //Enable Cors
+        builder.Services.AddCors(o =>
+        {
+            o.AddPolicy(CorsPolicy, builder =>
+            {
+                builder.AllowAnyOrigin();
+                builder.AllowAnyMethod();
+                builder.AllowAnyHeader();
+            });
+        });
+
         var app = builder.Build();
 
         // Configure the HTTP request pipeline.
@@ -43,6 +55,9 @@ internal class Program
         app.UseAuthorization();
 
         app.MapControllers();
+        
+        //Use Cors
+        app.UseCors(CorsPolicy);
 
         app.Run();
     }

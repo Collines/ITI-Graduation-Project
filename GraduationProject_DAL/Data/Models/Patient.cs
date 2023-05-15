@@ -1,4 +1,6 @@
-﻿using GraduationProject_DAL.Data.Models;
+﻿using GraduationProject_DAL.Data.Enums;
+using GraduationProject_DAL.Data.Models;
+using GraduationProject_DAL.Data.Validators;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -10,17 +12,12 @@ using System.Threading.Tasks;
 
 namespace GraduationProject_DAL.Data.Models
 {
-    public enum Gender
-    {
-        Female = 1,
-        Male
-    }
     public class Patient
     {
         [Key]
         public int Id { get; set; }
 
-        [StringLength(14)]
+        [Required,StringLength(14)]
         public string SSN { get; set; }
 
         [Required, MaxLength(50)]
@@ -37,7 +34,7 @@ namespace GraduationProject_DAL.Data.Models
 
         [Required]
         [EnumDataType(typeof(Gender))]
-        public Gender gender { get; set; }
+        public Gender Gender { get; set; }
 
         [Required, DataType(DataType.EmailAddress)]
         public string Email { get; set; }

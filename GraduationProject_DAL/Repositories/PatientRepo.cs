@@ -23,7 +23,7 @@ namespace GraduationProject_DAL.Repositories
            return context.Patients.ToList();
         }
 
-        public Patient GetPatientDetails(int id)
+        public Patient? GetPatientDetails(int id)
         {
             return context.Patients.FirstOrDefault(p => p.Id == id);
         }
@@ -41,7 +41,7 @@ namespace GraduationProject_DAL.Repositories
             pat.FNameAR=patient.FNameAR;
             pat.LName= patient.LName;
             pat.LNameAR=patient.LNameAR;
-            pat.gender = patient.gender;
+            pat.Gender = patient.Gender;
             pat.Email=patient.Email;
             pat.Password=patient.Password;
             pat.DOB = patient.DOB;
