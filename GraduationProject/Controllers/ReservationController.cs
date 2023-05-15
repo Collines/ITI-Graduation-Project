@@ -29,7 +29,7 @@ namespace GraduationProject.Controllers
             return Ok(reservations);
         }
 
-        [HttpGet("/Reservation/{id:int}")]
+        [HttpGet("{id:int}")]
         public ActionResult<Reservation> GetById(int id)
         {
             if (id == null)
@@ -53,7 +53,7 @@ namespace GraduationProject.Controllers
             return BadRequest();
         }
 
-        [HttpDelete("/Reservation/Delete/{id:int}")]
+        [HttpDelete("{id:int}")]
         public ActionResult<Reservation> DeleteReservation(int id)
         {
             var reservation = ReservationRepo.GetReservationDetails(id);
@@ -65,7 +65,7 @@ namespace GraduationProject.Controllers
             return Ok(reservation);
         }
 
-        [HttpPut("/Reservation/Update/{id:int}")]
+        [HttpPut("{id:int}")]
         public ActionResult<Reservation> UpdateReservation(int id, Reservation reservation)
         {
             //if (id != reservation.Id)
