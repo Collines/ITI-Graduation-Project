@@ -25,9 +25,9 @@ namespace GraduationProject.Controllers
 			PatientService = patientService;
 		}
         [HttpGet]
-        public ActionResult<List<Patient>> GetAll()
+        public async Task<ActionResult<List<Patient>>> GetAll()
         {
-            var patients = patientRepo.GetAllPatients();
+            var patients = await patientRepo.GetAllPatients();
             if (patients.Count == 0)
             {
                 return NotFound();
@@ -36,9 +36,9 @@ namespace GraduationProject.Controllers
         }
 
         [HttpGet("{id}")]
-        public ActionResult<Patient> GetPatientDetails(int id)
+        public async Task<ActionResult<Patient>> GetPatientDetails(int id)
         {
-            var patients = patientRepo.GetPatientDetails(id);
+            var patients =await patientRepo.GetPatientDetails(id);
             if (patients == null)
             {
                 return NotFound();
@@ -48,9 +48,9 @@ namespace GraduationProject.Controllers
 
         [HttpPost("Register")]
 		[AllowAnonymous]
-		public ActionResult<Patient> Register(Patient patient)
+		public async Task<ActionResult<Patient>> Register(Patient patient)
         {
-            if (patientRepo.IsExist(patient.Email))
+            if (await patientRepo.IsExist(patient.Email))
                 ModelState.AddModelError("Email", "Email Already Exist");
             if (ModelState.IsValid)
             {
@@ -72,18 +72,18 @@ namespace GraduationProject.Controllers
             return BadRequest("Email Already Exist");
         }
         [HttpDelete("{id}")]
-        public ActionResult<Patient> DeletePatient(int id) 
+        public async Task<ActionResult<Patient>> DeletePatient(int id) 
         {
-            var patients = patientRepo.GetPatientDetails(id);
-            if(patients == null)
+            var patient = await patientRepo.GetPatientDetails(id);
+            if(patient == null)
             {
                 return NotFound();
             }
             patientRepo.DeletePatient(id);
-            return Ok(patients);
+            return Ok(patient);
         }
         [HttpPatch("{id}")]
-        public ActionResult <Patient> UpdatePatient(int id,Patient patient)
+        public async Task<ActionResult<Patient>> UpdatePatient(int id,Patient patient)
         {
             if (ModelState.IsValid)
             {
@@ -91,7 +91,7 @@ namespace GraduationProject.Controllers
                 {
                     return BadRequest();
                 }
-                var updatePatient = patientRepo.GetPatientDetails(id);
+                var updatePatient = await patientRepo.GetPatientDetails(id);
                 if (updatePatient == null)
                 {
                     return NotFound();
@@ -105,14 +105,14 @@ namespace GraduationProject.Controllers
 
 		[HttpPost("Login")]
         [AllowAnonymous]
-		public ActionResult<Patient> Login(PatientLoginDTO p)
+		public async Task<ActionResult<Patient>> Login(PatientLoginDTO p)
 		{
             if (!String.IsNullOrEmpty(p.Email) && !String.IsNullOrEmpty(p.Password))
             {
                 Patient? patient = new() { Email = p.Email, Password = p.Password };
                 if(PatientService.IsValidUser(patient))
                 {
-                    patient = patientRepo.GetPatient(p.Email);
+                    patient =await patientRepo.GetPatient(p.Email);
                     Token? token = JWTManager.GenerateToken(patient);
 					if (token != null)
 					{
@@ -134,11 +134,11 @@ namespace GraduationProject.Controllers
 		[AllowAnonymous]
 		[HttpPost]
 		[Route("refresh")]
-		public IActionResult Refresh(Token token)
+		public async Task<IActionResult> Refresh(Token token)
 		{
 			var principal = JWTManager.GetPrincipalFromExpiredToken(token.TokenStr);
 			var Email = principal.Claims.ElementAt(1).Value;
-            var patient = patientRepo.GetPatient(Email);
+            var patient = await patientRepo.GetPatient(Email);
 
 			//retrieve the saved refresh token from database
 			var savedRefreshToken = PatientService.GetSavedRefreshTokens(Email, token.RefreshToken);

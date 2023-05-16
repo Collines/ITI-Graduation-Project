@@ -18,9 +18,9 @@ namespace GraduationProject.Controllers
         }
 
         [HttpGet]
-        public ActionResult<List<Doctor>> GetAll()
+        public async Task<ActionResult<List<Doctor>>> GetAll()
         {
-            var doctors = doctorRepo.GetAllDoctors();
+            var doctors = await doctorRepo.GetAllDoctors();
 
             if (doctors.Count == 0)
                 return NotFound();
@@ -29,12 +29,9 @@ namespace GraduationProject.Controllers
         }
 
         [HttpGet("{id:int}")]
-        public ActionResult<Doctor> GetById(int id)
+        public async Task<ActionResult<Doctor>> GetById(int id)
         {
-            if (id == null)
-                return BadRequest();
-
-            var doctor = doctorRepo.GetDoctorDetails(id);
+            var doctor = await doctorRepo.GetDoctorDetails(id);
 
             if (doctor == null)
                 return NotFound();
@@ -53,9 +50,9 @@ namespace GraduationProject.Controllers
         }
 
         [HttpDelete("{id:int}")]
-        public ActionResult<Doctor> DeleteDoctor(int id)
+        public async Task<ActionResult<Doctor>> DeleteDoctor(int id)
         {
-            var doctor = doctorRepo.GetDoctorDetails(id);
+            var doctor = await doctorRepo.GetDoctorDetails(id);
 
             if (doctor == null)
                 return NotFound();
@@ -65,11 +62,11 @@ namespace GraduationProject.Controllers
         }
 
         [HttpPatch("{id:int}")]
-        public ActionResult<Doctor> UpdateDoctor(int id, Doctor doctor)
+        public async Task<ActionResult<Doctor>> UpdateDoctor(int id, Doctor doctor)
         {
             if (id != doctor.Id)
                 return BadRequest();
-            var updatedDoctor = doctorRepo.GetDoctorDetails(id);
+            var updatedDoctor = await doctorRepo.GetDoctorDetails(id);
 
             if (updatedDoctor == null)
                 return NotFound();

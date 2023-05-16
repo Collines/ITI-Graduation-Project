@@ -8,9 +8,9 @@ namespace GraduationProject_DAL.Data.Models
 		[Key]
 		public int Id { get; set; }
 		[Required]
-		public string Email { get; set; }
+		public required string Email { get; set; }
 		[Required]
-		public string RefreshToken { get; set; }
+		public required string RefreshToken { get; set; }
 		public bool IsActive { get; set; } = true;
 	}
 }
