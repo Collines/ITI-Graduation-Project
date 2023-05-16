@@ -1,6 +1,7 @@
 ﻿using GraduationProject_DAL.Data.Models;
 using GraduationProject_DAL.Interfaces;
 using GraduationProject_DAL.Repositories;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
@@ -9,6 +10,7 @@ namespace GraduationProject.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class ReservationController : ControllerBase
     {
         private readonly IReservationRepo ReservationRepo;
