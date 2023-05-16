@@ -2,12 +2,6 @@
 using GraduationProject_DAL.Data.Models;
 using GraduationProject_DAL.Interfaces;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Numerics;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace GraduationProject_DAL.Repositories
 {
@@ -41,7 +35,7 @@ namespace GraduationProject_DAL.Repositories
 
         public void UpdateReservation(int id, Reservation reservation)
         {
-            Reservation oldReservation = context.Reservations.Find(id);
+            Reservation? oldReservation = context.Reservations.Find(id);
             if (oldReservation != null)
             {
                 oldReservation.DateTime = reservation.DateTime;
@@ -49,8 +43,6 @@ namespace GraduationProject_DAL.Repositories
                 oldReservation.PId = reservation.PId;
                 oldReservation.DocId = reservation.DocId;
                 context.SaveChanges();
-            //context.Reservations.Update(reservation);
-            //context.SaveChanges();
             }
         }
         public void DeleteReservation(int id)
@@ -58,7 +50,7 @@ namespace GraduationProject_DAL.Repositories
             var reservation = context.Reservations.Find(id);
             if (reservation != null)
             {
-                context.Remove(context.Reservations.Find(id));
+                context.Remove(reservation);
                 context.SaveChanges();
             }
         }

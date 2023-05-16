@@ -68,8 +68,6 @@ namespace GraduationProject.Controllers
         [HttpPut("{id:int}")]
         public ActionResult<Reservation> UpdateReservation(int id, Reservation reservation)
         {
-            //if (id != reservation.Id)
-            //    return BadRequest();
             var updatedreservation = ReservationRepo.GetReservationDetails(id);
 
             if (updatedreservation == null)

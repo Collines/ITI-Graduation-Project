@@ -67,6 +67,11 @@ namespace GraduationProject_DAL.Repositories
 			return context.Patients.Any(p=> p.Email == email);
 		}
 
+        public Patient? GetPatient(string email)
+        {
+            return context.Patients.FirstOrDefault(p => p.Email == email);
+        }
+
 		public bool IsExist(int id)
 		{
 			return context.Patients.Any(p => p.Id == id);

@@ -14,7 +14,9 @@ namespace GraduationProject_DAL.Interfaces
         public void InsertPatient(Patient patient);
         public void UpdatePatient(int id, Patient patient);
         public void DeletePatient(int id);
-        public bool IsExist(string email);
+        public Patient? GetPatient(string email);
+
+		public bool IsExist(string email);
         public bool IsExist(int id);
     }
 }
