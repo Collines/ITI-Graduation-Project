@@ -9,10 +9,10 @@ namespace GraduationProject_DAL.Interfaces
 {
     public interface GeneralRepo<T>
     {
-        public List<T> GetAllDept();
-        public T GetDeptDetails(int id);
-        public void InsertDept(T Dept);
-        public void UpdateDept(int id, T Dept);
-        public void DeleteDept(int id);
+        public List<T> GetAll();
+        public T GetDetails(int id);
+        public void Insert(T Dept);
+        public void Update(int id, T Dept);
+        public void Delete(int id);
     }
 }
