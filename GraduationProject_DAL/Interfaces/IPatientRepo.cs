@@ -9,10 +9,14 @@ namespace GraduationProject_DAL.Interfaces
 {
     public interface IPatientRepo
     {
-        public List<Patient> GetAllPatients();
-        public Patient? GetPatientDetails(int id);
+        public Task<List<Patient>> GetAllPatients();
+        public Task<Patient?> GetPatientDetails(int id);
         public void InsertPatient(Patient patient);
         public void UpdatePatient(int id, Patient patient);
         public void DeletePatient(int id);
+        public Task<Patient?> GetPatient(string email);
+
+		public Task<bool> IsExist(string email);
+        public Task<bool> IsExist(int id);
     }
 }

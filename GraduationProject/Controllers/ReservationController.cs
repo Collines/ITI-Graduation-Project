@@ -19,9 +19,9 @@ namespace GraduationProject.Controllers
         }
 
         [HttpGet]
-        public ActionResult<List<Reservation>> GetAll()
+        public async Task<ActionResult<List<Reservation>>> GetAll()
         {
-            var reservations = ReservationRepo.GetAllReservation();
+            var reservations = await ReservationRepo.GetAllReservation();
 
             if (reservations.Count == 0)
                 return NotFound();
@@ -30,12 +30,9 @@ namespace GraduationProject.Controllers
         }
 
         [HttpGet("{id:int}")]
-        public ActionResult<Reservation> GetById(int id)
+        public async Task<ActionResult<Reservation>> GetById(int id)
         {
-            if (id == null)
-                return BadRequest();
-
-            var reservation = ReservationRepo.GetReservationDetails(id);
+            var reservation = await ReservationRepo.GetReservationDetails(id);
 
             if (reservation == null)
                 return NotFound();
@@ -54,9 +51,9 @@ namespace GraduationProject.Controllers
         }
 
         [HttpDelete("{id:int}")]
-        public ActionResult<Reservation> DeleteReservation(int id)
+        public async Task<ActionResult<Reservation>> DeleteReservation(int id)
         {
-            var reservation = ReservationRepo.GetReservationDetails(id);
+            var reservation =await ReservationRepo.GetReservationDetails(id);
 
             if (reservation == null)
                 return NotFound();
@@ -66,11 +63,9 @@ namespace GraduationProject.Controllers
         }
 
         [HttpPut("{id:int}")]
-        public ActionResult<Reservation> UpdateReservation(int id, Reservation reservation)
+        public async Task<ActionResult<Reservation>> UpdateReservation(int id, Reservation reservation)
         {
-            //if (id != reservation.Id)
-            //    return BadRequest();
-            var updatedreservation = ReservationRepo.GetReservationDetails(id);
+            var updatedreservation = await ReservationRepo.GetReservationDetails(id);
 
             if (updatedreservation == null)
                 return NotFound();

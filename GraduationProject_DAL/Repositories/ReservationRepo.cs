@@ -2,12 +2,6 @@
 using GraduationProject_DAL.Data.Models;
 using GraduationProject_DAL.Interfaces;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Numerics;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace GraduationProject_DAL.Repositories
 {
@@ -19,47 +13,45 @@ namespace GraduationProject_DAL.Repositories
         {
             context = _context;            
         }
-        public List<Reservation> GetAllReservation()
+        public async Task<List<Reservation>> GetAllReservation()
         {
-            return context.Reservations.Include(r => r.Doctor)
+            return await context.Reservations.Include(r => r.Doctor)
                                        .Include(p=>p.Patient)
-                                       .ToList();
+                                       .ToListAsync();
         }
 
-        public Reservation? GetReservationDetails(int id)
+        public async Task<Reservation?> GetReservationDetails(int id)
         {
-             return context.Reservations.Include(r => r.Doctor)
+             return await context.Reservations.Include(r => r.Doctor)
                                         .Include(p => p.Patient)
-                                        .FirstOrDefault(x=>x.Id == id);
+                                        .FirstOrDefaultAsync(x=>x.Id == id);
         }
 
-        public void InsertReservation(Reservation reservation)
+        public async void InsertReservation(Reservation reservation)
         {
-            context.Reservations.Add(reservation);
-            context.SaveChanges();
+            await context.Reservations.AddAsync(reservation);
+            await context.SaveChangesAsync();
         }
 
-        public void UpdateReservation(int id, Reservation reservation)
+        public async void UpdateReservation(int id, Reservation reservation)
         {
-            Reservation oldReservation = context.Reservations.Find(id);
+            Reservation? oldReservation = await context.Reservations.FindAsync(id);
             if (oldReservation != null)
             {
                 oldReservation.DateTime = reservation.DateTime;
                 oldReservation.Queue = reservation.Queue;
                 oldReservation.PId = reservation.PId;
                 oldReservation.DocId = reservation.DocId;
-                context.SaveChanges();
-            //context.Reservations.Update(reservation);
-            //context.SaveChanges();
+                await context.SaveChangesAsync();
             }
         }
-        public void DeleteReservation(int id)
+        public async void DeleteReservation(int id)
         {
-            var reservation = context.Reservations.Find(id);
+            var reservation = await context.Reservations.FindAsync(id);
             if (reservation != null)
             {
-                context.Remove(context.Reservations.Find(id));
-                context.SaveChanges();
+                context.Remove(reservation);
+                await context.SaveChangesAsync();
             }
         }
     }
