@@ -1,14 +1,13 @@
 ﻿using GraduationProject_DAL.Data.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Security.Claims;
+
 
 namespace GraduationProject_DAL.Interfaces.Authentication
 {
 	public interface IJWTManagerRepository
 	{
-		Token? Authenticate(Patient patient);
+		Token? GenerateToken(Patient patient);
+		Token? GenerateRefreshToken(Patient? patient);
+		ClaimsPrincipal GetPrincipalFromExpiredToken(string token);
 	}
 }

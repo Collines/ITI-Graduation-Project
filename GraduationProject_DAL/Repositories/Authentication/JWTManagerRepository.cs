@@ -1,55 +1,95 @@
-﻿using GraduationProject_DAL.Data.Context;
-using GraduationProject_DAL.Data.Models;
+﻿using GraduationProject_DAL.Data.Models;
 using GraduationProject_DAL.Interfaces.Authentication;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
-using GraduationProject_DAL.Handlers;
+using System.Security.Cryptography;
 
 namespace GraduationProject_DAL.Repositories.Authentication
 {
 	public class JWTManagerRepository : IJWTManagerRepository
 	{
 		private readonly IConfiguration iconfiguration;
-		private readonly HospitalBDContext context;
 
-		public JWTManagerRepository(IConfiguration iconfiguration, HospitalBDContext context)
+		public JWTManagerRepository(IConfiguration iconfiguration/*, HospitalBDContext context*/)
 		{
 			this.iconfiguration = iconfiguration;
-			this.context = context;
 		}
-		public Token? Authenticate(Patient p)
+
+		public Token? GenerateToken(Patient patient)
 		{
-			Patient? patient = context.Patients.FirstOrDefault(pa => p.Email == pa.Email);
+			return GenerateJWTTokens(patient);
+		}
+
+		public Token? GenerateRefreshToken(Patient? patient)
+		{
 			if(patient!=null)
-			{
-				if (PasswordHandler.VerifyPassword(p.Password, patient.Password, Convert.FromHexString(patient.PasswordSalt)))
-				{
-					var tokenHandler = new JwtSecurityTokenHandler();
-					var tokenKey = Encoding.UTF8.GetBytes(iconfiguration["JWT:Key"]);
-					var tokenDescriptor = new SecurityTokenDescriptor
-					{
-						Subject = new ClaimsIdentity(new Claim[]
-						{
-							new Claim("Id", $"{patient.Id}"),
-							new Claim(ClaimTypes.Email, p.Email),
-							new Claim(ClaimTypes.Name, patient.FName +" "+ patient.LName),
-							new Claim("NameAR", patient.FNameAR +" "+ patient.LNameAR)
-						}),
-						IssuedAt = DateTime.UtcNow,
-						Expires = DateTime.UtcNow.AddMinutes(60),
-						SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(tokenKey), SecurityAlgorithms.HmacSha256Signature),
-						Issuer = iconfiguration["JWT:Issuer"],
-						Audience = iconfiguration["JWT:Audience"],
-					};
-					var token = tokenHandler.CreateToken(tokenDescriptor);
-					return new Token { TokenStr = tokenHandler.WriteToken(token) };
-				}
-				else return null;
-			}
+				return GenerateJWTTokens(patient);
 			return null;
+		}
+
+		public Token? GenerateJWTTokens(Patient patient)
+		{
+			try
+			{
+				var tokenHandler = new JwtSecurityTokenHandler();
+				var tokenKey = Encoding.UTF8.GetBytes(iconfiguration["JWT:Key"]);
+				var tokenDescriptor = new SecurityTokenDescriptor
+				{
+					Subject = new ClaimsIdentity(new Claim[]
+				  {
+						new Claim("Id", $"{patient.Id}"),
+						new Claim(ClaimTypes.Email, patient.Email),
+						new Claim("Name", $"{patient.FName} {patient.LName}"),
+						new Claim("NameAR", $"{patient.FNameAR} {patient.LNameAR}"),
+				  }),
+					Expires = DateTime.Now.AddMinutes(1),
+					SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(tokenKey), SecurityAlgorithms.HmacSha256Signature)
+				};
+				var token = tokenHandler.CreateToken(tokenDescriptor);
+				var refreshToken = GenerateRefreshToken();
+				return new Token { TokenStr = tokenHandler.WriteToken(token), RefreshToken = refreshToken };
+			}
+			catch
+			{
+				return null;
+			}
+		}
+
+		public string GenerateRefreshToken()
+		{
+			var randomNumber = new byte[32];
+			using (var rng = RandomNumberGenerator.Create())
+			{
+				rng.GetBytes(randomNumber);
+				return Convert.ToBase64String(randomNumber);
+			}
+		}
+
+		public ClaimsPrincipal GetPrincipalFromExpiredToken(string token)
+		{
+			var Key = Encoding.UTF8.GetBytes(iconfiguration["JWT:Key"]);
+
+			var tokenValidationParameters = new TokenValidationParameters
+			{
+				ValidateIssuer = false,
+				ValidateAudience = false,
+				ValidateLifetime = false,
+				ValidateIssuerSigningKey = true,
+				IssuerSigningKey = new SymmetricSecurityKey(Key),
+				ClockSkew = TimeSpan.Zero
+			};
+
+			var tokenHandler = new JwtSecurityTokenHandler();
+			var principal = tokenHandler.ValidateToken(token, tokenValidationParameters, out SecurityToken securityToken);
+			JwtSecurityToken jwtSecurityToken = securityToken as JwtSecurityToken;
+			if (jwtSecurityToken == null || !jwtSecurityToken.Header.Alg.Equals(SecurityAlgorithms.HmacSha256, StringComparison.InvariantCultureIgnoreCase))
+			{
+				throw new SecurityTokenException("Invalid token");
+			}
+			return principal;
 		}
 	}
 }

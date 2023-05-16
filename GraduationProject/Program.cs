@@ -24,6 +24,7 @@ internal class Program
         //Add Repo Services
         builder.Services.AddScoped<IDoctorRepo, DoctorRepo>();
         builder.Services.AddScoped<IPatientRepo, PatientRepo>();
+        builder.Services.AddScoped<IReservationRepo, ReservationRepo>();
 
 		// Adding Authentication using JWT
 		builder.Services.AddAuthentication(options =>
@@ -45,7 +46,7 @@ internal class Program
                 IssuerSigningKey = new SymmetricSecurityKey(Key),
                 ClockSkew = TimeSpan.Zero
 			};
-            o.Events = new JwtBearerEvents
+			o.Events = new JwtBearerEvents
 			{
 				OnAuthenticationFailed = context => {
 					if (context.Exception.GetType() == typeof(SecurityTokenExpiredException))
@@ -58,8 +59,9 @@ internal class Program
 
 		});
 		builder.Services.AddScoped<IJWTManagerRepository, JWTManagerRepository>();
-		builder.Services.AddScoped<IPatientServiceRepository, Patients>();
-        // End of JWT Authentication
+		builder.Services.AddScoped<IPatientServiceRepository, PatientServiceRepository>();
+
+		// End of JWT Authentication
 
 		// Add reference loop handling
 		builder.Services.AddControllers().AddNewtonsoftJson(o => o.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);

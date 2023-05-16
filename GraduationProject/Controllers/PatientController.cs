@@ -16,11 +16,13 @@ namespace GraduationProject.Controllers
     {
         private readonly IPatientRepo patientRepo;
 		private readonly IJWTManagerRepository JWTManager;
+		private readonly IPatientServiceRepository PatientService;
 
-		public PatientController(IPatientRepo Prepo, IJWTManagerRepository jWTManager)
+		public PatientController(IPatientRepo Prepo, IJWTManagerRepository jWTManager, IPatientServiceRepository patientService)
         {
             patientRepo = Prepo;
 			JWTManager = jWTManager;
+			PatientService = patientService;
 		}
         [HttpGet]
         public ActionResult<List<Patient>> GetAll()
@@ -55,7 +57,17 @@ namespace GraduationProject.Controllers
                 patient.Password = PasswordHandler.Hash(patient.Password, out byte[] salt);
                 patient.PasswordSalt = Convert.ToHexString(salt);
                 patientRepo.InsertPatient(patient);
-                return Ok(JWTManager.Authenticate(patient));
+				var token = JWTManager.GenerateToken(patient);
+				if (token == null)
+					return Unauthorized("Invalid Attempt!");
+				PatientRefreshTokens obj = new PatientRefreshTokens
+				{
+					RefreshToken = token.TokenStr,
+					Email = patient.Email
+				};
+				PatientService.AddUserRefreshTokens(obj);
+				PatientService.SaveCommit();
+				return Ok(token);
             }
             return BadRequest("Email Already Exist");
         }
@@ -97,15 +109,69 @@ namespace GraduationProject.Controllers
 		{
             if (!String.IsNullOrEmpty(p.Email) && !String.IsNullOrEmpty(p.Password))
             {
-                Patient patient = new Patient() { Email = p.Email, Password = p.Password };
-                Token? token = JWTManager.Authenticate(patient);
-				if (token != null)
-				{
-					return Ok(token);
+                Patient? patient = new() { Email = p.Email, Password = p.Password };
+                if(PatientService.IsValidUser(patient))
+                {
+                    patient = patientRepo.GetPatient(p.Email);
+                    Token? token = JWTManager.GenerateToken(patient);
+					if (token != null)
+					{
+						PatientRefreshTokens Prt = new PatientRefreshTokens
+						{
+							RefreshToken = token.RefreshToken,
+							Email = patient.Email
+						};
+						PatientService.AddUserRefreshTokens(Prt);
+						PatientService.SaveCommit();
+						return Ok(token);
+					} else Unauthorized("Invalid Attempt!");
 				}
-				else return Unauthorized();
+				return Unauthorized("Incorrect username or password!");
 			}
-            else return BadRequest();
+			else return BadRequest();
+		}
+
+		[AllowAnonymous]
+		[HttpPost]
+		[Route("refresh")]
+		public IActionResult Refresh(Token token)
+		{
+			var principal = JWTManager.GetPrincipalFromExpiredToken(token.TokenStr);
+			var Email = principal.Claims.ElementAt(1).Value;
+            var patient = patientRepo.GetPatient(Email);
+
+			//retrieve the saved refresh token from database
+			var savedRefreshToken = PatientService.GetSavedRefreshTokens(Email, token.RefreshToken);
+
+/*            if (savedRefreshToken != null)
+            {
+                if (savedRefreshToken.RefreshToken != token.TokenStr)
+                {
+                    return Unauthorized("Invalid attempt!");
+                }
+            }
+            else return Unauthorized("Invalid attempt!");*/
+
+            if (savedRefreshToken == null || savedRefreshToken.RefreshToken != token.RefreshToken)
+				return Unauthorized("Invalid attempt!");
+
+			var newJwtToken = JWTManager.GenerateRefreshToken(patient);
+
+			if (newJwtToken == null)
+				return Unauthorized("Invalid attempt!");
+
+			// saving refresh token to the db
+			PatientRefreshTokens obj = new PatientRefreshTokens
+			{
+				RefreshToken = newJwtToken.RefreshToken,
+				Email = Email
+			};
+
+			PatientService.DeleteUserRefreshTokens(Email, token.RefreshToken);
+			PatientService.AddUserRefreshTokens(obj);
+			PatientService.SaveCommit();
+
+			return Ok(newJwtToken);
 		}
 	}
 }
