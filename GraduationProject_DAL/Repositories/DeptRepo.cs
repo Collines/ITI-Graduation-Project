@@ -21,8 +21,11 @@ namespace GraduationProject_DAL.Repositories
         public void DeleteDept(int id)
         {
             Department dept = context.Departments.Find(id);
-            context.Departments.Remove(dept);
-            context.SaveChanges();
+            if (dept != null)
+            {
+                context.Departments.Remove(dept);
+                context.SaveChanges();
+            }
         }
 
         public List<Department> GetAllDept()
@@ -45,12 +48,14 @@ namespace GraduationProject_DAL.Repositories
         public void UpdateDept(int id, Department Dept)
         {
             Department OldDept = context.Departments.Find(id);
+            if (OldDept != null) { 
             OldDept.Title=Dept.Title;
             OldDept.Description = Dept.Description;
             OldDept.Id =Dept.Id;
             OldDept.DescriptionAR = Dept.DescriptionAR;
             OldDept.TitleAR = Dept.TitleAR;
             context.SaveChanges();
+            }
         }
     }
 }
