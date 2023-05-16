@@ -1,0 +1,70 @@
+.bg-image1{
+  min-height: 90vh;
+  position: relative;
+  background-size: cover;
+  background-position: center;
+}
+
+.site-header {
+    position: relative;
+    padding: 220px 0 140px;
+    background-color: #f0f4f8;
+    min-height: 90vh;
+
+}
+.header-img{
+  position: absolute;
+  top: 0;
+  right: 0;
+  max-width: 70%;
+  height: auto;
+
+}
+h2{
+  font-size: 50px;
+  line-height: 1.7;
+  font-weight: bold;
+  color: var(--secondaryColor);
+}
+.button.gradient-bg{
+  background: linear-gradient(270deg, rgba(50,200,250,1) 0%, rgba(88,125,228,1) 100%);
+  padding: 15px 30px;
+  border-radius: 30px;
+  cursor: pointer;
+  -webkit-border-radius: 30px;
+  -moz-border-radius: 30px;
+  -ms-border-radius: 30px;
+  -o-border-radius: 30px;
+}
+.button.gradient-bg:focus {
+  outline-color: transparent;
+  outline-style:solid;
+  box-shadow: 0 0 0 4px var(--mainColor);
+  transition: 0.7s;
+}
+.entry-footer a{
+  color: var(--secondaryColor);
+  font-size: 18px;
+  font-weight: 600;
+}
+.carousel-indicators [type="button"] {
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background-color: transparent;
+  border: 2px solid var(--mainColor);
+  margin-top: 25px;
+  margin-right: 10px;
+}
+.carousel-indicators .active {
+ background-color: var(--mainColor);
+ width: 35px;
+ height: 15px;
+ border-radius: 20px;
+}
+
+@media screen and (max-width: 600px) {
+  h2 {
+      font-size: 40px;
+  }
+}

@@ -1,0 +1,32 @@
+.bgGround{
+  background-color: #081f3e;
+}
+.nav-item a{
+  color: white;
+  padding-right: 20px;
+  font-size: 18px;
+  position: relative;
+}
+.nav-item a::after{
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 3px;
+  bottom: 3px;
+  left: 5px;
+  background-color: var(--mainColor);
+  transition: all 0.5s;
+}
+ li .active::after,
+ li:hover a::after {
+    width: 70%;
+}
+.nav-item a:focus{
+   color: var(--mainColor);
+}
+@media screen and (max-width: 992px) {
+  li .active::after,
+  li:hover a::after {
+     width: unset;
+ }
+}
