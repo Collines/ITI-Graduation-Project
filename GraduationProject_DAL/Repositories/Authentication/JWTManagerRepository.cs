@@ -13,7 +13,7 @@ namespace GraduationProject_DAL.Repositories.Authentication
 	{
 		private readonly IConfiguration iconfiguration;
 
-		public JWTManagerRepository(IConfiguration iconfiguration/*, HospitalBDContext context*/)
+		public JWTManagerRepository(IConfiguration iconfiguration)
 		{
 			this.iconfiguration = iconfiguration;
 		}
@@ -45,7 +45,7 @@ namespace GraduationProject_DAL.Repositories.Authentication
 						new Claim("Name", $"{patient.FName} {patient.LName}"),
 						new Claim("NameAR", $"{patient.FNameAR} {patient.LNameAR}"),
 				  }),
-					Expires = DateTime.Now.AddMinutes(1),
+					Expires = DateTime.Now.AddDays(2),
 					SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(tokenKey), SecurityAlgorithms.HmacSha256Signature)
 				};
 				var token = tokenHandler.CreateToken(tokenDescriptor);
@@ -84,7 +84,7 @@ namespace GraduationProject_DAL.Repositories.Authentication
 
 			var tokenHandler = new JwtSecurityTokenHandler();
 			var principal = tokenHandler.ValidateToken(token, tokenValidationParameters, out SecurityToken securityToken);
-			JwtSecurityToken jwtSecurityToken = securityToken as JwtSecurityToken;
+			JwtSecurityToken? jwtSecurityToken = securityToken as JwtSecurityToken;
 			if (jwtSecurityToken == null || !jwtSecurityToken.Header.Alg.Equals(SecurityAlgorithms.HmacSha256, StringComparison.InvariantCultureIgnoreCase))
 			{
 				throw new SecurityTokenException("Invalid token");
