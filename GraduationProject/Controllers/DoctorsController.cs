@@ -1,5 +1,6 @@
 ﻿using GraduationProject_DAL.Data.Models;
 using GraduationProject_DAL.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -8,6 +9,7 @@ namespace GraduationProject.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class DoctorsController : ControllerBase
     {
         private readonly IDoctorRepo doctorRepo;
@@ -23,9 +25,9 @@ namespace GraduationProject.Controllers
         }
 
         [HttpGet]
-        public ActionResult<List<Doctor>> GetAll()
+        public async Task<ActionResult<List<Doctor>>> GetAll()
         {
-            var doctors = doctorRepo.GetAllDoctors();
+            var doctors = await doctorRepo.GetAllDoctors();
 
             if (doctors.Count == 0)
                 return NotFound();
@@ -33,13 +35,10 @@ namespace GraduationProject.Controllers
             return Ok(doctors);
         }
 
-        [HttpGet("/Doctors/{id:int}")]
-        public ActionResult<Doctor> GetById(int id)
+        [HttpGet("{id:int}")]
+        public async Task<ActionResult<Doctor>> GetById(int id)
         {
-            if (id == null)
-                return BadRequest();
-
-            var doctor = doctorRepo.GetDoctorDetails(id);
+            var doctor = await doctorRepo.GetDoctorDetails(id);
 
             if (doctor == null)
                 return NotFound();
@@ -57,10 +56,10 @@ namespace GraduationProject.Controllers
             return BadRequest();
         }
 
-        [HttpDelete("/Doctors/Delete/{id:int}")]
-        public ActionResult<Doctor> DeleteDoctor(int id)
+        [HttpDelete("{id:int}")]
+        public async Task<ActionResult<Doctor>> DeleteDoctor(int id)
         {
-            var doctor = doctorRepo.GetDoctorDetails(id);
+            var doctor = await doctorRepo.GetDoctorDetails(id);
 
             if (doctor == null)
                 return NotFound();
@@ -69,12 +68,12 @@ namespace GraduationProject.Controllers
             return Ok(doctor);
         }
 
-        [HttpPut("/Doctors/Update/{id:int}")]
-        public ActionResult<Doctor> UpdateDoctor(int id, Doctor doctor)
+        [HttpPatch("{id:int}")]
+        public async Task<ActionResult<Doctor>> UpdateDoctor(int id, Doctor doctor)
         {
             if (id != doctor.Id)
                 return BadRequest();
-            var updatedDoctor = doctorRepo.GetDoctorDetails(id);
+            var updatedDoctor = await doctorRepo.GetDoctorDetails(id);
 
             if (updatedDoctor == null)
                 return NotFound();

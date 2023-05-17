@@ -1,6 +1,7 @@
 ﻿using GraduationProject_DAL.Data.Context;
 using GraduationProject_DAL.Data.Models;
 using GraduationProject_DAL.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,42 +19,63 @@ namespace GraduationProject_DAL.Repositories
             context = _context;
         }
 
-        public List<Patient> GetAllPatients()
+        public async Task<List<Patient>> GetAllPatients()
         {
-           return context.Patients.ToList();
+           return await context.Patients.ToListAsync();
         }
 
-        public Patient GetPatientDetails(int id)
+        public async Task<Patient?> GetPatientDetails(int id)
         {
-            return context.Patients.FirstOrDefault(p => p.Id == id);
+            return await context.Patients.FirstOrDefaultAsync(p => p.Id == id);
         }
 
-        public void InsertPatient(Patient patient)
+        public async void InsertPatient(Patient patient)
         {
-            context.Patients.Add(patient);
-            context.SaveChanges();
+            await context.Patients.AddAsync(patient);
+            await context.SaveChangesAsync();
         }
 
-        public void UpdatePatient(int id, Patient patient)
+        public async void UpdatePatient(int id, Patient patient)
         {
-            Patient pat= context.Patients.Find(id);
-            pat.FName = patient.FName;
-            pat.FNameAR=patient.FNameAR;
-            pat.LName= patient.LName;
-            pat.LNameAR=patient.LNameAR;
-            pat.gender = patient.gender;
-            pat.Email=patient.Email;
-            pat.Password=patient.Password;
-            pat.DOB = patient.DOB;
-            pat.PhoneNumber= patient.PhoneNumber;
-            pat.MedicalHistory=patient.MedicalHistory;
-            context.SaveChanges();
+            Patient? pat= await context.Patients.FindAsync(id);
+            if(pat !=null)
+            {
+				pat.FName = patient.FName;
+				pat.FNameAR = patient.FNameAR;
+				pat.LName = patient.LName;
+				pat.LNameAR = patient.LNameAR;
+				pat.Gender = patient.Gender;
+				pat.Email = patient.Email;
+				pat.Password = patient.Password;
+				pat.DOB = patient.DOB;
+				pat.PhoneNumber = patient.PhoneNumber;
+				pat.MedicalHistory = patient.MedicalHistory;
+				await context.SaveChangesAsync();
+			}
         }
-        public void DeletePatient(int id)
+        public async void DeletePatient(int id)
         {
-            context.Remove(context.Patients.Find(id));
-            context.SaveChanges();
-            
+            Patient? P = await context.Patients.FindAsync(id);
+            if(P!=null)
+            {
+				context.Remove(P);
+				await context.SaveChangesAsync();
+			}
         }
-    }
+
+		public async Task<bool> IsExist(string email)
+		{
+			return await context.Patients.AnyAsync(p=> p.Email == email);
+		}
+
+        public async Task<Patient?> GetPatient(string email)
+        {
+            return await context.Patients.FirstOrDefaultAsync(p => p.Email == email);
+        }
+
+		public async Task<bool> IsExist(int id)
+		{
+			return await context.Patients.AnyAsync(p => p.Id == id);
+		}
+	}
 }

@@ -1,26 +1,17 @@
-﻿using GraduationProject_DAL.Data.Models;
-using System;
-using System.Collections.Generic;
+﻿using GraduationProject_DAL.Data.Enums;
+using GraduationProject_DAL.Data.Validators;
+using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Text.Json.Serialization;
-using System.Threading.Tasks;
+
 
 namespace GraduationProject_DAL.Data.Models
 {
-    public enum Gender
-    {
-        Female = 1,
-        Male
-    }
     public class Patient
     {
         [Key]
         public int Id { get; set; }
 
-        [StringLength(14)]
+        [Required,StringLength(14)]
         public string SSN { get; set; }
 
         [Required, MaxLength(50)]
@@ -37,13 +28,16 @@ namespace GraduationProject_DAL.Data.Models
 
         [Required]
         [EnumDataType(typeof(Gender))]
-        public Gender gender { get; set; }
+        public Gender Gender { get; set; }
 
         [Required, DataType(DataType.EmailAddress)]
         public string Email { get; set; }
 
         [Required, DataType(DataType.Password)]
         public string Password { get; set; }
+
+        [HiddenInput]
+        public string? PasswordSalt { get; set; }
 
         [Required, DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}")]

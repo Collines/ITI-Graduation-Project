@@ -20,47 +20,50 @@ namespace GraduationProject_DAL.Repositories
         }
 
 
-        public List<Doctor> GetAllDoctors()
+        public async Task<List<Doctor>> GetAllDoctors()
         {
-            return context.Doctors.Include(d => d.Department).ToList();
+            return await context.Doctors.Include(d => d.Department).ToListAsync();
         }
 
-        public Doctor GetDoctorDetails(int id)
+        public async Task<Doctor?> GetDoctorDetails(int id)
         {
-            return context.Doctors.Include(d => d.Department).FirstOrDefault(d => d.Id == id);
+            return await context.Doctors.Include(d => d.Department).FirstOrDefaultAsync(d => d.Id == id);
         }
 
-        public void InsertDoctor(Doctor doctor)
+        public async void InsertDoctor(Doctor doctor)
         {
-            context.Doctors.Add(doctor);
-            context.SaveChanges();
+            await context.Doctors.AddAsync(doctor);
+            await context.SaveChangesAsync();
         }
 
-        public void UpdateDoctor(int id, Doctor doctor)
+        public async void UpdateDoctor(int id, Doctor doctor)
         {
-            Doctor OldDoctor = context.Doctors.Find(id);
-            OldDoctor.FName = doctor.FName;
-            OldDoctor.FNameAR = doctor.FNameAR;
-            OldDoctor.LName = doctor.LName;
-            OldDoctor.LNameAR = doctor.LNameAR;
-            OldDoctor.Title = doctor.Title;
-            OldDoctor.TitleAR = doctor.TitleAR;
-            OldDoctor.Bio = doctor.Bio;
-            OldDoctor.BioAR = doctor.BioAR;
-            if(doctor.Image != null )
-                OldDoctor.Image = doctor.Image;
-            OldDoctor.DeptId = doctor.DeptId;
+            Doctor? OldDoctor = await context.Doctors.FindAsync(id);
+            if (OldDoctor != null)
+            {
+                OldDoctor.FName = doctor.FName;
+                OldDoctor.FNameAR = doctor.FNameAR;
+                OldDoctor.LName = doctor.LName;
+                OldDoctor.LNameAR = doctor.LNameAR;
+                OldDoctor.Title = doctor.Title;
+                OldDoctor.TitleAR = doctor.TitleAR;
+                OldDoctor.Bio = doctor.Bio;
+                OldDoctor.BioAR = doctor.BioAR;
+                if (doctor.Image != null)
+                    OldDoctor.Image = doctor.Image;
+                OldDoctor.DeptId = doctor.DeptId;
 
-            context.SaveChanges();
+                await context.SaveChangesAsync();
+            }
         }
 
-        public void DeleteDoctor(int id)
+        public async void DeleteDoctor(int id)
         {
-            var doctor = context.Doctors.Find(id);
+            var doctor = await context.Doctors.FindAsync(id);
             if (doctor != null)
             {
                 context.Remove(doctor);
-                context.SaveChanges();
+                await context.SaveChangesAsync();
             }
             
         }

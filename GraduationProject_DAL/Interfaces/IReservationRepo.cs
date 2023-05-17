@@ -9,8 +9,8 @@ namespace GraduationProject_DAL.Interfaces
 {
     public interface IReservationRepo
     {
-        public List<Reservation> GetAllReservation();
-        public Reservation GetReservationDetails(int id);
+        public Task<List<Reservation>> GetAllReservation();
+        public Task<Reservation?> GetReservationDetails(int id);
         public void InsertReservation(Reservation reservation);
         public void UpdateReservation(int id, Reservation reservation);
         public void DeleteReservation(int id);
