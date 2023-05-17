@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace GraduationProject_DAL.Repositories
 {
-    public class ReservationRepo : IReservationRepo
+    public class ReservationRepo : IReservationRepo//:GeneralRepo<Department>
     {
         private readonly HospitalBDContext context;
 

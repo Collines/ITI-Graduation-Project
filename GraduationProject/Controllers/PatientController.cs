@@ -15,8 +15,9 @@ namespace GraduationProject.Controllers
     public class PatientController : ControllerBase
     {
         private readonly IPatientRepo patientRepo;
-		private readonly IJWTManagerRepository JWTManager;
-		private readonly IPatientServiceRepository PatientService;
+		    private readonly IJWTManagerRepository JWTManager;
+		    private readonly IPatientServiceRepository PatientService;
+
 
 		public PatientController(IPatientRepo Prepo, IJWTManagerRepository jWTManager, IPatientServiceRepository patientService)
         {
@@ -96,7 +97,7 @@ namespace GraduationProject.Controllers
                 {
                     return NotFound();
                 }
-                patientRepo.UpdatePatient(id, updatePatient);
+                patientRepo.UpdatePatient(id, patient);
                 return Ok(updatePatient);
 
             }
