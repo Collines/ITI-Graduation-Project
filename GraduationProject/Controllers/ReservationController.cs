@@ -1,10 +1,7 @@
 ﻿using GraduationProject_DAL.Data.Models;
 using GraduationProject_DAL.Interfaces;
-using GraduationProject_DAL.Repositories;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System.Net;
 
 namespace GraduationProject.Controllers
 {
@@ -13,17 +10,17 @@ namespace GraduationProject.Controllers
     [Authorize]
     public class ReservationController : ControllerBase
     {
-        private readonly IReservationRepo ReservationRepo;
+        private readonly IRepository<Reservation> repository;
 
-        public ReservationController(IReservationRepo _repo)
+        public ReservationController(IRepository<Reservation> _repository)
         {
-            ReservationRepo = _repo;
+            repository = _repository;
         }
 
         [HttpGet]
         public async Task<ActionResult<List<Reservation>>> GetAll()
         {
-            var reservations = await ReservationRepo.GetAllReservation();
+            var reservations = await repository.GetAllAsync();
 
             if (reservations.Count == 0)
                 return NotFound();
@@ -34,19 +31,26 @@ namespace GraduationProject.Controllers
         [HttpGet("{id:int}")]
         public async Task<ActionResult<Reservation>> GetById(int id)
         {
-            var reservation = await ReservationRepo.GetReservationDetails(id);
+            var reservations = await repository.GetAllAsync();
 
-            if (reservation == null)
-                return NotFound();
-            return Ok(reservation);
+            if (reservations != null)
+            {
+                var reservation = reservations.Find(x => x.Id == id);
+                if (reservation != null)
+                {
+                    return Ok(reservation);
+                }
+            }
+
+            return NotFound();
         }
 
         [HttpPost]
-        public ActionResult<Reservation> CreateReservation(Reservation reservation)
+        public async Task<ActionResult<Reservation>> CreateReservation(Reservation reservation)
         {
             if (ModelState.IsValid)
             {
-                ReservationRepo.InsertReservation(reservation);
+                await repository.InsertAsync(reservation);
                 return Ok(reservation);
             }
             return BadRequest();
@@ -55,24 +59,17 @@ namespace GraduationProject.Controllers
         [HttpDelete("{id:int}")]
         public async Task<ActionResult<Reservation>> DeleteReservation(int id)
         {
-            var reservation =await ReservationRepo.GetReservationDetails(id);
-
-            if (reservation == null)
-                return NotFound();
-
-            ReservationRepo.DeleteReservation(id);
-            return Ok(reservation);
+            await repository.DeleteAsync(id);
+            return Ok();
         }
 
         [HttpPut("{id:int}")]
         public async Task<ActionResult<Reservation>> UpdateReservation(int id, Reservation reservation)
         {
-            var updatedreservation = await ReservationRepo.GetReservationDetails(id);
+            if (id != reservation.Id)
+                return BadRequest();
 
-            if (updatedreservation == null)
-                return NotFound();
-            ReservationRepo.UpdateReservation(id, reservation);
-
+            await repository.UpdateAsync(id, reservation);
             return Ok(reservation);
         }
     }

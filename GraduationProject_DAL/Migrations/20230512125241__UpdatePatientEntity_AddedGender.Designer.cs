@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace GraduationProject_DAL.Migrations
 {
-    [DbContext(typeof(HospitalBDContext))]
+    [DbContext(typeof(HospitalDBContext))]
     [Migration("20230512125241__UpdatePatientEntity_AddedGender")]
     partial class _UpdatePatientEntity_AddedGender
     {

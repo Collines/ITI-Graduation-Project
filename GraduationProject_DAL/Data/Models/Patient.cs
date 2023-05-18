@@ -11,30 +11,24 @@ namespace GraduationProject_DAL.Data.Models
         [Key]
         public int Id { get; set; }
 
-        [Required,StringLength(14)]
-        public string SSN { get; set; }
+        [Required, StringLength(14)]
+        public required string SSN { get; set; }
 
         [Required, MaxLength(50)]
-        public string FName { get; set; }
+        public required string FirstName { get; set; }
 
         [Required, MaxLength(50)]
-        public string FNameAR { get; set; }
-
-        [Required, MaxLength(50)]
-        public string LName { get; set; }
-
-        [Required, MaxLength(50)]
-        public string LNameAR { get; set; }
+        public required string LastName { get; set; }
 
         [Required]
         [EnumDataType(typeof(Gender))]
         public Gender Gender { get; set; }
 
         [Required, DataType(DataType.EmailAddress)]
-        public string Email { get; set; }
+        public required string Email { get; set; }
 
         [Required, DataType(DataType.Password)]
-        public string Password { get; set; }
+        public required string Password { get; set; }
 
         [HiddenInput]
         public string? PasswordSalt { get; set; }
@@ -44,11 +38,11 @@ namespace GraduationProject_DAL.Data.Models
         public DateTime DOB { get; set; }
 
         [EgyptianPhones]
-        public string PhoneNumber { get; set; }
+        public required string PhoneNumber { get; set; }
 
         [MaxLength(500)]
         public string? MedicalHistory { get; set; }
 
-        public virtual IEnumerable<Reservation>? Reservations { get; set; }
+        public virtual IEnumerable<Reservation> Reservations { get; set; } = new HashSet<Reservation>();
     }
 }
