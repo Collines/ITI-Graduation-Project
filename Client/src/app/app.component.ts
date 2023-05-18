@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { config } from './Config/Config';
 
 @Component({
   selector: 'app-root',
@@ -8,6 +7,4 @@ import { config } from './Config/Config';
 })
 export class AppComponent {
   title = 'Client';
-
-  Development = config.Development;
 }
