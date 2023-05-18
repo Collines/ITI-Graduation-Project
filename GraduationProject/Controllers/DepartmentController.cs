@@ -44,7 +44,7 @@ namespace GraduationProject.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<InsertDepartmentDTO>> CreateDepartment(InsertDepartmentDTO department)
+        public async Task<ActionResult<DepartmentInsertDTO>> CreateDepartment(DepartmentInsertDTO department)
         {
             if (ModelState.IsValid)
             {
@@ -62,7 +62,7 @@ namespace GraduationProject.Controllers
         }
 
         [HttpPut("/Department/Update/{id:int}")]
-        public async Task<ActionResult<InsertDepartmentDTO>> UpdateDepartment(int id, InsertDepartmentDTO department)
+        public async Task<ActionResult<DepartmentInsertDTO>> UpdateDepartment(int id, DepartmentInsertDTO department)
         {
             await manager.UpdateAsync(id, department);
             return Ok(department);

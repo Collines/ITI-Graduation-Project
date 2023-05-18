@@ -1,4 +1,5 @@
-﻿using GraduationProject_DAL.Data.DTO;
+﻿using GraduationProject_BL.DTO;
+using GraduationProject_BL.Interfaces;
 using GraduationProject_DAL.Data.Models;
 using GraduationProject_DAL.Handlers;
 using GraduationProject_DAL.Interfaces;
@@ -16,13 +17,15 @@ namespace GraduationProject.Controllers
         private readonly IRepository<Patient> repository;
         private readonly IJWTManagerRepository JWTManager;
         private readonly IPatientServiceRepository PatientService;
+        private readonly IPatientManager patientManager;
 
 
-        public PatientController(IRepository<Patient> _repository, IJWTManagerRepository jWTManager, IPatientServiceRepository patientService)
+        public PatientController(IRepository<Patient> _repository, IJWTManagerRepository jWTManager, IPatientServiceRepository patientService, IPatientManager _patientManager)
         {
             repository = _repository;
             JWTManager = jWTManager;
             PatientService = patientService;
+            patientManager = _patientManager;
         }
 
         [HttpGet]
@@ -106,31 +109,25 @@ namespace GraduationProject.Controllers
 
         [HttpPost("Login")]
         [AllowAnonymous]
-        public async Task<ActionResult<Patient>> Login(PatientLoginDTO p)
+        public async Task<ActionResult<LoginDTO>> Login(PatientLoginDTO login)
         {
-            if (!String.IsNullOrEmpty(p.Email) && !String.IsNullOrEmpty(p.Password))
+            if (!string.IsNullOrEmpty(login.Email) && !string.IsNullOrEmpty(login.Password))
             {
-                if (PatientService.IsValidUser(p.Email, p.Password))
-                {
-                    var patient = await GetPatient(p.Email);
-                    if (patient == null)
-                    {
-                        return BadRequest();
-                    }
 
-                    Token? token = JWTManager.GenerateToken(patient);
-                    if (token != null)
+                var isFound = await patientManager.FindPatient(login.Email, login.Password);
+
+                if (isFound)
+                {
+                    var dto = await patientManager.Login(login.Email);
+
+                    if (dto != null)
                     {
-                        PatientRefreshTokens Prt = new()
-                        {
-                            RefreshToken = token.RefreshToken,
-                            Email = patient.Email
-                        };
-                        PatientService.AddUserRefreshTokens(Prt);
-                        PatientService.SaveCommit();
-                        return Ok(token);
+                        return Ok(dto);
                     }
-                    else Unauthorized("Invalid Attempt!");
+                    else
+                    {
+                        return Unauthorized("Invalid Attempt!");
+                    }
                 }
                 return Unauthorized("Incorrect username or password!");
             }

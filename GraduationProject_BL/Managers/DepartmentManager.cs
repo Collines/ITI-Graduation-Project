@@ -93,7 +93,7 @@ namespace GraduationProject_BL.Managers
             return null;
         }
 
-        public async Task InsertAsync(InsertDepartmentDTO item)
+        public async Task InsertAsync(DepartmentInsertDTO item)
         {
             Department department = new()
             {
@@ -114,7 +114,7 @@ namespace GraduationProject_BL.Managers
             await translations.InsertAsync(translation);
         }
 
-        public async Task UpdateAsync(int id, InsertDepartmentDTO item)
+        public async Task UpdateAsync(int id, DepartmentInsertDTO item)
         {
             var departments = await repository.GetAllAsync();
 

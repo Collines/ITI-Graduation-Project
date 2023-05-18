@@ -1,3 +1,5 @@
+using GraduationProject.Middlewares;
+using GraduationProject_BL.Interfaces;
 using GraduationProject_BL.Managers;
 using GraduationProject_DAL.Data.Context;
 using GraduationProject_DAL.Data.Models;
@@ -29,41 +31,28 @@ internal class Program
         builder.Services.AddScoped<IDepartmentManager, DepartmentManager>();
         builder.Services.AddScoped<IRepository<Doctor>, DoctorRepository>();
         builder.Services.AddScoped<IRepository<Patient>, PatientRepository>();
+        builder.Services.AddScoped<IRepository<PatientsLogins>, PatientsLoginsRepository>();
+        builder.Services.AddScoped<ITranslations<PatientTranslations>, PatientTranslationsRepository>();
+        builder.Services.AddScoped<IPatientManager, PatientManager>();
+        builder.Services.AddScoped<IPatientLoginManager, PatientLoginManager>();
         builder.Services.AddScoped<IRepository<Reservation>, ReservationRepository>();
 
         // Adding Authentication using JWT
-        builder.Services.AddAuthentication(options =>
-        {
-            options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-            options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-        }).AddJwtBearer(o =>
-        {
-            var Key = Encoding.UTF8.GetBytes(builder.Configuration["JWT:Key"]);
-            o.SaveToken = true;
-            o.TokenValidationParameters = new TokenValidationParameters
-            {
-                ValidateIssuer = false,
-                ValidateAudience = false,
-                ValidateLifetime = true,
-                ValidateIssuerSigningKey = true,
-                ValidIssuer = builder.Configuration["JWT:Issuer"],
-                ValidAudience = builder.Configuration["JWT:Audience"],
-                IssuerSigningKey = new SymmetricSecurityKey(Key),
-                ClockSkew = TimeSpan.Zero
-            };
-            o.Events = new JwtBearerEvents
-            {
-                OnAuthenticationFailed = context =>
-                {
-                    if (context.Exception.GetType() == typeof(SecurityTokenExpiredException))
-                    {
-                        context.Response.Headers.Add("IS-TOKEN-EXPIRED", "true");
-                    }
-                    return Task.CompletedTask;
-                }
-            };
 
-        });
+        builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+            .AddJwtBearer(options =>
+            {
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuer = true,
+                    ValidateAudience = true,
+                    ValidateIssuerSigningKey = true,
+                    ValidIssuer = builder.Configuration["JWT:Issuer"],
+                    ValidAudience = builder.Configuration["JWT:Audience"],
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["JWT:Key"]))
+                };
+            });
+
         builder.Services.AddScoped<IJWTManagerRepository, JWTManagerRepository>();
         builder.Services.AddScoped<IPatientServiceRepository, PatientServiceRepository>();
 
@@ -101,6 +90,7 @@ internal class Program
 
         app.UseHttpsRedirection();
 
+        app.UseMiddleware<TokenAuthenticationMiddleware>();
         app.UseAuthentication();
         app.UseAuthorization();
 
