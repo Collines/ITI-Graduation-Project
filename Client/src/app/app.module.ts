@@ -8,6 +8,9 @@ import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule} from '@angular/common/http';
+import { ClientComponent } from './components/client/client.component';
+import { DevHeaderComponent } from './components/dev-header/dev-header.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
 
 
 @NgModule({
@@ -15,7 +18,10 @@ import { HttpClientModule} from '@angular/common/http';
     AppComponent,
     NavbarComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    ClientComponent,
+    DevHeaderComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,
