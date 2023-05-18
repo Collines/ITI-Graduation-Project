@@ -32,7 +32,6 @@ namespace GraduationProject_DAL.Repositories
             {
                 department.Title = item.Title;
                 department.Description = item.Description;
-                department.Id = item.Id;
                 await context.SaveChangesAsync();
             }
         }

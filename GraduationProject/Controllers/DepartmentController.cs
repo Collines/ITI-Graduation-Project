@@ -1,5 +1,5 @@
-﻿using GraduationProject_DAL.Data.Models;
-using GraduationProject_DAL.Interfaces;
+﻿using GraduationProject_BL.DTO;
+using GraduationProject_BL.Managers;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -10,17 +10,19 @@ namespace GraduationProject.Controllers
     [ApiController]
     public class DepartmentController : ControllerBase
     {
-        private readonly IRepository<Department> repository;
+        private readonly IHttpContextAccessor httpContextAccessor;
+        private readonly IDepartmentManager manager;
 
-        public DepartmentController(IRepository<Department> _repository)
+        public DepartmentController(IHttpContextAccessor _httpContextAccessor, IDepartmentManager _manager)
         {
-            repository = _repository;
+            httpContextAccessor = _httpContextAccessor;
+            manager = _manager;
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<Department>>> GetAll()
+        public async Task<ActionResult<List<DepartmentDTO>>> GetAll()
         {
-            var departments = await repository.GetAllAsync();
+            var departments = await manager.GetAllAsync(Utils.GetLang(httpContextAccessor));
 
             if (departments.Count == 0)
                 return NotFound();
@@ -29,47 +31,40 @@ namespace GraduationProject.Controllers
         }
 
         [HttpGet("/Department/{id:int}")]
-        public async Task<ActionResult<Department>> GetById(int id)
+        public async Task<ActionResult<DepartmentDTO>> GetById(int id)
         {
-            var departments = await repository.GetAllAsync();
+            var department = await manager.GetByIdAsync(id, Utils.GetLang(httpContextAccessor));
 
-            if (departments != null)
+            if (department != null)
             {
-                var department = departments.Find(x => x.Id == id);
-                if (department != null)
-                {
-                    return Ok(department);
-                }
+                return Ok(department);
             }
 
             return NotFound();
         }
 
         [HttpPost]
-        public async Task<ActionResult<Department>> CreateDepartment(Department department)
+        public async Task<ActionResult<InsertDepartmentDTO>> CreateDepartment(InsertDepartmentDTO department)
         {
             if (ModelState.IsValid)
             {
-                await repository.InsertAsync(department);
+                await manager.InsertAsync(department);
                 return Ok(department);
             }
             return BadRequest();
         }
 
         [HttpDelete("/Department/Delete/{id:int}")]
-        public async Task<ActionResult<Department>> DeleteDepartment(int id)
+        public async Task<ActionResult<int>> DeleteDepartment(int id)
         {
-            await repository.DeleteAsync(id);
-            return Ok();
+            await manager.DeleteAsync(id);
+            return Ok(id);
         }
 
         [HttpPut("/Department/Update/{id:int}")]
-        public async Task<ActionResult<Department>> UpdateDepartment(int id, Department department)
+        public async Task<ActionResult<InsertDepartmentDTO>> UpdateDepartment(int id, InsertDepartmentDTO department)
         {
-            if (id != department.Id)
-                return BadRequest();
-
-            await repository.UpdateAsync(id, department);
+            await manager.UpdateAsync(id, department);
             return Ok(department);
         }
     }

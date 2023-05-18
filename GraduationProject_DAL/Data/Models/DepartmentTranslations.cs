@@ -1,10 +1,13 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace GraduationProject_DAL.Data.Models
 {
+    [PrimaryKey(nameof(Id), nameof(DepartmentId))]
     public class DepartmentTranslations
     {
+        [Column(Order = 0)]
         [Key]
         public int Id { get; set; }
 
@@ -20,8 +23,8 @@ namespace GraduationProject_DAL.Data.Models
         [Required, MaxLength(500)]
         public required string Description_AR { get; set; }
 
+        [Column(Order = 1)]
         [ForeignKey("Department")]
-        [Required]
         public required int DepartmentId { get; set; }
 
         public virtual Department? Department { get; set; }

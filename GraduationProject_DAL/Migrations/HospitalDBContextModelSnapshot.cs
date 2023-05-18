@@ -48,13 +48,12 @@ namespace GraduationProject_DAL.Migrations
             modelBuilder.Entity("GraduationProject_DAL.Data.Models.DepartmentTranslations", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                        .HasColumnType("int")
+                        .HasColumnOrder(0);
 
                     b.Property<int>("DepartmentId")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnOrder(1);
 
                     b.Property<string>("Description_AR")
                         .IsRequired()
@@ -76,7 +75,7 @@ namespace GraduationProject_DAL.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.HasKey("Id");
+                    b.HasKey("Id", "DepartmentId");
 
                     b.HasIndex("DepartmentId");
 
@@ -127,10 +126,12 @@ namespace GraduationProject_DAL.Migrations
             modelBuilder.Entity("GraduationProject_DAL.Data.Models.DoctorTranslations", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnOrder(0);
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    b.Property<int>("DoctorId")
+                        .HasColumnType("int")
+                        .HasColumnOrder(1);
 
                     b.Property<string>("Bio_AR")
                         .IsRequired()
@@ -141,9 +142,6 @@ namespace GraduationProject_DAL.Migrations
                         .IsRequired()
                         .HasMaxLength(500)
                         .HasColumnType("nvarchar(500)");
-
-                    b.Property<int>("DoctorId")
-                        .HasColumnType("int");
 
                     b.Property<string>("FirstName_AR")
                         .IsRequired()
@@ -175,7 +173,7 @@ namespace GraduationProject_DAL.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.HasKey("Id");
+                    b.HasKey("Id", "DoctorId");
 
                     b.HasIndex("DoctorId");
 
@@ -287,10 +285,12 @@ namespace GraduationProject_DAL.Migrations
             modelBuilder.Entity("GraduationProject_DAL.Data.Models.PatientTranslations", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnOrder(0);
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    b.Property<int>("PatientId")
+                        .HasColumnType("int")
+                        .HasColumnOrder(1);
 
                     b.Property<string>("FirstName_AR")
                         .IsRequired()
@@ -312,10 +312,7 @@ namespace GraduationProject_DAL.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<int>("PatientId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
+                    b.HasKey("Id", "PatientId");
 
                     b.HasIndex("PatientId");
 

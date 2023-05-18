@@ -5,7 +5,7 @@
 namespace GraduationProject_DAL.Migrations
 {
     /// <inheritdoc />
-    public partial class UpdatedEntitiesAndAddedTranslations : Migration
+    public partial class UpdatedEntities_AddedTranslations : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -112,17 +112,16 @@ namespace GraduationProject_DAL.Migrations
                 name: "DepartmentTranslations",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Id = table.Column<int>(type: "int", nullable: false),
+                    DepartmentId = table.Column<int>(type: "int", nullable: false),
                     Title_EN = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     Title_AR = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     Description_EN = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
-                    Description_AR = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
-                    DepartmentId = table.Column<int>(type: "int", nullable: false)
+                    Description_AR = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_DepartmentTranslations", x => x.Id);
+                    table.PrimaryKey("PK_DepartmentTranslations", x => new { x.Id, x.DepartmentId });
                     table.ForeignKey(
                         name: "FK_DepartmentTranslations_Departments_DepartmentId",
                         column: x => x.DepartmentId,
@@ -135,8 +134,8 @@ namespace GraduationProject_DAL.Migrations
                 name: "DoctorTranslations",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Id = table.Column<int>(type: "int", nullable: false),
+                    DoctorId = table.Column<int>(type: "int", nullable: false),
                     FirstName_EN = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     FirstName_AR = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     LastName_EN = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
@@ -144,12 +143,11 @@ namespace GraduationProject_DAL.Migrations
                     Title_EN = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     Title_AR = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     Bio_EN = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
-                    Bio_AR = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
-                    DoctorId = table.Column<int>(type: "int", nullable: false)
+                    Bio_AR = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_DoctorTranslations", x => x.Id);
+                    table.PrimaryKey("PK_DoctorTranslations", x => new { x.Id, x.DoctorId });
                     table.ForeignKey(
                         name: "FK_DoctorTranslations_Doctors_DoctorId",
                         column: x => x.DoctorId,
@@ -182,17 +180,16 @@ namespace GraduationProject_DAL.Migrations
                 name: "PatientTranslations",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Id = table.Column<int>(type: "int", nullable: false),
+                    PatientId = table.Column<int>(type: "int", nullable: false),
                     FirstName_EN = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     FirstName_AR = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     LastName_EN = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    LastName_AR = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    PatientId = table.Column<int>(type: "int", nullable: false)
+                    LastName_AR = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_PatientTranslations", x => x.Id);
+                    table.PrimaryKey("PK_PatientTranslations", x => new { x.Id, x.PatientId });
                     table.ForeignKey(
                         name: "FK_PatientTranslations_Patients_PatientId",
                         column: x => x.PatientId,

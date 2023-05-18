@@ -1,3 +1,4 @@
+using GraduationProject_BL.Managers;
 using GraduationProject_DAL.Data.Context;
 using GraduationProject_DAL.Data.Models;
 using GraduationProject_DAL.Interfaces;
@@ -24,6 +25,8 @@ internal class Program
 
         //Add Repo Services
         builder.Services.AddScoped<IRepository<Department>, DepartmentRepository>();
+        builder.Services.AddScoped<ITranslations<DepartmentTranslations>, DepartmentTranslationsRepository>();
+        builder.Services.AddScoped<IDepartmentManager, DepartmentManager>();
         builder.Services.AddScoped<IRepository<Doctor>, DoctorRepository>();
         builder.Services.AddScoped<IRepository<Patient>, PatientRepository>();
         builder.Services.AddScoped<IRepository<Reservation>, ReservationRepository>();
@@ -83,6 +86,9 @@ internal class Program
                 builder.AllowAnyHeader();
             });
         });
+
+        // To Access Headers
+        builder.Services.AddHttpContextAccessor();
 
         var app = builder.Build();
 

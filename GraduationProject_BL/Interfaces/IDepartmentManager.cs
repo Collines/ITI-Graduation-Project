@@ -1,0 +1,13 @@
+﻿using GraduationProject_BL.DTO;
+
+namespace GraduationProject_BL.Managers
+{
+    public interface IDepartmentManager
+    {
+        public Task<List<DepartmentDTO>> GetAllAsync(string lang);
+        public Task<DepartmentDTO?> GetByIdAsync(int id, string lang);
+        public Task InsertAsync(InsertDepartmentDTO item);
+        public Task UpdateAsync(int id, InsertDepartmentDTO item);
+        public Task DeleteAsync(int id);
+    }
+}

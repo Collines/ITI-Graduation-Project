@@ -4,10 +4,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 17.5.33516.290
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GraduationProject", "GraduationProject\GraduationProject.csproj", "{7AB8C3E2-3B50-4C81-834E-B932578ABB6B}"
+	ProjectSection(ProjectDependencies) = postProject
+		{43355AD1-996A-42ED-9DF6-4A359073ED0F} = {43355AD1-996A-42ED-9DF6-4A359073ED0F}
+	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GraduationProject_DAL", "GraduationProject_DAL\GraduationProject_DAL.csproj", "{43355AD1-996A-42ED-9DF6-4A359073ED0F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GraduationProject_DAL", "GraduationProject_DAL\GraduationProject_DAL.csproj", "{43355AD1-996A-42ED-9DF6-4A359073ED0F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GraduationProject_BL", "GraduationProject_BL\GraduationProject_BL.csproj", "{F305128F-1CC5-460F-8F0C-F9EF056EDA13}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GraduationProject_BL", "GraduationProject_BL\GraduationProject_BL.csproj", "{F305128F-1CC5-460F-8F0C-F9EF056EDA13}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
