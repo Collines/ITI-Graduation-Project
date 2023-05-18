@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace GraduationProject_DAL.Migrations
 {
-    [DbContext(typeof(HospitalBDContext))]
+    [DbContext(typeof(HospitalDBContext))]
     [Migration("20230510142356_All Navigational properties Nullable")]
     partial class AllNavigationalpropertiesNullable
     {

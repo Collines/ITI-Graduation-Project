@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace GraduationProject_DAL.Migrations
 {
-    [DbContext(typeof(HospitalBDContext))]
-    partial class HospitalBDContextModelSnapshot : ModelSnapshot
+    [DbContext(typeof(HospitalDBContext))]
+    partial class HospitalDBContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
@@ -35,17 +35,7 @@ namespace GraduationProject_DAL.Migrations
                         .HasMaxLength(500)
                         .HasColumnType("nvarchar(500)");
 
-                    b.Property<string>("DescriptionAR")
-                        .IsRequired()
-                        .HasMaxLength(500)
-                        .HasColumnType("nvarchar(500)");
-
                     b.Property<string>("Title")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<string>("TitleAR")
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
@@ -53,6 +43,44 @@ namespace GraduationProject_DAL.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Departments");
+                });
+
+            modelBuilder.Entity("GraduationProject_DAL.Data.Models.DepartmentTranslations", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("DepartmentId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Description_AR")
+                        .IsRequired()
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<string>("Description_EN")
+                        .IsRequired()
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<string>("Title_AR")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("Title_EN")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DepartmentId");
+
+                    b.ToTable("DepartmentTranslations");
                 });
 
             modelBuilder.Entity("GraduationProject_DAL.Data.Models.Doctor", b =>
@@ -68,20 +96,10 @@ namespace GraduationProject_DAL.Migrations
                         .HasMaxLength(500)
                         .HasColumnType("nvarchar(500)");
 
-                    b.Property<string>("BioAR")
-                        .IsRequired()
-                        .HasMaxLength(500)
-                        .HasColumnType("nvarchar(500)");
-
-                    b.Property<int>("DeptId")
+                    b.Property<int>("DepartmentId")
                         .HasColumnType("int");
 
-                    b.Property<string>("FName")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<string>("FNameAR")
+                    b.Property<string>("FirstName")
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
@@ -89,15 +107,7 @@ namespace GraduationProject_DAL.Migrations
                     b.Property<int>("Gender")
                         .HasColumnType("int");
 
-                    b.Property<byte[]>("Image")
-                        .HasColumnType("varbinary(max)");
-
-                    b.Property<string>("LName")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<string>("LNameAR")
+                    b.Property<string>("LastName")
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
@@ -107,16 +117,91 @@ namespace GraduationProject_DAL.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<string>("TitleAR")
+                    b.HasKey("Id");
+
+                    b.HasIndex("DepartmentId");
+
+                    b.ToTable("Doctors");
+                });
+
+            modelBuilder.Entity("GraduationProject_DAL.Data.Models.DoctorTranslations", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Bio_AR")
+                        .IsRequired()
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<string>("Bio_EN")
+                        .IsRequired()
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<int>("DoctorId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("FirstName_AR")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("FirstName_EN")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("LastName_AR")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("LastName_EN")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("Title_AR")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("Title_EN")
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("DeptId");
+                    b.HasIndex("DoctorId");
 
-                    b.ToTable("Doctors");
+                    b.ToTable("DoctorTranslations");
+                });
+
+            modelBuilder.Entity("GraduationProject_DAL.Data.Models.Image", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("DoctorId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DoctorId");
+
+                    b.ToTable("Images");
                 });
 
             modelBuilder.Entity("GraduationProject_DAL.Data.Models.Patient", b =>
@@ -134,12 +219,7 @@ namespace GraduationProject_DAL.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("FName")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<string>("FNameAR")
+                    b.Property<string>("FirstName")
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
@@ -147,12 +227,7 @@ namespace GraduationProject_DAL.Migrations
                     b.Property<int>("Gender")
                         .HasColumnType("int");
 
-                    b.Property<string>("LName")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<string>("LNameAR")
+                    b.Property<string>("LastName")
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
@@ -209,6 +284,44 @@ namespace GraduationProject_DAL.Migrations
                     b.ToTable("PatientRefreshTokens");
                 });
 
+            modelBuilder.Entity("GraduationProject_DAL.Data.Models.PatientTranslations", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("FirstName_AR")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("FirstName_EN")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("LastName_AR")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("LastName_EN")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<int>("PatientId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PatientId");
+
+                    b.ToTable("PatientTranslations");
+                });
+
             modelBuilder.Entity("GraduationProject_DAL.Data.Models.Reservation", b =>
                 {
                     b.Property<int>("Id")
@@ -220,10 +333,10 @@ namespace GraduationProject_DAL.Migrations
                     b.Property<DateTime>("DateTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("DocId")
+                    b.Property<int>("DoctorId")
                         .HasColumnType("int");
 
-                    b.Property<int>("PId")
+                    b.Property<int>("PatientId")
                         .HasColumnType("int");
 
                     b.Property<int?>("Queue")
@@ -231,35 +344,79 @@ namespace GraduationProject_DAL.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("DocId");
+                    b.HasIndex("DoctorId");
 
-                    b.HasIndex("PId");
+                    b.HasIndex("PatientId");
 
                     b.ToTable("Reservations");
                 });
 
-            modelBuilder.Entity("GraduationProject_DAL.Data.Models.Doctor", b =>
+            modelBuilder.Entity("GraduationProject_DAL.Data.Models.DepartmentTranslations", b =>
                 {
                     b.HasOne("GraduationProject_DAL.Data.Models.Department", "Department")
-                        .WithMany("Doctors")
-                        .HasForeignKey("DeptId")
+                        .WithMany()
+                        .HasForeignKey("DepartmentId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Department");
                 });
 
+            modelBuilder.Entity("GraduationProject_DAL.Data.Models.Doctor", b =>
+                {
+                    b.HasOne("GraduationProject_DAL.Data.Models.Department", "Department")
+                        .WithMany("Doctors")
+                        .HasForeignKey("DepartmentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Department");
+                });
+
+            modelBuilder.Entity("GraduationProject_DAL.Data.Models.DoctorTranslations", b =>
+                {
+                    b.HasOne("GraduationProject_DAL.Data.Models.Doctor", "Doctor")
+                        .WithMany()
+                        .HasForeignKey("DoctorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Doctor");
+                });
+
+            modelBuilder.Entity("GraduationProject_DAL.Data.Models.Image", b =>
+                {
+                    b.HasOne("GraduationProject_DAL.Data.Models.Doctor", "Doctor")
+                        .WithMany("Images")
+                        .HasForeignKey("DoctorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Doctor");
+                });
+
+            modelBuilder.Entity("GraduationProject_DAL.Data.Models.PatientTranslations", b =>
+                {
+                    b.HasOne("GraduationProject_DAL.Data.Models.Patient", "Patient")
+                        .WithMany()
+                        .HasForeignKey("PatientId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Patient");
+                });
+
             modelBuilder.Entity("GraduationProject_DAL.Data.Models.Reservation", b =>
                 {
                     b.HasOne("GraduationProject_DAL.Data.Models.Doctor", "Doctor")
                         .WithMany("Reservations")
-                        .HasForeignKey("DocId")
+                        .HasForeignKey("DoctorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("GraduationProject_DAL.Data.Models.Patient", "Patient")
                         .WithMany("Reservations")
-                        .HasForeignKey("PId")
+                        .HasForeignKey("PatientId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -275,6 +432,8 @@ namespace GraduationProject_DAL.Migrations
 
             modelBuilder.Entity("GraduationProject_DAL.Data.Models.Doctor", b =>
                 {
+                    b.Navigation("Images");
+
                     b.Navigation("Reservations");
                 });
 
