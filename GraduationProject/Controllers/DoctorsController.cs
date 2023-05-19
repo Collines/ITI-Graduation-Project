@@ -1,9 +1,7 @@
 ﻿using GraduationProject_DAL.Data.Models;
 using GraduationProject_DAL.Interfaces;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace GraduationProject.Controllers
 {
@@ -12,22 +10,17 @@ namespace GraduationProject.Controllers
     [Authorize]
     public class DoctorsController : ControllerBase
     {
-        private readonly IDoctorRepo doctorRepo;
-        // private readonly GeneralRepo<Docotr> patientRepo;
+        private readonly IRepository<Doctor> repository;
 
-        //public DoctorsController(GeneralRepo<Doctor> _repo)
-        //{
-        //    doctorRepo = _repo;
-        //}
-        public DoctorsController(IDoctorRepo _repo)
+        public DoctorsController(IRepository<Doctor> _repository)
         {
-            doctorRepo = _repo;
+            repository = _repository;
         }
 
         [HttpGet]
         public async Task<ActionResult<List<Doctor>>> GetAll()
         {
-            var doctors = await doctorRepo.GetAllDoctors();
+            var doctors = await repository.GetAllAsync();
 
             if (doctors.Count == 0)
                 return NotFound();
@@ -38,19 +31,26 @@ namespace GraduationProject.Controllers
         [HttpGet("{id:int}")]
         public async Task<ActionResult<Doctor>> GetById(int id)
         {
-            var doctor = await doctorRepo.GetDoctorDetails(id);
+            var doctors = await repository.GetAllAsync();
 
-            if (doctor == null)
-                return NotFound();
-            return Ok(doctor);
+            if (doctors != null)
+            {
+                var doctor = doctors.Find(x => x.Id == id);
+                if (doctor != null)
+                {
+                    return Ok(doctor);
+                }
+            }
+
+            return NotFound();
         }
 
         [HttpPost]
-        public ActionResult<Doctor> CreateDoctor(Doctor doctor)
+        public async Task<ActionResult<Doctor>> CreateDoctor(Doctor doctor)
         {
             if (ModelState.IsValid)
             {
-                doctorRepo.InsertDoctor(doctor);
+                await repository.InsertAsync(doctor);
                 return Ok(doctor);
             }
             return BadRequest();
@@ -59,13 +59,8 @@ namespace GraduationProject.Controllers
         [HttpDelete("{id:int}")]
         public async Task<ActionResult<Doctor>> DeleteDoctor(int id)
         {
-            var doctor = await doctorRepo.GetDoctorDetails(id);
-
-            if (doctor == null)
-                return NotFound();
-
-            doctorRepo.DeleteDoctor(id);
-            return Ok(doctor);
+            await repository.DeleteAsync(id);
+            return Ok();
         }
 
         [HttpPatch("{id:int}")]
@@ -73,12 +68,8 @@ namespace GraduationProject.Controllers
         {
             if (id != doctor.Id)
                 return BadRequest();
-            var updatedDoctor = await doctorRepo.GetDoctorDetails(id);
 
-            if (updatedDoctor == null)
-                return NotFound();
-            doctorRepo.UpdateDoctor(id, doctor);
-
+            await repository.UpdateAsync(id, doctor);
             return Ok(doctor);
         }
     }

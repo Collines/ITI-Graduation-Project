@@ -3,27 +3,17 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace GraduationProject_DAL.Data.Models
 {
-    public class Reservation
+    public class Image
     {
         [Key]
         public int Id { get; set; }
 
         [Required]
-        public DateTime DateTime { get; set; }
-
-        [Range(1, int.MaxValue)]
-        public int? Queue { get; set; }
-
-        [ForeignKey("Patient")]
-        public int PatientId { get; set; }
-
-        public virtual Patient? Patient { get; set; }
+        public required string Name { get; set; }
 
         [ForeignKey("Doctor")]
         public int DoctorId { get; set; }
 
         public virtual Doctor? Doctor { get; set; }
-
-
     }
 }

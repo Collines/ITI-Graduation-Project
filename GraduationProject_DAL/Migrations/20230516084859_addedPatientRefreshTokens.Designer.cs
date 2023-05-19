@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace GraduationProject_DAL.Migrations
 {
-    [DbContext(typeof(HospitalBDContext))]
+    [DbContext(typeof(HospitalDBContext))]
     [Migration("20230516084859_addedPatientRefreshTokens")]
     partial class addedPatientRefreshTokens
     {

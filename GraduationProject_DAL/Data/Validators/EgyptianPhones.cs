@@ -1,11 +1,6 @@
 ﻿using Microsoft.IdentityModel.Tokens;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 
 namespace GraduationProject_DAL.Data.Validators
 {
@@ -22,7 +17,7 @@ namespace GraduationProject_DAL.Data.Validators
             {
                 ErrorMessage = "Enter A valid Phone Number"; //user validation error
                 return false;
-            } 
+            }
         }
     }
 }
