@@ -6,6 +6,10 @@ import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { HomeComponent } from './components/home/home.component';
+import { LoginComponent } from './components/login/login.component';
+import { RegisterComponent } from './components/register/register.component';
+
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule} from '@angular/common/http';
 
@@ -15,7 +19,10 @@ import { HttpClientModule} from '@angular/common/http';
     AppComponent,
     NavbarComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    HomeComponent,
+    LoginComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,

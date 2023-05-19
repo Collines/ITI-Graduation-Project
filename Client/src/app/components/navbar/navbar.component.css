@@ -24,6 +24,23 @@
 .nav-item a:focus{
    color: var(--mainColor);
 }
+.button{
+  background-color: transparent;
+  border-radius: 8px;
+  padding: 10px;
+  border: 1px solid white;
+
+}
+.button>a{
+  color: white;
+}
+.button:hover{
+  border: 1px solid var(--mainColor);
+
+}
+.button:hover a{
+  color: var(--mainColor);
+}
 @media screen and (max-width: 992px) {
   li .active::after,
   li:hover a::after {

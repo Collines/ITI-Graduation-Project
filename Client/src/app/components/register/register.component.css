@@ -1,0 +1,112 @@
+.register{
+  background-image: url(../../../assets/images/dark.jpg);
+   /* background-image: linear-gradient(to right, rgb(240, 244, 248)65%,rgb(126, 204, 243) 35%); */
+   background-size: 100% 100%;
+   min-height: 90vh;
+   position: relative;
+   background-position: center;
+ }
+ .box{
+     width: 80%;
+     margin: auto;
+     position: relative;
+     background-color: #fff;
+     padding: 10px 20px;
+     overflow: hidden;
+     box-shadow: rgba(0, 0, 0, 0.15) 0px 15px 25px, rgba(0, 0, 0, 0.05) 0px 5px 10px;
+     border-radius: 10px;
+
+ }
+ .boxMargin{
+   margin-top: 100px;
+ }
+ h3{
+   color: #1472a1;
+ font-size: 30px;
+ letter-spacing: 2px;
+ }
+
+ #btn{
+   top: 0;
+   left: 0;
+   position: absolute;
+   width: 140px;
+   height: 100%;
+   background: linear-gradient(to right ,#9575cd, #039be5 ,#80deea);
+   border-radius: 30px;
+   transition: 0.5s;
+ }
+ h5{
+   color:#a5a4a4 ;
+   letter-spacing: 2px;
+ }
+ .line{
+   font-size: 15px;
+   color: #a5a4a4;
+ }
+ .line:before {
+   content: "";
+   display: block;
+   width: 130px;
+   height: 2px;
+   background: #cac9c9;
+   left: 20px;
+   top: 50%;
+   position: absolute;
+ }
+
+ .line:after {
+   content: "";
+   display: block;
+   width: 130px;
+   height: 2px;
+   background: #cac9c9;
+   right: 20px;
+   top: 50%;
+   position: absolute;
+ }
+ .social {
+   /* margin: 15px auto; */
+   text-align: center;
+   padding: 15px 0;
+
+ }
+ .social img{
+   position: relative;
+   width: 30px;
+   height: 30px;
+   margin: 0 12px;
+   box-shadow: 0 0 20px 0 #7f7f7f3d;
+   cursor: pointer;
+   border-radius: 50%;
+ }
+ .submit-btn{
+   width: 40%;
+   padding: 8px 15px ;
+   cursor: pointer;
+   display: block;
+   margin: auto;
+   background: linear-gradient(270deg, rgba(50,200,250,1) 0%, rgba(88,125,228,1) 100%);
+   border: 0;
+   outline: none;
+   border-radius: 30px;
+   font-size: 18px;
+   font-weight: 500;
+   color: #081f3e;
+
+ }
+ span{
+   color: var(--mainColor);
+   font-weight: 500;
+ }
+ .login a{
+   color: var(--mainColor);
+ }
+
+
+ @media screen and (max-width: 1176px) {
+
+ .box{
+     width: 100%;
+ }
+ }
