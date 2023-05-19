@@ -1,3 +1,4 @@
+using GraduationProject_BL.Interfaces;
 using GraduationProject_BL.Managers;
 using GraduationProject_DAL.Data.Context;
 using GraduationProject_DAL.Data.Models;
@@ -28,6 +29,8 @@ internal class Program
         builder.Services.AddScoped<ITranslations<DepartmentTranslations>, DepartmentTranslationsRepository>();
         builder.Services.AddScoped<IDepartmentManager, DepartmentManager>();
         builder.Services.AddScoped<IRepository<Doctor>, DoctorRepository>();
+        builder.Services.AddScoped<ITranslations<DoctorTranslations>, DoctorTranslationsRepository>();
+        builder.Services.AddScoped<IDoctorManager, DoctorManager>();
         builder.Services.AddScoped<IRepository<Patient>, PatientRepository>();
         builder.Services.AddScoped<IRepository<Reservation>, ReservationRepository>();
 
