@@ -71,10 +71,10 @@ namespace GraduationProject_BL.Managers
                 var patient = patients.Find(x => x.Id == id);
                 if (patient != null)
                 {
+                    PatientDTO dto;
                     var translation = await translations.FindAsync(patient.Id);
                     if (translation != null)
                     {
-                        PatientDTO dto;
                         if (lang == "ar")
                         {
                             dto = new()
@@ -82,16 +82,16 @@ namespace GraduationProject_BL.Managers
                                 Id = translation.PatientId,
                                 FullName = $"{translation.FirstName_AR} {translation.LastName_AR}"
                             };
-                        }
-                        else
-                        {
-                            dto = new()
-                            {
-                                Id = translation.PatientId,
-                                FullName = $"{translation.FirstName_EN} {translation.LastName_EN}"
-                            };
+                            return dto;
                         }
 
+                    } else
+                    {
+                        dto = new()
+                        {
+                            Id = patient.Id,
+                            FullName = $"{patient.FirstName} {patient.LastName}"
+                        };
                         return dto;
                     }
                 }

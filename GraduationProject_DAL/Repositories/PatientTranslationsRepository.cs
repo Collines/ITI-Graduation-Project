@@ -21,7 +21,7 @@ namespace GraduationProject_DAL.Repositories
 
         public async Task InsertAsync(PatientTranslations item)
         {
-            await context.AddAsync(item);
+            context.Add(item);
             await context.SaveChangesAsync();
         }
 

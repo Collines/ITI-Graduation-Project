@@ -21,7 +21,7 @@ namespace GraduationProject_DAL.Repositories
 
         public async Task InsertAsync(PatientsLogins item)
         {
-            await context.PatientsLogins.AddAsync(item);
+            context.PatientsLogins.Add(item);
             await context.SaveChangesAsync();
         }
 
@@ -30,11 +30,14 @@ namespace GraduationProject_DAL.Repositories
             var login = await context.PatientsLogins.FindAsync(id);
             if (login != null)
             {
-                login.AccessToken = item.AccessToken;
-                login.RefreshToken = item.RefreshToken;
-                login.Expiration = item.Expiration;
-                login.LoggedIn = item.LoggedIn;
-                await context.SaveChangesAsync();
+                if (item != null)
+                {
+                    login.AccessToken = item.AccessToken;
+                    login.RefreshToken = item.RefreshToken;
+                    login.Expiration = item.Expiration;
+                    login.LoggedIn = item.LoggedIn;
+                    await context.SaveChangesAsync();
+                }
             }
         }
         public async Task DeleteAsync(int id)

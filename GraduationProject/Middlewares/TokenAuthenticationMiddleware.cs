@@ -32,8 +32,8 @@ namespace GraduationProject.Middlewares
                         // Validate the token
                         var principal = tokenHandler.ValidateToken(token, new TokenValidationParameters
                         {
-                            ValidateIssuer = true,
-                            ValidateAudience = true,
+                            ValidateIssuer = false,
+                            ValidateAudience = false,
                             ValidateIssuerSigningKey = true,
                             ValidIssuer = _iConfiguration["JWT:Issuer"],
                             ValidAudience = _iConfiguration["JWT:Audience"],
