@@ -5,6 +5,6 @@
         public Task<T?> FindAsync(int parentId);
         public Task InsertAsync(T item);
         public Task UpdateAsync(int id, int parentId, T item);
-        public Task DeleteAsync(int id, int parentId);
+        public Task DeleteAsync(int parentId);
     }
 }

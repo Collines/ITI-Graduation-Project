@@ -144,6 +144,7 @@ namespace GraduationProject_BL.Managers
 
         public async Task DeleteAsync(int id)
         {
+            await translations.DeleteAsync(id);
             await repository.DeleteAsync(id);
         }
     }

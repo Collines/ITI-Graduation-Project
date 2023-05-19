@@ -45,12 +45,11 @@ namespace GraduationProject_DAL.Repositories
                 translation.Bio_AR = item.Bio_AR;
                 await context.SaveChangesAsync();
             }
-            throw new NotImplementedException();
         }
 
-        public async Task DeleteAsync(int id, int parentId)
+        public async Task DeleteAsync(int parentId)
         {
-            var translation = await context.DoctorTranslations.FirstOrDefaultAsync(d => d.Id == id && d.DoctorId == parentId);
+            var translation = await context.DoctorTranslations.FirstOrDefaultAsync(d => d.DoctorId == parentId);
             if (translation != null)
             {
                 context.Remove(translation);
