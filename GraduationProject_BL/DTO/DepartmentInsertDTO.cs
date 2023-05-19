@@ -1,6 +1,6 @@
 ﻿namespace GraduationProject_BL.DTO
 {
-    public class InsertDepartmentDTO
+    public class DepartmentInsertDTO
     {
         public required string Title_EN { get; set; }
         public required string Title_AR { get; set; }

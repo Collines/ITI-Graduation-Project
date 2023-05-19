@@ -1,8 +1,6 @@
-﻿using GraduationProject_DAL.Data.DTO;
+﻿using GraduationProject_BL.DTO;
+using GraduationProject_BL.Interfaces;
 using GraduationProject_DAL.Data.Models;
-using GraduationProject_DAL.Handlers;
-using GraduationProject_DAL.Interfaces;
-using GraduationProject_DAL.Interfaces.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -13,22 +11,20 @@ namespace GraduationProject.Controllers
     [Authorize]
     public class PatientController : ControllerBase
     {
-        private readonly IRepository<Patient> repository;
-        private readonly IJWTManagerRepository JWTManager;
-        private readonly IPatientServiceRepository PatientService;
+        private readonly IHttpContextAccessor httpContextAccessor;
+        private readonly IPatientManager manager;
 
 
-        public PatientController(IRepository<Patient> _repository, IJWTManagerRepository jWTManager, IPatientServiceRepository patientService)
+        public PatientController(IHttpContextAccessor _httpContextAccessor, IPatientManager _manager)
         {
-            repository = _repository;
-            JWTManager = jWTManager;
-            PatientService = patientService;
+            httpContextAccessor = _httpContextAccessor;
+            manager = _manager;
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<Patient>>> GetAll()
+        public async Task<ActionResult<List<PatientDTO>>> GetAll()
         {
-            var patients = await repository.GetAllAsync();
+            var patients = await manager.GetAllAsync(Utils.GetLang(httpContextAccessor));
             if (patients.Count == 0)
             {
                 return NotFound();
@@ -39,15 +35,11 @@ namespace GraduationProject.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Patient>> GetPatientDetails(int id)
         {
-            var patients = await repository.GetAllAsync();
+            var patient = await manager.GetByIdAsync(id, Utils.GetLang(httpContextAccessor));
 
-            if (patients != null)
+            if (patient != null)
             {
-                var patient = patients.Find(x => x.Id == id);
-                if (patient != null)
-                {
-                    return Ok(patient);
-                }
+                return Ok(patient);
             }
 
             return NotFound();
@@ -55,29 +47,23 @@ namespace GraduationProject.Controllers
 
         [HttpPost("Register")]
         [AllowAnonymous]
-        public async Task<ActionResult<Patient>> Register(Patient patient)
+        public async Task<ActionResult<LoginDTO>> Register(PatientInsertDTO patient)
         {
-            if (await IsExists(patient.Email))
+            if (await manager.FindPatient(patient.Email))
                 ModelState.AddModelError("Email", "Email Already Exist");
 
             if (ModelState.IsValid)
             {
-                patient.Password = PasswordHandler.Hash(patient.Password, out byte[] salt);
-                patient.PasswordSalt = Convert.ToHexString(salt);
-                await repository.InsertAsync(patient);
-                var token = JWTManager.GenerateToken(patient);
+                var dto = await manager.InsertAsync(patient);
 
-                if (token == null)
-                    return Unauthorized("Invalid Attempt!");
-
-                PatientRefreshTokens obj = new()
+                if (dto != null)
                 {
-                    RefreshToken = token.TokenStr,
-                    Email = patient.Email
-                };
-                PatientService.AddUserRefreshTokens(obj);
-                PatientService.SaveCommit();
-                return Ok(token);
+                    return Ok(dto);
+                }
+                else
+                {
+                    return Unauthorized("Invalid Attempt!");
+                }
             }
             return BadRequest("Email Already Exist");
         }
@@ -85,19 +71,16 @@ namespace GraduationProject.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult<Patient>> DeletePatient(int id)
         {
-            await repository.DeleteAsync(id);
-            return Ok();
+            await manager.DeleteAsync(id);
+            return Ok(id);
         }
 
         [HttpPatch("{id}")]
-        public async Task<ActionResult<Patient>> UpdatePatient(int id, Patient patient)
+        public async Task<ActionResult<Patient>> UpdatePatient(int id, PatientInsertDTO patient)
         {
             if (ModelState.IsValid)
             {
-                if (id != patient.Id)
-                    return BadRequest();
-
-                await repository.UpdateAsync(id, patient);
+                await manager.UpdateAsync(id, patient);
                 return Ok(patient);
 
             }
@@ -106,31 +89,25 @@ namespace GraduationProject.Controllers
 
         [HttpPost("Login")]
         [AllowAnonymous]
-        public async Task<ActionResult<Patient>> Login(PatientLoginDTO p)
+        public async Task<ActionResult<LoginDTO>> Login(PatientLoginDTO login)
         {
-            if (!String.IsNullOrEmpty(p.Email) && !String.IsNullOrEmpty(p.Password))
+            if (!string.IsNullOrEmpty(login.Email) && !string.IsNullOrEmpty(login.Password))
             {
-                if (PatientService.IsValidUser(p.Email, p.Password))
-                {
-                    var patient = await GetPatient(p.Email);
-                    if (patient == null)
-                    {
-                        return BadRequest();
-                    }
 
-                    Token? token = JWTManager.GenerateToken(patient);
-                    if (token != null)
+                var isFound = await manager.FindPatient(login.Email, login.Password);
+
+                if (isFound)
+                {
+                    var dto = await manager.Login(login.Email);
+
+                    if (dto != null)
                     {
-                        PatientRefreshTokens Prt = new()
-                        {
-                            RefreshToken = token.RefreshToken,
-                            Email = patient.Email
-                        };
-                        PatientService.AddUserRefreshTokens(Prt);
-                        PatientService.SaveCommit();
-                        return Ok(token);
+                        return Ok(dto);
                     }
-                    else Unauthorized("Invalid Attempt!");
+                    else
+                    {
+                        return Unauthorized("Invalid Attempt!");
+                    }
                 }
                 return Unauthorized("Incorrect username or password!");
             }
@@ -140,55 +117,32 @@ namespace GraduationProject.Controllers
         [AllowAnonymous]
         [HttpPost]
         [Route("refresh")]
-        public async Task<IActionResult> Refresh(Token token)
+        public async Task<IActionResult> Refresh(RefreshTokenDTO token)
         {
-            var principal = JWTManager.GetPrincipalFromExpiredToken(token.TokenStr);
-            var Email = principal.Claims.ElementAt(1).Value;
-            var patient = await GetPatient(Email);
-
-            //retrieve the saved refresh token from database
-            var savedRefreshToken = PatientService.GetSavedRefreshTokens(Email, token.RefreshToken);
-
-            if (savedRefreshToken == null || savedRefreshToken.RefreshToken != token.RefreshToken)
-                return Unauthorized("Invalid attempt!");
-
-            var newJwtToken = JWTManager.GenerateRefreshToken(patient);
-
-            if (newJwtToken == null)
-                return Unauthorized("Invalid attempt!");
-
-            // saving refresh token to the db
-            PatientRefreshTokens obj = new()
+            if (token.RefreshToken == null)
             {
-                RefreshToken = newJwtToken.RefreshToken,
-                Email = Email
-            };
-
-            PatientService.DeleteUserRefreshTokens(Email, token.RefreshToken);
-            PatientService.AddUserRefreshTokens(obj);
-            PatientService.SaveCommit();
-
-            return Ok(newJwtToken);
-        }
-
-        private async Task<bool> IsExists(string email)
-        {
-            var patients = await repository.GetAllAsync();
-            if (patients != null)
-            {
-                return patients.Any(p => p.Email == email);
+                return BadRequest();
             }
-            return false;
-        }
 
-        private async Task<Patient?> GetPatient(string email)
-        {
-            var patients = await repository.GetAllAsync();
-            if (patients != null)
+            var isFound = await manager.FindPatientByRefreshToken(token.RefreshToken);
+
+            if (isFound)
             {
-                return patients.FirstOrDefault(p => p.Email == email);
+                var dto = await manager.Refresh(token.RefreshToken);
+
+                if (dto != null)
+                {
+                    return Ok(dto);
+                }
+                else
+                {
+                    return Unauthorized("Invalid Attempt!");
+                }
             }
-            return null;
+            else
+            {
+                return Unauthorized();
+            }
         }
     }
 }
