@@ -38,9 +38,9 @@ namespace GraduationProject_DAL.Repositories
             }
         }
 
-        public async Task DeleteAsync(int id, int parentId)
+        public async Task DeleteAsync(int parentId)
         {
-            var translation = await context.PatientTranslations.FirstOrDefaultAsync(t => t.Id == id && t.PatientId == parentId);
+            var translation = await context.PatientTranslations.FirstOrDefaultAsync(t => t.PatientId == parentId);
             if (translation != null)
             {
                 context.Remove(translation);

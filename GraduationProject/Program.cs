@@ -4,9 +4,7 @@ using GraduationProject_BL.Managers;
 using GraduationProject_DAL.Data.Context;
 using GraduationProject_DAL.Data.Models;
 using GraduationProject_DAL.Interfaces;
-using GraduationProject_DAL.Interfaces.Authentication;
 using GraduationProject_DAL.Repositories;
-using GraduationProject_DAL.Repositories.Authentication;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -52,9 +50,6 @@ internal class Program
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["JWT:Key"]))
                 };
             });
-
-        builder.Services.AddScoped<IJWTManagerRepository, JWTManagerRepository>();
-        builder.Services.AddScoped<IPatientServiceRepository, PatientServiceRepository>();
 
         // End of JWT Authentication
 
