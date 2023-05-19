@@ -1,13 +1,13 @@
-.bgGround{
+.bgGround {
   background-color: #081f3e;
 }
-.nav-item a{
+.nav-item a {
   color: white;
   padding-right: 20px;
   font-size: 18px;
   position: relative;
 }
-.nav-item a::after{
+.nav-item a::after {
   content: "";
   position: absolute;
   width: 0;
@@ -17,33 +17,38 @@
   background-color: var(--mainColor);
   transition: all 0.5s;
 }
- li .active::after,
- li:hover a::after {
-    width: 70%;
+li .active::after,
+li:hover a::after {
+  width: 70%;
 }
-.nav-item a:focus{
-   color: var(--mainColor);
+.nav-item a:focus {
+  color: var(--mainColor);
 }
-.button{
+.button,
+.logout-button {
   background-color: transparent;
   border-radius: 8px;
   padding: 10px;
   border: 1px solid white;
-
 }
-.button>a{
+.button > a {
   color: white;
 }
-.button:hover{
+.button:hover {
   border: 1px solid var(--mainColor);
-
 }
-.button:hover a{
+.button:hover a {
   color: var(--mainColor);
+}
+
+.logout-button {
+  background-color: #780d0d;
+  color: white;
+  border: 1px solid #2c0707;
 }
 @media screen and (max-width: 992px) {
   li .active::after,
   li:hover a::after {
-     width: unset;
- }
+    width: unset;
+  }
 }

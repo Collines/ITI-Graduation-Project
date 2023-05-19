@@ -84,6 +84,12 @@ namespace GraduationProject_BL.Managers
                             };
                             return dto;
                         }
+                        dto = new()
+                        {
+                            Id = patient.Id,
+                            FullName = $"{patient.FirstName} {patient.LastName}"
+                        };
+                        return dto;
 
                     } else
                     {

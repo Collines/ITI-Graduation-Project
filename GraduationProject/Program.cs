@@ -39,7 +39,7 @@ internal class Program
 
         app.UseHttpsRedirection();
 
-        //app.UseMiddleware<TokenAuthenticationMiddleware>();
+        app.UseMiddleware<TokenAuthenticationMiddleware>();
         app.UseAuthentication();
         app.UseAuthorization();
 
