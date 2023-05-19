@@ -1,0 +1,75 @@
+<div class="register">
+  <div class="container">
+   <div class="row d-flex align-items-center justify-content-center">
+     <div class="col-lg-6 col-md-8 colsm-12">
+        <div class="box  mt-5" >
+
+            <h3 class="text-center pt-2">Register</h3>
+
+         <form class="w-100"  [formGroup]="Validation" (submit)="onSubmit()">
+           <div class="mb-3">
+             <label for="Name" class="form-label ">Username</label>
+             <input formControlName="name" type="text" required [ngClass]="!isNameValid ?{'is-invalid':submitted && Validation.controls.name.errors}:'is-valid'"
+               class="form-control" id="Name" placeholder="Enter Name" />
+               <div *ngIf="submitted && Validation.controls.name.errors" class="text-danger">
+                 <div *ngIf="submitted && Validation.controls.name.errors">
+                   Name Should be 3 characters or more
+                 </div>
+               </div>
+
+           </div>
+
+           <div class="mb-3">
+             <label for="email" class="form-label">Email address</label>
+             <input formControlName="email" type="email" required
+             [ngClass]="!isEmailValid ?{'is-invalid':submitted && Validation.controls.email.errors}:'is-valid'"
+             class="form-control" id="email" placeholder="Enter Email"/>
+             <div *ngIf="submitted && Validation.controls.email.errors" class="text-danger">
+               <div *ngIf="submitted && Validation.controls.email.errors">
+                 Email Should be email.example.com
+               </div>
+             </div>
+           </div>
+
+           <div class="mb-3">
+             <label for="pass" class="form-label">Password</label>
+             <input formControlName="password" type="password" required
+             [ngClass]="!isPasswordValid ?{'is-invalid':submitted && Validation.controls.password.errors}:'is-valid'"
+             class="form-control" id="pass" placeholder="Enter Password">
+             <div *ngIf="submitted && Validation.controls.password.errors" class="text-danger">
+               <div *ngIf="submitted && Validation.controls.password.errors">
+                 Password Should be at least 8 characters
+               </div>
+             </div>
+           </div>
+
+           <div class="mb-3 form-check">
+             <input type="checkbox" class="form-check-input" id="exampleCheck1">
+             <label class="form-check-label" for="exampleCheck1">I accept the <span> Terms of use</span> & <span> Privacy Policy </span></label>
+           </div>
+           <button type="submit" class="btn submit-btn" >Register</button>
+
+           <div class="login mt-3 text-muted">
+               <h6>Already have an account ? <a href="../login/login.component.html" routerLink="/login">Sign In</a></h6>
+           </div>
+         </form>
+
+         <div class="social">
+           <h5 class="text-center position-relative ">Or </h5>
+           <h6 class="text-center position-relative line mb-3"> Continue with </h6>
+             <a href="http://www.google.com"> <img src="assets/images/google.png " alt=""> </a>
+             <a href="http://www.facebook.com"><img src="assets/images/face.png" alt="" ></a>
+             <a href="http://www.twiter.com "><img src="assets/images/twiter.png" alt=""></a>
+
+
+         </div>
+        </div>
+
+     </div>
+
+
+  </div>
+  </div>
+
+
+ </div>
