@@ -21,7 +21,7 @@ namespace GraduationProject_DAL.Repositories
 
         public async Task InsertAsync(Doctor item)
         {
-            context.Add(item);
+            await context.AddAsync(item);
             await context.SaveChangesAsync();
         }
 
