@@ -33,6 +33,17 @@ namespace GraduationProject.Controllers
             return Ok(doctors);
         }
 
+        [HttpGet("InsertDTO/{id:int}")]
+        public async Task<ActionResult<DoctorInsertDTO>> GetAllInsertDTO(int id)
+        {
+            var doctor = await manager.GetInsertDTOByIdAsync(id);
+
+            if (doctor == null)
+                return NotFound();
+
+            return Ok(doctor);
+        }
+
         [HttpGet("{id:int}")]
         public async Task<ActionResult<DoctorDTO>> GetById(int id)
         {

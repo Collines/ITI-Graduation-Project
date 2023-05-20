@@ -204,5 +204,40 @@ namespace GraduationProject_BL.Managers
             await translations.DeleteAsync(id);
             await repository.DeleteAsync(id);
         }
+
+        public async Task<DoctorInsertDTO?> GetInsertDTOByIdAsync(int id)
+        {
+            var doctors = await repository.GetAllAsync();
+
+            if (doctors != null)
+            {
+                var doctor = doctors.Find(x => x.Id == id);
+                if (doctor != null)
+                {
+                    var translation = await translations.FindAsync(doctor.Id);
+                    if (translation != null)
+                    {
+                        DoctorInsertDTO dto = new()
+                        {
+                            Id = translation.DoctorId,
+                            FirstName_EN = translation.FirstName_EN,
+                            FirstName_AR = translation.FirstName_AR,
+                            LastName_EN = translation.LastName_EN,
+                            LastName_AR = translation.LastName_AR,
+                            Gender = doctor.Gender,
+                            Title_EN = translation.Title_EN,
+                            Title_AR = translation.Title_AR,
+                            Bio_EN = translation.Bio_EN,
+                            Bio_AR = translation.Bio_AR,
+                            Image = doctor.Image,
+                            DepartmentId = doctor.DepartmentId,
+                        };
+
+                        return dto;
+                    }
+                }
+            }
+            return null;
+        }
     }
 }
