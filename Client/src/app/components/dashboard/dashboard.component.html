@@ -1,0 +1,163 @@
+<div class="container">
+	<div class="row my-4">
+		<div class="col-md-3 ">
+		     <div class="list-group ">
+              <a href="#" class="list-group-item list-group-item-action ">Dashboard</a>
+              <a href="#" class="list-group-item list-group-item-action">Reservation</a>
+              <a href="#" class="list-group-item list-group-item-action active">Settings</a>
+              <a href="#" class="list-group-item list-group-item-action">Logout</a>
+
+
+            </div>
+		</div>
+		<div class="col-md-9">
+		    <div class="card">
+		        <div class="card-body">
+		            <div class="row">
+		                <div class="col-md-12">
+		                    <h4>Your Profile</h4>
+		                    <hr>
+		                </div>
+		            </div>
+		            <div class="row">
+		                <div class="col-md-12">
+		                    <form  [formGroup]="Validation" (submit)="onSubmit()">
+                          <div class="form-group row mb-2">
+                            <label for="ssn" class="col-4 col-form-label">SSN</label>
+                            <div class="col-8">
+                              <input id="ssn" name="ssn" readonly disabled placeholder="SSN" class="form-control here" type="text">
+                            </div>
+                          </div>
+
+                              <div class="form-group row mb-2">
+                                <label for="fname" class="col-4 col-form-label">First Name</label>
+                                <div class="col-8">
+                                  <input formControlName="FirstName" id="name" name="fname" placeholder="First Name" class="form-control here" type="text"
+                                  [ngClass]=" !isFirstNameValid ? { 'is-invalid': submitted && Validation.controls.FirstName.errors} : 'is-valid'">
+                                  <div
+                                  *ngIf="submitted && Validation.controls.FirstName.errors"
+                                  class="text-danger">
+                                  <div *ngIf="submitted && Validation.controls.FirstName.errors">
+                                    First Name Should be 3 characters or more
+                                  </div>
+                                </div>
+                                </div>
+                              </div>
+                              <div class="form-group row mb-2">
+                                <label for="lname" class="col-4 col-form-label">Last Name</label>
+                                <div class="col-8">
+                                  <input formControlName="LastName" id="lname" name="lastname" placeholder="Last Name" class="form-control here" type="text"
+                                  [ngClass]=" !isLastNameValid ? { 'is-invalid': submitted && Validation.controls.LastName.errors} : 'is-valid'">
+                                  <div
+                                    *ngIf="submitted && Validation.controls.LastName.errors"
+                                    class="text-danger">
+                                    <div *ngIf="submitted && Validation.controls.LastName.errors">
+                                      Last Name Should be 3 characters or more
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="form-group row mb-2">
+                                <label for="fnameAR" class="col-4 col-form-label">First Name in Arabic</label>
+                                <div class="col-8">
+                                  <input formControlName="FirstNameAr" id="fnameAR" name="text"  placeholder="First Name in Arabic" class="form-control here" type="text"
+                                  [ngClass]=" !isFirstNameArValid ? { 'is-invalid': submitted && Validation.controls.FirstNameAr.errors} : 'is-valid'">
+                                  <div
+                                    *ngIf="submitted && Validation.controls.FirstNameAr.errors"
+                                    class="text-danger">
+                                    <div *ngIf="submitted && Validation.controls.FirstNameAr.errors">
+                                      First Name Should be 3 characters or more
+                                    </div>
+                                  </div>
+
+                                </div>
+                              </div>
+                              <div class="form-group row mb-2">
+                                <label for="lnameAR" class="col-4 col-form-label">Last Name in Arabic</label>
+                                <div class="col-8">
+                                  <input formControlName="LastNameAr" id="lnameAR" name="text" placeholder="Last Name in Arabic" class="form-control here"  type="text"
+                                  [ngClass]=" !isLastNameArValid ? { 'is-invalid': submitted && Validation.controls.LastNameAr.errors} : 'is-valid'">
+                                  <div
+                                    *ngIf="submitted && Validation.controls.LastNameAr.errors"
+                                    class="text-danger">
+                                    <div *ngIf="submitted && Validation.controls.LastNameAr.errors">
+                                      Last Name Should be 3 characters or more
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="form-group row mb-2">
+                                <label for="email" class="col-4 col-form-label">Email Adress</label>
+                                <div class="col-8">
+                                  <input formControlName="email" id="email" name="email" placeholder="Email Adress" class="form-control here"  type="email"
+                                   [ngClass]=" !isEmailValid ? { 'is-invalid': submitted && Validation.controls.email.errors} : 'is-valid'">
+                                  <div
+                                    *ngIf="submitted && Validation.controls.email.errors"
+                                    class="text-danger">
+                                    <div *ngIf="submitted && Validation.controls.email.errors">
+                                      Enter a valid Email
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="form-group row mb-2">
+                                <label for="pass" class="col-4 col-form-label">Password</label>
+                                <div class="col-8">
+                                  <input formControlName="password" id="pass" name="password" placeholder="Password"  class="form-control here" type="password"
+                                  [ngClass]=" !isPasswordValid? {'is-invalid':submitted && Validation.controls.password.errors}: 'is-valid'"/>
+                              <div
+                                *ngIf="submitted && Validation.controls.password.errors" class="text-danger">
+                                <div *ngIf="submitted && Validation.controls.password.errors">
+                                  Password Should be at least 8 characters
+                                </div>
+                              </div>
+                                </div>
+                              </div>
+                              <div class="form-group row mb-2">
+                                <label for="DOB" class="col-4 col-form-label">DOB</label>
+                                <div class="col-8">
+                                  <input formControlName="Date" id="DOB" name="DOB" placeholder="New Password" class="form-control here" type="date"
+                                   [ngClass]=" !isDateValid? { 'is-invalid': submitted && Validation.controls.Date.errors} : 'is-valid' " />
+                              <div
+                                *ngIf="submitted && Validation.controls.Date.errors"class="text-danger">
+                                <div *ngIf="submitted && Validation.controls.Date.errors">
+                                  Date is required
+                                </div>
+                              </div>
+                                </div>
+                              </div>
+                              <div class="form-group row mb-2">
+                                <label for="phone" class="col-4 col-form-label">Phone</label>
+                                <div class="col-8">
+                                  <input formControlName="Phone" id="phone" name="phone" placeholder="Phone"  class="form-control here" type="text"
+                                  [ngClass]="!isPhoneValid ? {'is-invalid': submitted && Validation.controls.Phone.errors} : 'is-valid'" />
+                              <div
+                                *ngIf="submitted && Validation.controls.Phone.errors"
+                                class="text-danger" >
+                                <div *ngIf="submitted && Validation.controls.Phone.errors">
+                                  Phone is required and should start with (010, 011, 012 or 015)
+                                </div>
+                              </div>
+                                </div>
+                              </div>
+                              <div class="form-group row mb-2">
+                                <label for="MH" class="col-4 col-form-label">Medical History</label>
+                                <div class="col-8">
+                                  <textarea class="form-control" id="MH" rows="3" placeholder="Medical History"></textarea>
+                                </div>
+
+                              </div>
+                              <div class="form-group row mt-4">
+                                <div class="offset-4 col-8">
+                                  <button name="submit" type="submit" class="btn">Update My Profile</button>
+                                </div>
+                              </div>
+                        </form>
+		                </div>
+		            </div>
+
+		        </div>
+		    </div>
+		</div>
+	</div>
+</div>
