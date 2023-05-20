@@ -25,6 +25,8 @@ namespace GraduationProject
             services.AddScoped<ITranslations<DepartmentTranslations>, DepartmentTranslationsRepository>();
             services.AddScoped<IDepartmentManager, DepartmentManager>();
             services.AddScoped<IRepository<Doctor>, DoctorRepository>();
+            services.AddScoped<ITranslations<DoctorTranslations>, DoctorTranslationsRepository>();
+            services.AddScoped<IDoctorManager, DoctorManager>();
             services.AddScoped<IRepository<Patient>, PatientRepository>();
             services.AddScoped<IRepository<PatientsLogins>, PatientsLoginsRepository>();
             services.AddScoped<ITranslations<PatientTranslations>, PatientTranslationsRepository>();

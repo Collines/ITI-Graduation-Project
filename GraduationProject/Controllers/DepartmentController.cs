@@ -30,7 +30,7 @@ namespace GraduationProject.Controllers
             return Ok(departments);
         }
 
-        [HttpGet("/Department/{id:int}")]
+        [HttpGet("{id:int}")]
         public async Task<ActionResult<DepartmentDTO>> GetById(int id)
         {
             var department = await manager.GetByIdAsync(id, Utils.GetLang(httpContextAccessor));
@@ -54,14 +54,14 @@ namespace GraduationProject.Controllers
             return BadRequest();
         }
 
-        [HttpDelete("/Department/Delete/{id:int}")]
+        [HttpDelete("{id:int}")]
         public async Task<ActionResult<int>> DeleteDepartment(int id)
         {
             await manager.DeleteAsync(id);
             return Ok(id);
         }
 
-        [HttpPut("/Department/Update/{id:int}")]
+        [HttpPut("{id:int}")]
         public async Task<ActionResult<DepartmentInsertDTO>> UpdateDepartment(int id, DepartmentInsertDTO department)
         {
             await manager.UpdateAsync(id, department);
