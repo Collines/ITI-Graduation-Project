@@ -48,7 +48,7 @@ namespace GraduationProject_BL.Managers
                             Gender = doctor.Gender,
                             Title = translation.Title_AR,
                             Bio = translation.Bio_AR,
-                            Images = doctor.Images,
+                            Image = doctor.Image,
                             DepartmentId = doctor.DepartmentId,
                             DepartmentTitle = departmentTranslation.Title_AR
 
@@ -64,7 +64,7 @@ namespace GraduationProject_BL.Managers
                             Gender = doctor.Gender,
                             Title = translation.Title_EN,
                             Bio = translation.Bio_EN,
-                            Images = doctor.Images,
+                            Image = doctor.Image,
                             DepartmentId = doctor.DepartmentId,
                             DepartmentTitle = departmentTranslation.Title_EN
                         };
@@ -102,7 +102,7 @@ namespace GraduationProject_BL.Managers
                                 Gender = doctor.Gender,
                                 Title = translation.Title_AR,
                                 Bio = translation.Bio_AR,
-                                Images = doctor.Images,
+                                Image = doctor.Image,
                                 DepartmentId = doctor.DepartmentId,
                                 DepartmentTitle = departmentTranslation.Title_AR
                             };
@@ -117,7 +117,7 @@ namespace GraduationProject_BL.Managers
                                 Gender = doctor.Gender,
                                 Title = translation.Title_EN,
                                 Bio = translation.Bio_EN,
-                                Images = doctor.Images,
+                                Image = doctor.Image,
                                 DepartmentId = doctor.DepartmentId,
                                 DepartmentTitle = departmentTranslation.Title_EN
                             };
@@ -140,7 +140,7 @@ namespace GraduationProject_BL.Managers
                 Gender = item.Gender,
                 Title = item.Title_EN,
                 Bio = item.Bio_EN,
-                Images = item.Images,
+                Image = item.Image,
                 DepartmentId = item.DepartmentId
             };
 
@@ -191,8 +191,8 @@ namespace GraduationProject_BL.Managers
                     doctor.Title = item.Title_EN;
                     doctor.Bio = item.Bio_EN;
                     doctor.DepartmentId = item.DepartmentId;
-                    if (!item.Images.IsNullOrEmpty())
-                        doctor.Images = item.Images;
+                    if (!(item.Image == null))
+                        doctor.Image = item.Image;
 
                     await repository.UpdateAsync(doctor.Id, doctor);
                 }

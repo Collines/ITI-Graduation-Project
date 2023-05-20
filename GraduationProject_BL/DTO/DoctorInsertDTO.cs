@@ -32,6 +32,6 @@ namespace GraduationProject_BL.DTO
 
         public required int DepartmentId { get; set; }
 
-        public IEnumerable<Image> Images { get; set; } = new HashSet<Image>();
+        public Image? Image { get; set; }
     }
 }
