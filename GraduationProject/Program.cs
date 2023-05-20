@@ -28,6 +28,8 @@ internal class Program
         builder.Services.AddScoped<ITranslations<DepartmentTranslations>, DepartmentTranslationsRepository>();
         builder.Services.AddScoped<IDepartmentManager, DepartmentManager>();
         builder.Services.AddScoped<IRepository<Doctor>, DoctorRepository>();
+        builder.Services.AddScoped<ITranslations<DoctorTranslations>, DoctorTranslationsRepository>();
+        builder.Services.AddScoped<IDoctorManager, DoctorManager>();
         builder.Services.AddScoped<IRepository<Patient>, PatientRepository>();
         builder.Services.AddScoped<IRepository<PatientsLogins>, PatientsLoginsRepository>();
         builder.Services.AddScoped<ITranslations<PatientTranslations>, PatientTranslationsRepository>();
