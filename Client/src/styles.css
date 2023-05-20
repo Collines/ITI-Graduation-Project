@@ -18,3 +18,15 @@ a{text-decoration: none;
   margin: auto;
 }
 /* End Global Data */
+.heading{
+  color: #444;
+  font-size: 60px;
+  text-align: center;
+  text-shadow: var(--text-shadow);
+  letter-spacing: 5px;
+  padding-bottom: 15px;
+  font-weight: 900;
+}
+.heading span{
+  color: var(--mainColor);
+}
