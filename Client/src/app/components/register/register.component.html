@@ -1,75 +1,337 @@
 <div class="register">
   <div class="container">
-   <div class="row d-flex align-items-center justify-content-center">
-     <div class="col-lg-6 col-md-8 colsm-12">
-        <div class="box  mt-5" >
+    <div class="row d-flex align-items-center justify-content-center">
+      <div class="col-lg-6 col-md-8 colsm-12">
+        <div class="box mt-5">
+          <h3 class="text-center pt-2">Register</h3>
 
-            <h3 class="text-center pt-2">Register</h3>
+          <form class="w-100" [formGroup]="Validation" (submit)="onSubmit()">
+            <div class="mb-3">
+              <label for="FirstName" class="form-label">First Name</label>
+              <input
+                formControlName="FirstName"
+                type="text"
+                required
+                [ngClass]="
+                  !isFirstNameValid
+                    ? {
+                        'is-invalid':
+                          submitted && Validation.controls.FirstName.errors
+                      }
+                    : 'is-valid'
+                "
+                class="form-control"
+                id="FirstName"
+                placeholder="First Name"
+              />
+              <div
+                *ngIf="submitted && Validation.controls.FirstName.errors"
+                class="text-danger"
+              >
+                <div *ngIf="submitted && Validation.controls.FirstName.errors">
+                  First Name Should be 3 characters or more
+                </div>
+              </div>
+            </div>
+            <div class="mb-3">
+              <label for="LastName" class="form-label">Last Name</label>
+              <input
+                formControlName="LastName"
+                type="text"
+                required
+                [ngClass]="
+                  !isLastNameValid
+                    ? {
+                        'is-invalid':
+                          submitted && Validation.controls.LastName.errors
+                      }
+                    : 'is-valid'
+                "
+                class="form-control"
+                id="LastName"
+                placeholder="Last Name"
+              />
+              <div
+                *ngIf="submitted && Validation.controls.LastName.errors"
+                class="text-danger"
+              >
+                <div *ngIf="submitted && Validation.controls.LastName.errors">
+                  Last Name Should be 3 characters or more
+                </div>
+              </div>
+            </div>
+            <div class="mb-3">
+              <label for="FirstNameAr" class="form-label float-end"
+                >الاسم الاول</label
+              >
+              <input
+                formControlName="FirstNameAr"
+                type="text"
+                dir="rtl"
+                required
+                [ngClass]="
+                  !isFirstNameArValid
+                    ? {
+                        'is-invalid':
+                          submitted && Validation.controls.FirstNameAr.errors
+                      }
+                    : 'is-valid'
+                "
+                class="form-control"
+                id="FirstNameAr"
+                placeholder="اسم الاب"
+              />
+              <div
+                *ngIf="submitted && Validation.controls.FirstNameAr.errors"
+                class="text-danger"
+              >
+                <div
+                  *ngIf="submitted && Validation.controls.FirstNameAr.errors"
+                >
+                  الاسم الاول يجب الا يقل عن 3 احرف
+                </div>
+              </div>
+            </div>
+            <div class="mb-3">
+              <label for="LastNameAr" class="form-label float-end"
+                >اسم الاب</label
+              >
+              <input
+                formControlName="LastNameAr"
+                type="text"
+                dir="rtl"
+                required
+                [ngClass]="
+                  !isLastNameArValid
+                    ? {
+                        'is-invalid':
+                          submitted && Validation.controls.LastNameAr.errors
+                      }
+                    : 'is-valid'
+                "
+                class="form-control"
+                id="LastNameAr"
+                placeholder="اسم الاب"
+              />
+              <div
+                *ngIf="submitted && Validation.controls.LastNameAr.errors"
+                class="text-danger"
+              >
+                <div *ngIf="submitted && Validation.controls.LastNameAr.errors">
+                  اسم الاب يجب الا يقل عن 3 احرف
+                </div>
+              </div>
+            </div>
+            <div class="mb-3">
+              <label for="email" class="form-label">Email address</label>
+              <input
+                formControlName="email"
+                type="email"
+                required
+                [ngClass]="
+                  !isEmailValid
+                    ? {
+                        'is-invalid':
+                          submitted && Validation.controls.email.errors
+                      }
+                    : 'is-valid'
+                "
+                class="form-control"
+                id="email"
+                placeholder="Enter Email"
+              />
+              <div
+                *ngIf="submitted && Validation.controls.email.errors"
+                class="text-danger"
+              >
+                <div *ngIf="submitted && Validation.controls.email.errors">
+                  Enter a valid Email
+                </div>
+              </div>
+            </div>
 
-         <form class="w-100"  [formGroup]="Validation" (submit)="onSubmit()">
-           <div class="mb-3">
-             <label for="Name" class="form-label ">Username</label>
-             <input formControlName="name" type="text" required [ngClass]="!isNameValid ?{'is-invalid':submitted && Validation.controls.name.errors}:'is-valid'"
-               class="form-control" id="Name" placeholder="Enter Name" />
-               <div *ngIf="submitted && Validation.controls.name.errors" class="text-danger">
-                 <div *ngIf="submitted && Validation.controls.name.errors">
-                   Name Should be 3 characters or more
-                 </div>
-               </div>
+            <div class="mb-3">
+              <label for="pass" class="form-label">Password</label>
+              <input
+                formControlName="password"
+                type="password"
+                required
+                [ngClass]="
+                  !isPasswordValid
+                    ? {
+                        'is-invalid':
+                          submitted && Validation.controls.password.errors
+                      }
+                    : 'is-valid'
+                "
+                class="form-control"
+                id="pass"
+                placeholder="Enter Password"
+              />
+              <div
+                *ngIf="submitted && Validation.controls.password.errors"
+                class="text-danger"
+              >
+                <div *ngIf="submitted && Validation.controls.password.errors">
+                  Password Should be at least 8 characters
+                </div>
+              </div>
+            </div>
+            <div class="mb-3">
+              <label for="Phone" class="form-label">Phone</label>
+              <input
+                formControlName="Phone"
+                type="text"
+                required
+                [ngClass]="
+                  !isPhoneValid
+                    ? {
+                        'is-invalid':
+                          submitted && Validation.controls.Phone.errors
+                      }
+                    : 'is-valid'
+                "
+                class="form-control"
+                id="Phone"
+                placeholder="Enter Phone"
+              />
+              <div
+                *ngIf="submitted && Validation.controls.Phone.errors"
+                class="text-danger"
+              >
+                <div *ngIf="submitted && Validation.controls.Phone.errors">
+                  Phone is required and should start with (011, 012 or 015)
+                </div>
+              </div>
+            </div>
 
-           </div>
+            <div class="mb-3">
+              <label for="DOB" class="form-label">Date Of Birth</label>
+              <input
+                formControlName="Date"
+                type="date"
+                required
+                [ngClass]="
+                  !isDateValid
+                    ? {
+                        'is-invalid':
+                          submitted && Validation.controls.Date.errors
+                      }
+                    : 'is-valid'
+                "
+                class="form-control"
+                id="Date"
+                placeholder="Enter Date"
+              />
+              <div
+                *ngIf="submitted && Validation.controls.Date.errors"
+                class="text-danger"
+              >
+                <div *ngIf="submitted && Validation.controls.Date.errors">
+                  Date is required
+                </div>
+              </div>
+            </div>
 
-           <div class="mb-3">
-             <label for="email" class="form-label">Email address</label>
-             <input formControlName="email" type="email" required
-             [ngClass]="!isEmailValid ?{'is-invalid':submitted && Validation.controls.email.errors}:'is-valid'"
-             class="form-control" id="email" placeholder="Enter Email"/>
-             <div *ngIf="submitted && Validation.controls.email.errors" class="text-danger">
-               <div *ngIf="submitted && Validation.controls.email.errors">
-                 Email Should be email.example.com
-               </div>
-             </div>
-           </div>
+            <div class="mb-3">
+              <label for="SSN" class="form-label">SSN</label>
+              <input
+                formControlName="SSN"
+                type="text"
+                required
+                [ngClass]="
+                  !isSSNValid
+                    ? {
+                        'is-invalid':
+                          submitted && Validation.controls.SSN.errors
+                      }
+                    : 'is-valid'
+                "
+                class="form-control"
+                id="SSN"
+                placeholder="Enter SSN"
+              />
+              <div
+                *ngIf="submitted && Validation.controls.SSN.errors"
+                class="text-danger"
+              >
+                <div *ngIf="submitted && Validation.controls.SSN.errors">
+                  SSN is required and should be 14 numbers
+                </div>
+              </div>
+            </div>
 
-           <div class="mb-3">
-             <label for="pass" class="form-label">Password</label>
-             <input formControlName="password" type="password" required
-             [ngClass]="!isPasswordValid ?{'is-invalid':submitted && Validation.controls.password.errors}:'is-valid'"
-             class="form-control" id="pass" placeholder="Enter Password">
-             <div *ngIf="submitted && Validation.controls.password.errors" class="text-danger">
-               <div *ngIf="submitted && Validation.controls.password.errors">
-                 Password Should be at least 8 characters
-               </div>
-             </div>
-           </div>
+            <div class="mb-3">
+              <label for="Gender" class="form-label">Gender</label>
 
-           <div class="mb-3 form-check">
-             <input type="checkbox" class="form-check-input" id="exampleCheck1">
-             <label class="form-check-label" for="exampleCheck1">I accept the <span> Terms of use</span> & <span> Privacy Policy </span></label>
-           </div>
-           <button type="submit" class="btn submit-btn" >Register</button>
+              <select
+                name="Gender"
+                class="form-select"
+                formControlName="Gender"
+                required
+                [ngClass]="
+                  !isGenderValid
+                    ? {
+                        'is-invalid':
+                          submitted && Validation.controls.Gender.errors
+                      }
+                    : 'is-valid'
+                "
+              >
+                <option selected value="0">Select Gender</option>
+                <option value="2">Male</option>
+                <option value="1">Female</option>
+              </select>
+              <div
+                *ngIf="submitted && Validation.controls.Gender.errors"
+                class="text-danger"
+              >
+                <div *ngIf="submitted && Validation.controls.Gender.errors">
+                  Gender is required
+                </div>
+              </div>
+            </div>
 
-           <div class="login mt-3 text-muted">
-               <h6>Already have an account ? <a href="../login/login.component.html" routerLink="/login">Sign In</a></h6>
-           </div>
-         </form>
+            <div class="mb-3 form-check">
+              <input
+                type="checkbox"
+                class="form-check-input"
+                id="exampleCheck1"
+              />
+              <label class="form-check-label" for="exampleCheck1"
+                >I accept the <span> Terms of use</span> &
+                <span> Privacy Policy </span></label
+              >
+            </div>
+            <button type="submit" class="btn submit-btn">Register</button>
 
-         <div class="social">
-           <h5 class="text-center position-relative ">Or </h5>
-           <h6 class="text-center position-relative line mb-3"> Continue with </h6>
-             <a href="http://www.google.com"> <img src="assets/images/google.png " alt=""> </a>
-             <a href="http://www.facebook.com"><img src="assets/images/face.png" alt="" ></a>
-             <a href="http://www.twiter.com "><img src="assets/images/twiter.png" alt=""></a>
+            <div class="login mt-3 text-muted">
+              <h6>
+                Already have an account ?
+                <a href="../login/login.component.html" routerLink="/login"
+                  >Sign In</a
+                >
+              </h6>
+            </div>
+          </form>
 
-
-         </div>
+          <div class="social">
+            <h5 class="text-center position-relative">Or</h5>
+            <h6 class="text-center position-relative line mb-3">
+              Continue with
+            </h6>
+            <a href="http://www.google.com">
+              <img src="assets/images/google.png " alt="" />
+            </a>
+            <a href="http://www.facebook.com"
+              ><img src="assets/images/face.png" alt=""
+            /></a>
+            <a href="http://www.twiter.com "
+              ><img src="assets/images/twiter.png" alt=""
+            /></a>
+          </div>
         </div>
-
-     </div>
-
-
+      </div>
+    </div>
   </div>
-  </div>
-
-
- </div>
+</div>

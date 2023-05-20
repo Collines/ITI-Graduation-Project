@@ -1,4 +1,5 @@
 ﻿using GraduationProject_BL.Interfaces;
+using GraduationProject_DAL.Data.Models;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -32,11 +33,12 @@ namespace GraduationProject.Middlewares
                         // Validate the token
                         var principal = tokenHandler.ValidateToken(token, new TokenValidationParameters
                         {
-                            ValidateIssuer = true,
-                            ValidateAudience = true,
+                            ValidateIssuer = false,
+                            ValidateAudience = false,
                             ValidateIssuerSigningKey = true,
                             ValidIssuer = _iConfiguration["JWT:Issuer"],
                             ValidAudience = _iConfiguration["JWT:Audience"],
+                            ValidateLifetime= true,
                             IssuerSigningKey = new SymmetricSecurityKey(key)
                         }, out var validatedToken);
 
@@ -59,7 +61,7 @@ namespace GraduationProject.Middlewares
                             }
                         }
                     }
-                    catch (SecurityTokenValidationException)
+                    catch
                     {
                         // Token validation failed
                         context.Response.StatusCode = 401;
