@@ -1,4 +1,7 @@
-﻿using GraduationProject_DAL.Data.Models;
+﻿using GraduationProject_BL.DTO;
+using GraduationProject_BL.Interfaces;
+using GraduationProject_BL.Managers;
+using GraduationProject_DAL.Data.Models;
 using GraduationProject_DAL.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -10,17 +13,19 @@ namespace GraduationProject.Controllers
     [Authorize]
     public class DoctorsController : ControllerBase
     {
-        private readonly IRepository<Doctor> repository;
+        private readonly IHttpContextAccessor httpContextAccessor;
+        private readonly IDoctorManager manager;
 
-        public DoctorsController(IRepository<Doctor> _repository)
+        public DoctorsController(IHttpContextAccessor _httpContextAccessor, IDoctorManager _manager)
         {
-            repository = _repository;
+            httpContextAccessor = _httpContextAccessor;
+            manager = _manager;
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<Doctor>>> GetAll()
+        public async Task<ActionResult<List<DoctorDTO>>> GetAll()
         {
-            var doctors = await repository.GetAllAsync();
+            var doctors = await manager.GetAllAsync(Utils.GetLang(httpContextAccessor));
 
             if (doctors.Count == 0)
                 return NotFound();
@@ -29,47 +34,43 @@ namespace GraduationProject.Controllers
         }
 
         [HttpGet("{id:int}")]
-        public async Task<ActionResult<Doctor>> GetById(int id)
+        public async Task<ActionResult<DoctorDTO>> GetById(int id)
         {
-            var doctors = await repository.GetAllAsync();
+            var doctor = await manager.GetByIdAsync(id, Utils.GetLang(httpContextAccessor));
 
-            if (doctors != null)
+            if (doctor != null)
             {
-                var doctor = doctors.Find(x => x.Id == id);
-                if (doctor != null)
-                {
-                    return Ok(doctor);
-                }
+                return Ok(doctor);
             }
 
             return NotFound();
         }
 
         [HttpPost]
-        public async Task<ActionResult<Doctor>> CreateDoctor(Doctor doctor)
+        public async Task<ActionResult<DoctorInsertDTO>> CreateDoctor(DoctorInsertDTO doctor)
         {
             if (ModelState.IsValid)
             {
-                await repository.InsertAsync(doctor);
+                await manager.InsertAsync(doctor);
                 return Ok(doctor);
             }
             return BadRequest();
         }
 
         [HttpDelete("{id:int}")]
-        public async Task<ActionResult<Doctor>> DeleteDoctor(int id)
+        public async Task<ActionResult<int>> DeleteDoctor(int id)
         {
-            await repository.DeleteAsync(id);
-            return Ok();
+            await manager.DeleteAsync(id);
+            return Ok(id);
         }
 
         [HttpPatch("{id:int}")]
-        public async Task<ActionResult<Doctor>> UpdateDoctor(int id, Doctor doctor)
+        public async Task<ActionResult<DoctorInsertDTO>> UpdateDoctor(int id, DoctorInsertDTO doctor)
         {
             if (id != doctor.Id)
                 return BadRequest();
 
-            await repository.UpdateAsync(id, doctor);
+            await manager.UpdateAsync(id, doctor);
             return Ok(doctor);
         }
     }
