@@ -11,7 +11,7 @@ export class FooterComponent {
   constructor(private router: Router) {
    this.router.events.subscribe(v=>{
      if(v instanceof NavigationEnd) {
-        if(v.url == '/login' || v.url == '/register')
+        if(v.url == '/login' || v.url == '/register' || v.url == '/dashboard')
            this.showSlider=false;
      }
    })
