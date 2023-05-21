@@ -14,7 +14,7 @@ namespace GraduationProject_BL.Managers
 {
     public class DoctorManager : IDoctorManager
     {
-        private readonly string imagesPath = "D:\\Coding\\ITI\\zAngular\\Final\\src\\assets\\Images";
+        private readonly string imagesPath = "D:\\Coding\\ITI\\zAngular\\Final\\src\\assets\\Images"; // Change it to your absolute path
         private readonly IRepository<Doctor> repository;
         private readonly ITranslations<DoctorTranslations> translations;
         private readonly ITranslations<DepartmentTranslations> departmentTranslations;
