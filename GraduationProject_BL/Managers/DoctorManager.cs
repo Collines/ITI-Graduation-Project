@@ -1,5 +1,6 @@
 ﻿using GraduationProject_BL.DTO;
 using GraduationProject_BL.Interfaces;
+using GraduationProject_DAL.Data.Enums;
 using GraduationProject_DAL.Data.Models;
 using GraduationProject_DAL.Interfaces;
 using Microsoft.IdentityModel.Tokens;
@@ -13,6 +14,7 @@ namespace GraduationProject_BL.Managers
 {
     public class DoctorManager : IDoctorManager
     {
+        private readonly string imagesPath = "D:\\Coding\\ITI\\zAngular\\Final\\src\\assets\\Images";
         private readonly IRepository<Doctor> repository;
         private readonly ITranslations<DoctorTranslations> translations;
         private readonly ITranslations<DepartmentTranslations> departmentTranslations;
@@ -38,6 +40,9 @@ namespace GraduationProject_BL.Managers
                     var departmentTranslation = await departmentTranslations.FindAsync(doctor.DepartmentId);
 
                     DoctorDTO dto;
+                    var path = "";
+                    if (doctor.Image != null)
+                        path = Path.Combine(imagesPath, doctor.Image.Name);
                     if (lang == "ar")
                     {
                         dto = new()
@@ -48,7 +53,7 @@ namespace GraduationProject_BL.Managers
                             Gender = doctor.Gender,
                             Title = translation.Title_AR,
                             Bio = translation.Bio_AR,
-                            Image = doctor.Image,
+                            Image = path,
                             DepartmentId = doctor.DepartmentId,
                             DepartmentTitle = departmentTranslation.Title_AR
 
@@ -64,7 +69,7 @@ namespace GraduationProject_BL.Managers
                             Gender = doctor.Gender,
                             Title = translation.Title_EN,
                             Bio = translation.Bio_EN,
-                            Image = doctor.Image,
+                            Image = path,
                             DepartmentId = doctor.DepartmentId,
                             DepartmentTitle = departmentTranslation.Title_EN
                         };
@@ -92,6 +97,9 @@ namespace GraduationProject_BL.Managers
                         var departmentTranslation = await departmentTranslations.FindAsync(doctor.DepartmentId);
 
                         DoctorDTO dto;
+                        var path = "";
+                        if (doctor.Image != null)
+                            path = Path.Combine(imagesPath, doctor.Image.Name);
                         if (lang == "ar")
                         {
                             dto = new()
@@ -102,7 +110,7 @@ namespace GraduationProject_BL.Managers
                                 Gender = doctor.Gender,
                                 Title = translation.Title_AR,
                                 Bio = translation.Bio_AR,
-                                Image = doctor.Image,
+                                Image = path,
                                 DepartmentId = doctor.DepartmentId,
                                 DepartmentTitle = departmentTranslation.Title_AR
                             };
@@ -117,7 +125,7 @@ namespace GraduationProject_BL.Managers
                                 Gender = doctor.Gender,
                                 Title = translation.Title_EN,
                                 Bio = translation.Bio_EN,
-                                Image = doctor.Image,
+                                Image = path,
                                 DepartmentId = doctor.DepartmentId,
                                 DepartmentTitle = departmentTranslation.Title_EN
                             };
@@ -131,37 +139,41 @@ namespace GraduationProject_BL.Managers
             return null;
         }
 
-        public async Task InsertAsync(DoctorInsertDTO item)
+        public async Task InsertAsync(DoctorFormData formData)
         {
-            Doctor doctor = new()
+            DoctorInsertDTO item = await DoctorFormDataToDoctorInsertDTO(formData);
+            if (item != null) 
             {
-                FirstName = item.FirstName_EN,
-                LastName = item.LastName_EN,
-                Gender = item.Gender,
-                Title = item.Title_EN,
-                Bio = item.Bio_EN,
-                Image = item.Image,
-                DepartmentId = item.DepartmentId
-            };
+                Doctor doctor = new()
+                {
+                    FirstName = item.FirstName_EN,
+                    LastName = item.LastName_EN,
+                    Gender = item.Gender,
+                    Title = item.Title_EN,
+                    Bio = item.Bio_EN,
+                    Image = item.Image,
+                    DepartmentId = item.DepartmentId
+                };
 
-            await repository.InsertAsync(doctor);
+                await repository.InsertAsync(doctor);
 
-            DoctorTranslations translation = new()
-            {
-                FirstName_EN = item.FirstName_EN,
-                FirstName_AR = item.FirstName_AR,
-                LastName_EN = item.LastName_EN,
-                LastName_AR = item.LastName_AR,
-                Title_EN = item.Title_EN,
-                Title_AR = item.Title_AR,
-                Bio_EN = item.Bio_EN,
-                Bio_AR = item.Bio_AR,
-                DoctorId = doctor.Id
-            };
-            await translations.InsertAsync(translation);
+                DoctorTranslations translation = new()
+                {
+                    FirstName_EN = item.FirstName_EN,
+                    FirstName_AR = item.FirstName_AR,
+                    LastName_EN = item.LastName_EN,
+                    LastName_AR = item.LastName_AR,
+                    Title_EN = item.Title_EN,
+                    Title_AR = item.Title_AR,
+                    Bio_EN = item.Bio_EN,
+                    Bio_AR = item.Bio_AR,
+                    DoctorId = doctor.Id
+                };
+                await translations.InsertAsync(translation);
+            }
         }
 
-        public async Task UpdateAsync(int id, DoctorInsertDTO item)
+        public async Task UpdateAsync(int id, DoctorFormData formData)
         {
             var doctors = await repository.GetAllAsync();
 
@@ -171,6 +183,7 @@ namespace GraduationProject_BL.Managers
                 if (doctor != null)
                 {
                     var translation = await translations.FindAsync(doctor.Id);
+                    DoctorInsertDTO item = await DoctorFormDataToDoctorInsertDTO(formData);
                     if (translation != null)
                     {
                         translation.FirstName_EN = item.FirstName_EN;
@@ -191,7 +204,7 @@ namespace GraduationProject_BL.Managers
                     doctor.Title = item.Title_EN;
                     doctor.Bio = item.Bio_EN;
                     doctor.DepartmentId = item.DepartmentId;
-                    if (!(item.Image == null))
+                    if (item.Image != null)
                         doctor.Image = item.Image;
 
                     await repository.UpdateAsync(doctor.Id, doctor);
@@ -238,6 +251,38 @@ namespace GraduationProject_BL.Managers
                 }
             }
             return null;
+        }
+
+        public async Task<DoctorInsertDTO> DoctorFormDataToDoctorInsertDTO(DoctorFormData item)
+        {
+            DoctorInsertDTO doctor = new DoctorInsertDTO
+            {
+                FirstName_EN = item.FirstName_EN,
+                LastName_EN = item.LastName_EN,
+                FirstName_AR = item.FirstName_AR,
+                LastName_AR = item.LastName_AR,
+                Title_EN = item.Title_EN,
+                Title_AR = item.Title_AR,
+                Bio_EN = item.Bio_EN,
+                Bio_AR = item.Bio_AR,
+                Gender = item.Gender,
+                DepartmentId = item.DepartmentId,
+            };
+
+            if (item.Image != null && item.Image.Length > 0)
+            {
+                var uniqueFileName = DateTime.Now.ToString("yyyyMMdd_HHmmss") + "_" + item.Image.FileName;
+                var filePath = Path.Combine(imagesPath, uniqueFileName);
+
+                using (var stream = new FileStream(filePath, FileMode.Create))
+                {
+                    await item.Image.CopyToAsync(stream);
+                }
+
+                doctor.Image = new Image{Name=uniqueFileName};
+            }
+
+            return doctor;
         }
     }
 }

@@ -5,6 +5,7 @@ using GraduationProject_DAL.Data.Models;
 using GraduationProject_DAL.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.SqlServer.Server;
 
 namespace GraduationProject.Controllers
 {
@@ -13,6 +14,7 @@ namespace GraduationProject.Controllers
     
     public class DoctorsController : ControllerBase
     {
+        
         private readonly IHttpContextAccessor httpContextAccessor;
         private readonly IDoctorManager manager;
 
@@ -58,12 +60,12 @@ namespace GraduationProject.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<DoctorInsertDTO>> CreateDoctor(DoctorInsertDTO doctor)
+        public async Task<ActionResult> CreateDoctor([FromForm] DoctorFormData formData)
         {
             if (ModelState.IsValid)
             {
-                await manager.InsertAsync(doctor);
-                return Ok(doctor);
+                await manager.InsertAsync(formData);
+                return Ok();
             }
             return BadRequest();
         }
@@ -76,13 +78,13 @@ namespace GraduationProject.Controllers
         }
 
         [HttpPatch("{id:int}")]
-        public async Task<ActionResult<DoctorInsertDTO>> UpdateDoctor(int id, DoctorInsertDTO doctor)
+        public async Task<ActionResult<DoctorInsertDTO>> UpdateDoctor(int id, [FromForm] DoctorFormData formData)
         {
-            if (id != doctor.Id)
+            if (id != formData.Id)
                 return BadRequest();
 
-            await manager.UpdateAsync(id, doctor);
-            return Ok(doctor);
+            await manager.UpdateAsync(id, formData);
+            return Ok();
         }
     }
 }

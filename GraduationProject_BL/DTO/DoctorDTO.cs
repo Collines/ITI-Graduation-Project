@@ -26,6 +26,6 @@ namespace GraduationProject_BL.DTO
 
         public string DepartmentTitle { get; set; }
 
-        public Image? Image { get; set; }
+        public string? Image { get; set; }
     }
 }
