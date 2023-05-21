@@ -1,5 +1,4 @@
 ﻿using GraduationProject_BL.Interfaces;
-using GraduationProject_DAL.Data.Models;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -18,54 +17,67 @@ namespace GraduationProject.Middlewares
 
         public async Task Invoke(HttpContext context, IConfiguration _iConfiguration, IPatientLoginManager _manager)
         {
-            var token = context.Request.Headers["Authorization"].FirstOrDefault()?.Split(" ").Last();
-
-            if (token != null)
+            var headers = context.Request.Headers;
+            if (headers != null)
             {
-                var tokenHandler = new JwtSecurityTokenHandler();
-                var secretKey = _iConfiguration["JWT:Key"];
-                if (secretKey != null)
+                var authorizationHeader = context.Request.Headers["Authorization"].FirstOrDefault();
+
+                if (!string.IsNullOrEmpty(authorizationHeader))
                 {
-                    var key = Encoding.UTF8.GetBytes(secretKey);
-
-                    try
+                    var parts = authorizationHeader.Split(' ');
+                    if (parts.Length == 2 && parts[0].Equals("Bearer", StringComparison.OrdinalIgnoreCase))
                     {
-                        // Validate the token
-                        var principal = tokenHandler.ValidateToken(token, new TokenValidationParameters
-                        {
-                            ValidateIssuer = false,
-                            ValidateAudience = false,
-                            ValidateIssuerSigningKey = true,
-                            ValidIssuer = _iConfiguration["JWT:Issuer"],
-                            ValidAudience = _iConfiguration["JWT:Audience"],
-                            ValidateLifetime= true,
-                            IssuerSigningKey = new SymmetricSecurityKey(key)
-                        }, out var validatedToken);
+                        var token = parts[1];
 
-                        if (principal != null && validatedToken != null)
+                        if (token != null)
                         {
-                            var claim = principal.FindFirst("UserId");
-                            if (claim != null)
+                            var tokenHandler = new JwtSecurityTokenHandler();
+                            var secretKey = _iConfiguration["JWT:Key"];
+                            if (secretKey != null)
                             {
-                                // Retrieve user login details from the UserLogins table
-                                var userId = claim.Value;
-                                var isFound = await _manager.FindUser(userId);
+                                var key = Encoding.UTF8.GetBytes(secretKey);
 
-                                if (isFound)
+                                try
                                 {
-                                    // Perform additional authorization checks or set the user's identity
-                                    var identity = new ClaimsIdentity(principal.Identity);
-                                    // Add any additional claims to the identity as needed
-                                    context.User = new ClaimsPrincipal(identity);
+                                    // Validate the token
+                                    var principal = tokenHandler.ValidateToken(token, new TokenValidationParameters
+                                    {
+                                        ValidateIssuer = false,
+                                        ValidateAudience = false,
+                                        ValidateIssuerSigningKey = true,
+                                        ValidIssuer = _iConfiguration["JWT:Issuer"],
+                                        ValidAudience = _iConfiguration["JWT:Audience"],
+                                        ValidateLifetime = true,
+                                        IssuerSigningKey = new SymmetricSecurityKey(key)
+                                    }, out var validatedToken);
+
+                                    if (principal != null && validatedToken != null)
+                                    {
+                                        var claim = principal.FindFirst("UserId");
+                                        if (claim != null)
+                                        {
+                                            // Retrieve user login details from the UserLogins table
+                                            var userId = claim.Value;
+                                            var isFound = await _manager.FindUser(userId);
+
+                                            if (isFound)
+                                            {
+                                                // Perform additional authorization checks or set the user's identity
+                                                var identity = new ClaimsIdentity(principal.Identity);
+                                                // Add any additional claims to the identity as needed
+                                                context.User = new ClaimsPrincipal(identity);
+                                            }
+                                        }
+                                    }
+                                }
+                                catch
+                                {
+                                    // Token validation failed
+                                    context.Response.StatusCode = 401;
+                                    return;
                                 }
                             }
                         }
-                    }
-                    catch
-                    {
-                        // Token validation failed
-                        context.Response.StatusCode = 401;
-                        return;
                     }
                 }
             }
