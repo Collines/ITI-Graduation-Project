@@ -15,6 +15,7 @@ namespace GraduationProject_BL.Managers
     public class DoctorManager : IDoctorManager
     {
         private readonly string imagesPath = "D:\\Coding\\ITI\\zAngular\\Final\\src\\assets\\Images"; // Change it to your absolute path
+        private readonly string retrievePath = "assets\\Images"; 
         private readonly IRepository<Doctor> repository;
         private readonly ITranslations<DoctorTranslations> translations;
         private readonly ITranslations<DepartmentTranslations> departmentTranslations;
@@ -42,7 +43,7 @@ namespace GraduationProject_BL.Managers
                     DoctorDTO dto;
                     var path = "";
                     if (doctor.Image != null)
-                        path = Path.Combine(imagesPath, doctor.Image.Name);
+                        path = Path.Combine(retrievePath, doctor.Image.Name);
                     if (lang == "ar")
                     {
                         dto = new()
@@ -99,7 +100,7 @@ namespace GraduationProject_BL.Managers
                         DoctorDTO dto;
                         var path = "";
                         if (doctor.Image != null)
-                            path = Path.Combine(imagesPath, doctor.Image.Name);
+                            path = Path.Combine(retrievePath, doctor.Image.Name);
                         if (lang == "ar")
                         {
                             dto = new()
@@ -204,8 +205,17 @@ namespace GraduationProject_BL.Managers
                     doctor.Title = item.Title_EN;
                     doctor.Bio = item.Bio_EN;
                     doctor.DepartmentId = item.DepartmentId;
+
                     if (item.Image != null)
+                    {
+                        var oldImagePath = Path.Combine(imagesPath, doctor.Image.Name);
+                        if (File.Exists(oldImagePath)) 
+                        {
+                            File.Delete(oldImagePath);
+                        }
                         doctor.Image = item.Image;
+                    }
+                        
 
                     await repository.UpdateAsync(doctor.Id, doctor);
                 }
@@ -253,10 +263,12 @@ namespace GraduationProject_BL.Managers
             return null;
         }
 
+        // Convert formData to DoctorInsertDTO and create the image file
         public async Task<DoctorInsertDTO> DoctorFormDataToDoctorInsertDTO(DoctorFormData item)
         {
             DoctorInsertDTO doctor = new DoctorInsertDTO
             {
+                Id = item.Id,
                 FirstName_EN = item.FirstName_EN,
                 LastName_EN = item.LastName_EN,
                 FirstName_AR = item.FirstName_AR,
