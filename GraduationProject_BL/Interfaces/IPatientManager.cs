@@ -1,4 +1,6 @@
 ﻿using GraduationProject_BL.DTO;
+using GraduationProject_BL.DTO.PatientDTOs;
+using GraduationProject_DAL.Data.Models;
 
 namespace GraduationProject_BL.Interfaces
 {
@@ -6,10 +8,12 @@ namespace GraduationProject_BL.Interfaces
     {
         public Task<List<PatientDTO>> GetAllAsync(string lang);
 
+        public Task<Patient?> GetPatientByAccessToken(string token);
+
         // Used to get the patient depending on the user selected language
         public Task<PatientDTO?> GetByIdAsync(int id, string lang);
         public Task<LoginDTO?> InsertAsync(PatientInsertDTO item);
-        public Task UpdateAsync(int id, PatientInsertDTO item);
+        public Task UpdateAsync(int id, PatientUpdateDTO item);
         public Task DeleteAsync(int id);
 
         // Used to check if the email already exists or not
@@ -19,7 +23,7 @@ namespace GraduationProject_BL.Interfaces
         public Task<bool> FindPatient(string email, string password);
 
         // Used to check if the user have this refresh token
-        public Task<bool> FindPatientByRefreshToken(string refreshToken);
+        public Task<PatientsLogins?> FindPatientByRefreshToken(string refreshToken);
 
         // Used to get the patient from database, generate the token and return the needed data to the user
         public Task<LoginDTO?> Login(string email);

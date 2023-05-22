@@ -1,4 +1,6 @@
-﻿namespace GraduationProject_BL.DTO
+﻿using GraduationProject_BL.DTO.PatientDTOs;
+
+namespace GraduationProject_BL.DTO
 {
     public class LoginDTO
     {

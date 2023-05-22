@@ -1,5 +1,4 @@
 ﻿using GraduationProject_BL.Interfaces;
-using GraduationProject_DAL.Data.Models;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;

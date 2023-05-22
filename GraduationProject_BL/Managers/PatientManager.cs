@@ -1,9 +1,15 @@
 ﻿using GraduationProject_BL.DTO;
+using GraduationProject_BL.DTO.PatientDTOs;
 using GraduationProject_BL.Interfaces;
 using GraduationProject_DAL.Data.Models;
 using GraduationProject_DAL.Handlers;
 using GraduationProject_DAL.Interfaces;
 using Microsoft.Extensions.Configuration;
+using Microsoft.IdentityModel.Tokens;
+using NuGet.Common;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Text;
 
 namespace GraduationProject_BL.Managers
 {
@@ -137,7 +143,7 @@ namespace GraduationProject_BL.Managers
             return await GetLoginDTO(patient);
         }
 
-        public async Task UpdateAsync(int id, PatientInsertDTO item)
+        public async Task UpdateAsync(int id, PatientUpdateDTO item)
         {
             var patients = await repository.GetAllAsync();
 
@@ -156,17 +162,15 @@ namespace GraduationProject_BL.Managers
 
                         await translations.UpdateAsync(translation.Id, translation.PatientId, translation);
                     }
-
-                    patient.SSN = item.SSN;
+                    byte[]? salt = null;
                     patient.FirstName = item.FirstName_EN;
                     patient.LastName = item.LastName_EN;
-                    patient.Gender = item.Gender;
                     patient.Email = item.Email;
-                    patient.Password = item.Password;
+                    patient.Password = String.IsNullOrEmpty(item.Password)?patient.Password : PasswordHandler.Hash(item.Password,out salt);
+                    patient.PasswordSalt = salt == null ? patient.PasswordSalt : Convert.ToHexString(salt);
                     patient.DOB = item.DOB;
                     patient.PhoneNumber = item.Phone;
                     patient.MedicalHistory = item.MedicalHistory;
-
                     await repository.UpdateAsync(patient.Id, patient);
                 }
             }
@@ -186,7 +190,7 @@ namespace GraduationProject_BL.Managers
                 var patient = patients.Find(p => p.Email == email);
                 if (patient != null)
                 {
-                    return true;
+                    return FindPatientByRefreshToken !=null;
                 }
             }
             return false;
@@ -209,7 +213,7 @@ namespace GraduationProject_BL.Managers
             return false;
         }
 
-        public async Task<bool> FindPatientByRefreshToken(string refreshToken)
+        public async Task<PatientsLogins?> FindPatientByRefreshToken(string refreshToken)
         {
             var patientsLogins = await logins.GetAllAsync();
             if (patientsLogins != null)
@@ -217,10 +221,10 @@ namespace GraduationProject_BL.Managers
                 var login = patientsLogins.Find(p => p.RefreshToken == refreshToken);
                 if (login != null)
                 {
-                    return true;
+                    return login;
                 }
             }
-            return false;
+            return null;
         }
 
         public async Task<LoginDTO?> Login(string email)
@@ -237,6 +241,54 @@ namespace GraduationProject_BL.Managers
 
             return null;
         }
+
+        public async Task<Patient?> GetPatientByAccessToken(string token)
+        {
+            if (token != null)
+            {
+                var tokenHandler = new JwtSecurityTokenHandler();
+                var secretKey = iConfiguration["JWT:Key"];
+                if (secretKey != null)
+                {
+                    var key = Encoding.UTF8.GetBytes(secretKey);
+
+                    try
+                    {
+                        // Validate the token
+                        var principal = tokenHandler.ValidateToken(token, new TokenValidationParameters
+                        {
+                            ValidateIssuer = false,
+                            ValidateAudience = false,
+                            ValidateIssuerSigningKey = true,
+                            ValidIssuer = iConfiguration["JWT:Issuer"],
+                            ValidAudience = iConfiguration["JWT:Audience"],
+                            ValidateLifetime = true,
+                            IssuerSigningKey = new SymmetricSecurityKey(key)
+                        }, out var validatedToken);
+
+                        if (principal != null && validatedToken != null)
+                        {
+                            var claim = principal.FindFirst("UserId");
+                            if (claim != null)
+                            {
+                                // Retrieve user login details from the UserLogins table
+                                var userId = claim.Value;
+                                var patients = await repository.GetAllAsync();
+                                var patient = patients.FirstOrDefault(p => $"{p.Id}" == userId);
+                                if (patient != null)
+                                    return patient;
+                            }
+                        }
+                    }
+                    catch
+                    {
+                        // Token validation failed
+                        return null;
+                    }
+                }
+            }
+            return null;
+        } 
 
         public async Task<LoginDTO?> Refresh(string refreshToken)
         {
