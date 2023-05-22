@@ -6,6 +6,7 @@ using GraduationProject_DAL.Interfaces;
 using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -241,6 +242,8 @@ namespace GraduationProject_BL.Managers
                     var translation = await translations.FindAsync(doctor.Id);
                     if (translation != null)
                     {
+                        var path = Path.Combine(retrievePath, doctor.Image.Name);
+                        doctor.Image.Name = path;
                         DoctorInsertDTO dto = new()
                         {
                             Id = translation.DoctorId,
