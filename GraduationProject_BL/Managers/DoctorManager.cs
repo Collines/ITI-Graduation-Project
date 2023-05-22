@@ -208,10 +208,11 @@ namespace GraduationProject_BL.Managers
 
                     if (item.Image != null)
                     {
-                        var oldImagePath = Path.Combine(imagesPath, doctor.Image.Name);
-                        if (File.Exists(oldImagePath)) 
+                        if (doctor.Image != null)
                         {
-                            File.Delete(oldImagePath);
+                            var oldImagePath = Path.Combine(imagesPath, doctor.Image.Name);
+                            if (File.Exists(oldImagePath))
+                                File.Delete(oldImagePath);
                         }
                         doctor.Image = item.Image;
                     }
