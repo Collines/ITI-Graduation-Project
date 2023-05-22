@@ -114,7 +114,7 @@ export class RegisterComponent implements OnInit {
       };
       this.accountService.register(user).subscribe({
         next: (res) => {
-          this.router.navigate(['/home']);
+          this.router.navigate(['/dashboard']);
         },
         error: (err) => {
           console.log(err.error);

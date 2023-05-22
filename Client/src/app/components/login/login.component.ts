@@ -22,6 +22,7 @@ export class LoginComponent implements OnInit {
   }
   submitted = false;
   isLogged = false;
+  isResponseSuccess = true;
   Validation = new FormGroup({
     email: new FormControl(null, [
       Validators.required,
@@ -52,10 +53,10 @@ export class LoginComponent implements OnInit {
         })
         .subscribe({
           next: (resp) => {
-            this.router.navigate(['/home']);
+            this.router.navigate(['/dashboard']);
           },
           error: (err) => {
-            console.log(err);
+            this.isResponseSuccess = false;
           },
         });
     }

@@ -1,4 +1,4 @@
-﻿namespace GraduationProject_BL.DTO
+﻿namespace GraduationProject_BL.DTO.PatientDTOs
 {
     public class PatientDTO
     {

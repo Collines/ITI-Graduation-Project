@@ -79,7 +79,7 @@
                 "
                 class="form-control"
                 id="FirstNameAr"
-                placeholder="اسم الاب"
+                placeholder="الاسم الاول"
               />
               <div
                 *ngIf="submitted && Validation.controls.FirstNameAr.errors"
@@ -94,7 +94,7 @@
             </div>
             <div class="mb-3">
               <label for="LastNameAr" class="form-label float-end"
-                >اسم الاب</label
+                >اسم العائلة</label
               >
               <input
                 formControlName="LastNameAr"
@@ -111,7 +111,7 @@
                 "
                 class="form-control"
                 id="LastNameAr"
-                placeholder="اسم الاب"
+                placeholder="اسم العائلة"
               />
               <div
                 *ngIf="submitted && Validation.controls.LastNameAr.errors"
@@ -119,6 +119,33 @@
               >
                 <div *ngIf="submitted && Validation.controls.LastNameAr.errors">
                   اسم الاب يجب الا يقل عن 3 احرف
+                </div>
+              </div>
+            </div>
+            <div class="mb-3">
+              <label for="SSN" class="form-label">SSN</label>
+              <input
+                formControlName="SSN"
+                type="text"
+                required
+                [ngClass]="
+                  !isSSNValid
+                    ? {
+                        'is-invalid':
+                          submitted && Validation.controls.SSN.errors
+                      }
+                    : 'is-valid'
+                "
+                class="form-control"
+                id="SSN"
+                placeholder="Enter SSN"
+              />
+              <div
+                *ngIf="submitted && Validation.controls.SSN.errors"
+                class="text-danger"
+              >
+                <div *ngIf="submitted && Validation.controls.SSN.errors">
+                  SSN is required and should be 14 numbers
                 </div>
               </div>
             </div>
@@ -229,34 +256,6 @@
               >
                 <div *ngIf="submitted && Validation.controls.Date.errors">
                   Date is required
-                </div>
-              </div>
-            </div>
-
-            <div class="mb-3">
-              <label for="SSN" class="form-label">SSN</label>
-              <input
-                formControlName="SSN"
-                type="text"
-                required
-                [ngClass]="
-                  !isSSNValid
-                    ? {
-                        'is-invalid':
-                          submitted && Validation.controls.SSN.errors
-                      }
-                    : 'is-valid'
-                "
-                class="form-control"
-                id="SSN"
-                placeholder="Enter SSN"
-              />
-              <div
-                *ngIf="submitted && Validation.controls.SSN.errors"
-                class="text-danger"
-              >
-                <div *ngIf="submitted && Validation.controls.SSN.errors">
-                  SSN is required and should be 14 numbers
                 </div>
               </div>
             </div>
