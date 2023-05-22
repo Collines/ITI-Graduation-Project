@@ -30,7 +30,7 @@ namespace GraduationProject_DAL.Data.Models
 
         public virtual Department? Department { get; set; }
 
-        public virtual IEnumerable<Image> Images { get; set; } = new HashSet<Image>();
+        public virtual Image? Image { get; set; }
 
         public virtual IEnumerable<Reservation> Reservations { get; set; } = new HashSet<Reservation>();
     }

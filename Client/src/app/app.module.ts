@@ -15,6 +15,7 @@ import { HttpClientModule} from '@angular/common/http';
 import { AboutComponent } from './components/about/about.component';
 import { DoctorComponent } from './components/doctor/doctor.component';
 import { DoctordetailssComponent } from './components/doctordetailss/doctordetailss.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
 
 
 @NgModule({
@@ -29,6 +30,7 @@ import { DoctordetailssComponent } from './components/doctordetailss/doctordetai
     AboutComponent,
     DoctorComponent,
     DoctordetailssComponent
+    DashboardComponent
   ],
   imports: [
     BrowserModule,

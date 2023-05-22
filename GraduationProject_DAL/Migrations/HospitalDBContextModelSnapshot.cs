@@ -197,7 +197,8 @@ namespace GraduationProject_DAL.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("DoctorId");
+                    b.HasIndex("DoctorId")
+                        .IsUnique();
 
                     b.ToTable("Images");
                 });
@@ -392,8 +393,8 @@ namespace GraduationProject_DAL.Migrations
             modelBuilder.Entity("GraduationProject_DAL.Data.Models.Image", b =>
                 {
                     b.HasOne("GraduationProject_DAL.Data.Models.Doctor", "Doctor")
-                        .WithMany("Images")
-                        .HasForeignKey("DoctorId")
+                        .WithOne("Image")
+                        .HasForeignKey("GraduationProject_DAL.Data.Models.Image", "DoctorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -448,7 +449,7 @@ namespace GraduationProject_DAL.Migrations
 
             modelBuilder.Entity("GraduationProject_DAL.Data.Models.Doctor", b =>
                 {
-                    b.Navigation("Images");
+                    b.Navigation("Image");
 
                     b.Navigation("Reservations");
                 });
