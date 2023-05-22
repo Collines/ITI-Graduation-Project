@@ -1,70 +1,41 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { User } from '../Interfaces/user';
+import { User } from '../Interfaces/User/user';
 import { BehaviorSubject, Observable, map } from 'rxjs';
+import { UserUpdate } from '../Interfaces/User/userUpdate';
+import { Router } from '@angular/router';
+import { UserEdit } from '../Interfaces/User/UserEdit';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AccountService {
   private CurrentUserSource = new BehaviorSubject<User | null>(null);
+  private BaseURL: string = 'https://localhost:7035/api/patient/';
+  private Header: HttpHeaders = new HttpHeaders()
+    .set('content-type', 'application/json')
+    .set('Access-Control-Allow-Origin', '*');
   currentUser$ = this.CurrentUserSource.asObservable();
-  BaseURL: string = 'https://localhost:7035/api/patient/';
-  constructor(private http: HttpClient) {}
+
+  constructor(private http: HttpClient, private router: Router) {}
+
   login(model: any) {
-    return this.http.post<User>(this.BaseURL + 'login', model).pipe(
-      map((res: User) => {
-        const user = res;
-        if (user) {
-          localStorage.setItem('user', JSON.stringify(user));
-          this.CurrentUserSource.next(user);
-        }
-      })
-    );
+    return this.http
+      .post<User>(this.BaseURL + 'login', model, { headers: this.Header })
+      .pipe(
+        map((res: User) => {
+          const user = res;
+          if (user) {
+            localStorage.setItem('user', JSON.stringify(user));
+            this.CurrentUserSource.next(user);
+          }
+        })
+      );
   }
   register(model: any) {
-    return this.http.post<User>(this.BaseURL + 'register', model).pipe(
-      map((res: User) => {
-        const user = res;
-        if (user) {
-          localStorage.setItem('user', JSON.stringify(user));
-          this.CurrentUserSource.next(user);
-        }
-      })
-    );
-  }
-  logout() {
-    localStorage.removeItem('user');
-    this.CurrentUserSource.next(null);
-  }
-
-  // refreshToken(): any {
-  //   let user = localStorage.getItem('user');
-  //   let date = new Date().getTime();
-  //   let parsedUser: User = user ? JSON.parse(user) : null;
-  //   if (parsedUser) {
-  //     if (parsedUser.expiration - date / 1000 < 30) {
-  //       return this.http
-  //         .post<User>(this.BaseURL + 'refresh', {
-  //           RefreshToken: parsedUser.refreshToken,
-  //         })
-  //         .pipe(
-  //           map((res: User) => {
-  //             const user = res;
-  //             if (user) {
-  //               localStorage.setItem('user', JSON.stringify(user));
-  //               this.CurrentUserSource.next(user);
-  //               console.log(`token refreshed ${user}`);
-  //             }
-  //           })
-  //         );
-  //     }
-  //   }
-  // }
-  refreshToken(refreshToken: String) {
     return this.http
-      .post<User>(this.BaseURL + 'refresh', {
-        RefreshToken: refreshToken,
+      .post<User>(this.BaseURL + 'register', model, {
+        headers: this.Header,
       })
       .pipe(
         map((res: User) => {
@@ -72,7 +43,54 @@ export class AccountService {
           if (user) {
             localStorage.setItem('user', JSON.stringify(user));
             this.CurrentUserSource.next(user);
-            console.log(`token refreshed ${user}`);
+          }
+        })
+      );
+  }
+  logout() {
+    localStorage.removeItem('user');
+    this.CurrentUserSource.next(null);
+    this.router.navigate(['/home']);
+  }
+
+  update(accessToken: string, model: UserUpdate) {
+    return this.http.patch(
+      this.BaseURL + 'update?accessToken=' + accessToken,
+      model,
+      {
+        headers: this.Header.set('Authorization', `bearer ${accessToken}`),
+      }
+    );
+  }
+
+  getData(token: string) {
+    return this.http.post<UserEdit>(
+      this.BaseURL + 'GetPatientData',
+      `\"${token}\"`,
+      {
+        headers: this.Header.set('Authorization', `bearer ${token}`),
+      }
+    );
+  }
+
+  refreshToken(refreshToken: String, accessToken: string) {
+    return this.http
+      .post<User>(
+        this.BaseURL + 'refresh',
+        {
+          RefreshToken: refreshToken,
+        },
+        {
+          headers: this.Header.set('Authorization', `bearer ${accessToken}`),
+        }
+      )
+      .pipe(
+        map((res: User) => {
+          const user = res;
+          if (user) {
+            localStorage.setItem('user', JSON.stringify(user));
+            this.CurrentUserSource.next(user);
+            console.log(`token refreshed ${user.accessToken}`);
           }
         })
       );
