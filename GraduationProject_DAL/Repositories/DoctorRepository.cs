@@ -16,7 +16,7 @@ namespace GraduationProject_DAL.Repositories
 
         public async Task<List<Doctor>> GetAllAsync()
         {
-            return await context.Doctors.Include(d => d.Department).ToListAsync();
+            return await context.Doctors.Include(d => d.Department).Include(d => d.Image).ToListAsync();
         }
 
         public async Task InsertAsync(Doctor item)
