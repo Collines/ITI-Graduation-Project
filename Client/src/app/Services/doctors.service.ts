@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +14,9 @@ export class DoctorsService {
   GetAllDoctors(){
     return this.Clint.get(this.BaseURL);
   }
+  // getAllDoctors(): Observable<any> {
+  //   return this.Clint.get(this.BaseURL);
+  // }
 
   GetById(id:number){
     return this.Clint.get(`${this.BaseURL}/${id}`);
