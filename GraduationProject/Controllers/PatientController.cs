@@ -94,6 +94,10 @@ namespace GraduationProject.Controllers
                     }
                     await manager.UpdateAsync(patient.Id, patientUDTO);
                     return Ok(new {message="Edited Successfully"});
+                } else
+                {
+                    await manager.UpdateAsync(patient.Id, patientUDTO);
+                    return Ok(new { message = "Edited Successfully" });
                 }
             }
             return BadRequest();

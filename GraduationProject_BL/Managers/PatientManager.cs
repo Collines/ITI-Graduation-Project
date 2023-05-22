@@ -117,10 +117,10 @@ namespace GraduationProject_BL.Managers
             Patient patient = new()
             {
                 SSN = item.SSN,
-                FirstName = item.FirstName_EN,
-                LastName = item.LastName_EN,
+                FirstName = item.FirstName_EN.ToLower(),
+                LastName = item.LastName_EN.ToLower(),
                 Gender = item.Gender,
-                Email = item.Email,
+                Email = item.Email.ToLower(),
                 Password = PasswordHandler.Hash(item.Password, out byte[] salt),
                 PasswordSalt = Convert.ToHexString(salt),
                 DOB = item.DOB,
@@ -132,9 +132,9 @@ namespace GraduationProject_BL.Managers
 
             PatientTranslations translation = new()
             {
-                FirstName_EN = item.FirstName_EN,
+                FirstName_EN = item.FirstName_EN.ToLower(),
                 FirstName_AR = item.FirstName_AR,
-                LastName_EN = item.LastName_EN,
+                LastName_EN = item.LastName_EN.ToLower(),
                 LastName_AR = item.LastName_AR,
                 PatientId = patient.Id
             };
@@ -155,17 +155,17 @@ namespace GraduationProject_BL.Managers
                     var translation = await translations.FindAsync(patient.Id);
                     if (translation != null)
                     {
-                        translation.FirstName_EN = item.FirstName_EN;
+                        translation.FirstName_EN = item.FirstName_EN.ToLower();
                         translation.FirstName_AR = item.FirstName_AR;
-                        translation.LastName_EN = item.LastName_EN;
+                        translation.LastName_EN = item.LastName_EN.ToLower();
                         translation.LastName_AR = item.LastName_AR;
 
                         await translations.UpdateAsync(translation.Id, translation.PatientId, translation);
                     }
                     byte[]? salt = null;
-                    patient.FirstName = item.FirstName_EN;
-                    patient.LastName = item.LastName_EN;
-                    patient.Email = item.Email;
+                    patient.FirstName = item.FirstName_EN.ToLower();
+                    patient.LastName = item.LastName_EN ;
+                    patient.Email = item.Email.ToLower();
                     patient.Password = String.IsNullOrEmpty(item.Password)?patient.Password : PasswordHandler.Hash(item.Password,out salt);
                     patient.PasswordSalt = salt == null ? patient.PasswordSalt : Convert.ToHexString(salt);
                     patient.DOB = item.DOB;
@@ -187,7 +187,7 @@ namespace GraduationProject_BL.Managers
             var patients = await repository.GetAllAsync();
             if (patients != null)
             {
-                var patient = patients.Find(p => p.Email == email);
+                var patient = patients.Find(p => p.Email.ToLower() == email.ToLower());
                 if (patient != null)
                 {
                     return FindPatientByRefreshToken !=null;
@@ -201,7 +201,7 @@ namespace GraduationProject_BL.Managers
             var patients = await repository.GetAllAsync();
             if (patients != null)
             {
-                var patient = patients.Find(p => p.Email == email);
+                var patient = patients.Find(p => p.Email.ToLower() == email.ToLower());
                 if (patient != null)
                 {
                     if (patient.PasswordSalt != null)
@@ -232,7 +232,7 @@ namespace GraduationProject_BL.Managers
             var patients = await repository.GetAllAsync();
             if (patients != null)
             {
-                var patient = patients.Find(p => p.Email == email);
+                var patient = patients.Find(p => p.Email.ToLower() == email.ToLower());
                 if (patient != null)
                 {
                     return await GetLoginDTO(patient);
