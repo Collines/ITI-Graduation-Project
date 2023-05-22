@@ -109,26 +109,9 @@ namespace GraduationProject.Controllers
         {
             if (ModelState.IsValid)
             {
-                var patient = await manager.GetPatientByAccessToken(accessToken);
-                
-                if (patient != null)
-                {
-                    var translation = await translations.FindAsync(patient.Id);
-                    var patientUDTO = new PatientEditDTO()
-                    {
-                        SSN = patient.SSN,
-                        Gender = patient.Gender,
-                        FirstName_EN = patient.FirstName,
-                        LastName_EN = patient.LastName,
-                        FirstName_AR = translation?.FirstName_AR ?? "",
-                        LastName_AR = translation?.LastName_AR ?? "",
-                        Email = patient.Email,
-                        Phone = patient.PhoneNumber,
-                        MedicalHistory = patient.MedicalHistory,
-                        DOB = patient.DOB,
-                    };
+                var patientUDTO = await manager.GetPatientEditDTOByAccessToken(accessToken);
+                if (patientUDTO != null)
                     return Ok(patientUDTO);
-                }
             }
             return BadRequest();
         }

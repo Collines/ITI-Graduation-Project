@@ -8,6 +8,8 @@ namespace GraduationProject_BL.Interfaces
     {
         public Task<List<PatientDTO>> GetAllAsync(string lang);
 
+        public Task<PatientEditDTO?> GetPatientEditDTOByAccessToken(string accessToken);
+
         public Task<Patient?> GetPatientByAccessToken(string token);
 
         // Used to get the patient depending on the user selected language
