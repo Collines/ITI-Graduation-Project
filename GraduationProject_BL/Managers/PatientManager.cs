@@ -82,16 +82,20 @@ namespace GraduationProject_BL.Managers
                                 Id = translation.PatientId,
                                 FullName = $"{translation.FirstName_AR} {translation.LastName_AR}"
                             };
-                            return dto;
                         }
-                        dto = new()
+                        else
                         {
-                            Id = patient.Id,
-                            FullName = $"{patient.FirstName} {patient.LastName}"
-                        };
+                            dto = new()
+                            {
+                                Id = translation.PatientId,
+                                FullName = $"{translation.FirstName_EN} {translation.LastName_EN}"
+                            };
+                        }
+
                         return dto;
 
-                    } else
+                    }
+                    else
                     {
                         dto = new()
                         {
