@@ -26,6 +26,6 @@ namespace GraduationProject_BL.DTO
 
         public string DepartmentTitle { get; set; }
 
-        public IEnumerable<Image> Images { get; set; } = new HashSet<Image>();
+        public string? Image { get; set; }
     }
 }
