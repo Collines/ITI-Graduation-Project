@@ -18,7 +18,7 @@
           </div>
         </div>
       </div> -->
-
+<!-- 
       <div class="container">
         <div class="d-grid">
           <div class="col-lg-8 col-md-6 mb-4" *ngFor="let doctor of doctors">
@@ -31,7 +31,9 @@
                   <br>
                   <h4 class="card-text">{{ doctor.title }}</h4>
                   <h5 class="card-title"><a routerLink="/doctor/{{doctor.id}}">{{ doctor.firstName+" "+doctor.lastName }}</a></h5>
-                  <p class="card-text">{{ doctor.department }}</p>
+                  <h6 class="card-text">{{ doctor.departmentTitle }}</h6>
+                  <h5>Bio:</h5>
+          <textarea class="form-control  w-100" disabled [value]="doctor.bio"></textarea>
                 </div>
                 <div class="d-grid align-items-center justify-content-center" style="flex: 0 0 20%;">
                   <a class="btn btn-danger mt-3" routerLink="/doctor/{{doctor.id}}">View profile</a>
@@ -41,9 +43,40 @@
             </div>
           </div>
         </div>
+      </div> -->
+      
+      
+
+
+
+
+
+
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6 col-lg-4 mb-4" *ngFor="let doctor of doctors">
+            <div class="card">
+              <img class="card-img-top rounded-circle" src="https://hips.hearstapps.com/hmg-prod/images/portrait-of-a-happy-young-doctor-in-his-clinic-royalty-free-image-1661432441.jpg?crop=0.66698xw:1xh;center,top&resize=1200:*" alt="Doctor Image">
+              <div class="card-body"> <h5 class="card-title"><a routerLink="/doctor/{{doctor.id}}">{{ doctor.firstName+" "+doctor.lastName }}</a></h5>
+                <h6 class="card-subtitle mb-2 text-muted">{{ doctor.title }}</h6>
+                <p class="card-text">Department: {{ doctor.departmentTitle }}</p>
+                <a class="btn btn-danger " routerLink="/doctor/{{doctor.id}}">View profile</a>
+                <button class="btn btn-primary" style="margin-left: 13vw;">Book</button>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
       
-      
+
+
+
+
+
+
+
+
+
 
 
 

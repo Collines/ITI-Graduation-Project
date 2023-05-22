@@ -29,7 +29,7 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
     RegisterComponent,
     AboutComponent,
     DoctorComponent,
-    DoctordetailssComponent
+    DoctordetailssComponent,
     DashboardComponent
   ],
   imports: [
