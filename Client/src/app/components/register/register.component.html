@@ -1,8 +1,8 @@
 <div class="register">
   <div class="container">
-    <div class="row d-flex align-items-center justify-content-center">
+    <div class="row d-flex align-items-center justify-content-center mt-5">
       <div class="col-lg-6 col-md-8 colsm-12">
-        <div class="box mt-5">
+        <div class="box mt-5 mb-4 ">
           <h3 class="text-center pt-2">Register</h3>
 
           <form class="w-100" [formGroup]="Validation" (submit)="onSubmit()">
@@ -12,8 +12,7 @@
                 formControlName="FirstName"
                 type="text"
                 required
-                [ngClass]="
-                  !isFirstNameValid
+                [ngClass]=" !isFirstNameValid
                     ? {
                         'is-invalid':
                           submitted && Validation.controls.FirstName.errors
@@ -79,7 +78,9 @@
                 "
                 class="form-control"
                 id="FirstNameAr"
+
                 placeholder="الاسم الاول"
+
               />
               <div
                 *ngIf="submitted && Validation.controls.FirstNameAr.errors"
@@ -316,7 +317,7 @@
 
           <div class="social">
             <h5 class="text-center position-relative">Or</h5>
-            <h6 class="text-center position-relative line mb-3">
+            <h6 class="text-center position-relative linee mb-3">
               Continue with
             </h6>
             <a href="http://www.google.com">
@@ -334,3 +335,4 @@
     </div>
   </div>
 </div>
+

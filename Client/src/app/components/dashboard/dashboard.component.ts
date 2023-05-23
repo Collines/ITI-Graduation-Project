@@ -16,6 +16,7 @@ import { AccountService } from 'src/app/Services/account.service';
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css'],
 })
+
 export class DashboardComponent implements OnInit {
   constructor(private accountService: AccountService) {
     this.Validation = new FormGroup({
@@ -114,6 +115,7 @@ export class DashboardComponent implements OnInit {
   isResponsed = false;
   textArea: string | null = '';
 
+
   get isFirstNameValid() {
     return this.Validation.controls['FirstName'].status == 'VALID';
   }
@@ -125,6 +127,9 @@ export class DashboardComponent implements OnInit {
   }
   get isLastNameArValid() {
     return this.Validation.controls['LastNameAr'].status == 'VALID';
+  }
+  get isGenderValid() {
+    return this.Validation.controls.Gender.valid;
   }
   get isEmailValid() {
     return this.Validation.controls['email'].status == 'VALID';
@@ -188,3 +193,4 @@ export class DashboardComponent implements OnInit {
     }
   }
 }
+
