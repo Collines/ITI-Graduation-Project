@@ -33,6 +33,7 @@ namespace GraduationProject
             services.AddScoped<IPatientManager, PatientManager>();
             services.AddScoped<IPatientLoginManager, PatientLoginManager>();
             services.AddScoped<IRepository<Reservation>, ReservationRepository>();
+            services.AddScoped<IReservationManager, ReservationManager>();
 
             // Adding Authentication using JWT
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
