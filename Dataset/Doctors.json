@@ -1,0 +1,131 @@
+[
+    {
+        "FirstName_EN": "John",
+        "FirstName_AR": "جون",
+        "LastName_EN": "Smith",
+        "LastName_AR": "سميث",
+        "Gender": 2,
+        "Title_EN": "Cardiologist",
+        "Title_AR": "طبيب القلبية",
+        "Bio_EN": "Dr. John Smith is a highly skilled cardiologist with years of experience in treating heart-related conditions.",
+        "Bio_AR": "دكتور جون سميث هو طبيب قلب ماهر لديه سنوات من الخبرة في علاج حالات القلب.",
+        "DepartmentId": 1
+      },
+      
+      {
+        "FirstName_EN": "Emily",
+        "FirstName_AR": "إيميلي",
+        "LastName_EN": "Johnson",
+        "LastName_AR": "جونسون",
+        "Gender": 1,
+        "Title_EN": "Cardiologist",
+        "Title_AR": "طبيب القلبية",
+        "Bio_EN": "Dr. Emily Johnson is a skilled cardiologist specializing in the diagnosis and treatment of heart diseases.",
+        "Bio_AR": "دكتور إيميلي جونسون هو طبيب قلب ماهر يتخصص في تشخيص وعلاج أمراض القلب.",
+        "DepartmentId": 1
+      },
+
+      {
+        "FirstName_EN": "Robert",
+        "FirstName_AR": "روبرت",
+        "LastName_EN": "Taylor",
+        "LastName_AR": "تايلور",
+        "Gender": 2,
+        "Title_EN": "Orthopedic Surgeon",
+        "Title_AR": "جراح عظام",
+        "Bio_EN": "Dr. Robert Taylor is a highly skilled orthopedic surgeon specializing in the treatment of musculoskeletal disorders and injuries.",
+        "Bio_AR": "دكتور روبرت تايلور هو جراح عظام ماهر متخصص في علاج اضطرابات وإصابات الجهاز العضلي الهيكلي.",
+        "DepartmentId": 2
+      },
+      
+      {
+        "FirstName_EN": "Emma",
+        "FirstName_AR": "إيما",
+        "LastName_EN": "Brown",
+        "LastName_AR": "براون",
+        "Gender": 1,
+        "Title_EN": "Orthopedic Surgeon",
+        "Title_AR": "جراح عظام",
+        "Bio_EN": "Dr. Emma Brown is a skilled orthopedic surgeon with expertise in joint replacements and sports-related injuries.",
+        "Bio_AR": "دكتور إيما براون هو جراح عظام ماهر يتخصص في استبدال المفاصل وإصابات الرياضة.",
+        "DepartmentId": 2
+      },
+
+      {
+        "FirstName_EN": "Samantha",
+        "FirstName_AR": "سامانثا",
+        "LastName_EN": "Davis",
+        "LastName_AR": "ديفيس",
+        "Gender": 1,
+        "Title_EN": "Gynecologist",
+        "Title_AR": "طبيبة نسائية",
+        "Bio_EN": "Dr. Samantha Davis is a skilled gynecologist providing specialized care for women's reproductive health.",
+        "Bio_AR": "دكتورة سامانثا ديفيس هي طبيبة نسائية ماهرة تقدم رعاية متخصصة لصحة الجهاز التناسلي للنساء.",
+        "DepartmentId": 3
+      },
+      
+      {
+        "FirstName_EN": "Emma",
+        "FirstName_AR": "إيما",
+        "LastName_EN": "Roberts",
+        "LastName_AR": "روبرتس",
+        "Gender": 1,
+        "Title_EN": "Gynecologist",
+        "Title_AR": "طبيبة نسائية",
+        "Bio_EN": "Dr. Emma Roberts is a compassionate gynecologist dedicated to providing comprehensive care for women's health needs.",
+        "Bio_AR": "دكتورة إيما روبرتس هي طبيبة نسائية مخلصة تقدم رعاية شاملة لاحتياجات صحة المرأة.",
+        "DepartmentId": 3
+      },
+      
+      {
+        "FirstName_EN": "Michael",
+        "FirstName_AR": "مايكل",
+        "LastName_EN": "Davis",
+        "LastName_AR": "ديفيس",
+        "Gender": 2,
+        "Title_EN": "Pediatrician",
+        "Title_AR": "طبيب الأطفال",
+        "Bio_EN": "Dr. Michael Davis is a compassionate pediatrician dedicated to providing quality healthcare to children of all ages.",
+        "Bio_AR": "دكتور مايكل ديفيس هو طبيب أطفال متفانٍ ملتزم بتقديم رعاية صحية عالية الجودة للأطفال من جميع الأعمار.",
+        "DepartmentId": 4
+      },
+      
+      {
+        "FirstName_EN": "Sarah",
+        "FirstName_AR": "سارة",
+        "LastName_EN": "Wilson",
+        "LastName_AR": "ويلسون",
+        "Gender": 1,
+        "Title_EN": "Pediatrician",
+        "Title_AR": "طبيب الأطفال",
+        "Bio_EN": "Dr. Sarah Wilson is a dedicated pediatrician with a passion for promoting the health and well-being of children.",
+        "Bio_AR": "دكتور سارة ويلسون هو طبيب أطفال ملتزم يحمل شغفًا بتعزيز صحة ورفاهية الأطفال.",
+        "DepartmentId": 4
+      },
+
+      {
+        "FirstName_EN": "Ethan",
+        "FirstName_AR": "إيثان",
+        "LastName_EN": "Johnson",
+        "LastName_AR": "جونسون",
+        "Gender": 2,
+        "Title_EN": "Neurologist",
+        "Title_AR": "طبيب أمراض الأعصاب",
+        "Bio_EN": "Dr. Ethan Johnson is a skilled neurologist specializing in the diagnosis and treatment of neurological disorders.",
+        "Bio_AR": "دكتور إيثان جونسون هو طبيب أمراض الأعصاب ماهر يتخصص في تشخيص وعلاج اضطرابات الجهاز العصبي.",
+        "DepartmentId": 5
+      },
+      
+      {
+        "FirstName_EN": "Sophia",
+        "FirstName_AR": "صوفيا",
+        "LastName_EN": "Evans",
+        "LastName_AR": "إيفانز",
+        "Gender": 1,
+        "Title_EN": "Neurologist",
+        "Title_AR": "طبيب أمراض الأعصاب",
+        "Bio_EN": "Dr. Sophia Evans is a compassionate neurologist dedicated to providing comprehensive care for patients with neurological conditions.",
+        "Bio_AR": "دكتور صوفيا إيفانز هو طبيب أمراض الأعصاب ملتزم يقدم رعاية شاملة للمرضى الذين يعانون من حالات الجهاز العصبي.",
+        "DepartmentId": 5
+      }
+]

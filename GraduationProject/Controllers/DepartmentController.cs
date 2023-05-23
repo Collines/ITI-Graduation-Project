@@ -24,9 +24,6 @@ namespace GraduationProject.Controllers
         {
             var departments = await manager.GetAllAsync(Utils.GetLang(httpContextAccessor));
 
-            if (departments.Count == 0)
-                return NotFound();
-
             return Ok(departments);
         }
 

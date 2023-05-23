@@ -1,21 +1,14 @@
 ﻿using GraduationProject_BL.DTO;
 using GraduationProject_BL.Interfaces;
-using GraduationProject_BL.Managers;
-using GraduationProject_DAL.Data.Models;
-using GraduationProject_DAL.Interfaces;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.SqlServer.Server;
 
 namespace GraduationProject.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-   // [Authorize]
-    
     public class DoctorsController : ControllerBase
     {
-        
+
         private readonly IHttpContextAccessor httpContextAccessor;
         private readonly IDoctorManager manager;
 
@@ -29,9 +22,6 @@ namespace GraduationProject.Controllers
         public async Task<ActionResult<List<DoctorDTO>>> GetAll()
         {
             var doctors = await manager.GetAllAsync(Utils.GetLang(httpContextAccessor));
-
-            if (doctors.Count == 0)
-                return NotFound();
 
             return Ok(doctors);
         }
@@ -81,9 +71,6 @@ namespace GraduationProject.Controllers
         [HttpPatch("{id:int}")]
         public async Task<ActionResult<DoctorInsertDTO>> UpdateDoctor(int id, [FromForm] DoctorFormData formData)
         {
-            if (id != formData.Id)
-                return BadRequest();
-
             await manager.UpdateAsync(id, formData);
             return Ok();
         }

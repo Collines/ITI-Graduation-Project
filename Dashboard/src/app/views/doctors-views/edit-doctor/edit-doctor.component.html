@@ -1,0 +1,137 @@
+<div class="container">
+    <div class="row">
+      <form #AddForm (ngSubmit)="Edit(FirstName_EN.value,LastName_EN.value,FirstName_AR.value,LastName_AR.value,gender.value,Title_EN.value,Title_AR.value,Bio_EN.value,Bio_AR.value,DepartmentId.value)" [formGroup]="validator" class="col">
+  
+        <div class="row">
+          <div class="mb-3 col">
+            <label class="form-label" for="FirstName_EN">First Name</label>
+            <input #FirstName_EN formControlName="FirstName_EN" [(ngModel)]="Doctor.firstName_EN" type="text" class="form-control" id="FirstName_EN" placeholder="First Name" />
+            <br>
+            <div class="alert alert-danger" *ngIf="!FirstName_EN_Valid && FirstName_EN.value">
+              <p>*First Name Must be 3 Letters or More</p>
+              <p>*Less Than 50</p>
+              <p>*No Special Characters</p>
+            </div>
+          </div>
+  
+          <div class="mb-3 col">
+            <label class="form-label" for="LastName_EN">Last Name</label>
+            <input #LastName_EN formControlName="LastName_EN" [(ngModel)]="Doctor.lastName_EN" type="text" class="form-control" id="LastName_EN" placeholder="Last Name" />
+            <br>
+            <div class="alert alert-danger" *ngIf="!LastName_EN_Valid && LastName_EN.value">
+              <p>*Last Name Must be 3 Letters or More</p>
+              <p>*Less Than 50</p>
+              <p>*No Special Characters</p>
+            </div>
+          </div>
+        </div>
+  
+        <div class="row">
+          <div class="mb-3 col">
+            <label class="form-label " for="FirstName_AR">First Name in Arabic</label>
+            <input #FirstName_AR formControlName="FirstName_AR" [(ngModel)]="Doctor.firstName_AR" type="text" class="form-control text-end" id="FirstName_AR" placeholder="اسم الطبيب"/>
+            <br>
+            <div class="alert alert-danger" *ngIf="!FirstName_AR_Valid && FirstName_AR.value">
+              <p>*First Name in Arabic Must be 2 Letters or More</p>
+              <p>*Less Than 50</p>
+              <p>*Must be Writen in Arabic</p>
+              <p>*No Special Characters or Numbers</p>
+            </div>
+          </div>
+  
+          <div class="mb-3 col">
+            <label class="form-label" for="LastName_AR">Last Name in Arabic</label>
+            <input #LastName_AR formControlName="LastName_AR" [(ngModel)]="Doctor.lastName_AR" type="text" class="form-control text-end" id="LastName_AR" placeholder="اسم عائلة الطبيب"/>
+            <br>
+            <div class="alert alert-danger" *ngIf="!LastName_AR_Valid && LastName_AR.value">
+              <p>*Last Name in Arabic Must be 2 Letters or More</p>
+              <p>*Less Than 50</p>
+              <p>*Must be Writen in Arabic</p>
+              <p>*No Special Characters or Numbers</p>
+            </div>
+          </div>
+        </div>
+  
+        <div class="mb-3">
+          <div class="text-danger" *ngIf="!Gender_Valid">
+            <p>*Gender Is Required</p>
+          </div>
+          <label class="form-label" for="gender">Gender</label>
+          <select #gender class="form-select" [(ngModel)]="Doctor.gender" formControlName="Gender" name="gender" id="gender" aria-label="gender">
+            <option selected value="{{Gender.Male}}">{{Gender[Gender.Male]}}</option>
+            <option value="{{Gender.Female}}">{{Gender[Gender.Female]}}</option>
+          </select>
+  
+        </div>
+  
+        <div class="mb-3">
+          <label class="form-label" for="Title_EN">Title</label>
+          <input #Title_EN formControlName="Title_EN" [(ngModel)]="Doctor.title_EN" type="text" class="form-control" id="Title_EN" placeholder="Title" />
+          <br>
+            <div class="alert alert-danger" *ngIf="!Title_EN_Valid && Title_EN.value">
+              <p>*Title Must be 5 Letters or More</p>
+              <p>*Less Than 50</p>
+            </div>
+        </div>
+  
+        <div class="mb-3">
+          <label class="form-label" for="Title_AR">Title in Arabic</label>
+          <input #Title_AR formControlName="Title_AR" type="text" [(ngModel)]="Doctor.title_AR" class="form-control text-end" id="Title_AR" placeholder="الوظيفة"/>
+          <br>
+            <div class="alert alert-danger" *ngIf="!Title_AR_Valid && Title_AR.value">
+              <p>*Title in Arabic Must be 5 Letters or More</p>
+              <p>*Less Than 50</p>
+              <p>*Must be Writen in Arabic</p>
+              <p>*Only (.) or (,) Are Allowed</p>
+            </div>
+        </div>
+  
+        <div class="mb-3">
+          <label class="form-label" for="Bio_EN">Bio</label>
+          <input #Bio_EN formControlName="Bio_EN" type="text" [(ngModel)]="Doctor.bio_EN" class="form-control" id="Bio_EN" placeholder="Bio" />
+          <div class="alert alert-danger" *ngIf="!Bio_EN_Valid && Bio_EN.value">
+            <p>*Bio Must be 10 Letters or More</p>
+            <p>*Less Than 500</p>
+          </div>
+        </div>
+  
+        <div class="mb-3">
+          <label class="form-label " for="Bio_AR">Bio in Arabic</label>
+          <input #Bio_AR formControlName="Bio_AR" type="text" [(ngModel)]="Doctor.bio_AR" class="form-control text-end" id="Bio_AR" placeholder="نبذة قصيرة" />
+          <br>
+            <div class="alert alert-danger" *ngIf="!Bio_AR_Valid && Bio_AR.value">
+              <p>*Bio in Arabic Must be 10 Letters or More</p>
+              <p>*Less Than 500</p>
+              <p>*Must be Writen in Arabic</p>
+              <p>*Only (.) or (,) Are Allowed</p>
+            </div>
+        </div>
+  
+        <div class="mb-3">
+          <div class="text-danger" *ngIf="!DepartmentId_Valid">
+            <p>*Department Is Required</p>
+          </div>
+          <label class="form-label" for="DepartmentId">Department</label>
+          <select #DepartmentId class="form-select" [(ngModel)]="Doctor.departmentId" formControlName="DepartmentId" name="DepartmentId" aria-label="DepartmentId">
+              <option *ngFor="let d of Departments" value="{{d.id}}">{{d.title}}</option>
+          </select>
+        </div>
+  
+        <div class="mb-3 col-6">
+          <label for="Image" class="form-label">Image</label>
+          <input #image (change)="ChangeSrc($event)" class="form-control" formControlName="Image" type="file" id="Image" accept="image/*">
+        </div>
+  
+        <div *ngIf="BaseImage != '' "class="mb-3 col-6">
+          <img [src]="BaseImage" *ngIf="image" width="300" height="300">
+        </div>
+  
+        <div class="row mb-3 ms-10 me-10 text-center">
+          <div class="text-center">
+            <input class="col-6" type="submit" value="Edit" class="w-50 btn rounded-pill btn-outline-primary">
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  
