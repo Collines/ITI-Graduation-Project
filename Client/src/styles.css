@@ -6,6 +6,9 @@
   --secondaryColor:#081f3e;
   --padding-top: 80px;
   --padding-bootm:80px;
+  --border:2px solid var(--mainColor);
+   --text-shadow: 3px 3px 0 rgba(0, 0, 0, .2);
+   --box-shadow: 4px 4px 0 rgb(24, 163, 235 , 0.2);
 }
 ul{
   list-style: none;
@@ -29,4 +32,30 @@ a{text-decoration: none;
 }
 .heading span{
   color: var(--mainColor);
+}
+.line{
+  position: relative;
+  width: 160px;
+  height: 1px;
+  background-color: var(--mainColor);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  margin-bottom: 20px;
+}
+.line::before,
+.line::after{
+  content: "";
+  position: absolute;
+  width: 50%;
+  height: 1px;
+  background-color: var(--mainColor);
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.line::before {
+  top: 5px;
+}
+.line::after{
+  top: -5px;
 }

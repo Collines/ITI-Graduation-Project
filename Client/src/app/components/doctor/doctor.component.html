@@ -18,7 +18,7 @@
           </div>
         </div>
       </div> -->
-<!-- 
+<!--
       <div class="container">
         <div class="d-grid">
           <div class="col-lg-8 col-md-6 mb-4" *ngFor="let doctor of doctors">
@@ -37,27 +37,27 @@
                 </div>
                 <div class="d-grid align-items-center justify-content-center" style="flex: 0 0 20%;">
                   <a class="btn btn-danger mt-3" routerLink="/doctor/{{doctor.id}}">View profile</a>
-                 <button class="btn btn-primary mb-3">Book</button>   
+                 <button class="btn btn-primary mb-3">Book</button>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div> -->
-      
-      
 
 
 
 
 
 
-      <div class="container">
+
+
+      <div class="container mt-5">
         <div class="row">
           <div class="col-md-6 col-lg-4 mb-4" *ngFor="let doctor of doctors">
             <div class="card">
               <img class="card-img-top rounded-circle img-fluid" src="https://hips.hearstapps.com/hmg-prod/images/portrait-of-a-happy-young-doctor-in-his-clinic-royalty-free-image-1661432441.jpg?crop=0.66698xw:1xh;center,top&resize=1200:*" alt="Doctor Image">
-              <div class="card-body"> 
+              <div class="card-body">
                 <h6 class="card-subtitle mb-2 text-muted">{{ doctor.title }}</h6>
                 <h5 class="card-title"><a routerLink="/doctor/{{doctor.id}}">{{ doctor.firstName+" "+doctor.lastName }}</a></h5>
                 <p class="card-text" ><b>Department:</b> {{ doctor.departmentTitle }}</p>
@@ -68,7 +68,6 @@
           </div>
         </div>
       </div>
-      
 
 
 
@@ -81,7 +80,8 @@
 
 
 
-<!-- 
+
+<!--
       <div class="container">
         <div class="d-grid">
           <div class="col-4" *ngFor="let doctor of doctors">
@@ -98,5 +98,5 @@
         </div>
       </div> -->
 
-      
+
 

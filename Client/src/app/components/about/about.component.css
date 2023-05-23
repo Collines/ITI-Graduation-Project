@@ -1,7 +1,228 @@
-.about{
+
+.banner{
   background-image: url("/assets/images/banner-breadcrumb.jpg");
-  height: 200px;
+  height: 260px;
   background-size: cover;
   background-position: center;
+  position: relative;
 
 }
+h2,h3,h4,h5,h6{
+  color: #081f3e;
+}
+.title{
+  position: absolute;
+  top: 60%;
+  left: 20%;
+  transform: translateY(-40%);
+  -webkit-transform: translateY(-40%);
+  -moz-transform: translateY(-40%);
+  -ms-transform: translateY(-40%);
+  -o-transform: translateY(-40%);
+}
+.title h2{
+  font-size: 60px;
+}
+.title a{
+  color: #081f3e;
+  margin: 5px;
+  font-size: 18px;
+  font-weight: 500;
+  transition: 0.3s;
+  -webkit-transition: 0.3s;
+  -moz-transition: 0.3s;
+  -ms-transition: 0.3s;
+  -o-transition: 0.3s;
+}
+.title a:hover{
+  color: #cde1f8;
+}
+.first{
+  padding-top: var(--padding-top);
+  padding-bottom: var(--padding-bottom);
+}
+.first .data h2{
+  font-weight: 700;
+}
+.first .data p{
+  line-height: 1.7;
+  color: #777;
+}
+.first .image img{
+  width: 75%;
+}
+
+@property --progress-value {
+  syntax: "<integer>";
+  initial-value: 0;
+  inherits: false;
+}
+
+@keyframes progress1 {
+ to { --progress-value: 90; }
+}
+@keyframes progress2 {
+ to { --progress-value: 80; }
+}
+@keyframes progress3 {
+ to { --progress-value: 100; }
+}
+@keyframes progress4 {
+ to { --progress-value: 75; }
+}
+@keyframes progress5 {
+ to { --progress-value: 85; }
+}
+@keyframes progress6 {
+ to { --progress-value: 95; }
+}
+
+.progress-bar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background:radial-gradient(closest-side, white 79%, transparent 80% 100%),
+  conic-gradient(#18a3eb calc(var(--progress-value) * 1%), #a0cfe7 0);
+
+}
+.p1{
+  animation: progress1 2s 1 forwards;
+}
+.p2{
+  animation: progress2 2s 1 forwards;
+
+}
+.p3{
+  animation: progress3 2s 1 forwards;
+}
+.p4{
+  animation: progress4 2s 1 forwards;
+}
+.p5{
+  animation: progress5 2s 1 forwards;
+}
+.p6{
+  animation: progress6 2s 1 forwards;
+}
+
+.p1::before {
+  counter-reset: percentage var(--progress-value);
+  content: counter(percentage) '%';
+  animation: progress1 2s 1 forwards;
+}
+.p2::before {
+  counter-reset: percentage var(--progress-value);
+  content: counter(percentage) '%';
+  animation: progress2 2s 1 forwards;
+  -webkit-animation: progress2 2s 1 forwards;
+}
+.p3::before {
+  counter-reset: percentage var(--progress-value);
+  content: counter(percentage) '%';
+  animation: progress3 2s 1 forwards;
+  -webkit-animation: progress3 2s 1 forwards;
+}
+.p4::before {
+  counter-reset: percentage var(--progress-value);
+  content: counter(percentage) '%';
+  animation: progress4 2s 1 forwards;
+  -webkit-animation: progress4 2s 1 forwards;
+}
+.p5::before {
+  counter-reset: percentage var(--progress-value);
+  content: counter(percentage) '%';
+  animation: progress5 2s 1 forwards;
+  -webkit-animation: progress5 2s 1 forwards;
+}
+.p6::before {
+  counter-reset: percentage var(--progress-value);
+  content: counter(percentage) '%';
+  animation: progress6 2s 1 forwards;
+  -webkit-animation: progress6 2s 1 forwards;
+}
+.load{
+  width: 80%;
+  margin: auto;
+}
+@media screen and (max-width: 520px) {
+  .load {
+     width: 30%;
+
+  }
+}
+.thired{
+  padding-top: var(--padding-top);
+  padding-bottom: var(--padding-bootm);
+}
+
+
+/*  Start Work Section */
+.work {
+  padding-top: var(--padding-top);
+  padding-bottom: 30px;
+  background-color: var(--backgroundColor);
+}
+.work ul li{
+  line-height: 1.8;
+}
+.work .box {
+  box-shadow: 0 1px 1px 0 rgb(0 0 0 / 6%), 0 2px 5px 0 rgb(0 0 0 / 20%);
+}
+.work .box img {
+  transition: all 0.8s;
+}
+.work .box:hover img {
+  transform: scale(1.2);
+}
+/*  End Work Section */
+
+#testimonial{
+  padding-top: 30px;
+  padding-bottom: var(--padding-bootm);
+  background-color: var(--backgroundColor);
+}
+
+.feadback{
+  background-color: #fff;
+  padding: 50px;
+  width: 60%;
+}
+
+@media only screen and (max-width: 992px) {
+.feadback {
+      width: 100%;
+  }
+}
+.img-feadback img{
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+}
+.carousel-indicators [type="button"] {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: transparent;
+  border: 1px solid var(--mainColor);
+  margin-top: 20px;
+}
+.carousel-indicators .active {
+ background-color: var(--mainColor);
+ width: 30px;
+ height: 12px;
+ border-radius: 20px;
+}
+.color {
+  width: 350px;
+  height: 350px;
+  background-color: var(--mainColor);
+  position: absolute;
+  top: -200px;
+  left: -200px;
+  transform: rotate(45deg);
+}
+/* End Testimonial Section */
+

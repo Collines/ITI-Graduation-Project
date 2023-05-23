@@ -1,3 +1,4 @@
+
 .section{
   padding-top: var(--padding-top);
   padding-bottom: var(--padding-bootm);
@@ -8,42 +9,60 @@
   grid-template-columns: repeat(auto-fill , minmax(250px , 1fr));
   gap: 40px;
 }
-.section .container .box{
-  padding-top: 20px;
+.section .box{
+  background-color: var(--backgroundColor);
+  padding: 20px 10px ;
   text-align: center;
-  border: 1.5px solid #96bce1;
-  border-radius: 8px;
+  position: relative;
   transition: 0.3s;
-
+  border: 0.7px solid var(--backgroundColor);
 }
+
 .section .container .box i{
-  font-size: 40px;
+  font-size: 38px;
   color: var(--mainColor);
   padding-bottom: 10px;
   transition: 0.3s;
 }
 .section .container .box h2{
-  font-size: 44px;
+  font-size: 40px;
   text-shadow: var(--text-shadow);
   color: #444;
-  padding-bottom: 10px;
+  padding-bottom: 7px;
   font-weight: 700;
 }
 .section .container .box p{
-  color: #777;
+  color: #444;
   font-size: 16px;
   font-weight: 500;
 }
-.section .container .box:hover {
-  box-shadow: var(--box-shadow);
-  transform: translateY(-10px);
-  -webkit-transform: translateY(-10px);
-  -moz-transform: translateY(-10px);
-  -ms-transform: translateY(-10px);
-  -o-transform: translateY(-10px);
-}
 .section .container .box:hover i{
-  transform: scale(1.2);
+  transform: scale(1.14);
+  -webkit-transform: scale(1.14);
+  -moz-transform: scale(1.14);
+  -ms-transform: scale(1.14);
+  -o-transform: scale(1.14);
+}
+.section .box::before,
+.section .box::after{
+  content: "";
+  position: absolute;
+  width: 3px;
+  background-color: var(--mainColor);
+  transition: 1s;
+  height: 0;
+}
+.section .box::before{
+  top: 0;
+  left: 0;
+}
+.section .box::after{
+  bottom: 0;
+  right: 0;
+}
+.section .box:hover::before,
+.section .box:hover::after{
+  height: 100%;
 
 }
 .services{
@@ -67,5 +86,84 @@
 .data h4{
   font-weight: 700;
   font-size: 20px;
+  color: #081f3e;
+}
+.gallery{
+  padding-top: var(--padding-top);
+  padding-bottom: var(--padding-bootm);
+  background-color: #fff;
+}
+.gallery .single-gallery {
+  position: relative;
+  overflow: hidden;
+}
+.gallery .single-gallery .big-img {
+  position: relative;
+  height: 500px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  transition: 0.3s;
+
+}
+.gallery .single-gallery .small-img {
+  position: relative;
+  height: 300px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  transition: 0.4s;
+
+}
+
+.gallery .single-gallery .gallery-img:hover,
+.gallery .single-gallery .gallery-img:hover{
+   transform: scale(1.08);
+
+}
+ .layer{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  top: 0;
+  left: 0;
+  opacity: 0;
+  transition: all 0.3s;
+
+}
+.gallery .single-gallery:hover .layer{
+  opacity: 1;
+}
+.subscribe-banner {
+  padding: 80px 0;
+  background: url("/assets/images/subscribe-bg.png") no-repeat center;
+  background-size: cover;
+  text-align: center;
+  background-attachment: fixed;
+}
+.subscribe-banner h2 {
+  font-size: 35px;
+  font-weight: 700;
+  color: #cde1f8;
+  padding-bottom: 5px;
+}
+.subscribe-banner p {
+  font-size: 30px;
+  font-weight: 500;
+  color: #081f3e;
+  line-height: 1.6;
+
+}
+
+.blog {
+  padding-top: var(--padding-top);
+  padding-bottom: var(--padding-bootm);
+  background-color: var(--backgroundColor);
+}
+.blog .card-footer img {
+  width: 40px;
+  border-radius: 50%;
+}
+
+blog h5{
   color: #081f3e;
 }
