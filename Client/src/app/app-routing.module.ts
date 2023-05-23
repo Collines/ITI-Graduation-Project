@@ -9,6 +9,7 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { AboutComponent } from './components/about/about.component';
 import { DepartmentsComponent } from './components/departments/departments.component';
 import { ContactComponent } from './components/contact/contact.component';
+import { ReservationComponent } from './components/reservation/reservation.component';
 const routes: Routes = [
   {path:"",component:HomeComponent},
   {path:"home", component:HomeComponent},
@@ -19,7 +20,8 @@ const routes: Routes = [
   {path:"doctor/:id",component:DoctordetailssComponent},
   {path:"dashboard",component:DashboardComponent},
   {path: 'departments',component: DepartmentsComponent},
-  {path:"contact",component:ContactComponent}
+  {path:"contact",component:ContactComponent},
+  {path:"reservation",component:ReservationComponent}
 ];
 
 @NgModule({

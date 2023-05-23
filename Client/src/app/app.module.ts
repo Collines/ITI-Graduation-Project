@@ -19,6 +19,7 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { DepartmentsComponent } from './components/departments/departments.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ContactComponent } from './components/contact/contact.component';
+import { ReservationComponent } from './components/reservation/reservation.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { ContactComponent } from './components/contact/contact.component';
     DashboardComponent,
     DepartmentsComponent,
     ContactComponent,
+    ReservationComponent,
   ],
   imports: [
     BrowserModule,
