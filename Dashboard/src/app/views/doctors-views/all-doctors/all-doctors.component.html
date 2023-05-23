@@ -1,0 +1,46 @@
+<div class="text-center">
+    <a routerLink="/AddDoctor" class="btn btn-outline-primary rounded-pill mb-4">Create New Doctor</a>
+</div>
+<table class="table align-middle mb-0 bg-white">
+    <thead class="table-dark">
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Title</th>
+        <th>Gender</th>
+        <th class="text-center">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let d of Doctors">
+        <td>{{d.id}}</td>
+        <td>
+          <div class="d-flex align-items-center">
+            <img
+                src="{{d.image}}"
+                alt=""
+                style="width: 45px; height: 45px"
+                class="rounded-circle"
+                />
+            <div class="ms-3">
+              <p class="fw-bold mb-1">{{d.firstName+" "+d.lastName}}</p>
+            </div>
+          </div>
+        </td>
+        <td>
+          <p class="fw-normal mb-1">{{d.title}}</p>
+          <p class="text-muted mb-0">{{d.departmentTitle}}</p>
+        </td>
+        <td>
+          <p class="fw-normal mb-1">{{Gender[d.gender]}}</p>
+          <span *ngIf="d.gender == 2" class="badge badge-info rounded-pill text-bg-info d-inline"><i class="fa-solid fa-mars fa-lg" style="color: #ffffff;"></i></span>
+          <span *ngIf="d.gender == 1" class="badge badge-info rounded-pill text-bg-danger d-inline"><i class="fa-solid fa-venus fa-lg" style="color: #ffffff;"></i></span>
+        </td>
+        <td class="text-center">
+          <a routerLink="/Doctors/{{d.id}}" class="btn" title="Details"><i class="fa-solid fa-desktop text-info" ></i></a>
+          <a routerLink="/EditDoctor/{{d.id}}" class="btn" title="Edit"><i class="fa-solid fa-pen-to-square text-warning" ></i></a>
+          <button (click)="DeleteDoctor(d.id)" class="btn " title="Delete"><i class="fa-solid fa-trash text-danger" ></i></button>
+        </td>
+      </tr>
+    </tbody>
+</table>
