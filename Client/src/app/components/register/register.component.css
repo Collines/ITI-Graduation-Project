@@ -2,7 +2,7 @@
   background-image: url(../../../assets/images/dark.jpg);
    /* background-image: linear-gradient(to right, rgb(240, 244, 248)65%,rgb(126, 204, 243) 35%); */
    background-size: 100% 100%;
-   min-height: 90vh;
+   min-height: 100vh;
    position: relative;
    background-position: center;
  }
@@ -18,7 +18,7 @@
 
  }
  .boxMargin{
-   margin-top: 100px;
+   margin-top: 150px;
  }
  h3{
    color: #1472a1;
@@ -40,11 +40,11 @@
    color:#a5a4a4 ;
    letter-spacing: 2px;
  }
- .line{
+ .linee{
    font-size: 15px;
    color: #a5a4a4;
  }
- .line:before {
+ .linee:before {
    content: "";
    display: block;
    width: 130px;
@@ -55,7 +55,7 @@
    position: absolute;
  }
 
- .line:after {
+ .linee:after {
    content: "";
    display: block;
    width: 130px;
