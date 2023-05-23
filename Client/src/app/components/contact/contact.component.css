@@ -1,0 +1,93 @@
+.banner{
+  background-image: url("/assets/images/banner-breadcrumb.jpg");
+  height: 260px;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+
+}
+h1,h2,h3,h4,h5,h6{
+  color: #081f3e;
+}
+.title{
+  position: absolute;
+  top: 60%;
+  left: 20%;
+  transform: translateY(-40%);
+  -webkit-transform: translateY(-40%);
+  -moz-transform: translateY(-40%);
+  -ms-transform: translateY(-40%);
+  -o-transform: translateY(-40%);
+}
+.title h2{
+  font-size: 60px;
+}
+.title a{
+  color: #081f3e;
+  margin: 5px;
+  font-size: 18px;
+  font-weight: 500;
+  transition: 0.3s;
+  -webkit-transition: 0.3s;
+  -moz-transition: 0.3s;
+  -ms-transition: 0.3s;
+  -o-transition: 0.3s;
+}
+.title a:hover{
+  color: #cde1f8;
+}
+.first{
+  background-color: var(--backgroundColor);
+}
+.first .icon{
+  width: 50px;
+  height: 50px;
+  padding: 20px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--mainColor);
+  background-color: #fff;
+  border-radius: 50%;
+  transition: all 0.2s;
+}
+.first .icon:hover {
+  background-color: var(--mainColor);
+  color: #F4F4F4;
+
+}
+.second{
+
+  padding-top: 20px;
+  padding-bottom: var(--padding-bootm);
+  background-color: var(--backgroundColor);
+}
+.box h4 {
+  position: relative;
+  padding-bottom: 18px;
+  display: block;
+  width: 100%;
+  border-bottom: 1px solid #f3f3f3;
+  margin: 0;
+}
+.second .box{
+   box-shadow: 0 1px 1px 0 rgb(0 0 0 / 6%), 0 2px 5px 0 rgb(0 0 0 / 20%);
+}
+.btn{
+  color: var(--mainColor);
+  border: 1px solid var(--mainColor);
+  transition: 0.3s;
+  -webkit-transition: 0.3s;
+  -moz-transition: 0.3s;
+  -ms-transition: 0.3s;
+  -o-transition: 0.3s;
+  font-weight: 500;
+}
+.btn:hover{
+  color: #fff;
+  background-color: var(--mainColor);
+}
+
+
+
