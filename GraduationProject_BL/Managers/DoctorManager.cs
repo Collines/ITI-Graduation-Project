@@ -1,22 +1,13 @@
 ﻿using GraduationProject_BL.DTO;
 using GraduationProject_BL.Interfaces;
-using GraduationProject_DAL.Data.Enums;
 using GraduationProject_DAL.Data.Models;
 using GraduationProject_DAL.Interfaces;
-using Microsoft.IdentityModel.Tokens;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace GraduationProject_BL.Managers
 {
     public class DoctorManager : IDoctorManager
     {
-        private readonly string imagesPath = "D:\\Coding\\ITI\\zAngular\\Final\\src\\assets\\Images"; // Change it to your absolute path
-        private readonly string retrievePath = "assets\\Images"; 
+        private readonly string retrievePath = "assets\\images";
         private readonly IRepository<Doctor> repository;
         private readonly ITranslations<DoctorTranslations> translations;
         private readonly ITranslations<DepartmentTranslations> departmentTranslations;
@@ -45,6 +36,7 @@ namespace GraduationProject_BL.Managers
                     var path = "";
                     if (doctor.Image != null)
                         path = Path.Combine(retrievePath, doctor.Image.Name);
+
                     if (lang == "ar")
                     {
                         dto = new()
@@ -144,7 +136,7 @@ namespace GraduationProject_BL.Managers
         public async Task InsertAsync(DoctorFormData formData)
         {
             DoctorInsertDTO item = await DoctorFormDataToDoctorInsertDTO(formData);
-            if (item != null) 
+            if (item != null)
             {
                 Doctor doctor = new()
                 {
@@ -211,13 +203,13 @@ namespace GraduationProject_BL.Managers
                     {
                         if (doctor.Image != null)
                         {
-                            var oldImagePath = Path.Combine(imagesPath, doctor.Image.Name);
+                            var oldImagePath = Path.Combine(GetImagesPath(), doctor.Image.Name);
                             if (File.Exists(oldImagePath))
                                 File.Delete(oldImagePath);
                         }
                         doctor.Image = item.Image;
                     }
-                        
+
 
                     await repository.UpdateAsync(doctor.Id, doctor);
                 }
@@ -270,9 +262,8 @@ namespace GraduationProject_BL.Managers
         // Convert formData to DoctorInsertDTO and create the image file
         public async Task<DoctorInsertDTO> DoctorFormDataToDoctorInsertDTO(DoctorFormData item)
         {
-            DoctorInsertDTO doctor = new DoctorInsertDTO
+            DoctorInsertDTO doctor = new()
             {
-                Id = item.Id,
                 FirstName_EN = item.FirstName_EN,
                 LastName_EN = item.LastName_EN,
                 FirstName_AR = item.FirstName_AR,
@@ -288,17 +279,25 @@ namespace GraduationProject_BL.Managers
             if (item.Image != null && item.Image.Length > 0)
             {
                 var uniqueFileName = DateTime.Now.ToString("yyyyMMdd_HHmmss") + "_" + item.Image.FileName;
-                var filePath = Path.Combine(imagesPath, uniqueFileName);
+
+                var filePath = Path.Combine(GetImagesPath(), uniqueFileName);
 
                 using (var stream = new FileStream(filePath, FileMode.Create))
                 {
                     await item.Image.CopyToAsync(stream);
                 }
 
-                doctor.Image = new Image{Name=uniqueFileName};
+                doctor.Image = new Image { Name = uniqueFileName };
             }
 
             return doctor;
+        }
+
+        private string GetImagesPath()
+        {
+            var currentPath = Directory.GetCurrentDirectory();
+            var newPath = Path.GetDirectoryName(currentPath) + "\\Dashboard\\src\\" + retrievePath;
+            return newPath;
         }
     }
 }

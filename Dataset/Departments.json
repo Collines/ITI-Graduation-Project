@@ -1,0 +1,36 @@
+[
+    {
+        "title_EN": "Cardiology",
+        "title_AR": "قلبية",
+        "description_EN": "Department specializing in heart-related conditions.",
+        "description_AR": "قسم متخصص في الحالات المتعلقة بالقلب."
+      },
+      
+      {
+        "title_EN": "Orthopedics",
+        "title_AR": "عظام",
+        "description_EN": "Department specializing in bone and joint disorders.",
+        "description_AR": "قسم متخصص في اضطرابات العظام والمفاصل."
+      },
+      
+      {
+        "title_EN": "Gynecology",
+        "title_AR": "نسائية",
+        "description_EN": "Department specializing in women's health and reproductive system.",
+        "description_AR": "قسم متخصص في صحة المرأة والجهاز التناسلي."
+      },
+      
+      {
+        "title_EN": "Pediatrics",
+        "title_AR": "أطفال",
+        "description_EN": "Department specializing in medical care for infants, children, and adolescents.",
+        "description_AR": "قسم متخصص في الرعاية الطبية للرضع والأطفال والمراهقين."
+      },
+      
+      {
+        "title_EN": "Neurology",
+        "title_AR": "عصبية",
+        "description_EN": "Department specializing in disorders of the nervous system.",
+        "description_AR": "قسم متخصص في اضطرابات الجهاز العصبي."
+      }
+]

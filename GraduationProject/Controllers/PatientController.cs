@@ -2,37 +2,30 @@
 using GraduationProject_BL.DTO.PatientDTOs;
 using GraduationProject_BL.Interfaces;
 using GraduationProject_DAL.Data.Models;
-using GraduationProject_DAL.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using NuGet.Common;
 
 namespace GraduationProject.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
+    //[Authorize]
     public class PatientController : ControllerBase
     {
         private readonly IHttpContextAccessor httpContextAccessor;
         private readonly IPatientManager manager;
-        private readonly ITranslations<PatientTranslations> translations;
 
-        public PatientController(IHttpContextAccessor _httpContextAccessor, IPatientManager _manager, ITranslations<PatientTranslations> translations)
+        public PatientController(IHttpContextAccessor _httpContextAccessor, IPatientManager _manager)
         {
             httpContextAccessor = _httpContextAccessor;
             manager = _manager;
-            this.translations = translations;
         }
 
         [HttpGet]
         public async Task<ActionResult<List<PatientDTO>>> GetAll()
         {
             var patients = await manager.GetAllAsync(Utils.GetLang(httpContextAccessor));
-            if (patients.Count == 0)
-            {
-                return NotFound();
-            }
+
             return Ok(patients);
         }
 
@@ -82,7 +75,7 @@ namespace GraduationProject.Controllers
         [HttpPatch("Update")]
         public async Task<ActionResult<Patient>> UpdatePatient(string accessToken, PatientUpdateDTO patientUDTO)
         {
-             var patient = await manager.GetPatientByAccessToken(accessToken);
+            var patient = await manager.GetPatientByAccessToken(accessToken);
             if (patient != null)
             {
                 if (patientUDTO.Email != patient.Email)
@@ -93,8 +86,9 @@ namespace GraduationProject.Controllers
                         return BadRequest("Email Already Exist");
                     }
                     await manager.UpdateAsync(patient.Id, patientUDTO);
-                    return Ok(new {message="Edited Successfully"});
-                } else
+                    return Ok(new { message = "Edited Successfully" });
+                }
+                else
                 {
                     await manager.UpdateAsync(patient.Id, patientUDTO);
                     return Ok(new { message = "Edited Successfully" });
@@ -105,7 +99,7 @@ namespace GraduationProject.Controllers
 
         [HttpPost("GetPatientData")]
 
-        public async Task<ActionResult<PatientEditDTO>> GetPatientDetails([FromBody]string accessToken)
+        public async Task<ActionResult<PatientEditDTO>> GetPatientDetails([FromBody] string accessToken)
         {
             if (ModelState.IsValid)
             {
@@ -155,7 +149,7 @@ namespace GraduationProject.Controllers
 
             var isFound = await manager.FindPatientByRefreshToken(token.RefreshToken);
 
-            if (isFound !=null)
+            if (isFound != null)
             {
                 var dto = await manager.Refresh(token.RefreshToken);
 
