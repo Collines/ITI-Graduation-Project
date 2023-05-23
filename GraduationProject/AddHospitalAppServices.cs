@@ -16,7 +16,7 @@ namespace GraduationProject
         public static IServiceCollection AddHospitalServices(this IServiceCollection services, IConfiguration config)
         {
             // Add services to the container.
-            services.AddDbContext<HospitalDBContext>(options => options.UseSqlServer(
+            services.AddDbContext<HospitalDBContext>(options =>options.UseSqlServer(
                 config.GetConnectionString("DefaultConnectionString")
             ));
 

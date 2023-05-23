@@ -18,6 +18,12 @@
           </div>
 
           <form class="w-100" [formGroup]="Validation" (submit)="onSubmit()">
+            <div
+              class="alert alert-danger"
+              *ngIf="submitted && !isResponseSuccess"
+            >
+              Please Enter a valid Email or Password
+            </div>
             <div class="mb-3">
               <label for="email" class="form-label">Email address</label>
               <input
@@ -89,10 +95,7 @@
             <div class="login mt-3 text-muted">
               <h6>
                 Create New account ?
-                <a
-                  routerLink="/register"
-                  >Register</a
-                >
+                <a routerLink="/register">Register</a>
               </h6>
             </div>
           </form>

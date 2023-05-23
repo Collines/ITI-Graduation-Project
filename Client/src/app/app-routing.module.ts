@@ -7,7 +7,7 @@ import{DoctorComponent} from './components/doctor/doctor.component';
 import{DoctordetailssComponent} from './components/doctordetailss/doctordetailss.component'
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { AboutComponent } from './components/about/about.component';
-
+import { DepartmentsComponent } from './components/departments/departments.component';
 const routes: Routes = [
   {path:"",component:HomeComponent},
   {path:"home", component:HomeComponent},
@@ -16,12 +16,12 @@ const routes: Routes = [
   {path:"login", component:LoginComponent},
   {path:"doctor",component:DoctorComponent},
   {path:"doctor/:id",component:DoctordetailssComponent},
-  {path:"dashboard",component:DashboardComponent}
-
+  {path:"dashboard",component:DashboardComponent},
+  {path: 'departments',component: DepartmentsComponent}
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

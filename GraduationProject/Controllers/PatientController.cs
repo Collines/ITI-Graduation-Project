@@ -1,8 +1,11 @@
 ﻿using GraduationProject_BL.DTO;
+using GraduationProject_BL.DTO.PatientDTOs;
 using GraduationProject_BL.Interfaces;
 using GraduationProject_DAL.Data.Models;
+using GraduationProject_DAL.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using NuGet.Common;
 
 namespace GraduationProject.Controllers
 {
@@ -13,12 +16,13 @@ namespace GraduationProject.Controllers
     {
         private readonly IHttpContextAccessor httpContextAccessor;
         private readonly IPatientManager manager;
+        private readonly ITranslations<PatientTranslations> translations;
 
-
-        public PatientController(IHttpContextAccessor _httpContextAccessor, IPatientManager _manager)
+        public PatientController(IHttpContextAccessor _httpContextAccessor, IPatientManager _manager, ITranslations<PatientTranslations> translations)
         {
             httpContextAccessor = _httpContextAccessor;
             manager = _manager;
+            this.translations = translations;
         }
 
         [HttpGet]
@@ -75,16 +79,41 @@ namespace GraduationProject.Controllers
             return Ok(id);
         }
 
-        [HttpPatch("{id}")]
-        public async Task<ActionResult<Patient>> UpdatePatient(int id, PatientInsertDTO patient)
+        [HttpPatch("Update")]
+        public async Task<ActionResult<Patient>> UpdatePatient(string accessToken, PatientUpdateDTO patientUDTO)
+        {
+             var patient = await manager.GetPatientByAccessToken(accessToken);
+            if (patient != null)
+            {
+                if (patientUDTO.Email != patient.Email)
+                {
+                    if (await manager.FindPatient(patientUDTO.Email))
+                    {
+                        ModelState.AddModelError("Email", "Email Already Exist");
+                        return BadRequest("Email Already Exist");
+                    }
+                    await manager.UpdateAsync(patient.Id, patientUDTO);
+                    return Ok(new {message="Edited Successfully"});
+                } else
+                {
+                    await manager.UpdateAsync(patient.Id, patientUDTO);
+                    return Ok(new { message = "Edited Successfully" });
+                }
+            }
+            return BadRequest();
+        }
+
+        [HttpPost("GetPatientData")]
+
+        public async Task<ActionResult<PatientEditDTO>> GetPatientDetails([FromBody]string accessToken)
         {
             if (ModelState.IsValid)
             {
-                await manager.UpdateAsync(id, patient);
-                return Ok(patient);
-
+                var patientUDTO = await manager.GetPatientEditDTOByAccessToken(accessToken);
+                if (patientUDTO != null)
+                    return Ok(patientUDTO);
             }
-            return NotFound();
+            return BadRequest();
         }
 
         [HttpPost("Login")]
@@ -126,7 +155,7 @@ namespace GraduationProject.Controllers
 
             var isFound = await manager.FindPatientByRefreshToken(token.RefreshToken);
 
-            if (isFound)
+            if (isFound !=null)
             {
                 var dto = await manager.Refresh(token.RefreshToken);
 

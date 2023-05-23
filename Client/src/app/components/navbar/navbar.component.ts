@@ -10,8 +10,16 @@ export class NavbarComponent implements OnInit {
   constructor(private accountService: AccountService) {}
   ngOnInit(): void {
     this.accountService.currentUser$.subscribe({
-      next: (user) => (this.isLogged = !!user),
+      next: (user) => {
+        this.isLogged = !!user;
+        if (user) this.Username = user.patient.fullName;
+      },
     });
+  }
+  Username = '';
+  dropdownShow=false;
+  dropDownClick(){
+    this.dropdownShow=!this.dropdownShow;
   }
   isLogged: boolean = false;
   Logout() {
