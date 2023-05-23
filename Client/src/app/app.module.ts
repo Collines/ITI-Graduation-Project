@@ -13,6 +13,8 @@ import { RegisterComponent } from './components/register/register.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { AboutComponent } from './components/about/about.component';
+import { DoctorComponent } from './components/doctor/doctor.component';
+import { DoctordetailssComponent } from './components/doctordetailss/doctordetailss.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { DepartmentsComponent } from './components/departments/departments.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -27,6 +29,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     LoginComponent,
     RegisterComponent,
     AboutComponent,
+    DoctorComponent,
+    DoctordetailssComponent,
     DashboardComponent,
     DepartmentsComponent,
   ],

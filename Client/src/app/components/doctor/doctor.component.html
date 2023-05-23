@@ -1,0 +1,102 @@
+<br>
+       <!-- <div class="container">
+        <div class="row">
+          <div class="col-md-4" *ngFor="let doctor of doctors">
+            <div class="card mb-3">
+              <img class="card-img-top img-fluid" src="" alt="{{ doctor.firstName }} Image">
+              <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center">
+                  <h5 class="card-title mb-0" style="font-size: 1.2rem">
+                    <a href="#">{{ doctor.firstName }} {{ doctor.lastName}}</a></h5>
+                  </div>
+                <div class="d-flex">
+                  <h5 class="card-text flex-grow-1">{{ doctor.title }}</h5>
+                  <button class="btn btn-outline-primary w-25">Book</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div> -->
+<!-- 
+      <div class="container">
+        <div class="d-grid">
+          <div class="col-lg-8 col-md-6 mb-4" *ngFor="let doctor of doctors">
+            <div class="card h-100">
+              <div class="card-body d-flex">
+                <div style="flex: 0 0 35%;">
+                  <img class="card-img rounded-circle" src="https://hips.hearstapps.com/hmg-prod/images/portrait-of-a-happy-young-doctor-in-his-clinic-royalty-free-image-1661432441.jpg?crop=0.66698xw:1xh;center,top&resize=1200:*" alt="Doctor Image">
+                </div>
+                <div class="m-5" style="flex: 0 0 35%;">
+                  <br>
+                  <h4 class="card-text">{{ doctor.title }}</h4>
+                  <h5 class="card-title"><a routerLink="/doctor/{{doctor.id}}">{{ doctor.firstName+" "+doctor.lastName }}</a></h5>
+                  <h6 class="card-text">{{ doctor.departmentTitle }}</h6>
+                  <h5>Bio:</h5>
+          <textarea class="form-control  w-100" disabled [value]="doctor.bio"></textarea>
+                </div>
+                <div class="d-grid align-items-center justify-content-center" style="flex: 0 0 20%;">
+                  <a class="btn btn-danger mt-3" routerLink="/doctor/{{doctor.id}}">View profile</a>
+                 <button class="btn btn-primary mb-3">Book</button>   
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div> -->
+      
+      
+
+
+
+
+
+
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6 col-lg-4 mb-4" *ngFor="let doctor of doctors">
+            <div class="card">
+              <img class="card-img-top rounded-circle img-fluid" src="https://hips.hearstapps.com/hmg-prod/images/portrait-of-a-happy-young-doctor-in-his-clinic-royalty-free-image-1661432441.jpg?crop=0.66698xw:1xh;center,top&resize=1200:*" alt="Doctor Image">
+              <div class="card-body"> 
+                <h6 class="card-subtitle mb-2 text-muted">{{ doctor.title }}</h6>
+                <h5 class="card-title"><a routerLink="/doctor/{{doctor.id}}">{{ doctor.firstName+" "+doctor.lastName }}</a></h5>
+                <p class="card-text" ><b>Department:</b> {{ doctor.departmentTitle }}</p>
+                <a class="btn btn-danger " routerLink="/doctor/{{doctor.id}}">View profile</a>
+                <button class="btn btn-primary" style="margin-left: 13vw;">Book</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 
+      <div class="container">
+        <div class="d-grid">
+          <div class="col-4" *ngFor="let doctor of doctors">
+            <div class="card ">
+              <img class="card-img-top" class="rounded-circle img-fluid" style="width: 150px;"src="https://hips.hearstapps.com/hmg-prod/images/portrait-of-a-happy-young-doctor-in-his-clinic-royalty-free-image-1661432441.jpg?crop=0.66698xw:1xh;center,top&resize=1200:*" alt="Doctor Image">
+              <div class="card-body">
+                <h5 class="card-title">{{ doctor.title }} {{ doctor.firstName }} {{ doctor.lastName }}</h5>
+                <h6 class="card-subtitle mb-2 text-muted">{{ doctor.departmentName }}</h6>
+                <button class="btn btn-outline-primary">Book</button>
+              </div>
+            </div>
+            <br>
+          </div>
+        </div>
+      </div> -->
+
+      
+
