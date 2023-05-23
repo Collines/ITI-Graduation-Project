@@ -1,13 +1,12 @@
 ﻿using GraduationProject_DAL.Data.Models;
 using GraduationProject_DAL.Interfaces;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GraduationProject.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
+    //[Authorize]
     public class ReservationController : ControllerBase
     {
         private readonly IRepository<Reservation> repository;
@@ -21,9 +20,6 @@ namespace GraduationProject.Controllers
         public async Task<ActionResult<List<Reservation>>> GetAll()
         {
             var reservations = await repository.GetAllAsync();
-
-            if (reservations.Count == 0)
-                return NotFound();
 
             return Ok(reservations);
         }

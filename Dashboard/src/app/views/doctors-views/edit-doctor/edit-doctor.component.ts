@@ -28,7 +28,7 @@ export class EditDoctorComponent {
   }
 
   // Pattern For Arabic Letters Only
-  private ArabicPattern = /^[[ء-ي]|\s]+$/;
+  private ArabicPattern = /^[[ء-ي\s]+$/;
   private ArabicPatternForParagraph = /^[[ء-ي]|\s]|\.|\,+$/;
 
   // Options For Gender Select List In Html
@@ -111,10 +111,10 @@ export class EditDoctorComponent {
       }
 
       formData.append('Id', String(this.ID));
-      formData.append('FirstName_EN', FirstName_EN);
-      formData.append('LastName_EN', LastName_EN);
-      formData.append('FirstName_AR', FirstName_AR);
-      formData.append('LastName_AR', LastName_AR);
+      formData.append('FirstName_EN', FirstName_EN.trim());
+      formData.append('LastName_EN', LastName_EN.trim());
+      formData.append('FirstName_AR', FirstName_AR.trim());
+      formData.append('LastName_AR', LastName_AR.trim());
       formData.append('Title_EN', Title_EN);
       formData.append('Title_AR', Title_AR);
       formData.append('Bio_EN', Bio_EN);

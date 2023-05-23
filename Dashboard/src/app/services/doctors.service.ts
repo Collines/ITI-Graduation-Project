@@ -1,37 +1,36 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { Injectable } from "@angular/core";
+import { HttpClient } from "@angular/common/http";
 
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root",
 })
 export class DoctorsService {
+  constructor(private Client: HttpClient) {}
 
-  constructor(private Client:HttpClient) { }
+  private BaseURL = "https://localhost:7035/api/Doctors";
 
-  private BaseURL = "https://localhost:7035/api/Doctors"
-
-  GetAllDoctors(){
+  GetAllDoctors() { 
     return this.Client.get(this.BaseURL);
   }
 
-  GetDoctorInsertDTO(id:number){
+  GetDoctorInsertDTO(id: number) {
     return this.Client.get(`${this.BaseURL}/InsertDTO/${id}`);
   }
 
-  GetById(id:number){
+  GetById(id: number) {
     return this.Client.get(`${this.BaseURL}/${id}`);
   }
 
-  AddDoctor(formData:FormData){
-    return this.Client.post(this.BaseURL,formData);
+  AddDoctor(formData: FormData) {
+    return this.Client.post(this.BaseURL, formData);
   }
 
-  DeleteDoctor(id:number){
+  DeleteDoctor(id: number) {
     return this.Client.delete(`${this.BaseURL}/${id}`);
   }
 
-  EditDoctor(id:number,formData:FormData){
-    return this.Client.patch(`${this.BaseURL}/${id}`,formData);
+  EditDoctor(id: number, formData: FormData) {
+    return this.Client.patch(`${this.BaseURL}/${id}`, formData);
   }
 }

@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { HashLocationStrategy, LocationStrategy, PathLocationStrategy } from '@angular/common';
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { BrowserModule, Title } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -27,7 +27,6 @@ import {
 import {
   AvatarModule,
   BadgeModule,
-  BreadcrumbModule,
   ButtonGroupModule,
   ButtonModule,
   CardModule,
@@ -46,7 +45,6 @@ import {
 } from '@coreui/angular';
 
 import { IconModule, IconSetService } from '@coreui/icons-angular';
-import { DoctorsComponent } from './views/doctors/doctors.component';
 import { AllDoctorsComponent } from './views/doctors-views/all-doctors/all-doctors.component';
 import { AddDoctorComponent } from './views/doctors-views/add-doctor/add-doctor.component';
 import { EditDoctorComponent } from './views/doctors-views/edit-doctor/edit-doctor.component';
@@ -61,14 +59,20 @@ const APP_CONTAINERS = [
   DefaultLayoutComponent,
 ];
 
+const DOCTORS_COMPONENTS = [
+  AllDoctorsComponent,
+  AddDoctorComponent,
+  EditDoctorComponent,
+  DetailsDoctorComponent
+];
+
 @NgModule({
-  declarations: [AppComponent, ...APP_CONTAINERS, DoctorsComponent, AllDoctorsComponent, AddDoctorComponent, EditDoctorComponent, DetailsDoctorComponent],
+  declarations: [AppComponent, ...APP_CONTAINERS, ...DOCTORS_COMPONENTS],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
     AvatarModule,
-    BreadcrumbModule,
     FooterModule,
     DropdownModule,
     GridModule,

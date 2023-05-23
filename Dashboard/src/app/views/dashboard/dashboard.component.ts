@@ -1,127 +1,132 @@
-import { Component, OnInit } from '@angular/core';
-import { UntypedFormControl, UntypedFormGroup } from '@angular/forms';
+import { Component, OnInit } from "@angular/core";
 
-import { DashboardChartsData, IChartProps } from './dashboard-charts-data';
+import { DoctorsService } from "src/app/services/doctors.service";
+import { DepartmentsService } from "src/app/services/departments.service";
+import { PatientsService } from "src/app/services/patients.service";
+import { ReservationsService } from "src/app/services/reservations.service";
 
-interface IUser {
-  name: string;
-  state: string;
-  registered: string;
-  country: string;
-  usage: number;
-  period: string;
-  payment: string;
-  activity: string;
-  avatar: string;
-  status: string;
-  color: string;
+interface ISearchData {
+  id: number;
+  label: string;
+  value: string;
+  route: string;
 }
 
 @Component({
-  templateUrl: 'dashboard.component.html',
-  styleUrls: ['dashboard.component.scss']
+  templateUrl: "dashboard.component.html",
+  styleUrls: ["dashboard.component.scss"],
 })
 export class DashboardComponent implements OnInit {
-  constructor(private chartsData: DashboardChartsData) {
-  }
+  Departments: any = [];
+  Doctors: any = [];
+  Patients: any = [];
+  Reservations: any = [];
 
-  public users: IUser[] = [
-    {
-      name: 'Yiorgos Avraamu',
-      state: 'New',
-      registered: 'Jan 1, 2021',
-      country: 'Us',
-      usage: 50,
-      period: 'Jun 11, 2021 - Jul 10, 2021',
-      payment: 'Mastercard',
-      activity: '10 sec ago',
-      avatar: './assets/img/avatars/1.jpg',
-      status: 'success',
-      color: 'success'
-    },
-    {
-      name: 'Avram Tarasios',
-      state: 'Recurring ',
-      registered: 'Jan 1, 2021',
-      country: 'Br',
-      usage: 10,
-      period: 'Jun 11, 2021 - Jul 10, 2021',
-      payment: 'Visa',
-      activity: '5 minutes ago',
-      avatar: './assets/img/avatars/2.jpg',
-      status: 'danger',
-      color: 'info'
-    },
-    {
-      name: 'Quintin Ed',
-      state: 'New',
-      registered: 'Jan 1, 2021',
-      country: 'In',
-      usage: 74,
-      period: 'Jun 11, 2021 - Jul 10, 2021',
-      payment: 'Stripe',
-      activity: '1 hour ago',
-      avatar: './assets/img/avatars/3.jpg',
-      status: 'warning',
-      color: 'warning'
-    },
-    {
-      name: 'Enéas Kwadwo',
-      state: 'Sleep',
-      registered: 'Jan 1, 2021',
-      country: 'Fr',
-      usage: 98,
-      period: 'Jun 11, 2021 - Jul 10, 2021',
-      payment: 'Paypal',
-      activity: 'Last month',
-      avatar: './assets/img/avatars/4.jpg',
-      status: 'secondary',
-      color: 'danger'
-    },
-    {
-      name: 'Agapetus Tadeáš',
-      state: 'New',
-      registered: 'Jan 1, 2021',
-      country: 'Es',
-      usage: 22,
-      period: 'Jun 11, 2021 - Jul 10, 2021',
-      payment: 'ApplePay',
-      activity: 'Last week',
-      avatar: './assets/img/avatars/5.jpg',
-      status: 'success',
-      color: 'primary'
-    },
-    {
-      name: 'Friderik Dávid',
-      state: 'New',
-      registered: 'Jan 1, 2021',
-      country: 'Pl',
-      usage: 43,
-      period: 'Jun 11, 2021 - Jul 10, 2021',
-      payment: 'Amex',
-      activity: 'Yesterday',
-      avatar: './assets/img/avatars/6.jpg',
-      status: 'info',
-      color: 'dark'
-    }
-  ];
-  public mainChart: IChartProps = {};
-  public chart: Array<IChartProps> = [];
-  public trafficRadioGroup = new UntypedFormGroup({
-    trafficRadio: new UntypedFormControl('Month')
-  });
+  searchQuery: string = "";
+  private searchTimer: any;
+
+  SearchResult: ISearchData[] = [];
+
+  constructor(
+    private DepartmentsService: DepartmentsService,
+    private DoctorsService: DoctorsService,
+    private PatientsService: PatientsService,
+    private ReservationsService: ReservationsService
+  ) {}
 
   ngOnInit(): void {
-    this.initCharts();
+    this.DepartmentsService.GetAllDepartments().subscribe({
+      next: (data) => (this.Departments = data),
+      error: (err) => console.log(err),
+    });
+
+    this.DoctorsService.GetAllDoctors().subscribe({
+      next: (data) => (this.Doctors = data),
+      error: (err) => console.log(err),
+    });
+
+    this.PatientsService.getAll().subscribe({
+      next: (data) => (this.Patients = data),
+      error: (err) => console.log(err),
+    });
+
+    this.ReservationsService.getAll().subscribe({
+      next: (data) => (this.Reservations = data),
+      error: (err) => console.log(err),
+    });
   }
 
-  initCharts(): void {
-    this.mainChart = this.chartsData.mainChart;
+  onSearch(): void {
+    clearTimeout(this.searchTimer);
+    this.searchTimer = setTimeout(() => {
+      this.performSearch();
+    }, 300);
   }
 
-  setTrafficPeriod(value: string): void {
-    this.trafficRadioGroup.setValue({ trafficRadio: value });
-    this.chartsData.initMainChart(value);
-    this.initCharts();
+  performSearch(): void {
+    this.SearchResult = [];
+
+    if (this.searchQuery.length > 0) {
+      if (this.Departments.length > 0) {
+        this.Departments.forEach((item: any) => {
+          if (
+            item.title
+              .toLocaleLowerCase()
+              .includes(this.searchQuery.toLocaleLowerCase())
+          ) {
+            let temp: ISearchData = {
+              id: item.id,
+              label: "Department",
+              value: item.title,
+              route: "Departments",
+            };
+            this.SearchResult.push(temp);
+          }
+        });
+      }
+
+      if (this.Doctors.length > 0) {
+        this.Doctors.forEach((item: any) => {
+          if (
+            item.firstName
+              .toLocaleLowerCase()
+              .includes(this.searchQuery.toLocaleLowerCase()) ||
+            item.lastName
+              .toLocaleLowerCase()
+              .includes(this.searchQuery.toLocaleLowerCase())
+          ) {
+            let temp: ISearchData = {
+              id: item.id,
+              label: "Doctor",
+              value: `${item.firstName} ${item.lastName}`,
+              route: "Doctors",
+            };
+            this.SearchResult.push(temp);
+          }
+        });
+      }
+
+      if (this.Patients.length > 0) {
+        this.Patients.forEach((item: any) => {
+          if (
+            item.fullName
+              .toLocaleLowerCase()
+              .includes(this.searchQuery.toLocaleLowerCase())
+          ) {
+            let temp: ISearchData = {
+              id: item.id,
+              label: "Patient",
+              value: item.fullName,
+              route: "Patients",
+            };
+            this.SearchResult.push(temp);
+          }
+        });
+      }
+    }
+  }
+
+  ngOnDestroy(): void {
+    clearTimeout(this.searchTimer);
   }
 }
