@@ -56,10 +56,11 @@
         <div class="row">
           <div class="col-md-6 col-lg-4 mb-4" *ngFor="let doctor of doctors">
             <div class="card">
-              <img class="card-img-top rounded-circle" src="https://hips.hearstapps.com/hmg-prod/images/portrait-of-a-happy-young-doctor-in-his-clinic-royalty-free-image-1661432441.jpg?crop=0.66698xw:1xh;center,top&resize=1200:*" alt="Doctor Image">
-              <div class="card-body"> <h5 class="card-title"><a routerLink="/doctor/{{doctor.id}}">{{ doctor.firstName+" "+doctor.lastName }}</a></h5>
+              <img class="card-img-top rounded-circle img-fluid" src="https://hips.hearstapps.com/hmg-prod/images/portrait-of-a-happy-young-doctor-in-his-clinic-royalty-free-image-1661432441.jpg?crop=0.66698xw:1xh;center,top&resize=1200:*" alt="Doctor Image">
+              <div class="card-body"> 
                 <h6 class="card-subtitle mb-2 text-muted">{{ doctor.title }}</h6>
-                <p class="card-text">Department: {{ doctor.departmentTitle }}</p>
+                <h5 class="card-title"><a routerLink="/doctor/{{doctor.id}}">{{ doctor.firstName+" "+doctor.lastName }}</a></h5>
+                <p class="card-text" ><b>Department:</b> {{ doctor.departmentTitle }}</p>
                 <a class="btn btn-danger " routerLink="/doctor/{{doctor.id}}">View profile</a>
                 <button class="btn btn-primary" style="margin-left: 13vw;">Book</button>
               </div>
