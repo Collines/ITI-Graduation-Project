@@ -9,7 +9,7 @@ export class DepartmentsService {
 
   constructor(private Client:HttpClient) { }
 
-  private BaseURL = "https://localhost:7035/api/Department"
+  private BaseURL = "https://localhost:44372/api/Department"
 
   GetAllDepartments(){
     return this.Client.get(this.BaseURL);

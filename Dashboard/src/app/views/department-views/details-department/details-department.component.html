@@ -1,0 +1,8 @@
+<div *ngIf="Department ; else falseBlock" class="alert alert-secondary">
+    <p>Title: {{Department.title}}</p>
+    <p>Description: {{Department.description}}</p>
+  </div>
+  <button class="btn btn-info" routerLink="/dashboard/departments" >Back To List</button>
+  <ng-template #falseBlock>
+    <h1>Loading.....</h1>
+  </ng-template>

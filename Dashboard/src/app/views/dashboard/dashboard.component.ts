@@ -45,7 +45,7 @@ export class DashboardComponent implements OnInit {
       error: (err) => console.log(err),
     });
 
-    this.PatientsService.getAll().subscribe({
+    this.PatientsService.GetAll().subscribe({
       next: (data) => (this.Patients = data),
       error: (err) => console.log(err),
     });

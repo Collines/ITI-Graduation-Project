@@ -1,0 +1,36 @@
+<div class="text-center">
+    <a routerLink="/AddDepartment" class="btn btn-outline-primary rounded-pill mb-4">Create New Department</a>
+</div>
+<table class="table align-middle mb-0 bg-white">
+    <thead class="table-dark">
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Description</th>
+        <th class="text-center">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let d of departments">
+        <td>{{d.id}}</td>
+        <td>
+          <div class="d-flex align-items-center">
+            <div class="ms-3">
+              <p class="fw-bold mb-1">{{d.title}}</p>
+            </div>
+          </div>
+        </td>
+        <td>
+            <div class="d-flex align-items-center">
+              <div class="ms-3">
+                <p class="fw-bold mb-1">{{d.description}}</p>
+              </div>
+            </div>
+          </td>
+        <td class="text-center">
+          <a routerLink="/Departments{{d.id}}" class="btn" title="Details"><i class="fa-solid fa-desktop text-info" ></i></a>
+          <button (click)="DeleteDept(d.id)" class="btn " title="Delete"><i class="fa-solid fa-trash text-danger" ></i></button>
+        </td>
+      </tr>
+    </tbody>
+</table>
