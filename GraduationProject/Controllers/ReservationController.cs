@@ -1,6 +1,9 @@
-﻿using GraduationProject_DAL.Data.Models;
+﻿using GraduationProject_BL.DTO;
+using GraduationProject_BL.Interfaces;
+using GraduationProject_DAL.Data.Models;
 using GraduationProject_DAL.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.SqlServer.Server;
 
 namespace GraduationProject.Controllers
 {
@@ -9,33 +12,31 @@ namespace GraduationProject.Controllers
     //[Authorize]
     public class ReservationController : ControllerBase
     {
-        private readonly IRepository<Reservation> repository;
+        private readonly IHttpContextAccessor httpContextAccessor;
+        private readonly IReservationManager manager;
 
-        public ReservationController(IRepository<Reservation> _repository)
+        public ReservationController(IReservationManager _manager, IHttpContextAccessor _httpContextAccessor)
         {
-            repository = _repository;
+            manager = _manager;
+            httpContextAccessor = _httpContextAccessor;
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<Reservation>>> GetAll()
+        public async Task<ActionResult<List<ReservationDTO>>> GetAll()
         {
-            var reservations = await repository.GetAllAsync();
+            var reservations = await manager.GetAllAsync(Utils.GetLang(httpContextAccessor));
 
             return Ok(reservations);
         }
 
         [HttpGet("{id:int}")]
-        public async Task<ActionResult<Reservation>> GetById(int id)
+        public async Task<ActionResult<ReservationDTO>> GetById(int id)
         {
-            var reservations = await repository.GetAllAsync();
+            var reservation = await manager.GetByIdAsync(id, Utils.GetLang(httpContextAccessor));
 
-            if (reservations != null)
+            if (reservation != null)
             {
-                var reservation = reservations.Find(x => x.Id == id);
-                if (reservation != null)
-                {
-                    return Ok(reservation);
-                }
+                return Ok(reservation);
             }
 
             return NotFound();
@@ -46,8 +47,8 @@ namespace GraduationProject.Controllers
         {
             if (ModelState.IsValid)
             {
-                await repository.InsertAsync(reservation);
-                return Ok(reservation);
+                await manager.InsertAsync(reservation);
+                return Ok();
             }
             return BadRequest();
         }
@@ -55,7 +56,7 @@ namespace GraduationProject.Controllers
         [HttpDelete("{id:int}")]
         public async Task<ActionResult<Reservation>> DeleteReservation(int id)
         {
-            await repository.DeleteAsync(id);
+            await manager.DeleteAsync(id);
             return Ok();
         }
 
@@ -65,7 +66,7 @@ namespace GraduationProject.Controllers
             if (id != reservation.Id)
                 return BadRequest();
 
-            await repository.UpdateAsync(id, reservation);
+            await manager.UpdateAsync(id, reservation);
             return Ok(reservation);
         }
     }

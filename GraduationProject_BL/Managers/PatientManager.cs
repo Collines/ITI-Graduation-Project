@@ -49,7 +49,8 @@ namespace GraduationProject_BL.Managers
                         dto = new()
                         {
                             Id = translation.PatientId,
-                            FullName = $"{translation.FirstName_AR} {translation.LastName_AR}"
+                            FullName = $"{translation.FirstName_AR} {translation.LastName_AR}",
+                            
                         };
                     }
                     else
@@ -60,6 +61,13 @@ namespace GraduationProject_BL.Managers
                             FullName = $"{translation.FirstName_EN} {translation.LastName_EN}"
                         };
                     }
+
+                    dto.SSN = patient.SSN;
+                    dto.Gender = patient.Gender;
+                    dto.DOB = patient.DOB;
+                    dto.Email = patient.Email;
+                    dto.PhoneNumber = patient.PhoneNumber;
+                    dto.MedicalHistory = patient.MedicalHistory;
 
                     patientsDTO.Add(dto);
                 }
@@ -98,6 +106,13 @@ namespace GraduationProject_BL.Managers
                             };
                         }
 
+                        dto.SSN = patient.SSN;
+                        dto.Gender = patient.Gender;
+                        dto.DOB = patient.DOB;
+                        dto.Email = patient.Email;
+                        dto.PhoneNumber = patient.PhoneNumber;
+                        dto.MedicalHistory = patient.MedicalHistory;
+
                         return dto;
 
                     }
@@ -106,8 +121,14 @@ namespace GraduationProject_BL.Managers
                         dto = new()
                         {
                             Id = patient.Id,
-                            FullName = $"{patient.FirstName} {patient.LastName}"
-                        };
+                            FullName = $"{patient.FirstName} {patient.LastName}",
+                            SSN = patient.SSN,
+                            Gender = patient.Gender,
+                            DOB = patient.DOB,
+                            Email = patient.Email,
+                            PhoneNumber = patient.PhoneNumber,
+                            MedicalHistory = patient.MedicalHistory
+                    };
                         return dto;
                     }
                 }
