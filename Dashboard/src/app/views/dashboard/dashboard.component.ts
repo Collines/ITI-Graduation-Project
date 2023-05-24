@@ -5,6 +5,8 @@ import { DepartmentsService } from "src/app/services/departments.service";
 import { PatientsService } from "src/app/services/patients.service";
 import { ReservationsService } from "src/app/services/reservations.service";
 
+import { Router, ActivatedRoute } from "@angular/router";
+
 interface ISearchData {
   id: number;
   label: string;
@@ -31,10 +33,13 @@ export class DashboardComponent implements OnInit {
     private DepartmentsService: DepartmentsService,
     private DoctorsService: DoctorsService,
     private PatientsService: PatientsService,
-    private ReservationsService: ReservationsService
+    private ReservationsService: ReservationsService,
+    private activatedRoute: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
+    console.log(this.activatedRoute.url)
+
     this.DepartmentsService.GetAllDepartments().subscribe({
       next: (data) => (this.Departments = data),
       error: (err) => console.log(err),

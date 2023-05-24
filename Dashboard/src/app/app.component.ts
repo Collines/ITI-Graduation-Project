@@ -1,32 +1,46 @@
-import { Component, OnInit } from '@angular/core';
-import { Router, NavigationEnd } from '@angular/router';
+import { Component, OnInit } from "@angular/core";
+import { Router, NavigationStart, NavigationEnd } from "@angular/router";
 
-import { IconSetService } from '@coreui/icons-angular';
-import { iconSubset } from './icons/icon-subset';
-import { Title } from '@angular/platform-browser';
+import { AccountService, Admin } from "./Services/account.service";
 
 @Component({
-  selector: 'app-root',
-  template: '<router-outlet></router-outlet>',
+  selector: "app-root",
+  template: "<router-outlet></router-outlet>",
 })
 export class AppComponent implements OnInit {
-  title = 'CoreUI Free Angular Admin Template';
+  title = "Hospital System Admin";
 
-  constructor(
-    private router: Router,
-    private titleService: Title,
-    private iconSetService: IconSetService
-  ) {
-    titleService.setTitle(this.title);
-    // iconSet singleton
-    iconSetService.icons = { ...iconSubset };
-  }
+  constructor(private router: Router, private accountService: AccountService) {
+    this.router.events.subscribe((event) => {
+      if (event instanceof NavigationStart) {
+        this.accountService.currentUser$.subscribe({
+          next: (user) => {
+            if (user) {
+              let date = new Date().getTime();
+              if (!(user.expiration - date / 1000 < 40)) {
+                accountService.logout();
+              }
+            } else {
+              this.router.navigate(["/login"]);
+            }
+          },
+        });
+      }
 
-  ngOnInit(): void {
-    this.router.events.subscribe((evt) => {
-      if (!(evt instanceof NavigationEnd)) {
+      if (!(event instanceof NavigationEnd)) {
         return;
       }
     });
+  }
+
+  ngOnInit(): void {
+    this.setCurrentUser();
+  }
+
+  setCurrentUser() {
+    const x = localStorage.getItem("user");
+    if (!x) return;
+    const admin: Admin = JSON.parse(x);
+    this.accountService.setCurrentUser(admin);
   }
 }
