@@ -1,4 +1,11 @@
 {
-  "Name": "Khaled Ahmed"
-
+  "Home": "Home",
+  "About": "About",
+  "Departments": "Departments",
+  "Contact": "Contact",
+  "Register": "Register",
+  "Login": "Login",
+  "Logout": "Logout",
+  "Profile": "Profile",
+  "Settings": "Settings"
 }
