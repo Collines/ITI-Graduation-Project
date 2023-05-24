@@ -22,8 +22,8 @@ export class AllDepartmentsComponent implements OnInit {
     if(confirm(`Do You Want To Delete Department No. ${id}`))
     {
     this.myService.DeleteDepartment(id).subscribe(
-      response=>{console.log('item Deleted successfully!')},
-      error=>{console.log('item Still exist successfully!')}
+      response=>{this.router.navigate(['/Departments']);},
+      error=>{alert('item Still exist successfully!')}
     )
     this.ngOnInit();
   };

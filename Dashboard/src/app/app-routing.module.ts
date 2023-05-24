@@ -73,7 +73,6 @@ const routes: Routes = [
         path: 'Departments/:id',
         component: DetailsDepartmentComponent
       },
-      
       {
         path: "pages",
         loadChildren: () =>

@@ -28,7 +28,8 @@
             </div>
           </td>
         <td class="text-center">
-          <a routerLink="/Departments{{d.id}}" class="btn" title="Details"><i class="fa-solid fa-desktop text-info" ></i></a>
+          <a routerLink="/Departments/{{d.id}}" class="btn" title="Details"><i class="fa-solid fa-desktop text-info" ></i></a>
+          <a routerLink="/EditDepartment/{{d.id}}" class="btn" title="Edit"><i class="fa-solid fa-pen-to-square text-warning" ></i></a>
           <button (click)="DeleteDept(d.id)" class="btn " title="Delete"><i class="fa-solid fa-trash text-danger" ></i></button>
         </td>
       </tr>
