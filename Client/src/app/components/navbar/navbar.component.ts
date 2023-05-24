@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AccountService } from 'src/app/Services/account.service';
+import { TranslateService } from '@ngx-translate/core';
+
 
 @Component({
   selector: 'app-navbar',
@@ -7,7 +9,10 @@ import { AccountService } from 'src/app/Services/account.service';
   styleUrls: ['./navbar.component.css'],
 })
 export class NavbarComponent implements OnInit {
-  constructor(private accountService: AccountService) {}
+  constructor(private accountService: AccountService, public translate: TranslateService) {
+    translate.addLangs(['en', 'ar']);
+    translate.setDefaultLang('en');
+  }
   ngOnInit(): void {
     this.accountService.currentUser$.subscribe({
       next: (user) => {
@@ -25,5 +30,10 @@ export class NavbarComponent implements OnInit {
   Logout() {
     this.accountService.logout();
     this.isLogged = false;
+  }
+
+  //translation switcher
+  switchLang(lang: string) {
+    this.translate.use(lang);
   }
 }

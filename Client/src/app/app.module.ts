@@ -11,7 +11,7 @@ import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule,HttpClient } from '@angular/common/http';
 import { AboutComponent } from './components/about/about.component';
 import { DoctorComponent } from './components/doctor/doctor.component';
 import { DoctordetailssComponent } from './components/doctordetailss/doctordetailss.component';
@@ -20,6 +20,10 @@ import { DepartmentsComponent } from './components/departments/departments.compo
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ContactComponent } from './components/contact/contact.component';
 import { ReservationComponent } from './components/reservation/reservation.component';
+
+//For Translarion
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
 @NgModule({
   declarations: [
@@ -45,8 +49,19 @@ import { ReservationComponent } from './components/reservation/reservation.compo
     ReactiveFormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: httpTranslateLoader,
+        deps: [HttpClient]
+      }
+    })
   ],
   providers: [],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
+
+export function httpTranslateLoader(http: HttpClient) {
+  return new TranslateHttpLoader(http);
+}
