@@ -1,12 +1,7 @@
-﻿using GraduationProject_BL.DTO;
+﻿using GraduationProject_BL.DTO.ReservationDTOs;
 using GraduationProject_BL.Interfaces;
 using GraduationProject_DAL.Data.Models;
 using GraduationProject_DAL.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace GraduationProject_BL.Managers
 {
@@ -103,6 +98,38 @@ namespace GraduationProject_BL.Managers
                     await repository.UpdateAsync(reservation.Id, reservation);
                 }
             }
+        }
+
+        public async Task<List<PatientReservationDTO>?> GetAllPatientReservationsAsync(string lang, int patientId)
+        {
+            var reservations = await repository.GetAllAsync();
+            var patientReservations = reservations.Where(r=> r.PatientId== patientId).ToList();
+
+            if (patientReservations != null && patientReservations.Count > 0)
+            {
+                var reservationsDTO = new List<PatientReservationDTO>();
+
+                foreach (var reservation in patientReservations)
+                {
+                    var patientDTO = await patients.GetByIdAsync(reservation.PatientId, lang);
+                    var doctorDTO = await doctors.GetByIdAsync(reservation.DoctorId, lang);
+
+                    PatientReservationDTO dto = new PatientReservationDTO()
+                    {
+                        Id = reservation.Id,
+                        DateTime = reservation.DateTime,
+                        Queue = reservation.Queue,
+                        Doctor = doctorDTO,
+                        Status = reservation.Status
+                    };
+
+                    reservationsDTO.Add(dto);
+                }
+
+                return reservationsDTO;
+            }
+            else
+                return null;
         }
 
         public async Task DeleteAsync(int id)

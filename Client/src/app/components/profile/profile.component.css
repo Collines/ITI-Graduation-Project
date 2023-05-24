@@ -1,9 +1,7 @@
-
-.active
-{
+.active {
   background-color: #081f3e;
 }
-.btn{
+.btn {
   color: #081f3e;
   border: 1px solid #081f3e;
   transition: 0.3s;
@@ -12,7 +10,11 @@
   -ms-transition: 0.3s;
   -o-transition: 0.3s;
 }
-.btn:hover{
+.btn:hover {
   color: #fff;
   background-color: #081f3e;
+}
+
+.logout:hover {
+  cursor: pointer;
 }

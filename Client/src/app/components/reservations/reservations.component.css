@@ -1,0 +1,26 @@
+h1,h2,h3,h4,h5,h6{
+  color: #081f3e;
+}
+.active
+{
+  background-color: #081f3e;
+}
+.btn{
+  color: #081f3e;
+  border: 1px solid #081f3e;
+  transition: 0.3s;
+  background-color: var(--backgroundColor);
+
+}
+.btn:hover{
+  color: var(--backgroundColor);
+  background-color: #081f3e;
+}
+input, select, textarea {
+  outline: 0;
+  margin: 0;
+  text-align: left;
+}
+.card-body{
+  background-color: var(--backgroundColor) ;
+}

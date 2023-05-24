@@ -1,17 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { UserEdit } from 'src/app/Interfaces/User/UserEdit';
 import { UserUpdate } from 'src/app/Interfaces/User/userUpdate';
 import { AccountService } from 'src/app/Services/account.service';
 
 @Component({
-  selector: 'app-dashboard',
-  templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.css'],
+  selector: 'app-profile',
+  templateUrl: './profile.component.html',
+  styleUrls: ['./profile.component.css'],
 })
-
-export class DashboardComponent implements OnInit {
-  constructor(private accountService: AccountService) {
+export class ProfileComponent implements OnInit {
+  constructor(private accountService: AccountService, private router: Router) {
     this.Validation = new FormGroup({
       FirstName: new FormControl(null, [
         Validators.required,
@@ -80,6 +80,8 @@ export class DashboardComponent implements OnInit {
               this.textArea = this.userEdit.medicalHistory;
             },
           });
+        } else {
+          this.router.navigate(['/login']);
         }
       },
     });
@@ -105,7 +107,6 @@ export class DashboardComponent implements OnInit {
   isDataLoaded = false;
   isResponsed = false;
   textArea: string | null = '';
-
 
   get isFirstNameValid() {
     return this.Validation.controls['FirstName'].status == 'VALID';
@@ -138,6 +139,10 @@ export class DashboardComponent implements OnInit {
   public onValueChange(event: Event): void {
     const value = (event.target as any).value;
     this.textArea = value;
+  }
+
+  logout() {
+    this.accountService.logout();
   }
 
   onSubmit(errorElement: any, SuccessElement: any) {
@@ -180,4 +185,3 @@ export class DashboardComponent implements OnInit {
     }
   }
 }
-

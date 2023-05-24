@@ -1,15 +1,11 @@
-﻿using System.ComponentModel;
+﻿using GraduationProject_DAL.Data.Enums;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace GraduationProject_DAL.Data.Models
 {
-    public enum ReservationStatus
-    {
-        ToVisit=1,
-        Visited=2,
-        Cancelled=3
-    }
+
     public class Reservation
     {
         [Key]

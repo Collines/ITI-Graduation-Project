@@ -32,9 +32,11 @@
           >
         </li>
         <li class="nav-item">
-          <a class="nav-link" aria-current="page" routerLink="/doctor">Doctors</a>
+          <a class="nav-link" aria-current="page" routerLink="/doctor"
+            >Doctors</a
+          >
         </li>
-      <li class="nav-item">
+        <li class="nav-item">
           <a
             class="nav-link"
             routerLink="/departments"
@@ -44,7 +46,8 @@
         </li>
 
         <li class="nav-item">
-          <a class="nav-link" routerLink="/contact" routerLinkActive="active" >Contact</a
+          <a class="nav-link" routerLink="/contact" routerLinkActive="active"
+            >Contact</a
           >
         </li>
 
@@ -77,24 +80,27 @@
             [ngClass]="dropdownShow ? 'show' : ''"
             aria-labelledby="dropdownMenuLink"
           >
-            <a class="dropdown-item" routerLink="/dashboard">Profile</a>
+            <a class="dropdown-item" routerLink="/profile">Profile</a>
             <a class="dropdown-item" href="#">Settings</a>
             <a class="dropdown-item" (click)="Logout()">Logout</a>
           </div>
 
           <!-- Language selector -->
-        <span class="form-inline ms-2 mt-1">
-          <select
+          <span class="form-inline ms-2 mt-1">
+            <select
               class="form-control"
               #selectedLang
-              (change)="switchLang(selectedLang.value)">
-            <option *ngFor="let language of translate.getLangs()"
-              [value]="language"
-              [selected]="language === translate.currentLang">
-              {{ language }}
-            </option>
-          </select>
-        </span>
+              (change)="switchLang(selectedLang.value)"
+            >
+              <option
+                *ngFor="let language of translate.getLangs()"
+                [value]="language"
+                [selected]="language === translate.currentLang"
+              >
+                {{ language }}
+              </option>
+            </select>
+          </span>
         </div>
       </ul>
     </div>

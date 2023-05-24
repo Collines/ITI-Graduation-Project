@@ -1,4 +1,4 @@
-﻿using GraduationProject_BL.DTO;
+﻿using GraduationProject_BL.DTO.ReservationDTOs;
 using GraduationProject_DAL.Data.Models;
 using System;
 using System.Collections.Generic;
@@ -15,5 +15,7 @@ namespace GraduationProject_BL.Interfaces
         public Task InsertAsync(Reservation item);
         public Task UpdateAsync(int id, Reservation item);
         public Task DeleteAsync(int id);
+
+        public Task<List<PatientReservationDTO>?> GetAllPatientReservationsAsync(string lang, int patientId);
     }
 }

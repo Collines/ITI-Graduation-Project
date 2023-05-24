@@ -5,11 +5,11 @@ import { RegisterComponent } from './components/register/register.component';
 import { LoginComponent } from './components/login/login.component';
 import { DoctorComponent } from './components/doctor/doctor.component';
 import { DoctordetailsComponent } from './components/doctordetails/doctordetails.component';
-import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { ProfileComponent } from './components/profile/profile.component';
 import { AboutComponent } from './components/about/about.component';
 import { DepartmentsComponent } from './components/departments/departments.component';
 import { ContactComponent } from './components/contact/contact.component';
-import { ReservationComponent } from './components/reservation/reservation.component';
+import { ReservationsComponent } from './components/reservations/reservations.component';
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'home', component: HomeComponent },
@@ -18,10 +18,10 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'doctor', component: DoctorComponent },
   { path: 'doctor/:id', component: DoctordetailsComponent },
-  { path: 'dashboard', component: DashboardComponent },
+  { path: 'profile', component: ProfileComponent },
   { path: 'departments', component: DepartmentsComponent },
   { path: 'contact', component: ContactComponent },
-  { path: 'reservation', component: ReservationComponent },
+  { path: 'reservations', component: ReservationsComponent },
 ];
 
 @NgModule({
