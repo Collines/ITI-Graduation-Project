@@ -1,17 +1,10 @@
 ﻿using GraduationProject_DAL.Data.Enums;
-using GraduationProject_DAL.Data.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 
-namespace GraduationProject_BL.DTO
+namespace GraduationProject_BL.DTO.DoctorDTOs
 {
-    public class DoctorInsertDTO
+    public class DoctorFormData
     {
-        public int Id { get; set; }
-
         public required string FirstName_EN { get; set; }
 
         public required string FirstName_AR { get; set; }
@@ -32,6 +25,6 @@ namespace GraduationProject_BL.DTO
 
         public required int DepartmentId { get; set; }
 
-        public Image? Image { get; set; }
+        public required IFormFile? Image { get; set; }
     }
 }

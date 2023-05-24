@@ -14,7 +14,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule,HttpClient } from '@angular/common/http';
 import { AboutComponent } from './components/about/about.component';
 import { DoctorComponent } from './components/doctor/doctor.component';
-import { DoctordetailssComponent } from './components/doctordetailss/doctordetailss.component';
+import { DoctordetailsComponent } from './components/doctordetails/doctordetails.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { DepartmentsComponent } from './components/departments/departments.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -36,7 +36,7 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
     RegisterComponent,
     AboutComponent,
     DoctorComponent,
-    DoctordetailssComponent,
+    DoctordetailsComponent,
     DashboardComponent,
     DepartmentsComponent,
     ContactComponent,

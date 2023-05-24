@@ -129,12 +129,12 @@ namespace GraduationProject.Controllers
                     }
                     else
                     {
-                        return Unauthorized("Invalid Attempt!");
+                        return Unauthorized(new { ResponseMessage = "Invalid Attempt!" });
                     }
                 }
-                return Unauthorized("Incorrect username or password!");
+                return Unauthorized(new {ResponseMessage= "Incorrect username or password!" });
             }
-            else return BadRequest();
+            else return BadRequest(new { ResponseMessage = "Incorrect username or password!" });
         }
 
         [AllowAnonymous]

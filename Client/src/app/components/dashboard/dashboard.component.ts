@@ -1,11 +1,4 @@
-import {
-  Component,
-  OnInit,
-  ElementRef,
-  ViewChild,
-  AfterContentInit,
-  AfterViewChecked,
-} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { UserEdit } from 'src/app/Interfaces/User/UserEdit';
 import { UserUpdate } from 'src/app/Interfaces/User/userUpdate';
@@ -65,7 +58,6 @@ export class DashboardComponent implements OnInit {
                 (date.getMonth() + 1).toString().padStart(2, '0') +
                 '-' +
                 date.getDate().toString().padStart(2, '0');
-              // console.log(udata);
               this.Validation.controls['FirstName'].value =
                 this.userEdit.firstName_EN;
               this.Validation.controls['FirstNameAr'].value =
@@ -87,7 +79,6 @@ export class DashboardComponent implements OnInit {
               this.Validation.controls['Date'].status = 'VALID';
               this.textArea = this.userEdit.medicalHistory;
             },
-            error: (er) => console.log(er),
           });
         }
       },
@@ -145,7 +136,6 @@ export class DashboardComponent implements OnInit {
   }
 
   public onValueChange(event: Event): void {
-    console.log(event.target);
     const value = (event.target as any).value;
     this.textArea = value;
   }
@@ -153,7 +143,6 @@ export class DashboardComponent implements OnInit {
   onSubmit(errorElement: any, SuccessElement: any) {
     this.submitted = true;
     if (this.Validation.invalid) {
-      console.log('invalid');
       return;
     } else {
       let accessToken;
@@ -174,8 +163,6 @@ export class DashboardComponent implements OnInit {
           medicalHistory: this.textArea,
           password: this.Validation.controls['password'].value,
         };
-        debugger;
-        user;
         this.accountService.update(accessToken, user).subscribe({
           next: (r: any) => {
             this.error = false;

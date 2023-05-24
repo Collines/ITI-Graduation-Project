@@ -1,4 +1,4 @@
-﻿using GraduationProject_BL.DTO;
+﻿using GraduationProject_BL.DTO.DoctorDTOs;
 using GraduationProject_BL.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 

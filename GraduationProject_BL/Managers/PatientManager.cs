@@ -398,11 +398,10 @@ namespace GraduationProject_BL.Managers
                         await logins.InsertAsync(login);
                     }
 
-
-
                     LoginDTO dto = new()
                     {
-                        Patient = patientDTO,
+                        Id= patientDTO.Id,
+                        FullName = patientDTO.FullName,
                         AccessToken = accessToken,
                         RefreshToken = refreshToken,
                         Expiration = expiration

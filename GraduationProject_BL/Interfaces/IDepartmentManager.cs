@@ -1,4 +1,4 @@
-﻿using GraduationProject_BL.DTO;
+﻿using GraduationProject_BL.DTO.DepartmentDTOs;
 
 namespace GraduationProject_BL.Managers
 {

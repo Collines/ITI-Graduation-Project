@@ -17,14 +17,14 @@ export class NavbarComponent implements OnInit {
     this.accountService.currentUser$.subscribe({
       next: (user) => {
         this.isLogged = !!user;
-        if (user) this.Username = user.patient.fullName;
+        if (user) this.Username = user.fullName;
       },
     });
   }
   Username = '';
-  dropdownShow=false;
-  dropDownClick(){
-    this.dropdownShow=!this.dropdownShow;
+  dropdownShow = false;
+  dropDownClick() {
+    this.dropdownShow = !this.dropdownShow;
   }
   isLogged: boolean = false;
   Logout() {

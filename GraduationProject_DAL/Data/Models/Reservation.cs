@@ -1,8 +1,15 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace GraduationProject_DAL.Data.Models
 {
+    public enum ReservationStatus
+    {
+        ToVisit=1,
+        Visited=2,
+        Cancelled=3
+    }
     public class Reservation
     {
         [Key]
@@ -21,9 +28,11 @@ namespace GraduationProject_DAL.Data.Models
 
         [ForeignKey("Doctor")]
         public int DoctorId { get; set; }
+        [EnumDataType(typeof(ReservationStatus))]
+        [DefaultValue(ReservationStatus.ToVisit)]
+        public ReservationStatus Status { get; set; }
 
         public virtual Doctor? Doctor { get; set; }
-
 
     }
 }
