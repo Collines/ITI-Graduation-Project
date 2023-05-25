@@ -8,7 +8,7 @@ import { HttpClient } from "@angular/common/http";
 export class DoctorsService {
   constructor(private Client: HttpClient) {}
 
-  private BaseURL = "https://localhost:7035/api/Doctors";
+  private BaseURL = "https://localhost:44372/api/Doctors";
 
   GetAllDoctors() { 
     return this.Client.get(this.BaseURL);

@@ -8,7 +8,7 @@ export const navItems: INavData[] = [
   },
   {
     name: 'Departments',
-    url: '/departments',
+    url: '/Departments',
     iconComponent: { name: 'cil-home' }
   },
   {
@@ -18,7 +18,7 @@ export const navItems: INavData[] = [
   },
   {
     name: 'Patients',
-    url: '/patients',
+    url: '/Patients',
     iconComponent: { name: 'cil-user' }
   },
   {

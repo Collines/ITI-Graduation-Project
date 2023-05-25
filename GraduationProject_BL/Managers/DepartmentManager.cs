@@ -1,4 +1,5 @@
 ﻿using GraduationProject_BL.DTO;
+using GraduationProject_BL.Interfaces;
 using GraduationProject_DAL.Data.Models;
 using GraduationProject_DAL.Interfaces;
 
@@ -147,5 +148,36 @@ namespace GraduationProject_BL.Managers
             await translations.DeleteAsync(id);
             await repository.DeleteAsync(id);
         }
+        public async Task<DepartmentInsertDTO?> GetInsertDTOByIdAsync(int id)
+        {
+            var doctors = await repository.GetAllAsync();
+
+            if (doctors != null)
+            {
+                var doctor = doctors.Find(x => x.Id == id);
+                if (doctor != null)
+                {
+
+                    var translation = await translations.FindAsync(doctor.Id);
+                    if (translation != null)
+                    {
+
+                        DepartmentInsertDTO dto = new()
+                        {
+                            Title_EN = translation.Title_EN,
+                            Title_AR = translation.Title_AR,
+                            Description_EN = translation.Description_EN,
+                            Description_AR = translation.Description_AR
+                        };
+
+                        return dto;
+
+                    }
+                }
+            }
+               return null;
+            
+        }
     }
 }
+
