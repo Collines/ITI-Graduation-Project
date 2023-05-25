@@ -32,7 +32,7 @@ export class NavbarComponent implements OnInit {
     this.isLogged = false;
   }
 
-  //translation switcher
+  // translation switcher
   switchLang(lang: string) {
     this.translate.use(lang);
   }
