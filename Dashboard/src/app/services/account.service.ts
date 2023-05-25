@@ -15,12 +15,10 @@ export interface Admin {
   providedIn: "root",
 })
 export class AccountService {
-  private CurrentUserSource = new BehaviorSubject<Admin | null>(null);
   private BaseURL: string = "https://localhost:7035/api/Admin/";
   private Header: HttpHeaders = new HttpHeaders()
     .set("content-type", "application/json")
     .set("Access-Control-Allow-Origin", "*");
-  currentUser$ = this.CurrentUserSource.asObservable();
 
   constructor(private http: HttpClient, private router: Router) {}
 
@@ -31,21 +29,31 @@ export class AccountService {
         map((result: Admin) => {
           const admin = result;
           if (admin) {
-            localStorage.setItem("admin", JSON.stringify(admin));
-            this.CurrentUserSource.next(admin);
-            console.log(this.currentUser$);
+            this.setLocalStorage(admin);
+            this.router.navigate(["/"]);
           }
         })
       );
   }
 
-  logout() {
-    localStorage.removeItem("admin");
-    this.CurrentUserSource.next(null);
-    this.router.navigate(["/login"]);
+  private setLocalStorage(admin: Admin) {
+    localStorage.setItem("admin", JSON.stringify(admin));
+    console.log(admin);
   }
 
-  setCurrentUser(admin: Admin) {
-    this.CurrentUserSource.next(admin);
+  private clearLocalStorage() {
+    localStorage.removeItem("admin");
+  }
+
+  getAdmin() {
+    const temp = localStorage.getItem("admin");
+    if (!temp) return;
+    const admin: Admin = JSON.parse(temp);
+    return admin;
+  }
+
+  logout() {
+    this.clearLocalStorage();
+    this.router.navigate(["/login"]);
   }
 }

@@ -1,10 +1,6 @@
 import { Component, OnInit } from "@angular/core";
-import {
-  FormGroup,
-  FormControl,
-  Validators,
-} from "@angular/forms";
-import { Router, ActivatedRoute } from "@angular/router";
+import { FormGroup, FormControl, Validators } from "@angular/forms";
+import { Router } from "@angular/router";
 import { AccountService } from "src/app/Services/account.service";
 
 @Component({
@@ -14,7 +10,6 @@ import { AccountService } from "src/app/Services/account.service";
 })
 export class LoginComponent implements OnInit {
   submitted = false;
-  isLogged = false;
   isResponseSuccess = true;
 
   Validation = new FormGroup({
@@ -28,20 +23,12 @@ export class LoginComponent implements OnInit {
     ]),
   });
 
-  constructor(
-    private accountService: AccountService,
-    private router: Router,
-    private activatedRoute: ActivatedRoute
-  ) {}
+  constructor(private accountService: AccountService, private router: Router) {}
 
   ngOnInit(): void {
-    this.accountService.currentUser$.subscribe({
-      next: (res) => {
-        this.isLogged = !!res;
-      },
-    });
-    if (this.isLogged) {
-      this.router.navigate(["/dashboard"]);
+    let admin = this.accountService.getAdmin();
+    if (admin) {
+      this.router.navigate(["/"]);
     }
   }
 
@@ -67,7 +54,7 @@ export class LoginComponent implements OnInit {
         .subscribe({
           next: () => {
             console.log("LOGIN SUCCESS!");
-            this.router.navigate(['/']);
+            this.router.navigate(["/"]);
           },
           error: () => {
             this.isResponseSuccess = false;
