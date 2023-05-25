@@ -1,0 +1,30 @@
+.aon-med-team {
+
+  background-color:#f3f6f9;
+  margin-bottom: 30px;
+  border: 1px solid #ebebeb;
+  border-radius: 4px;
+  padding: 15px;
+  display: flex;
+  transition: all 0.5s ease;
+  cursor: pointer;
+}
+.aon-med-team:hover{
+  box-shadow: rgba(0, 0, 0, 0.35) 1px 3px 15px;
+}
+h5 >a
+{
+  color: #081f3e;
+}
+.btn1{
+  color: var(--mainColor);
+  border: 1px solid var(--mainColor);
+  transition: 0.3s;
+  background-color: var(--backgroundColor);
+  font-size: 15px;
+}
+.btn1:hover {
+  color: var(--backgroundColor);
+  background-color: var(--mainColor);
+  transition: 0.3s;
+}
