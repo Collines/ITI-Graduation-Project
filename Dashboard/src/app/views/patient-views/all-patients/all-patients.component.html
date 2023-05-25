@@ -1,0 +1,61 @@
+<!-- <p>all-patients works!</p>
+<table class="table text-center">
+    <thead>
+      <tr>
+        <th>Patient</th>
+        <th>Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let p of Patients">
+        <td>{{p.fullName}}</td>
+        <td>
+            <a class="btn btn-danger" (click)="DeletePatient(p.id)">Delete</a></td>
+      </tr>
+    </tbody>
+  </table> -->
+<div class="w-100" style="background-color: #ebedef;">
+<table class="table align-middle mb-0 bg-white">
+    <thead class="table-dark">
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>SSN</th>
+        <th>Email</th>
+        <th>Phone Number</th>
+        <th>Date Of Birth</th>
+        <th>Gender</th>
+        <th class="text-center">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let p of Patients">
+        <td>{{p.id}}</td>
+        <td>
+          <p class="fw-bold mb-1">{{p.fullName}}</p>
+        </td>
+        <td>
+          <p class="fw-bold text-muted mb-1">{{p.ssn}}</p>
+        </td>
+        <td>
+          <p class="fw-bold text-muted mb-1">{{p.email}}</p>
+        </td>
+        <td>
+          <p class="fw-bold text-muted mb-1">{{p.phoneNumber}}</p>
+        </td>
+        <td>
+          <p class="fw-bold text-muted mb-1">{{p.dob}}</p>
+        </td>
+        <td>
+          <p class="fw-normal mb-1">{{Gender[p.gender]}}</p>
+          <span *ngIf="p.gender == 2" class="badge badge-info rounded-pill text-bg-info d-inline"><i class="fa-solid fa-mars fa-lg" style="color: #ffffff;"></i></span>
+          <span *ngIf="p.gender == 1" class="badge badge-info rounded-pill text-bg-danger d-inline"><i class="fa-solid fa-venus fa-lg" style="color: #ffffff;"></i></span>
+        </td>
+        <td class="text-center">
+          <!-- <a routerLink="/Doctors/{{p.id}}" class="btn" title="Details"><i class="fa-solid fa-desktop text-info" ></i></a> -->
+          <button (click)="DeletePatient(p.id)" class="btn " title="Delete"><i class="fa-solid fa-trash text-danger" ></i></button>
+        </td>
+      </tr>
+    </tbody>
+</table>
+</div>

@@ -17,10 +17,29 @@ namespace GraduationProject_DAL.Handlers
             {
             new Claim("UserId", patient.Id.ToString()),
             new Claim("Name", $"{patient.FirstName} {patient.LastName}"),
-            new Claim("Email", patient.Email)
+            new Claim("Email", patient.Email),
+            new Claim(ClaimTypes.Role, "Patient")
             // Add additional claims as needed
             };
 
+            return GenerateToken(claims, secretKey);
+        }
+
+        public static string GenerateAdminAccessToken(Admin admin, string secretKey)
+        {
+            var claims = new[]
+            {
+            new Claim("AdminId", admin.Id.ToString()),
+            new Claim("AdminUserName", admin.UserName),
+            new Claim(ClaimTypes.Role, "Admin")
+            // Add additional claims as needed
+            };
+
+            return GenerateToken(claims, secretKey);
+        }
+
+        private static string GenerateToken(Claim[] claims, string secretKey)
+        {
             var key = Encoding.UTF8.GetBytes(secretKey);
             var token = new JwtSecurityToken(
                 claims: claims,

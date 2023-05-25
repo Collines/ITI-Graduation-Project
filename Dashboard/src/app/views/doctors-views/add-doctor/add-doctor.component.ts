@@ -1,3 +1,4 @@
+import { AccountService } from 'src/app/Services/account.service';
 import { DoctorsService } from 'src/app/services/doctors.service';
 import { DepartmentsService } from 'src/app/services/departments.service';
 import { Router } from '@angular/router';
@@ -11,9 +12,18 @@ import { Gender } from 'src/app/enums/gender';
 })
 export class AddDoctorComponent implements OnInit {
 
-  constructor(private DoctorsService:DoctorsService,private DepartmentsService:DepartmentsService, private Router:Router){}
+  constructor(
+    private DoctorsService:DoctorsService,
+    private DepartmentsService:DepartmentsService,
+    private Router:Router,
+    private AccountService:AccountService){}
 
   ngOnInit(): void {
+    let admin = this.AccountService.getAdmin()
+    if(!admin) {
+      this.Router.navigate(["/login"]);
+    }
+
     this.DepartmentsService.GetAllDepartments().subscribe({
       next: data => this.Departments = data,
       error: err => console.log(err)

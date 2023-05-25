@@ -6,11 +6,15 @@ import { DefaultLayoutComponent } from './containers';
 import { Page404Component } from './views/pages/page404/page404.component';
 import { Page500Component } from './views/pages/page500/page500.component';
 import { LoginComponent } from './views/pages/login/login.component';
-import { RegisterComponent } from './views/pages/register/register.component';
 import { AllDoctorsComponent } from './views/doctors-views/all-doctors/all-doctors.component';
 import { AddDoctorComponent } from './views/doctors-views/add-doctor/add-doctor.component';
 import { EditDoctorComponent } from "./views/doctors-views/edit-doctor/edit-doctor.component";
 import { DetailsDoctorComponent } from "./views/doctors-views/details-doctor/details-doctor.component";
+import { AllPatientsComponent } from "./views/patient-views/all-patients/all-patients.component";
+import { AllDepartmentsComponent } from "./views/department-views/all-departments/all-departments.component";
+import { EditDepartmentComponent } from "./views/department-views/edit-department/edit-department.component";
+import { AddDepartmentComponent } from "./views/department-views/add-department/add-department.component";
+import { DetailsDepartmentComponent } from "./views/department-views/details-department/details-department.component";
 
 const routes: Routes = [
   {
@@ -49,6 +53,26 @@ const routes: Routes = [
         component: DetailsDoctorComponent
       },
       {
+        path: 'Patients',
+        component: AllPatientsComponent
+      },
+      {
+        path: 'Departments',
+        component: AllDepartmentsComponent
+      },
+      {
+        path: 'AddDepartment',
+        component: AddDepartmentComponent
+      },
+      {
+        path: 'EditDepartment/:id',
+        component: EditDepartmentComponent
+      },
+      {
+        path: 'Departments/:id',
+        component: DetailsDepartmentComponent
+      },
+      {
         path: "pages",
         loadChildren: () =>
           import("./views/pages/pages.module").then((m) => m.PagesModule),
@@ -74,13 +98,6 @@ const routes: Routes = [
     component: LoginComponent,
     data: {
       title: "Login Page",
-    },
-  },
-  {
-    path: "register",
-    component: RegisterComponent,
-    data: {
-      title: "Register Page",
     },
   },
   { path: "**", redirectTo: "dashboard" },

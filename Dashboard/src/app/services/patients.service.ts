@@ -9,9 +9,16 @@ export class PatientsService {
 
   constructor(private Client:HttpClient) { }
 
-  private BaseURL = "https://localhost:7035/api/Patient"
+  //private BaseURL = "https://localhost:7035/api/Patient"
 
-  getAll(){
-    return this.Client.get(this.BaseURL);
+  private Base_URL = "https://localhost:7035/api/Patient";
+  GetAll(){
+    return this.Client.get(this.Base_URL);
+  }
+  GetByID(id:any){
+    return this.Client.get(`${this.Base_URL}/${id}`);
+  }
+  Delete(id: any) {
+    return this.Client.delete(`${this.Base_URL}/${id}`);
   }
 }

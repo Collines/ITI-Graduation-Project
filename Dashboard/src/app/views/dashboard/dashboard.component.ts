@@ -5,6 +5,9 @@ import { DepartmentsService } from "src/app/services/departments.service";
 import { PatientsService } from "src/app/services/patients.service";
 import { ReservationsService } from "src/app/services/reservations.service";
 
+import { Router, ActivatedRoute } from "@angular/router";
+import { AccountService } from "src/app/Services/account.service";
+
 interface ISearchData {
   id: number;
   label: string;
@@ -31,10 +34,17 @@ export class DashboardComponent implements OnInit {
     private DepartmentsService: DepartmentsService,
     private DoctorsService: DoctorsService,
     private PatientsService: PatientsService,
-    private ReservationsService: ReservationsService
+    private ReservationsService: ReservationsService,
+    private AccountService: AccountService,
+    private router: Router,
   ) {}
 
   ngOnInit(): void {
+    let admin = this.AccountService.getAdmin()
+    if(!admin) {
+      this.router.navigate(["/login"]);
+    }
+
     this.DepartmentsService.GetAllDepartments().subscribe({
       next: (data) => (this.Departments = data),
       error: (err) => console.log(err),
@@ -45,7 +55,7 @@ export class DashboardComponent implements OnInit {
       error: (err) => console.log(err),
     });
 
-    this.PatientsService.getAll().subscribe({
+    this.PatientsService.GetAll().subscribe({
       next: (data) => (this.Patients = data),
       error: (err) => console.log(err),
     });

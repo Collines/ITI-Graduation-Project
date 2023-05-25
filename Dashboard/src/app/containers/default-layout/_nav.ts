@@ -8,7 +8,7 @@ export const navItems: INavData[] = [
   },
   {
     name: 'Departments',
-    url: '/departments',
+    url: '/Departments',
     iconComponent: { name: 'cil-home' }
   },
   {
@@ -18,35 +18,12 @@ export const navItems: INavData[] = [
   },
   {
     name: 'Patients',
-    url: '/patients',
+    url: '/Patients',
     iconComponent: { name: 'cil-user' }
   },
   {
     name: 'Reservations',
     url: '/reservations',
     iconComponent: { name: 'cil-task' }
-  },
-  {
-    name: 'Pages',
-    url: '/login',
-    iconComponent: { name: 'cil-star' },
-    children: [
-      {
-        name: 'Login',
-        url: '/login'
-      },
-      {
-        name: 'Register',
-        url: '/register'
-      },
-      {
-        name: 'Error 404',
-        url: '/404'
-      },
-      {
-        name: 'Error 500',
-        url: '/500'
-      }
-    ]
   },
 ];

@@ -4,6 +4,7 @@ import { Router, ActivatedRoute} from '@angular/router';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { Gender } from 'src/app/enums/gender';
+import { AccountService } from 'src/app/Services/account.service';
 @Component({
   selector: 'app-edit-doctor',
   templateUrl: './edit-doctor.component.html',
@@ -11,14 +12,27 @@ import { Gender } from 'src/app/enums/gender';
 })
 export class EditDoctorComponent {
 
-  constructor(private DoctorsService:DoctorsService,private DepartmentsService:DepartmentsService,private Route:ActivatedRoute, private Router:Router){
-    this.ID = this.Route.snapshot.params["id"];
-  }
+  constructor(
+    private DoctorsService:DoctorsService,
+    private DepartmentsService:DepartmentsService,
+    private Route:ActivatedRoute,
+    private Router:Router,
+    private AccountService:AccountService)
+    {
+      this.ID = this.Route.snapshot.params["id"];
+    }
+
   ngOnInit(): void {
+    let admin = this.AccountService.getAdmin()
+    if(!admin) {
+      this.Router.navigate(["/login"]);
+    }
+
     this.DepartmentsService.GetAllDepartments().subscribe({
       next: data => this.Departments = data,
       error: err => console.log(err)
     })
+    
     this.DoctorsService.GetDoctorInsertDTO(this.ID).subscribe({
       next: data => {this.Doctor = data;
         this.BaseImage = this.Doctor.image.name
@@ -100,6 +114,7 @@ export class EditDoctorComponent {
   // Add Function => Calls The Post Service Of DoctorsService To Add Doctor To DataBase
   Edit (FirstName_EN:any,LastName_EN:any,FirstName_AR:any,LastName_AR:any,Gender:any,
         Title_EN:any,Title_AR:any,Bio_EN:any,Bio_AR:any,DepartmentId:any){
+          
     if(this.validator.valid)
     {
       console.log("true")
@@ -123,14 +138,14 @@ export class EditDoctorComponent {
       formData.append('DepartmentId', String(DepartmentId));
 
       this.DoctorsService.EditDoctor(this.ID,formData).subscribe({
-        next: data => {alert("Doctor Edited Successfully");
-                        this.Router.navigate(['/Doctors'])},
+        next: () => {
+          alert("Doctor Edited Successfully");
+          this.Router.navigate(['/Doctors'])},
         error: err => console.log(formData)
       });
     }
     else
       alert(`Make Sure To Fill All The Input Fields`)
-      console.log(this.validator)
   };
 
   async ChangeSrc(e:any) {

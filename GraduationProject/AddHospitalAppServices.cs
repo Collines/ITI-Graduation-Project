@@ -1,12 +1,12 @@
-﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.IdentityModel.Tokens;
-using GraduationProject_BL.Interfaces;
+﻿using GraduationProject_BL.Interfaces;
 using GraduationProject_BL.Managers;
 using GraduationProject_DAL.Data.Context;
 using GraduationProject_DAL.Data.Models;
 using GraduationProject_DAL.Interfaces;
 using GraduationProject_DAL.Repositories;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using System.Text;
 
 namespace GraduationProject
@@ -16,11 +16,13 @@ namespace GraduationProject
         public static IServiceCollection AddHospitalServices(this IServiceCollection services, IConfiguration config)
         {
             // Add services to the container.
-            services.AddDbContext<HospitalDBContext>(options =>options.UseSqlServer(
+            services.AddDbContext<HospitalDBContext>(options => options.UseSqlServer(
                 config.GetConnectionString("DefaultConnectionString")
             ));
 
             //Add Repo Services
+            services.AddScoped<IRepository<Admin>, AdminsRepository>();
+            services.AddScoped<IAdminManager, AdminManager>();
             services.AddScoped<IRepository<Department>, DepartmentRepository>();
             services.AddScoped<ITranslations<DepartmentTranslations>, DepartmentTranslationsRepository>();
             services.AddScoped<IDepartmentManager, DepartmentManager>();
