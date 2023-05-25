@@ -9,5 +9,6 @@ namespace GraduationProject_BL.Managers
         public Task InsertAsync(DepartmentInsertDTO item);
         public Task UpdateAsync(int id, DepartmentInsertDTO item);
         public Task DeleteAsync(int id);
+        public Task<DepartmentInsertDTO?> GetInsertDTOByIdAsync(int id);
     }
 }

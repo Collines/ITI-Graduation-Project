@@ -48,6 +48,11 @@ import { AllDoctorsComponent } from './views/doctors-views/all-doctors/all-docto
 import { AddDoctorComponent } from './views/doctors-views/add-doctor/add-doctor.component';
 import { EditDoctorComponent } from './views/doctors-views/edit-doctor/edit-doctor.component';
 import { DetailsDoctorComponent } from './views/doctors-views/details-doctor/details-doctor.component';
+import { AllPatientsComponent } from './views/patient-views/all-patients/all-patients.component';
+import { AllDepartmentsComponent } from './views/department-views/all-departments/all-departments.component';
+import { DetailsDepartmentComponent } from './views/department-views/details-department/details-department.component';
+import { AddDepartmentComponent } from './views/department-views/add-department/add-department.component';
+import { EditDepartmentComponent } from './views/department-views/edit-department/edit-department.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -66,7 +71,7 @@ const DOCTORS_COMPONENTS = [
 ];
 
 @NgModule({
-  declarations: [AppComponent, ...APP_CONTAINERS, ...DOCTORS_COMPONENTS],
+  declarations: [AppComponent, ...APP_CONTAINERS, ...DOCTORS_COMPONENTS, AllPatientsComponent, AllDepartmentsComponent, DetailsDepartmentComponent, AddDepartmentComponent, EditDepartmentComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
