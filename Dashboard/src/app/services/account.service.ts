@@ -33,6 +33,7 @@ export class AccountService {
           if (admin) {
             localStorage.setItem("admin", JSON.stringify(admin));
             this.CurrentUserSource.next(admin);
+            console.log(this.currentUser$);
           }
         })
       );

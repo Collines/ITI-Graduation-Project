@@ -44,7 +44,7 @@ export class EditDepartmentComponent {
       [Validators.required,
         Validators.minLength(2),
         Validators.maxLength(50),
-        Validators.pattern(this.ArabicPattern)])
+        Validators.pattern(this.ArabicPatternForParagraph)])
       });
       get Title_EN_Valid(){return this.validator.controls["title_EN"].valid;}
       get Title_AR_Valid(){return this.validator.controls["title_AR"].valid;}
