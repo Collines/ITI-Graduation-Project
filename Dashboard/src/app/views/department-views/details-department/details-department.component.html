@@ -1,4 +1,6 @@
-  <div class="col-lg-9" *ngIf="Department">
+<button class="btn btn-outline-primary mb-4" routerLink="/Departments" >Back To List</button>
+
+  <div class="col-lg-12" *ngIf="Department">
     <div class="card mb-4">
       <div class="card-body">
         <div class="row">
@@ -30,4 +32,8 @@
       </div>
     </div>
 
-    <button class="btn btn-info" routerLink="/Departments" >Back To List</button>
+    <a routerLink="/EditDepartment/{{Department.id}}" class="btn btn-outline-primary me-2" title="Edit">Edit</a>
+    <button (click)="DeleteDept(Department.id)" class="btn btn-outline-danger" title="Delete">Delete</button>
+
+
+    

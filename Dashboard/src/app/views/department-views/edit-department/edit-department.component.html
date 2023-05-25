@@ -4,8 +4,8 @@
   
         <div class="row">
           <div class="mb-3 col">
-            <label class="form-label" for="title_EN">Title_EN</label>
-            <input #title_EN formControlName="title_EN" [(ngModel)]="Department.title_EN" type="text" class="form-control" id="title_EN" placeholder="title_EN" />
+            <label class="form-label" for="title_EN">Title English</label>
+            <input #title_EN formControlName="title_EN" [(ngModel)]="Department.title_EN" type="text" class="form-control" id="Title English" placeholder="title_EN" />
             <br>
             <div class="alert alert-danger" *ngIf="!Title_EN_Valid && title_EN.value">
               <p>*title_EN Must be 3 Letters or More</p>
@@ -15,8 +15,8 @@
           </div>
   
           <div class="mb-3 col">
-            <label class="form-label" for="description_EN">description_EN</label>
-            <input #description_EN formControlName="description_EN" [(ngModel)]="Department.description_EN" type="text" class="form-control" id="description_EN" placeholder="description_EN" />
+            <label class="form-label" for="description_EN">Description English</label>
+            <input #description_EN formControlName="description_EN" [(ngModel)]="Department.description_EN" type="text" class="form-control" id="description_EN" placeholder="Description English" />
             <br>
             <div class="alert alert-danger" *ngIf="!Description_EN_Valid && description_EN.value">
               <p>*description_EN Must be 3 Letters or More</p>
@@ -60,4 +60,3 @@
       </form>
     </div>
   </div>
-  <button class="btn btn-info" routerLink="/Departments" >Back To List</button>

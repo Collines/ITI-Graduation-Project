@@ -25,5 +25,6 @@ namespace GraduationProject_DAL.Data.Context
         public virtual DbSet<PatientTranslations> PatientTranslations { get; set; }
         public virtual DbSet<Reservation> Reservations { get; set; }
         public virtual DbSet<PatientsLogins> PatientsLogins { get; set; }
+        public virtual DbSet<Admin> Admins { get; set; }
     }
 }

@@ -2,9 +2,8 @@ import { NgModule } from '@angular/core';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { BrowserModule, Title } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule} from '@angular/common/http';
-
 
 import {
   PERFECT_SCROLLBAR_CONFIG,
@@ -90,6 +89,7 @@ const DOCTORS_COMPONENTS = [
     FormModule,
     UtilitiesModule,
     ButtonGroupModule,
+    FormModule,
     ReactiveFormsModule,
     SidebarModule,
     SharedModule,

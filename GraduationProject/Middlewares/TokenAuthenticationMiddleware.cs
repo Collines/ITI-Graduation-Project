@@ -53,21 +53,51 @@ namespace GraduationProject.Middlewares
 
                                     if (principal != null && validatedToken != null)
                                     {
-                                        var claim = principal.FindFirst("UserId");
-                                        if (claim != null)
-                                        {
-                                            // Retrieve user login details from the UserLogins table
-                                            var userId = claim.Value;
-                                            var isFound = await _manager.FindUser(userId);
+                                        var adminClaim = principal.FindFirst("AdminId");
+                                        var userClaim = principal.FindFirst("UserId");
 
-                                            if (isFound)
+                                        if (adminClaim != null || userClaim != null)
+                                        {
+                                            if (userClaim != null)
                                             {
-                                                // Perform additional authorization checks or set the user's identity
-                                                var identity = new ClaimsIdentity(principal.Identity);
-                                                // Add any additional claims to the identity as needed
-                                                context.User = new ClaimsPrincipal(identity);
+                                                // Retrieve user login details from the UserLogins table
+                                                var userId = userClaim.Value;
+                                                var isFound = await _manager.FindUser(userId);
+
+                                                if (isFound)
+                                                {
+                                                    // Perform additional authorization checks or set the user's identity
+                                                    var identity = new ClaimsIdentity(principal.Identity);
+                                                    // Add any additional claims to the identity as needed
+                                                    context.User = new ClaimsPrincipal(identity);
+                                                }
+                                                else
+                                                {
+                                                    context.Response.StatusCode = 401;
+                                                    return;
+                                                }
+                                            }
+                                            else if (adminClaim != null)
+                                            {
+                                                var adminId = adminClaim.Value;
+                                                // TODO: Add Admins Logins
+                                                if (adminId == null)
+                                                {
+                                                    context.Response.StatusCode = 401;
+                                                    return;
+                                                }
                                             }
                                         }
+                                        else
+                                        {
+                                            context.Response.StatusCode = 401;
+                                            return;
+                                        }
+                                    }
+                                    else
+                                    {
+                                        context.Response.StatusCode = 401;
+                                        return;
                                     }
                                 }
                                 catch

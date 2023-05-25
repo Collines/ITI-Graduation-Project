@@ -5,28 +5,20 @@
     <thead class="table-dark">
       <tr>
         <th>ID</th>
-        <th>Name</th>
-        <th>Description</th>
+        <th class="">Title</th>
+        <th class="">Description</th>
         <th class="text-center">Actions</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let d of departments">
         <td>{{d.id}}</td>
-        <td>
-          <div class="d-flex align-items-center">
-            <div class="ms-3">
-              <p class="fw-bold mb-1">{{d.title}}</p>
-            </div>
-          </div>
+        <td class="">
+          <p class="fw-bold mb-1">{{d.title}}</p>
         </td>
-        <td>
-            <div class="d-flex align-items-center">
-              <div class="ms-3">
-                <p class="fw-bold mb-1">{{d.description}}</p>
-              </div>
-            </div>
-          </td>
+        <td class="">
+          <p class="fw-bold mb-1">{{d.description}}</p>
+        </td>
         <td class="text-center">
           <a routerLink="/Departments/{{d.id}}" class="btn" title="Details"><i class="fa-solid fa-desktop text-info" ></i></a>
           <a routerLink="/EditDepartment/{{d.id}}" class="btn" title="Edit"><i class="fa-solid fa-pen-to-square text-warning" ></i></a>

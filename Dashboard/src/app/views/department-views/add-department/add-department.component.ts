@@ -2,14 +2,25 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { DepartmentsService } from 'src/app/services/departments.service';
+import { AccountService } from 'src/app/Services/account.service';
 
 @Component({
   selector: 'app-add-department',
   templateUrl: './add-department.component.html',
   styleUrls: ['./add-department.component.scss']
 })
-export class AddDepartmentComponent {
-  constructor(private myService:DepartmentsService, private router:Router){}
+export class AddDepartmentComponent implements OnInit {
+  constructor(
+    private myService:DepartmentsService,
+    private router:Router,
+    private AccountService:AccountService){}
+
+  ngOnInit(): void {
+    let admin = this.AccountService.getAdmin()
+    if(!admin) {
+      this.router.navigate(["/login"]);
+    }
+  }
 
 
   private ArabicPattern = /^[[ء-ي\s]+$/;
@@ -33,7 +44,7 @@ export class AddDepartmentComponent {
       [Validators.required,
         Validators.minLength(2),
         Validators.maxLength(50),
-        Validators.pattern(this.ArabicPattern)])
+        Validators.pattern(this.ArabicPatternForParagraph)])
       });
       get Title_EN_Valid(){return this.validator.controls["title_EN"].valid;}
       get Title_AR_Valid(){return this.validator.controls["title_AR"].valid;}
