@@ -26,6 +26,16 @@ namespace GraduationProject.Controllers
 
             return Ok(departments);
         }
+        [HttpGet("InsertDTO/{id:int}")]
+        public async Task<ActionResult<DepartmentInsertDTO>> GetAllInsertDTO(int id) 
+        {
+            var department = await manager.GetInsertDTOByIdAsync(id);
+
+            if (department == null)
+                return NotFound();
+
+            return Ok(department);
+        }
 
         [HttpGet("{id:int}")]
         public async Task<ActionResult<DepartmentDTO>> GetById(int id)
@@ -41,7 +51,7 @@ namespace GraduationProject.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<DepartmentInsertDTO>> CreateDepartment(DepartmentInsertDTO department)
+        public async Task<ActionResult<DepartmentInsertDTO>> CreateDepartment([FromForm] DepartmentInsertDTO department)
         {
             if (ModelState.IsValid)
             {
@@ -58,8 +68,8 @@ namespace GraduationProject.Controllers
             return Ok(id);
         }
 
-        [HttpPut("{id:int}")]
-        public async Task<ActionResult<DepartmentInsertDTO>> UpdateDepartment(int id, DepartmentInsertDTO department)
+        [HttpPatch("{id:int}")]
+        public async Task<ActionResult<DepartmentInsertDTO>> UpdateDepartment(int id,[FromForm] DepartmentInsertDTO department)
         {
             await manager.UpdateAsync(id, department);
             return Ok(department);
