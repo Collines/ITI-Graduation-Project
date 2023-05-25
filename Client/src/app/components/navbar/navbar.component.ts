@@ -40,7 +40,7 @@ export class NavbarComponent implements OnInit {
     this.isLogged = false;
   }
 
-  //translation switcher
+  // translation switcher
   switchLang(lang: string) {
     localStorage.setItem('language', lang);
     this.translate.use(lang);

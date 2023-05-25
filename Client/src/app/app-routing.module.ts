@@ -10,6 +10,8 @@ import { AboutComponent } from './components/about/about.component';
 import { DepartmentsComponent } from './components/departments/departments.component';
 import { ContactComponent } from './components/contact/contact.component';
 import { ReservationsComponent } from './components/reservations/reservations.component';
+import { ReservationComponent } from './components/reservation/reservation.component';
+import { DepartmentComponent } from './components/department/department.component';
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'home', component: HomeComponent },
@@ -22,6 +24,8 @@ const routes: Routes = [
   { path: 'departments', component: DepartmentsComponent },
   { path: 'contact', component: ContactComponent },
   { path: 'reservations', component: ReservationsComponent },
+  { path: 'department', component: DepartmentComponent },
+  { path: 'reservation', component: ReservationComponent },
 ];
 
 @NgModule({

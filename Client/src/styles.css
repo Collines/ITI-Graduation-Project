@@ -59,3 +59,7 @@ a{text-decoration: none;
 .line::after{
   top: -5px;
 }
+
+body{
+  overflow-x: hidden;
+}

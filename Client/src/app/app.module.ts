@@ -20,6 +20,7 @@ import { DepartmentsComponent } from './components/departments/departments.compo
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ContactComponent } from './components/contact/contact.component';
 import { ReservationsComponent } from './components/reservations/reservations.component';
+import { DepartmentComponent } from './components/department/department.component';
 
 //For Translarion
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
@@ -43,6 +44,7 @@ import { ReservationComponent } from './components/reservation/reservation.compo
     ContactComponent,
     ReservationsComponent,
     ReservationComponent,
+    DepartmentComponent,
   ],
   imports: [
     BrowserModule,
