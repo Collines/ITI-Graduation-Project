@@ -15,7 +15,6 @@ export interface Admin {
   providedIn: "root",
 })
 export class AccountService {
-  private CurrentUser:(Admin|null) = null;
   private BaseURL: string = "https://localhost:7035/api/Admin/";
   private Header: HttpHeaders = new HttpHeaders()
     .set("content-type", "application/json")
@@ -39,7 +38,6 @@ export class AccountService {
 
   private setLocalStorage(admin: Admin) {
     localStorage.setItem("admin", JSON.stringify(admin));
-    this.CurrentUser = admin;
   }
 
   private clearLocalStorage() {
@@ -50,14 +48,11 @@ export class AccountService {
     const temp = localStorage.getItem("admin");
     if (!temp) return;
     const admin: Admin = JSON.parse(temp);
-    if(admin.accessToken != this.CurrentUser?.accessToken) 
-      return; 
     return admin;
   }
 
   logout() {
     this.clearLocalStorage();
-    this.CurrentUser = null;
     this.router.navigate(["/login"]);
   }
 }
