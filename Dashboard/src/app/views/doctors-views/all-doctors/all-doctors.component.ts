@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { DoctorsService } from 'src/app/services/doctors.service';
 import { Gender } from 'src/app/enums/gender';
+import { AccountService } from 'src/app/Services/account.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-all-doctors',
@@ -9,11 +11,18 @@ import { Gender } from 'src/app/enums/gender';
 })
 export class AllDoctorsComponent implements OnInit {
 
-  constructor(private DoctorsService:DoctorsService){}
+  constructor(
+    private DoctorsService:DoctorsService,private Router:Router,
+    private AccountService:AccountService){}
   Doctors:any;
   Gender = Gender;
 
   ngOnInit(): void {
+    let admin = this.AccountService.getAdmin()
+    if(!admin) {
+      this.Router.navigate(["/login"]);
+    }
+
     this.DoctorsService.GetAllDoctors().subscribe({
       next: data => {this.Doctors = data;
     },

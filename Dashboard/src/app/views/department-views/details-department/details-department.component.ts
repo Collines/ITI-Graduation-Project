@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute,Router } from '@angular/router';
+import { AccountService } from 'src/app/Services/account.service';
 import { DepartmentsService } from 'src/app/services/departments.service';
 
 @Component({
@@ -10,15 +11,23 @@ import { DepartmentsService } from 'src/app/services/departments.service';
 export class DetailsDepartmentComponent implements OnInit {
   ID:any;
   Department:any;
-  constructor(myRoute:ActivatedRoute, public myService:DepartmentsService,private router: Router){
-    this.ID = myRoute.snapshot.params["id"];
-  }
+
+  constructor(myRoute:ActivatedRoute,
+    public myService:DepartmentsService,
+    private router: Router,
+    private AccountService:AccountService)
+    {
+      this.ID = myRoute.snapshot.params["id"];
+    }
+
   ngOnInit(): void {
+    let admin = this.AccountService.getAdmin()
+    if(!admin) {
+      this.router.navigate(["/login"]);
+    }
+
     this.myService.GetById(this.ID).subscribe({
-      next:(data)=>{
-        //console.log(data)
-        this.Department = data;
-      },
+      next:(data)=>{this.Department = data;},
       error:(err)=>{console.log(err)}
     });
   }
