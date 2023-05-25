@@ -67,12 +67,7 @@ export class LoginComponent implements OnInit {
         .subscribe({
           next: () => {
             console.log("LOGIN SUCCESS!");
-            this.accountService.currentUser$.subscribe({
-              next: (user) => {
-                console.log(user);
-              },
-            });
-            this.router.navigate(["../dashboard"]);
+            this.router.navigate(['/']);
           },
           error: () => {
             this.isResponseSuccess = false;

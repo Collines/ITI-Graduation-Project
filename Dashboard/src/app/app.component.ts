@@ -1,6 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 import { Router, NavigationStart, NavigationEnd } from "@angular/router";
-
+import { IconSetService } from '@coreui/icons-angular';
+import { iconSubset } from './icons/icon-subset';
+import { Title } from '@angular/platform-browser';
 import { AccountService, Admin } from "./Services/account.service";
 
 @Component({
@@ -10,19 +12,25 @@ import { AccountService, Admin } from "./Services/account.service";
 export class AppComponent implements OnInit {
   title = "Hospital System Admin";
 
-  constructor(private router: Router, private accountService: AccountService) {
+  constructor(private router: Router,
+    private accountService: AccountService,
+    private titleService: Title,
+    private iconSetService: IconSetService) {
+
+      titleService.setTitle(this.title);
+      // iconSet singleton
+      iconSetService.icons = { ...iconSubset };
+
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationStart) {
         this.accountService.currentUser$.subscribe({
-          next: (user) => {
-            if (user) {
+          next: (admin) => {
+            if (admin) {
               let date = new Date().getTime();
-              if (!(user.expiration - date / 1000 < 40)) {
+              if (!(admin.expiration - date / 1000 < 40)) {
                 accountService.logout();
               }
-            } else {
-              this.router.navigate(["/login"]);
-            }
+            } 
           },
         });
       }
@@ -38,7 +46,7 @@ export class AppComponent implements OnInit {
   }
 
   setCurrentUser() {
-    const x = localStorage.getItem("user");
+    const x = localStorage.getItem("admin");
     if (!x) return;
     const admin: Admin = JSON.parse(x);
     this.accountService.setCurrentUser(admin);

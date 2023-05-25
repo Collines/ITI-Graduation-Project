@@ -27,7 +27,7 @@ namespace GraduationProject.Controllers
         }
 
         [HttpGet("InsertDTO/{id:int}")]
-        public async Task<ActionResult<DoctorInsertDTO>> GetAllInsertDTO(int id)
+        public async Task<ActionResult<DoctorInsertDTO>> GetDoctorInsertDTO(int id)
         {
             var doctor = await manager.GetInsertDTOByIdAsync(id);
 
