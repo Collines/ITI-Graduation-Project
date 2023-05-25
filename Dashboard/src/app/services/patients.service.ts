@@ -11,7 +11,7 @@ export class PatientsService {
 
   //private BaseURL = "https://localhost:7035/api/Patient"
 
-  private Base_URL = "https://localhost:44372/api/Patient";
+  private Base_URL = "https://localhost:7035/api/Patient";
   GetAll(){
     return this.Client.get(this.Base_URL);
   }
