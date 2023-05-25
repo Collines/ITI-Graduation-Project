@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute,Router } from '@angular/router';
 import { DepartmentsService } from 'src/app/services/departments.service';
 
 @Component({
@@ -10,7 +10,7 @@ import { DepartmentsService } from 'src/app/services/departments.service';
 export class DetailsDepartmentComponent implements OnInit {
   ID:any;
   Department:any;
-  constructor(myRoute:ActivatedRoute, public myService:DepartmentsService){
+  constructor(myRoute:ActivatedRoute, public myService:DepartmentsService,private router: Router){
     this.ID = myRoute.snapshot.params["id"];
   }
   ngOnInit(): void {
@@ -22,4 +22,14 @@ export class DetailsDepartmentComponent implements OnInit {
       error:(err)=>{console.log(err)}
     });
   }
+
+  DeleteDept(id:any) {
+    if(confirm(`Do You Want To Delete Department No. ${id}`))
+    {
+    this.myService.DeleteDepartment(id).subscribe({
+      next: response=>{this.router.navigate(['/Departments']);},
+      error: error=>{alert('item Still exist')}
+    })};
+  }
+
 }
