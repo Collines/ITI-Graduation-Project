@@ -1,32 +1,79 @@
-<div class="mt-2">
-    <h1>Doctor Detailes</h1>
-    <hr />
-    <div class="d-flex flex-row justify-content-between ms-5">  
-        <img class="w-25 h-50 img-fluid me-2" src="https://hips.hearstapps.com/hmg-prod/images/portrait-of-a-happy-young-doctor-in-his-clinic-royalty-free-image-1661432441.jpg?crop=0.66698xw:1xh;center,top&resize=1200:*" alt="Card image cap">
-  
-        <div class="col-8 me-5">
-        <div>
-          <h5>Name: {{Doctor.firstName+" "+Doctor.lastName}}</h5>
+<br><br>
+
+
+
+
+
+
+<section class="container my-5  ">
+  <a class="btn btn1" routerLink="/doctor">Back To List</a>
+    <div class="py-3">
+      <div class="row">
+        <div class="col-lg-3">
+          <div class="card mb-4">
+            <div class="card-body text-center">
+              <img src="{{Doctor.image}}" alt="avatar"
+                class="rounded-circle img-fluid" style="width: 180px;height: 180px; border: 1px solid black;">
+              <h5 class="my-3">{{Doctor.firstName+" "+Doctor.lastName}}</h5>
+              <p class="text-muted mb-1">{{Doctor.departmentTitle}}</p>
+              <p class="text-muted mb-4">{{Doctor.title}}</p>
+              <div class="d-flex justify-content-center mb-2">
+                <button class="btn btn1 m-1">Book</button>
+              </div>
+            </div>
+          </div>
+
         </div>
-        <hr>
-        <div>
-          <h5>Department: {{Doctor.departmentTitle}}</h5>
-        </div>
-        <hr>
-        <div>
-            <h5>Title: {{Doctor.title}}</h5>
-        </div>
-        <hr>
-        <div>
-          <h5>Bio:</h5>
-          <textarea class="form-control border-success w-100" cols="50" rows="7"  disabled [value]="Doctor.bio"></textarea>
-        </div>
-        <hr>
-        <div class="mt-2">
-          <a class="btn btn-warning m-1 text-white" routerLink="/doctor">Back to List</a>
-          <button class="btn btn-primary m-1">Book</button> 
+        <div class="col-lg-9">
+          <div class="card mb-4">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-sm-3">
+                  <p class="mb-0 fw-semibold">ID</p>
+                </div>
+                <div class="col-sm-9">
+                  <p class="text-muted mb-0">{{Doctor.id}}</p>
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-sm-3">
+                  <p class="mb-0 fw-semibold">Full Name</p>
+                </div>
+                <div class="col-sm-9">
+                  <p class="text-muted mb-0">{{Doctor.firstName+" "+Doctor.lastName}}</p>
+                </div>
+              </div>
+              <hr>
+
+              <div class="row">
+                <div class="col-sm-3">
+                  <p class="mb-0 fw-semibold">Department</p>
+                </div>
+                <div class="col-sm-9">
+                  <p class="text-muted mb-0">{{Doctor.departmentTitle}}</p>
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-sm-3">
+                  <p class="mb-0 fw-semibold">Title</p>
+                </div>
+                <div class="col-sm-9">
+                  <p class="text-muted mb-0">{{Doctor.title}}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="mb-3">
+              <p class="fw-semibold">Bio : </p>
+              <textarea class="form-control border-light"  disabled [value]="Doctor.bio" rows="7"></textarea>
+            </div>
+
+          </div>
+
         </div>
       </div>
     </div>
-  </div>
-  
+  </section>

@@ -3,11 +3,15 @@ import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { AccountService } from './Services/account.service';
 import { User } from './Interfaces/User/user';
 import { NavigationStart, Router, RouterOutlet } from '@angular/router';
+import { slideInAnimation  } from './animations/app.animation';
+
+
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
+  animations: [slideInAnimation]
 })
 export class AppComponent implements OnInit {
   title = 'Client';
@@ -47,4 +51,8 @@ export class AppComponent implements OnInit {
     const user: User = JSON.parse(x);
     this.accountService.setCurrentUser(user);
   }
+  // prepareRoute(outlet:RouterOutlet){
+  // return outlet && outlet.activatedRouteData
+  // }
+
 }

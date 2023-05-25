@@ -7,20 +7,26 @@ import { DoctorsService } from 'src/app/Services/doctors.service';
   styleUrls: ['./doctor.component.css']
 })
 export class DoctorComponent implements OnInit {
-  doctors:any[]=[];
+  doctors:any;
   constructor(private doctorService:DoctorsService){}//
   ngOnInit(): void {
     this.getDoctors();
   }
+  // getDoctors() {
+  //   this.doctorService.GetAllDoctors().subscribe(
+  //     (data:any) => {
+  //       this.doctors = data;
+  //     },
+  //     (error) => {
+  //       console.error('Error fetching doctors:', error);
+  //     }
+  //   );
+  // }
   getDoctors() {
-    this.doctorService.GetAllDoctors().subscribe(
-      (data:any) => {
-        this.doctors = data;
-      },
-      (error) => {
-        console.error('Error fetching doctors:', error);
-      }
-    );
+    this.doctorService.GetAllDoctors().subscribe({
+      next: d=> this.doctors =d,
+      error: e=>console.log(e)
+    })
   }
 
 }
