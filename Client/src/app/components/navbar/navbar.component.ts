@@ -9,10 +9,27 @@ import { TranslateService } from '@ngx-translate/core';
   styleUrls: ['./navbar.component.css'],
 })
 export class NavbarComponent implements OnInit {
+
+  Lang:(string|null);
+  TextDir:string;
+
   constructor(private accountService: AccountService, public translate: TranslateService) {
+
     translate.addLangs(['en', 'ar']);
-    translate.setDefaultLang('en');
+    translate.setDefaultLang("en");
+
+    this.Lang = sessionStorage.getItem("Lang");
+    if(this.Lang)
+      translate.use(this.Lang);
+
+    if(this.Lang === "ar")
+      this.TextDir = 'rtl';
+    else
+      this.TextDir = 'ltr';
+
+    document.dir = this.TextDir;
   }
+
   ngOnInit(): void {
     this.accountService.currentUser$.subscribe({
       next: (user) => {
@@ -21,11 +38,14 @@ export class NavbarComponent implements OnInit {
       },
     });
   }
+
   Username = '';
   dropdownShow=false;
+
   dropDownClick(){
     this.dropdownShow=!this.dropdownShow;
   }
+
   isLogged: boolean = false;
   Logout() {
     this.accountService.logout();
@@ -35,5 +55,17 @@ export class NavbarComponent implements OnInit {
   // translation switcher
   switchLang(lang: string) {
     this.translate.use(lang);
+    sessionStorage.setItem("Lang",lang)
+
+    if(lang === "ar"){
+      this.TextDir = 'rtl';
+      sessionStorage.setItem("Dir",'rtl')
+    }
+    else {
+      this.TextDir = 'ltr';
+      sessionStorage.setItem("Dir",'ltr')
+    }
+
+    document.dir = this.TextDir
   }
 }
