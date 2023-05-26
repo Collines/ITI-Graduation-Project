@@ -1,0 +1,12 @@
+.btn1{
+  color: var(--mainColor);
+  border: 1px solid var(--mainColor);
+  transition: 0.3s;
+  background-color: #fff;
+  font-size: 15px;
+}
+.btn1:hover{
+  color: #fff;
+  background-color: var(--mainColor);
+  transition: 0.3s;
+}
