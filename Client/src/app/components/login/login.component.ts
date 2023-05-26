@@ -53,7 +53,7 @@ export class LoginComponent implements OnInit {
         })
         .subscribe({
           next: (resp) => {
-            this.router.navigate(['/profile']);
+            this.router.navigate(['..']);
           },
           error: (err) => {
             this.isResponseSuccess = false;

@@ -1,27 +1,15 @@
-<div class="department">
-
-    <div class="row mb-3 gy-3">
-
-
-        <div class="col-lg-4">
-          <div class="aon-med-team  d-flex ">
-
-            <div class="aon-med-team-info ms-3 mt-3">
-              <h5 class="card-title mb-2"><a href="">Cardiology</a></h5>
-              <h6 class="card-subtitle mb-2 text-muted">Department specializing in heart-related conditions</h6>
-              <a href="#" class="btn btn1 my-2">View</a>
-            </div>
-        </div>
-
-
-       </div>
-
-
-
-
-    </div>
-
-
+<div class="aon-med-team">
+  <a routerLink="/department/{{ department.id }}"
+    ><div class="aon-med-team-info ms-3 mt-3">
+      <h5 class="card-title mb-2">
+        <a>{{ department.title }}</a>
+      </h5>
+      <h6 class="card-subtitle mb-2 text-muted">
+        {{ department.description }}
+      </h6>
+      <a routerLink="/department/{{ department.id }}" class="btn btn1 my-2"
+        >View</a
+      >
+    </div></a
+  >
 </div>
-
-

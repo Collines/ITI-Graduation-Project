@@ -2,7 +2,6 @@
 using GraduationProject_BL.Interfaces;
 using GraduationProject_DAL.Data.Models;
 using GraduationProject_DAL.Interfaces;
-using System.Numerics;
 
 namespace GraduationProject_BL.Managers
 {
@@ -75,6 +74,16 @@ namespace GraduationProject_BL.Managers
             }
 
             return doctorsDTO;
+        }
+
+        public async Task<List<DoctorDTO>?> GetDepartmentDoctors(int deptId,string lang)
+        {
+            var doctors = await GetAllAsync(lang);
+            if(doctors!=null && doctors.Count >0)
+            {
+                return doctors.Where(d=>d.DepartmentId==deptId).ToList();
+            }
+            return null;
         }
 
         public async Task<DoctorDTO?> GetByIdAsync(int id, string lang)

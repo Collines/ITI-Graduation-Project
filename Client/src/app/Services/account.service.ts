@@ -5,6 +5,7 @@ import { BehaviorSubject, Observable, map } from 'rxjs';
 import { UserUpdate } from '../Interfaces/User/userUpdate';
 import { Router } from '@angular/router';
 import { UserEdit } from '../Interfaces/User/UserEdit';
+import { HeaderService } from './header.service';
 
 @Injectable({
   providedIn: 'root',
@@ -12,12 +13,10 @@ import { UserEdit } from '../Interfaces/User/UserEdit';
 export class AccountService {
   private CurrentUserSource = new BehaviorSubject<User | null>(null);
   private BaseURL: string = 'https://localhost:7035/api/patient/';
-  private Header: HttpHeaders = new HttpHeaders()
-    .set('content-type', 'application/json')
-    .set('Access-Control-Allow-Origin', '*');
+  private Header: HttpHeaders = this.header.Header
   currentUser$ = this.CurrentUserSource.asObservable();
 
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(private http: HttpClient, private router: Router,private header:HeaderService) {}
 
   login(model: any) {
     return this.http

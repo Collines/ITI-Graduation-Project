@@ -1,184 +1,27 @@
-<br>
-<br>
-       <!-- <div class="container">
-        <div class="row">
-          <div class="col-md-4" *ngFor="let doctor of doctors">
-            <div class="card mb-3">
-              <img class="card-img-top img-fluid" src="" alt="{{ doctor.firstName }} Image">
-              <div class="card-body">
-                <div class="d-flex justify-content-between align-items-center">
-                  <h5 class="card-title mb-0" style="font-size: 1.2rem">
-                    <a href="#">{{ doctor.firstName }} {{ doctor.lastName}}</a></h5>
-                  </div>
-                <div class="d-flex">
-                  <h5 class="card-text flex-grow-1">{{ doctor.title }}</h5>
-                  <button class="btn btn-outline-primary w-25">Book</button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div> -->
-<!--
-      <div class="container">
-        <div class="d-grid">
-          <div class="col-lg-8 col-md-6 mb-4" *ngFor="let doctor of doctors">
-            <div class="card h-100">
-              <div class="card-body d-flex">
-                <div style="flex: 0 0 35%;">
-                  <img class="card-img rounded-circle" src="https://hips.hearstapps.com/hmg-prod/images/portrait-of-a-happy-young-doctor-in-his-clinic-royalty-free-image-1661432441.jpg?crop=0.66698xw:1xh;center,top&resize=1200:*" alt="Doctor Image">
-                </div>
-                <div class="m-5" style="flex: 0 0 35%;">
-                  <br>
-                  <h4 class="card-text">{{ doctor.title }}</h4>
-                  <h5 class="card-title"><a routerLink="/doctor/{{doctor.id}}">{{ doctor.firstName+" "+doctor.lastName }}</a></h5>
-                  <h6 class="card-text">{{ doctor.departmentTitle }}</h6>
-                  <h5>Bio:</h5>
-          <textarea class="form-control  w-100" disabled [value]="doctor.bio"></textarea>
-                </div>
-                <div class="d-grid align-items-center justify-content-center" style="flex: 0 0 20%;">
-                  <a class="btn btn-danger mt-3" routerLink="/doctor/{{doctor.id}}">View profile</a>
-                 <button class="btn btn-primary mb-3">Book</button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div> -->
+<div>
+  <div class="aon-med-team d-flex">
+    <div class="aon-med-team-pic">
+      <!-- <img src="/assets/images/pic1.jpg" alt="Doctor Image"> -->
 
-      <!-- <div class="container mt-5">
-        <div class="row">
-          <div class="col-md-6 col-lg-4 mb-4" *ngFor="let doctor of doctors">
-            <div class="card">
-              <img class="card-img-top rounded-circle img-fluid" src="https://hips.hearstapps.com/hmg-prod/images/portrait-of-a-happy-young-doctor-in-his-clinic-royalty-free-image-1661432441.jpg?crop=0.66698xw:1xh;center,top&resize=1200:*" alt="Doctor Image">
-              <div class="card-body">
-                <h6 class="card-subtitle mb-2 text-muted">{{ doctor.title }}</h6>
-                <h5 class="card-title"><a routerLink="/doctor/{{doctor.id}}">{{ doctor.firstName+" "+doctor.lastName }}</a></h5>
-                <p class="card-text" ><b>Department:</b> {{ doctor.departmentTitle }}</p>
-                <a class="btn btn-danger " routerLink="/doctor/{{doctor.id}}">View profile</a>
-                <button class="btn btn-primary" style="margin-left: 13vw;">Book</button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div> -->
-
-      <!-- <div id="top-search" class=" navbar-default navbar listing-search mt-5 " style="">
-
-        <div class=" navbar-collapse text-left">
-            <form class="form-inline advanced-serach" method="POST" onkeypress="return event.keyCode != 13;">
-              <div class="container">
-              <div class="input-field ">
-
-               <div class="form-group top-8">
-                  <input type="text" class="form-control ui-autocomplete-input" id="keyword" name="keyword" placeholder="Keyword" value="" autocomplete="off">
-                                  <script>
-                      jQuery(function() {
-                      var availableTags = [ "Dr. Keri Peterson MD","Dr. Steven P. Leon","Dr. Borimir J Darakchiev","Dr. Ramin Rak","Dr. Raphael Davis","Dr. Modesto Fontanez","Dr. Magdy Shawky Shady","Dr. Robert Carras" ];
-                      jQuery( "#keyword" ).autocomplete({source: availableTags});
-                      });
-
-                    </script>
-
-
-                </div>
-
-               <div class="form-group top-8">
-                <i class="fa fa-chevron-down arrow"></i>
-                      <select name="doctor-category" class="form-control">	<option selected="" value="">Any Category</option>
-
-                          <option value="cardiac-surgery">Cardiac Surgery</option>
-
-
-
-                          <option value="cardiology">Cardiology</option>
-
-
-
-                          <option value="gynaecology">Gynaecology</option>
-
-
-
-                          <option value="psychology">Psychology</option>
-
-                      </select>						</div>
-
-
-                <div class="form-group search top-8">
-                      <button type="submit" id="submit" name="submit" class="btn-new btn-custom-search "><i class="fa fa-search"></i><span>Search</span></button>
-                </div>
-
-              </div>
-
-
-
-
-              </div>
-            </form>
-
-       </div>
-      </div> -->
-    <div class="container mt-5">
-
-        <div class="row height d-flex justify-content-center align-items-center">
-
-          <div class="col-md-8">
-
-            <div class="search">
-              <i class="fa fa-search"></i>
-              <input type="text" class="form-control rounded-pill" placeholder="Search by doctor name.....">
-              <button class="btn btn-primary rounded-pill">Search</button>
-            </div>
-
-          </div>
-
-        </div>
+      <img src="{{ doctor.image }}" alt="Doctor Image" />
     </div>
+    <div class="aon-med-team-info ms-3 mt-3">
+      <h5 class="card-title mb-2">
+        <a routerLink="/doctor/{{ doctor.id }}">
+          Dr. {{ doctor.firstName + " " + doctor.lastName }}</a
+        >
+      </h5>
+      <h6 class="card-subtitle mb-2 text-muted">{{ doctor.title }}</h6>
 
-  <div class="container mt-5">
-    <div class="section-content">
-      <div class="aon-med-team-section ">
-          <div class="row gy-1">
-              <div class="col-lg-6 col-md-6" *ngFor="let doctor of doctors">
-                  <div class="aon-med-team  d-flex ">
-                      <div class="aon-med-team-pic">
-                           <!-- <img src="/assets/images/pic1.jpg" alt="Doctor Image"> -->
+      <p class="card-text mb-3 fs-6">
+        <span>Department :</span> {{ doctor.departmentTitle }}
+      </p>
 
-                          <img  src="{{doctor.image}}" alt="Doctor Image" />
-                      </div>
-                      <div class="aon-med-team-info ms-3 mt-3">
-                        <h5 class="card-title mb-2"><a routerLink="/doctor/{{doctor.id}}"> Dr. {{ doctor.firstName+" "+doctor.lastName }}</a></h5>
-                        <h6 class="card-subtitle mb-2 text-muted">{{ doctor.title }}</h6>
+      <a class="btn btn1 me-2" routerLink="/doctor/{{ doctor.id }}"
+        >View profile</a
+      >
 
-                        <p class="card-text mb-3 fs-6"><span >Department :</span> {{ doctor.departmentTitle }}</p>
-
-                        <a class="btn btn1 me-2" routerLink="/doctor/{{doctor.id}}">View profile</a>
-
-                        <button class="btn btn2 " >Book</button>
-                      </div>
-                  </div>
-              </div>
-          </div>
-      </div>
+      <button class="btn btn2">Book</button>
     </div>
   </div>
-
-<!--
-      <div class="container">
-        <div class="d-grid">
-          <div class="col-4" *ngFor="let doctor of doctors">
-            <div class="card ">
-              <img class="card-img-top" class="rounded-circle img-fluid" style="width: 150px;"src="https://hips.hearstapps.com/hmg-prod/images/portrait-of-a-happy-young-doctor-in-his-clinic-royalty-free-image-1661432441.jpg?crop=0.66698xw:1xh;center,top&resize=1200:*" alt="Doctor Image">
-              <div class="card-body">
-                <h5 class="card-title">{{ doctor.title }} {{ doctor.firstName }} {{ doctor.lastName }}</h5>
-                <h6 class="card-subtitle mb-2 text-muted">{{ doctor.departmentName }}</h6>
-                <button class="btn btn-outline-primary">Book</button>
-              </div>
-            </div>
-            <br>
-          </div>
-        </div>
-      </div> -->
-
-
-
+</div>

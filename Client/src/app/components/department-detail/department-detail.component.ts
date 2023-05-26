@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Department } from 'src/app/Interfaces/Department';
 import { Doctor } from 'src/app/Interfaces/Doctor';
@@ -8,36 +8,12 @@ import { DepartmentService } from 'src/app/Services/department.service';
 import { DoctorsService } from 'src/app/Services/doctors.service';
 
 @Component({
-  selector: 'app-department',
-  templateUrl: './department.component.html',
-  styleUrls: ['./department.component.css'],
+  selector: 'app-department-detail',
+  templateUrl: './department-detail.component.html',
+  styleUrls: ['./department-detail.component.css'],
 })
-export class DepartmentComponent implements OnInit {
-  constructor(
-    private Route: ActivatedRoute,
-    private router: Router,
-    private accountService: AccountService,
-    private doctorService: DoctorsService
-  ) {
-    this.department.id = Route.snapshot.params['id'];
-    accountService.currentUser$.subscribe({
-      next: (user) => {
-        if (user) this.user = user;
-      },
-      error: (er) => {
-        router.navigate(['/login']);
-      },
-    });
-  }
-  ngOnInit(): void {
-    this.doctorService
-      .GetDepartmentDoctors(this.department.id, this.user.accessToken)
-      .subscribe({
-        next: (doctors) => (this.doctors = doctors),
-      });
-  }
-
-  @Input() department: Department = {
+export class DepartmentDetailComponent implements OnInit {
+  department: Department = {
     id: 0,
     title: '',
     description: '',
@@ -50,4 +26,35 @@ export class DepartmentComponent implements OnInit {
     refreshToken: '',
     expiration: 0,
   };
+  constructor(
+    private Route: ActivatedRoute,
+    private router: Router,
+    private accountService: AccountService,
+    private departmentService: DepartmentService,
+    private doctorService: DoctorsService
+  ) {
+    this.department.id = Route.snapshot.params['id'];
+    accountService.currentUser$.subscribe({
+      next: (user) => {
+        if (user) this.user = user;
+      },
+      error: (er) => {
+        router.navigate(['/login']);
+      },
+    });
+    departmentService
+      .GetById(this.department.id, this.user.accessToken)
+      .subscribe({
+        next: (dept) => {
+          if (dept) this.department = dept;
+        },
+      });
+  }
+  ngOnInit(): void {
+    this.doctorService
+      .GetDepartmentDoctors(this.department.id, this.user.accessToken)
+      .subscribe({
+        next: (doctors) => (this.doctors = doctors),
+      });
+  }
 }

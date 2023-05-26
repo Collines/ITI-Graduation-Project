@@ -1,36 +1,30 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Doctor } from '../Interfaces/Doctor';
+import { HeaderService } from './header.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class DoctorsService {
+  constructor(private http: HttpClient, private header: HeaderService) {}
 
-  constructor(private Clint:HttpClient) { }
+  private BaseURL = 'https://localhost:7035/api/Doctors';
+  private Header: HttpHeaders = this.header.Header;
 
-  private BaseURL = "https://localhost:7035/api/Doctors"
-
-  GetAllDoctors(){
-    return this.Clint.get(this.BaseURL);
+  GetAllDoctors(accessToken: string) {
+    return this.http.get<Doctor[]>(this.BaseURL, {
+      headers: this.Header.set('Authorization', `bearer ${accessToken}`),
+    });
   }
-  // getAllDoctors(): Observable<any> {
-  //   return this.Clint.get(this.BaseURL);
-  // }
-
-  GetById(id:number){
-    return this.Clint.get(`${this.BaseURL}/${id}`);
+  GetById(id: number, accessToken: string) {
+    return this.http.get(`${this.BaseURL}/${id}`, {
+      headers: this.Header.set('Authorization', `bearer ${accessToken}`),
+    });
   }
-
-  AddDoctor(NewDoctor:any){
-    return this.Clint.post(this.BaseURL,NewDoctor);
-  }
-
-  DeleteDoctor(id:number){
-    return this.Clint.delete(`${this.BaseURL}/${id}`);
-  }
-
-  EditDoctor(id:number,NewDoctor:any){
-    return this.Clint.patch(`${this.BaseURL}/${id}`,NewDoctor);
+  GetDepartmentDoctors(id: number, accessToken: string) {
+    return this.http.get<Doctor[]>(`${this.BaseURL}/DepartmentDoctors/${id}`, {
+      headers: this.Header.set('Authorization', `bearer ${accessToken}`),
+    });
   }
 }

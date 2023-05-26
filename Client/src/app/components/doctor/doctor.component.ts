@@ -1,32 +1,29 @@
-import { Component,OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { Doctor } from 'src/app/Interfaces/Doctor';
+import { AccountService } from 'src/app/Services/account.service';
 import { DoctorsService } from 'src/app/Services/doctors.service';
 
 @Component({
   selector: 'app-doctor',
   templateUrl: './doctor.component.html',
-  styleUrls: ['./doctor.component.css']
+  styleUrls: ['./doctor.component.css'],
 })
-export class DoctorComponent implements OnInit {
-  doctors:any;
-  constructor(private doctorService:DoctorsService){}//
-  ngOnInit(): void {
-    this.getDoctors();
-  }
-  // getDoctors() {
-  //   this.doctorService.GetAllDoctors().subscribe(
-  //     (data:any) => {
-  //       this.doctors = data;
-  //     },
-  //     (error) => {
-  //       console.error('Error fetching doctors:', error);
-  //     }
-  //   );
-  // }
-  getDoctors() {
-    this.doctorService.GetAllDoctors().subscribe({
-      next: d=> this.doctors =d,
-      error: e=>console.log(e)
-    })
-  }
-
+export class DoctorComponent {
+  @Input() doctor: Doctor = {
+    id: 0,
+    firstName: 'string',
+    lastName: 'string',
+    gender: 1,
+    title: 'string',
+    bio: 'string',
+    departmentId: 0,
+    departmentTitle: 'string',
+    image: 'string',
+  };
+  constructor(
+    private doctorService: DoctorsService,
+    private accountServices: AccountService,
+    private router: Router
+  ) {} //
 }
