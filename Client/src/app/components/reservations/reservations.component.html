@@ -1,0 +1,25 @@
+<div class="container pt-4">
+  <div class="row my-5 gy-5">
+    <div class="col-md-3">
+      <div class="list-group">
+        <a
+          href="#"
+          class="list-group-item list-group-item-action"
+          routerLink="/profile"
+          >Profile</a
+        >
+        <a class="list-group-item list-group-item-action active">Reservation</a>
+        <a href="#" class="list-group-item list-group-item-action">Settings</a>
+        <a href="#" class="list-group-item list-group-item-action">Logout</a>
+      </div>
+    </div>
+
+    <div class="col-md-8 offset-md-1">
+      <h4 class="mb-4">Your Reservations</h4>
+      <app-reservation
+        [reservation]="res"
+        *ngFor="let res of reservations"
+      ></app-reservation>
+    </div>
+  </div>
+</div>

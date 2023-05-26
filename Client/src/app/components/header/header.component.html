@@ -1,68 +1,101 @@
-
 <div id="carouselExampleIndicators" class="carousel slide" *ngIf="showSlider">
-
   <div class="carousel-inner">
     <div class="carousel-item active">
-      <div class="bg-image1 position-relative"
-      style="background-image: url('/assets/images/hero.jpg');">
-
-      <div class="container h-100 z-3 ">
-        <div class="row h-100">
-        <div class="col-lg-5 gy-5 d-flex justify-content-center align-items-center">
-               <div class="data mt-5">
+      <div
+        class="bg-image1 position-relative"
+        style="background-image: url('/assets/images/hero.jpg')"
+      >
+        <div class="container h-100 z-3">
+          <div class="row h-100">
+            <div
+              class="col-lg-5 gy-5 d-flex justify-content-center align-items-center"
+            >
+              <div class="data mt-5">
                 <header class="entry-header mt-5">
-                  <h2>The Best <br>Medical Services</h2>
-                  </header>
-                  <div class="entry-content mt-4">
-                  <p >Lorem ipsum dolor sit amet, consectetur adipiscing elit.<br> Donec malesuada lorem maximus mauris scelerisque, at rutrum <br>nulla dictum. Ut ac ligula sapien.</p>
-                  </div>
-                  <footer class="entry-footer mt-5">
-                  <a href="#" class="button gradient-bg">Make an appointment</a>
-                  </footer>
-               </div>
-        </div>
-        </div>
-        </div>
-  </div>
-    </div>
-    <div class="carousel-item">
-      <header class="site-header">
-          <div class="container">
-            <div class="row">
-              <div class="col-12">
-                <h2>Medical Services that <br>You can Trust 100%</h2>
-                <footer class="entry-footer  mt-5">
-                  <a href="#" class="button gradient-bg">Make an appointment</a>
-                  </footer>
+                  <h2>
+                    {{ "TheBest" | translate }} <br />{{
+                      "MedServices" | translate
+                    }}
+                  </h2>
+                </header>
+                <div class="entry-content mt-4">
+                  <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.<br />
+                    Donec malesuada lorem maximus mauris scelerisque, at rutrum
+                    <br />nulla dictum. Ut ac ligula sapien.
+                  </p>
+                </div>
+                <footer class="entry-footer mt-5">
+                  <a href="#" class="button gradient-bg">{{
+                    "MakeAppointment" | translate
+                  }}</a>
+                </footer>
               </div>
             </div>
           </div>
-          <img class="header-img" src="/assets/images/service-bg.png" alt="">
-        </header>
-
-  </div>
-  <div class="carousel-item">
-    <header class="site-header">
-      <div class="container">
-        <div class="row">
-          <div class="col-12">
-            <h2>The Best <br>Medical Services</h2>
-            <footer class="entry-footer mt-5">
-              <a href="#" class="button gradient-bg">Make an appointment</a>
-              </footer>
-          </div>
         </div>
       </div>
-      <img class="header-img" src="/assets/images/about-bg.png" alt="">
-    </header>
-
+    </div>
+    <div class="carousel-item">
+      <header class="site-header">
+        <div class="container">
+          <div class="row">
+            <div class="col-12">
+              <h2>Medical Services that <br />You can Trust 100%</h2>
+              <footer class="entry-footer mt-5">
+                <a href="#" class="button gradient-bg">{{
+                  "MakeAppointment" | translate
+                }}</a>
+              </footer>
+            </div>
+          </div>
+        </div>
+        <img class="header-img" src="/assets/images/service-bg.png" alt="" />
+      </header>
+    </div>
+    <div class="carousel-item">
+      <header class="site-header">
+        <div class="container">
+          <div class="row">
+            <div class="col-12">
+              <h2>
+                {{ "TheBest" | translate }} <br />{{
+                  "MedServices" | translate
+                }}
+              </h2>
+              <footer class="entry-footer mt-5">
+                <a href="#" class="button gradient-bg">{{
+                  "MakeAppointment" | translate
+                }}</a>
+              </footer>
+            </div>
+          </div>
+        </div>
+        <img class="header-img" src="/assets/images/about-bg.png" alt="" />
+      </header>
+    </div>
   </div>
-    </div>
 
-    <div class="carousel-indicators">
-      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
-    </div>
-
+  <div class="carousel-indicators">
+    <button
+      type="button"
+      data-bs-target="#carouselExampleIndicators"
+      data-bs-slide-to="0"
+      class="active"
+      aria-current="true"
+      aria-label="Slide 1"
+    ></button>
+    <button
+      type="button"
+      data-bs-target="#carouselExampleIndicators"
+      data-bs-slide-to="1"
+      aria-label="Slide 2"
+    ></button>
+    <button
+      type="button"
+      data-bs-target="#carouselExampleIndicators"
+      data-bs-slide-to="2"
+      aria-label="Slide 3"
+    ></button>
+  </div>
 </div>

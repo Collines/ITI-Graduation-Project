@@ -1,4 +1,36 @@
 {
-  "Name": "Khaled Ahmed"
+  "Home": "Home",
+  "About": "About",
+  "Departments": "Departments",
+  "Contact": "Contact",
+  "Register": "Register",
+  "Login": "Login",
+  "Logout": "Logout",
+  "Profile": "Profile",
+  "Settings": "Settings",
 
+  "TheBest": "The Best",
+  "MedServices": "Medical Services",
+  "MakeAppointment": "Make an appointment",
+
+  "DocAtWork": "Doctors At Work",
+  "SatPatients": "Satisfied Patients",
+  "Beds": "Beds",
+  "Appointment": "Appointments",
+  "Our": "OUR",
+  "Services": "Services",
+  "ExpertDoctors": "Expert Doctors",
+  "EmergencyServices": "Emergency Services",
+  "OutdoorsCheckup": "Outdoors Checkup",
+  "TotalCare": "Total Care",
+  "ExpertDoctorsDesc": "We have the best professional doctors, well-trained staff and outstanding consultants",
+  "EmergencyServicesDesc": "We have excellent service available 24 hours and fully equipped ambulances to protect the patient",
+  "OutdoorsCheckupDesc": "We provide you with all types of exams with the latest medical equipment to ensure the doctors help in diagnosing",
+  "TotalCareDesc": "We provide you with all types of exams with the latest medical equipment to ensure the doctors help in diagnosing",
+  "MEDICALCAMP": "MEDICAL CAMP",
+  "YourHealth": "Your Health is Our Priority",
+  "YourHealthTxt": "The hospital provides its patients with many foreign experts through an integrated program for visiting doctors.",
+  "LatestNews": "LATEST NEWS",
+
+  "": ""
 }

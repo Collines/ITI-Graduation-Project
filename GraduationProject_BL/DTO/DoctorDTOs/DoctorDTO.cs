@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GraduationProject_BL.DTO
+namespace GraduationProject_BL.DTO.DoctorDTOs
 {
     public class DoctorDTO
     {

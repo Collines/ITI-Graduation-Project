@@ -1,24 +1,25 @@
-﻿using GraduationProject_BL.DTO;
+﻿using GraduationProject_BL.DTO.ReservationDTOs;
 using GraduationProject_BL.Interfaces;
 using GraduationProject_DAL.Data.Models;
-using GraduationProject_DAL.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.SqlServer.Server;
 
 namespace GraduationProject.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    //[Authorize]
+    [Authorize]
     public class ReservationController : ControllerBase
     {
         private readonly IHttpContextAccessor httpContextAccessor;
+        private readonly IPatientManager patientMgr;
         private readonly IReservationManager manager;
 
-        public ReservationController(IReservationManager _manager, IHttpContextAccessor _httpContextAccessor)
+        public ReservationController(IReservationManager _manager, IHttpContextAccessor _httpContextAccessor, IPatientManager patientMgr)
         {
             manager = _manager;
             httpContextAccessor = _httpContextAccessor;
+            this.patientMgr = patientMgr;
         }
 
         [HttpGet]
@@ -40,6 +41,23 @@ namespace GraduationProject.Controllers
             }
 
             return NotFound();
+        }
+
+        [HttpPost("My-Reservations")]
+        public async Task<ActionResult<List<PatientReservationDTO>>> GetAllPatientReservations(int patientId,[FromBody]string accessToken)
+        {
+            var patient = await patientMgr.GetPatientByAccessToken(accessToken);
+            if (patient != null)
+            {
+                if (patientId != patient.Id)
+                    return Unauthorized();
+                var reservations = await manager.GetAllPatientReservationsAsync(Utils.GetLang(httpContextAccessor), patientId);
+                if (reservations != null && reservations.Count > 0)
+                    return Ok(reservations);
+
+                return NotFound();
+            }
+            return Unauthorized();
         }
 
         [HttpPost]

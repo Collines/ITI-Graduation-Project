@@ -1,24 +1,17 @@
-import {
-  Component,
-  OnInit,
-  ElementRef,
-  ViewChild,
-  AfterContentInit,
-  AfterViewChecked,
-} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { UserEdit } from 'src/app/Interfaces/User/UserEdit';
 import { UserUpdate } from 'src/app/Interfaces/User/userUpdate';
 import { AccountService } from 'src/app/Services/account.service';
 
 @Component({
-  selector: 'app-dashboard',
-  templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.css'],
+  selector: 'app-profile',
+  templateUrl: './profile.component.html',
+  styleUrls: ['./profile.component.css'],
 })
-
-export class DashboardComponent implements OnInit {
-  constructor(private accountService: AccountService) {
+export class ProfileComponent implements OnInit {
+  constructor(private accountService: AccountService, private router: Router) {
     this.Validation = new FormGroup({
       FirstName: new FormControl(null, [
         Validators.required,
@@ -65,7 +58,6 @@ export class DashboardComponent implements OnInit {
                 (date.getMonth() + 1).toString().padStart(2, '0') +
                 '-' +
                 date.getDate().toString().padStart(2, '0');
-              // console.log(udata);
               this.Validation.controls['FirstName'].value =
                 this.userEdit.firstName_EN;
               this.Validation.controls['FirstNameAr'].value =
@@ -87,8 +79,9 @@ export class DashboardComponent implements OnInit {
               this.Validation.controls['Date'].status = 'VALID';
               this.textArea = this.userEdit.medicalHistory;
             },
-            error: (er) => console.log(er),
           });
+        } else {
+          this.router.navigate(['/login']);
         }
       },
     });
@@ -114,7 +107,6 @@ export class DashboardComponent implements OnInit {
   isDataLoaded = false;
   isResponsed = false;
   textArea: string | null = '';
-
 
   get isFirstNameValid() {
     return this.Validation.controls['FirstName'].status == 'VALID';
@@ -145,15 +137,17 @@ export class DashboardComponent implements OnInit {
   }
 
   public onValueChange(event: Event): void {
-    console.log(event.target);
     const value = (event.target as any).value;
     this.textArea = value;
+  }
+
+  logout() {
+    this.accountService.logout();
   }
 
   onSubmit(errorElement: any, SuccessElement: any) {
     this.submitted = true;
     if (this.Validation.invalid) {
-      console.log('invalid');
       return;
     } else {
       let accessToken;
@@ -174,8 +168,6 @@ export class DashboardComponent implements OnInit {
           medicalHistory: this.textArea,
           password: this.Validation.controls['password'].value,
         };
-        debugger;
-        user;
         this.accountService.update(accessToken, user).subscribe({
           next: (r: any) => {
             this.error = false;
@@ -193,4 +185,3 @@ export class DashboardComponent implements OnInit {
     }
   }
 }
-
