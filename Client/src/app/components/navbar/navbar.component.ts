@@ -36,13 +36,6 @@ export class NavbarComponent implements OnInit {
         if (user) this.Username = user.fullName;
       },
     });
-    let langauge = localStorage.getItem('language');
-    if (langauge) {
-      this.translate.setDefaultLang(langauge);
-      this.translate.currentLang = langauge;
-    } else {
-      this.translate.setDefaultLang('en');
-    }
   }
 
   Username = '';
@@ -60,7 +53,6 @@ export class NavbarComponent implements OnInit {
 
   // translation switcher
   switchLang(lang: string) {
-    localStorage.setItem('language', lang);
     this.translate.use(lang);
     sessionStorage.setItem("Lang",lang)
 
