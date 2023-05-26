@@ -46,12 +46,9 @@
           }}</a>
         </li>
 
-        <button *ngIf="!isLogged" class="button mx-1">
-          <a routerLink="/register"> Register </a>
-        </button>
-        <button *ngIf="!isLogged" class="button mx-1">
-          <a routerLink="/login"> Login </a>
-        </button>
+        <a class="button mx-1 mt-4 mt-lg-0 text-center text-light" *ngIf="!isLogged" routerLink="/register"> Register </a>
+
+        <a class="button mx-1 mt-4 mt-lg-0 text-center text-light" *ngIf="!isLogged" routerLink="/login"> Login </a>
 
         <div
           class="d-inline-flex dropdown"
@@ -85,9 +82,10 @@
           </div>
         </div>
         <!-- Language selector -->
-        <span class="form-inline ms-2 mt-1">
+        <span class="form-inline mx-lg-4 mx-1 mt-4 mt-lg-1">
           <select
-            class="form-select"
+            class="form-control text-light text-center"
+            style="background-color: #081f3e;"
             #selectedLang
             (change)="switchLang(selectedLang.value)"
           >
