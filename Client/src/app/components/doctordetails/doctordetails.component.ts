@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { DoctorsService } from 'src/app/Services/doctors.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AccountService } from 'src/app/Services/account.service';
+import { Location } from '@angular/common';
+import { Doctor } from 'src/app/Interfaces/Doctor';
 
 @Component({
   selector: 'app-doctordetailss',
@@ -9,16 +11,29 @@ import { AccountService } from 'src/app/Services/account.service';
   styleUrls: ['./doctordetails.component.css'],
 })
 export class DoctordetailsComponent implements OnInit {
-  ID: any;
-  Doctor: any;
+  ID: number;
+  Doctor: Doctor = {
+    id: 0,
+    firstName: '',
+    lastName: '',
+    gender: 1,
+    title: '',
+    bio: '',
+    departmentId: 0,
+    departmentTitle: '',
+    image: '',
+  };
   constructor(
     private DoctorsService: DoctorsService,
     private Route: ActivatedRoute,
     private router: Router,
-    private myAccountService: AccountService
+    private myAccountService: AccountService,
+    private _location: Location
   ) {
     this.ID = this.Route.snapshot.params['id'];
-    myAccountService.currentUser$.subscribe({
+  }
+  ngOnInit() {
+    this.myAccountService.currentUser$.subscribe({
       next: (user) => {
         if (user) {
           this.DoctorsService.GetById(this.ID, user.accessToken).subscribe({
@@ -29,13 +44,15 @@ export class DoctordetailsComponent implements OnInit {
             error: (err) => console.log(err),
           });
         } else {
-          router.navigate(['/login']);
+          this.router.navigate(['/login']);
         }
       },
       error: (e) => {
-        router.navigate(['/login']);
+        this.router.navigate(['/login']);
       },
     });
   }
-  ngOnInit() {}
+  returnBack() {
+    this._location.back();
+  }
 }

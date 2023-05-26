@@ -56,7 +56,6 @@ export class AppComponent implements OnInit {
       .subscribe(() => {
         const rt = this.getChild(this.activatedRoute);
         rt.data.subscribe((data) => {
-          console.log(data);
           this.titleService.setTitle(data['title']);
         });
       });
@@ -76,7 +75,4 @@ export class AppComponent implements OnInit {
     const user: User = JSON.parse(x);
     this.accountService.setCurrentUser(user);
   }
-  // prepareRoute(outlet:RouterOutlet){
-  // return outlet && outlet.activatedRouteData
-  // }
 }

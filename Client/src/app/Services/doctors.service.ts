@@ -18,7 +18,7 @@ export class DoctorsService {
     });
   }
   GetById(id: number, accessToken: string) {
-    return this.http.get(`${this.BaseURL}/${id}`, {
+    return this.http.get<Doctor>(`${this.BaseURL}/${id}`, {
       headers: this.Header.set('Authorization', `bearer ${accessToken}`),
     });
   }

@@ -6,6 +6,7 @@ import { UserUpdate } from '../Interfaces/User/userUpdate';
 import { Router } from '@angular/router';
 import { UserEdit } from '../Interfaces/User/UserEdit';
 import { HeaderService } from './header.service';
+import { Location } from '@angular/common';
 
 @Injectable({
   providedIn: 'root',
@@ -13,10 +14,15 @@ import { HeaderService } from './header.service';
 export class AccountService {
   private CurrentUserSource = new BehaviorSubject<User | null>(null);
   private BaseURL: string = 'https://localhost:7035/api/patient/';
-  private Header: HttpHeaders = this.header.Header
+  private Header: HttpHeaders = this.header.Header;
   currentUser$ = this.CurrentUserSource.asObservable();
 
-  constructor(private http: HttpClient, private router: Router,private header:HeaderService) {}
+  constructor(
+    private http: HttpClient,
+    private router: Router,
+    private header: HeaderService,
+    private location: Location
+  ) {}
 
   login(model: any) {
     return this.http
@@ -49,7 +55,7 @@ export class AccountService {
   logout() {
     localStorage.removeItem('user');
     this.CurrentUserSource.next(null);
-    this.router.navigate(['/home']);
+    this.location.back();
   }
 
   update(accessToken: string, model: UserUpdate) {
