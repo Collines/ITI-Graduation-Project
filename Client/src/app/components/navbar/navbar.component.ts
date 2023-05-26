@@ -8,12 +8,27 @@ import { TranslateService } from '@ngx-translate/core';
   styleUrls: ['./navbar.component.css'],
 })
 export class NavbarComponent implements OnInit {
-  constructor(
-    private accountService: AccountService,
-    public translate: TranslateService
-  ) {
+
+  Lang:(string|null);
+  TextDir:string;
+
+  constructor(private accountService: AccountService, public translate: TranslateService) {
+
     translate.addLangs(['en', 'ar']);
+    translate.setDefaultLang("en");
+
+    this.Lang = sessionStorage.getItem("Lang");
+    if(this.Lang)
+      translate.use(this.Lang);
+
+    if(this.Lang === "ar")
+      this.TextDir = 'rtl';
+    else
+      this.TextDir = 'ltr';
+
+    document.dir = this.TextDir;
   }
+
   ngOnInit(): void {
     this.accountService.currentUser$.subscribe({
       next: (user) => {
@@ -29,11 +44,14 @@ export class NavbarComponent implements OnInit {
       this.translate.setDefaultLang('en');
     }
   }
+
   Username = '';
-  dropdownShow = false;
-  dropDownClick() {
-    this.dropdownShow = !this.dropdownShow;
+  dropdownShow=false;
+
+  dropDownClick(){
+    this.dropdownShow=!this.dropdownShow;
   }
+
   isLogged: boolean = false;
   Logout() {
     this.accountService.logout();
@@ -44,5 +62,17 @@ export class NavbarComponent implements OnInit {
   switchLang(lang: string) {
     localStorage.setItem('language', lang);
     this.translate.use(lang);
+    sessionStorage.setItem("Lang",lang)
+
+    if(lang === "ar"){
+      this.TextDir = 'rtl';
+      sessionStorage.setItem("Dir",'rtl')
+    }
+    else {
+      this.TextDir = 'ltr';
+      sessionStorage.setItem("Dir",'ltr')
+    }
+
+    document.dir = this.TextDir
   }
 }

@@ -2,6 +2,7 @@
 using GraduationProject_BL.Interfaces;
 using GraduationProject_DAL.Data.Models;
 using GraduationProject_DAL.Interfaces;
+using System.Numerics;
 
 namespace GraduationProject_BL.Managers
 {
@@ -203,9 +204,7 @@ namespace GraduationProject_BL.Managers
                     {
                         if (doctor.Image != null)
                         {
-                            var oldImagePath = Path.Combine(GetImagesPath(), doctor.Image.Name);
-                            if (File.Exists(oldImagePath))
-                                File.Delete(oldImagePath);
+                            DeleteDoctorImage(doctor.Image.Name);
                         }
                         doctor.Image = item.Image;
                     }
@@ -218,8 +217,17 @@ namespace GraduationProject_BL.Managers
 
         public async Task DeleteAsync(int id)
         {
-            await translations.DeleteAsync(id);
-            await repository.DeleteAsync(id);
+            var doctors = await repository.GetAllAsync();
+            var doctor = doctors.Find(d => d.Id == id);
+            if (doctor != null)
+            {
+                if (doctor.Image != null)
+                {
+                    DeleteDoctorImage(doctor.Image.Name);
+                }
+                await translations.DeleteAsync(id);
+                await repository.DeleteAsync(id);
+            }   
         }
 
         public async Task<DoctorInsertDTO?> GetInsertDTOByIdAsync(int id)
@@ -280,9 +288,14 @@ namespace GraduationProject_BL.Managers
             {
                 var uniqueFileName = DateTime.Now.ToString("yyyyMMdd_HHmmss") + "_" + item.Image.FileName;
 
-                var filePath = Path.Combine(GetImagesPath(), uniqueFileName);
+                var dashboardFilePath = Path.Combine(GetDashboardImagesPath(), uniqueFileName);
+                using (var stream = new FileStream(dashboardFilePath, FileMode.Create))
+                {
+                    await item.Image.CopyToAsync(stream);
+                }
 
-                using (var stream = new FileStream(filePath, FileMode.Create))
+                var clientFilePath = Path.Combine(GetClientImagesPath(), uniqueFileName);
+                using (var stream = new FileStream(clientFilePath, FileMode.Create))
                 {
                     await item.Image.CopyToAsync(stream);
                 }
@@ -293,11 +306,29 @@ namespace GraduationProject_BL.Managers
             return doctor;
         }
 
-        private string GetImagesPath()
+        private string GetDashboardImagesPath()
         {
             var currentPath = Directory.GetCurrentDirectory();
             var newPath = Path.GetDirectoryName(currentPath) + "\\Dashboard\\src\\" + retrievePath;
             return newPath;
+        }
+
+        private string GetClientImagesPath()
+        {
+            var currentPath = Directory.GetCurrentDirectory();
+            var newPath = Path.GetDirectoryName(currentPath) + "\\Client\\src\\" + retrievePath;
+            return newPath;
+        }
+
+        private void DeleteDoctorImage(string imageName)
+        {
+            var dasboardPreviousImagePath = Path.Combine(GetDashboardImagesPath(), imageName);
+            if (File.Exists(dasboardPreviousImagePath))
+                File.Delete(dasboardPreviousImagePath);
+
+            var clientPreviousImagePath = Path.Combine(GetClientImagesPath(), imageName);
+            if (File.Exists(clientPreviousImagePath))
+                File.Delete(clientPreviousImagePath);
         }
     }
 }
