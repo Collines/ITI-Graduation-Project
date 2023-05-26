@@ -1,4 +1,4 @@
-﻿using GraduationProject_BL.DTO;
+﻿using GraduationProject_BL.DTO.DoctorDTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;

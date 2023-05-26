@@ -4,7 +4,10 @@ namespace GraduationProject_BL.DTO
 {
     public class LoginDTO
     {
-        public required PatientDTO Patient { get; set; }
+        //public required PatientDTO Patient { get; set; }
+        public required int Id { get; set; }
+
+        public required string FullName { get; set; }
 
         public required string AccessToken { get; set; }
 

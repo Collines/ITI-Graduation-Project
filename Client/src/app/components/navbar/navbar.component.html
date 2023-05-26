@@ -23,29 +23,27 @@
             routerLink="/home"
             routerLinkActive="active"
             [routerLinkActiveOptions]="{ exact: true }"
-            >Home</a
+            >{{ "Home" | translate }}</a
           >
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/about" routerLinkActive="active"
-            >About</a
-          >
+          <a class="nav-link" routerLink="/about" routerLinkActive="active">{{
+            "About" | translate
+          }}</a>
         </li>
-        <!-- <li class="nav-item">
-          <a class="nav-link" aria-current="page" routerLink="/doctor">Doctors</a>
-        </li> -->
-      <li class="nav-item">
+        <li class="nav-item">
           <a
             class="nav-link"
             routerLink="/departments"
             routerLinkActive="active"
-            >Department</a
+            >{{ "Departments" | translate }}</a
           >
         </li>
 
         <li class="nav-item">
-          <a class="nav-link" routerLink="/contact" routerLinkActive="active" >Contact</a
-          >
+          <a class="nav-link" routerLink="/contact" routerLinkActive="active">{{
+            "Contact" | translate
+          }}</a>
         </li>
 
         <button *ngIf="!isLogged" class="button mx-1">
@@ -54,20 +52,6 @@
         <button *ngIf="!isLogged" class="button mx-1">
           <a routerLink="/login"> Login </a>
         </button>
-
-        <!-- Language selector -->
-        <span class="form-inline ms-2 mt-1">
-          <select
-              class="form-control"
-              #selectedLang
-              (change)="switchLang(selectedLang.value)">
-            <option *ngFor="let language of translate.getLangs()"
-              [value]="language"
-              [selected]="language === translate.currentLang">
-              {{ language }}
-            </option>
-          </select>
-        </span>
 
         <div
           class="d-inline-flex dropdown"
@@ -91,11 +75,31 @@
             [ngClass]="dropdownShow ? 'show' : ''"
             aria-labelledby="dropdownMenuLink"
           >
-            <a class="dropdown-item" routerLink="/dashboard">Profile</a>
-            <a class="dropdown-item" href="#">Settings</a>
-            <a class="dropdown-item" (click)="Logout()">Logout</a>
+            <a class="dropdown-item" routerLink="/profile">{{
+              "Profile" | translate
+            }}</a>
+            <a class="dropdown-item" href="#">{{ "Settings" | translate }}</a>
+            <a class="dropdown-item" (click)="Logout()">{{
+              "Logout" | translate
+            }}</a>
           </div>
         </div>
+        <!-- Language selector -->
+        <span class="form-inline ms-2 mt-1">
+          <select
+            class="form-control"
+            #selectedLang
+            (change)="switchLang(selectedLang.value)"
+          >
+            <option
+              *ngFor="let language of translate.getLangs()"
+              [value]="language"
+              [selected]="language === translate.currentLang"
+            >
+              {{ language == "en" ? "English" : "العربية" }}
+            </option>
+          </select>
+        </span>
       </ul>
     </div>
   </div>

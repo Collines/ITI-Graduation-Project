@@ -11,21 +11,21 @@ import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule,HttpClient } from '@angular/common/http';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { AboutComponent } from './components/about/about.component';
 import { DoctorComponent } from './components/doctor/doctor.component';
-import { DoctordetailssComponent } from './components/doctordetailss/doctordetailss.component';
-import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { DoctordetailsComponent } from './components/doctordetails/doctordetails.component';
+import { ProfileComponent } from './components/profile/profile.component';
 import { DepartmentsComponent } from './components/departments/departments.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ContactComponent } from './components/contact/contact.component';
-import { ReservationComponent } from './components/reservation/reservation.component';
+import { ReservationsComponent } from './components/reservations/reservations.component';
 import { DepartmentComponent } from './components/department/department.component';
 
 //For Translarion
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-
+import { ReservationComponent } from './components/reservation/reservation.component';
 
 @NgModule({
   declarations: [
@@ -38,12 +38,13 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
     RegisterComponent,
     AboutComponent,
     DoctorComponent,
-    DoctordetailssComponent,
-    DashboardComponent,
+    DoctordetailsComponent,
+    ProfileComponent,
     DepartmentsComponent,
     ContactComponent,
+    ReservationsComponent,
     ReservationComponent,
-    DepartmentComponent
+    DepartmentComponent,
   ],
   imports: [
     BrowserModule,
@@ -56,9 +57,9 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
       loader: {
         provide: TranslateLoader,
         useFactory: httpTranslateLoader,
-        deps: [HttpClient]
-      }
-    })
+        deps: [HttpClient],
+      },
+    }),
   ],
   providers: [],
   bootstrap: [AppComponent],

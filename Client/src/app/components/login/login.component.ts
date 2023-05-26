@@ -40,7 +40,7 @@ export class LoginComponent implements OnInit {
   get isPasswordValid() {
     return this.Validation.controls.password.valid;
   }
-  onSubmit() {
+  onSubmit(ErrorDiv: any) {
     this.submitted = true;
 
     if (this.Validation.invalid) {
@@ -53,10 +53,17 @@ export class LoginComponent implements OnInit {
         })
         .subscribe({
           next: (resp) => {
-            this.router.navigate(['/dashboard']);
+            this.router.navigate(['/profile']);
           },
           error: (err) => {
             this.isResponseSuccess = false;
+            console.log(err);
+
+            if (err.error.responseMessage) {
+              ErrorDiv.innerHTML = err.error.responseMessage;
+            } else {
+              ErrorDiv.innerHTML = "Can't Connect to Server";
+            }
           },
         });
     }
