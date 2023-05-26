@@ -53,23 +53,6 @@
           <a routerLink="/login"> Login </a>
         </button>
 
-        <!-- Language selector -->
-        <span class="form-inline ms-2 mt-1">
-          <select
-            class="form-control"
-            #selectedLang
-            (change)="switchLang(selectedLang.value)"
-          >
-            <option
-              *ngFor="let language of translate.getLangs()"
-              [value]="language"
-              [selected]="language === translate.currentLang"
-            >
-              {{ language }}
-            </option>
-          </select>
-        </span>
-
         <div
           class="d-inline-flex dropdown"
           *ngIf="isLogged"
@@ -100,23 +83,23 @@
               "Logout" | translate
             }}</a>
           </div>
-          <!-- Language selector -->
-          <span class="form-inline ms-2 mt-1">
-            <select
-              class="form-control"
-              #selectedLang
-              (change)="switchLang(selectedLang.value)"
-            >
-              <option
-                *ngFor="let language of translate.getLangs()"
-                [value]="language"
-                [selected]="language === translate.currentLang"
-              >
-                {{ language == "en" ? "English" : "العربية" }}
-              </option>
-            </select>
-          </span>
         </div>
+        <!-- Language selector -->
+        <span class="form-inline ms-2 mt-1">
+          <select
+            class="form-control"
+            #selectedLang
+            (change)="switchLang(selectedLang.value)"
+          >
+            <option
+              *ngFor="let language of translate.getLangs()"
+              [value]="language"
+              [selected]="language === translate.currentLang"
+            >
+              {{ language == "en" ? "English" : "العربية" }}
+            </option>
+          </select>
+        </span>
       </ul>
     </div>
   </div>
