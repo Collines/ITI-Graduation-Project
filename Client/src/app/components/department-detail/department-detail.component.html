@@ -1,6 +1,6 @@
 <div class="wrapper">
   <h1 class="text-center">{{ department.title }} Doctors</h1>
-  <div class="container mt-5">
+  <div class="container my-5">
     <div class="row height d-flex justify-content-center align-items-center">
       <div class="col-md-8">
         <div class="search">
@@ -9,8 +9,12 @@
             type="text"
             class="form-control rounded-pill"
             placeholder="Search by doctor name....."
+            [(ngModel)]="searchQuery"
+            (input)="onSearch()"
           />
-          <button class="btn btn-primary rounded-pill">Search</button>
+          <button class="btn btn-primary rounded-pill" (click)="onSearch()">
+            Search
+          </button>
         </div>
       </div>
     </div>
@@ -19,14 +23,16 @@
   <div class="container mt-5">
     <div class="section-content">
       <div class="aon-med-team-section">
-        <div class="row gy-1" *ngIf="doctors.length > 0">
+        <div class="row gy-1" *ngIf="SearchResult.length > 0">
           <app-doctor
             class="col-lg-6 col-md-6"
             [doctor]="doc"
-            *ngFor="let doc of doctors"
+            *ngFor="let doc of SearchResult"
           ></app-doctor>
         </div>
-        <p class="text-center fs-3">No Doctors in this department</p>
+        <p *ngIf="SearchResult.length == 0" class="text-center fs-3">
+          No Doctors in this department
+        </p>
       </div>
     </div>
   </div>
