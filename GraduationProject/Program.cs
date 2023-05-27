@@ -39,14 +39,16 @@ internal class Program
 
         app.UseHttpsRedirection();
 
+        //Use Cors
+        app.UseCors(CorsPolicy);
+
         app.UseMiddleware<TokenAuthenticationMiddleware>();
         app.UseAuthentication();
         app.UseAuthorization();
 
         app.MapControllers();
 
-        //Use Cors
-        app.UseCors(CorsPolicy);
+        
 
         app.Run();
     }

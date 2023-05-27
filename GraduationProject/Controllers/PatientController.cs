@@ -9,7 +9,6 @@ namespace GraduationProject.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    //[Authorize]
     public class PatientController : ControllerBase
     {
         private readonly IHttpContextAccessor httpContextAccessor;
@@ -21,6 +20,7 @@ namespace GraduationProject.Controllers
             manager = _manager;
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         public async Task<ActionResult<List<PatientDTO>>> GetAll()
         {
@@ -29,6 +29,7 @@ namespace GraduationProject.Controllers
             return Ok(patients);
         }
 
+        [Authorize]
         [HttpGet("{id}")]
         public async Task<ActionResult<Patient>> GetPatientDetails(int id)
         {
@@ -65,6 +66,7 @@ namespace GraduationProject.Controllers
             return BadRequest("Email Already Exist");
         }
 
+        [Authorize]
         [HttpDelete("{id}")]
         public async Task<ActionResult<Patient>> DeletePatient(int id)
         {
@@ -72,6 +74,7 @@ namespace GraduationProject.Controllers
             return Ok(id);
         }
 
+        [Authorize(Roles = "Patient")]
         [HttpPatch("Update")]
         public async Task<ActionResult<Patient>> UpdatePatient(string accessToken, PatientUpdateDTO patientUDTO)
         {
@@ -97,8 +100,8 @@ namespace GraduationProject.Controllers
             return BadRequest();
         }
 
+        [Authorize]
         [HttpPost("GetPatientData")]
-
         public async Task<ActionResult<PatientEditDTO>> GetPatientDetails([FromBody] string accessToken)
         {
             if (ModelState.IsValid)
@@ -137,7 +140,7 @@ namespace GraduationProject.Controllers
             else return BadRequest(new { ResponseMessage = "Incorrect username or password!" });
         }
 
-        [AllowAnonymous]
+        [Authorize]
         [HttpPost]
         [Route("refresh")]
         public async Task<IActionResult> Refresh(RefreshTokenDTO token)
