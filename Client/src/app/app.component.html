@@ -1,4 +1,10 @@
-<div [dir]="">
+<div class="d-flex justify-content-center align-items-center " *ngIf="loader" style="height: 100vh;">
+
+  <span class="loader"></span>
+
+</div>
+
+<div [dir]="" *ngIf="!loader">
   <app-navbar></app-navbar>
 <!-- <main  [@slideInAnimation]="prepareRoute(outlet)"> -->
   <router-outlet #outlet="outlet"></router-outlet>
