@@ -51,6 +51,7 @@ export class DepartmentDetailComponent implements OnInit {
     id: 0,
     title: '',
     description: '',
+    numberOfBeds: 0
   };
   doctors: Doctor[] = [];
   user: User = {
