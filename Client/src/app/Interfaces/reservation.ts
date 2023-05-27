@@ -6,5 +6,7 @@ export interface Reservation {
   dateTime: string;
   queue: number;
   status: ReservationStatus;
-  doctor: Doctor;
+  doctor: Doctor | null;
+  doctorId: number;
+  patientId: number;
 }

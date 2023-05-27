@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, Title } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -26,6 +26,7 @@ import { DepartmentComponent } from './components/department/department.componen
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { ReservationComponent } from './components/reservation/reservation.component';
+import { DepartmentDetailComponent } from './components/department-detail/department-detail.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +46,7 @@ import { ReservationComponent } from './components/reservation/reservation.compo
     ReservationsComponent,
     ReservationComponent,
     DepartmentComponent,
+    DepartmentDetailComponent,
   ],
   imports: [
     BrowserModule,
@@ -61,7 +63,7 @@ import { ReservationComponent } from './components/reservation/reservation.compo
       },
     }),
   ],
-  providers: [],
+  providers: [Title],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

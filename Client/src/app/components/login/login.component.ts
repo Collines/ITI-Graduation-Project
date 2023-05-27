@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -9,7 +10,11 @@ import { AccountService } from 'src/app/Services/account.service';
   styleUrls: ['../register/register.component.css'],
 })
 export class LoginComponent implements OnInit {
-  constructor(private accountService: AccountService, private router: Router) {}
+  constructor(
+    private accountService: AccountService,
+    private router: Router,
+    private location: Location
+  ) {}
   ngOnInit(): void {
     this.accountService.currentUser$.subscribe({
       next: (res) => {
@@ -53,7 +58,7 @@ export class LoginComponent implements OnInit {
         })
         .subscribe({
           next: (resp) => {
-            this.router.navigate(['/profile']);
+            this.location.back();
           },
           error: (err) => {
             this.isResponseSuccess = false;

@@ -1,16 +1,18 @@
-
-.banner{
+.banner {
   background-image: url("/assets/images/banner-breadcrumb.jpg");
   height: 260px;
   background-size: cover;
   background-position: center;
   position: relative;
-
 }
-h2,h3,h4,h5,h6{
+h2,
+h3,
+h4,
+h5,
+h6 {
   color: #081f3e;
 }
-.title{
+.title {
   position: absolute;
   top: 60%;
   left: 20%;
@@ -20,10 +22,10 @@ h2,h3,h4,h5,h6{
   -ms-transform: translateY(-40%);
   -o-transform: translateY(-40%);
 }
-.title h2{
+.title h2 {
   font-size: 60px;
 }
-.title a{
+.title a {
   color: #081f3e;
   margin: 5px;
   font-size: 18px;
@@ -34,21 +36,21 @@ h2,h3,h4,h5,h6{
   -ms-transition: 0.3s;
   -o-transition: 0.3s;
 }
-.title a:hover{
+.title a:hover {
   color: #cde1f8;
 }
-.first{
+.first {
   padding-top: var(--padding-top);
   padding-bottom: var(--padding-bottom);
 }
-.first .data h2{
+.first .data h2 {
   font-weight: 700;
 }
-.first .data p{
+.first .data p {
   line-height: 1.7;
   color: #777;
 }
-.first .image img{
+.first .image img {
   width: 75%;
 }
 
@@ -59,22 +61,34 @@ h2,h3,h4,h5,h6{
 }
 
 @keyframes progress1 {
- to { --progress-value: 90; }
+  to {
+    --progress-value: 90;
+  }
 }
 @keyframes progress2 {
- to { --progress-value: 80; }
+  to {
+    --progress-value: 80;
+  }
 }
 @keyframes progress3 {
- to { --progress-value: 100; }
+  to {
+    --progress-value: 100;
+  }
 }
 @keyframes progress4 {
- to { --progress-value: 75; }
+  to {
+    --progress-value: 75;
+  }
 }
 @keyframes progress5 {
- to { --progress-value: 85; }
+  to {
+    --progress-value: 85;
+  }
 }
 @keyframes progress6 {
- to { --progress-value: 95; }
+  to {
+    --progress-value: 95;
+  }
 }
 
 .progress-bar {
@@ -84,80 +98,76 @@ h2,h3,h4,h5,h6{
   width: 100px;
   height: 100px;
   border-radius: 50%;
-  background:radial-gradient(closest-side, white 79%, transparent 80% 100%),
-  conic-gradient(#18a3eb calc(var(--progress-value) * 1%), #a0cfe7 0);
-
+  background: radial-gradient(closest-side, white 79%, transparent 80% 100%),
+    conic-gradient(#18a3eb calc(var(--progress-value) * 1%), #a0cfe7 0);
 }
-.p1{
+.p1 {
   animation: progress1 2s 1 forwards;
 }
-.p2{
+.p2 {
   animation: progress2 2s 1 forwards;
-
 }
-.p3{
+.p3 {
   animation: progress3 2s 1 forwards;
 }
-.p4{
+.p4 {
   animation: progress4 2s 1 forwards;
 }
-.p5{
+.p5 {
   animation: progress5 2s 1 forwards;
 }
-.p6{
+.p6 {
   animation: progress6 2s 1 forwards;
 }
 
 .p1::before {
   counter-reset: percentage var(--progress-value);
-  content: counter(percentage) '%';
+  content: counter(percentage) "%";
   animation: progress1 2s 1 forwards;
 }
 .p2::before {
   counter-reset: percentage var(--progress-value);
-  content: counter(percentage) '%';
+  content: counter(percentage) "%";
   animation: progress2 2s 1 forwards;
   -webkit-animation: progress2 2s 1 forwards;
 }
 .p3::before {
   counter-reset: percentage var(--progress-value);
-  content: counter(percentage) '%';
+  content: counter(percentage) "%";
   animation: progress3 2s 1 forwards;
   -webkit-animation: progress3 2s 1 forwards;
 }
 .p4::before {
   counter-reset: percentage var(--progress-value);
-  content: counter(percentage) '%';
+  content: counter(percentage) "%";
   animation: progress4 2s 1 forwards;
   -webkit-animation: progress4 2s 1 forwards;
 }
 .p5::before {
   counter-reset: percentage var(--progress-value);
-  content: counter(percentage) '%';
+  content: counter(percentage) "%";
   animation: progress5 2s 1 forwards;
   -webkit-animation: progress5 2s 1 forwards;
 }
 .p6::before {
   counter-reset: percentage var(--progress-value);
-  content: counter(percentage) '%';
+  content: counter(percentage) "%";
   animation: progress6 2s 1 forwards;
   -webkit-animation: progress6 2s 1 forwards;
 }
-.load{
+.load {
   width: 80%;
   margin: auto;
 }
 @media screen and (max-width: 520px) {
   .load {
-     width: 30%;
-
+    width: 30%;
   }
 }
-.thired{
+.thired {
   padding-top: var(--padding-top);
   padding-bottom: var(--padding-bootm);
 }
-
 
 /*  Start Work Section */
 .work {
@@ -165,7 +175,7 @@ h2,h3,h4,h5,h6{
   padding-bottom: 30px;
   background-color: var(--backgroundColor);
 }
-.work ul li{
+.work ul li {
   line-height: 1.8;
 }
 .work .box {
@@ -179,24 +189,24 @@ h2,h3,h4,h5,h6{
 }
 /*  End Work Section */
 
-#testimonial{
+#testimonial {
   padding-top: 30px;
   padding-bottom: var(--padding-bootm);
   background-color: var(--backgroundColor);
 }
 
-.feadback{
+.feadback {
   background-color: #fff;
   padding: 50px;
   width: 60%;
 }
 
 @media only screen and (max-width: 992px) {
-.feadback {
-      width: 100%;
+  .feadback {
+    width: 100%;
   }
 }
-.img-feadback img{
+.img-feadback img {
   width: 100px;
   height: 100px;
   border-radius: 50%;
@@ -210,10 +220,10 @@ h2,h3,h4,h5,h6{
   margin-top: 20px;
 }
 .carousel-indicators .active {
- background-color: var(--mainColor);
- width: 30px;
- height: 12px;
- border-radius: 20px;
+  background-color: var(--mainColor);
+  width: 30px;
+  height: 12px;
+  border-radius: 20px;
 }
 .color {
   width: 350px;
@@ -225,4 +235,3 @@ h2,h3,h4,h5,h6{
   transform: rotate(45deg);
 }
 /* End Testimonial Section */
-

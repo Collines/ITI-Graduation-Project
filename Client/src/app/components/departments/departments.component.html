@@ -1,24 +1,30 @@
 <div class="contact">
-  <div class="banner ">
-   <div class="container">
-    <div class="title ">
-      <h2 > Department</h2>
-      <p class="text-white link-nav">
-        <a routerLink="/home">Home </a> <i class="fa-solid fa-arrow-right" style="color: #081f3e;"></i>
-        <a routerLink="contact"> Department</a></p>
-     </div>
-   </div>
+  <div class="banner">
+    <div class="container">
+      <div class="title">
+        <h2>Department</h2>
+        <p class="text-white link-nav">
+          <a routerLink="/home">Home </a>
+          <i class="fa-solid fa-arrow-right" style="color: #081f3e"></i>
+          <a routerLink="contact"> Department</a>
+        </p>
+      </div>
+    </div>
   </div>
-<div class="first">
-    <h6 class="text-center my-4 fs-3 fw-bold search ">Search Doctor By Departments </h6>
+  <div class="first">
+    <h6 class="text-center my-4 fs-3 fw-bold search">
+      Search Doctor By Departments
+    </h6>
     <div class="line mb-5"></div>
 
-   <div class="container ">
-
-       <app-department ></app-department>
-
- </div>
-</div>
-
-
+    <div class="container">
+      <div class="row mb-3 gy-3">
+        <app-department
+          class="col-lg-4"
+          [department]="dept"
+          *ngFor="let dept of departments"
+        ></app-department>
+      </div>
+    </div>
+  </div>
 </div>

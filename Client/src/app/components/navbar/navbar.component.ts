@@ -53,6 +53,7 @@ export class NavbarComponent implements OnInit {
   switchLang(lang: string) {
     localStorage.setItem('language', lang);
     this.translate.use(lang);
+    location.reload();
     document.dir = lang === 'en' ? 'ltr' : 'rtl';
   }
 }

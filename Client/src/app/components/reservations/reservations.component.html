@@ -16,10 +16,15 @@
 
     <div class="col-md-8 offset-md-1">
       <h4 class="mb-4">Your Reservations</h4>
-      <app-reservation
-        [reservation]="res"
-        *ngFor="let res of reservations"
-      ></app-reservation>
+      <div *ngIf="reservations.length > 0">
+        <app-reservation
+          [reservation]="res"
+          *ngFor="let res of reservations"
+        ></app-reservation>
+      </div>
+      <p *ngIf="reservations.length == 0" class="fs-5 text-center fst-italic">
+        You made no reservations
+      </p>
     </div>
   </div>
 </div>

@@ -1,24 +1,32 @@
 import { HttpClient } from '@angular/common/http';
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AccountService } from './Services/account.service';
 import { User } from './Interfaces/User/user';
-import { NavigationStart, Router, RouterOutlet } from '@angular/router';
-import { slideInAnimation  } from './animations/app.animation';
-
-
+import {
+  ActivatedRoute,
+  NavigationEnd,
+  NavigationStart,
+  Router,
+  RouterOutlet,
+} from '@angular/router';
+import { slideInAnimation } from './animations/app.animation';
+import { Title } from '@angular/platform-browser';
+import { filter } from 'rxjs';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
-  animations: [slideInAnimation]
+  animations: [slideInAnimation],
 })
 export class AppComponent implements OnInit {
   title = 'Client';
   constructor(
     private http: HttpClient,
     private accountService: AccountService,
-    private router: Router
+    private router: Router,
+    private titleService: Title,
+    private activatedRoute: ActivatedRoute
   ) {
     router.events.subscribe((event) => {
       if (event instanceof NavigationStart) {
@@ -43,6 +51,22 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this.setCurrentUser();
+    this.router.events
+      .pipe(filter((event) => event instanceof NavigationEnd))
+      .subscribe(() => {
+        const rt = this.getChild(this.activatedRoute);
+        rt.data.subscribe((data) => {
+          this.titleService.setTitle(data['title']);
+        });
+      });
+  }
+
+  getChild(activatedRoute: ActivatedRoute): ActivatedRoute {
+    if (activatedRoute.firstChild) {
+      return this.getChild(activatedRoute.firstChild);
+    } else {
+      return activatedRoute;
+    }
   }
 
   setCurrentUser() {
@@ -51,8 +75,4 @@ export class AppComponent implements OnInit {
     const user: User = JSON.parse(x);
     this.accountService.setCurrentUser(user);
   }
-  // prepareRoute(outlet:RouterOutlet){
-  // return outlet && outlet.activatedRouteData
-  // }
-
 }

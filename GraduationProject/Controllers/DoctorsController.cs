@@ -1,5 +1,6 @@
 ﻿using GraduationProject_BL.DTO.DoctorDTOs;
 using GraduationProject_BL.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GraduationProject.Controllers
@@ -25,6 +26,17 @@ namespace GraduationProject.Controllers
 
             return Ok(doctors);
         }
+
+        [HttpGet("DepartmentDoctors/{id:int}")]
+        public async Task<ActionResult<List<DoctorDTO>>> GetDepartmentDoctors(int id)
+        {
+            var doctors = await manager.GetDepartmentDoctors(id,Utils.GetLang(httpContextAccessor));
+            if(doctors!=null && doctors.Count >0)
+                return Ok(doctors);
+            return NotFound();
+        }
+
+
 
         [HttpGet("InsertDTO/{id:int}")]
         public async Task<ActionResult<DoctorInsertDTO>> GetDoctorInsertDTO(int id)
