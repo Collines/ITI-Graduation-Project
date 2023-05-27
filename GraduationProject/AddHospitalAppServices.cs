@@ -29,6 +29,7 @@ namespace GraduationProject
             services.AddScoped<IRepository<Doctor>, DoctorRepository>();
             services.AddScoped<ITranslations<DoctorTranslations>, DoctorTranslationsRepository>();
             services.AddScoped<IDoctorManager, DoctorManager>();
+
             services.AddScoped<IRepository<Patient>, PatientRepository>();
             services.AddScoped<IRepository<PatientsLogins>, PatientsLoginsRepository>();
             services.AddScoped<ITranslations<PatientTranslations>, PatientTranslationsRepository>();
@@ -36,6 +37,11 @@ namespace GraduationProject
             services.AddScoped<IPatientLoginManager, PatientLoginManager>();
             services.AddScoped<IRepository<Reservation>, ReservationRepository>();
             services.AddScoped<IReservationManager, ReservationManager>();
+
+            services.AddScoped<IRepository<Banners>, BannerRepository>();
+            services.AddScoped<ITranslations<BannerTranslation>, BannerTranslationRepository>();
+            services.AddScoped<IBannerManger, BannerManager>();
+
 
             // Adding Authentication using JWT
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
