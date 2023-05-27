@@ -6,16 +6,22 @@
           href="#"
           class="list-group-item list-group-item-action"
           routerLink="/profile"
-          >Profile</a
+          >{{ "Profile" | translate }}</a
         >
-        <a class="list-group-item list-group-item-action active">Reservation</a>
-        <a href="#" class="list-group-item list-group-item-action">Settings</a>
-        <a href="#" class="list-group-item list-group-item-action">Logout</a>
+        <a class="list-group-item list-group-item-action active">{{
+          "Reservation" | translate
+        }}</a>
+        <a href="#" class="list-group-item list-group-item-action">{{
+          "Settings" | translate
+        }}</a>
+        <a href="#" class="list-group-item list-group-item-action">{{
+          "Logout" | translate
+        }}</a>
       </div>
     </div>
 
     <div class="col-md-8 offset-md-1">
-      <h4 class="mb-4">Your Reservations</h4>
+      <h4 class="mb-4">{{ "YourReservations" | translate }}</h4>
       <div *ngIf="reservations.length > 0">
         <app-reservation
           [reservation]="res"

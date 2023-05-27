@@ -2,17 +2,19 @@
   <div class="banner">
     <div class="container">
       <div class="title">
-        <h2>Department</h2>
+        <h2>{{ "Departments" | translate }}</h2>
         <p class="text-white link-nav">
-          <a routerLink="/home">Home </a>
+          <a routerLink="/home">{{ "Home" | translate }} </a>
           <i class="fa-solid fa-arrow-right" style="color: #081f3e"></i>
-          <a routerLink="contact"> Department</a>
+          <a routerLink="/departments"> {{ "Departments" | translate }}</a>
         </p>
       </div>
     </div>
   </div>
   <div class="first">
-    <h6 class="text-center my-4 fs-3 fw-bold search">Departments</h6>
+    <h6 class="text-center my-4 fs-3 fw-bold search">
+      {{ "Departments" | translate }}
+    </h6>
     <div class="line mb-5"></div>
     <div class="row height d-flex justify-content-center align-items-center">
       <div class="col-md-8">
@@ -21,12 +23,12 @@
           <input
             type="text"
             class="form-control rounded-pill"
-            placeholder="Search by department name....."
+            [placeholder]="'SearchByDept' | translate"
             [(ngModel)]="searchQuery"
             (input)="onSearch()"
           />
           <button class="btn btn-primary rounded-pill" (click)="onSearch()">
-            Search
+            {{ "Search" | translate }}
           </button>
         </div>
       </div>
