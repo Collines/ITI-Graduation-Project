@@ -9,6 +9,6 @@ namespace GraduationProject_BL.DTO.CampImageDTOs
 {
     public class CampImageInsertDTO
     {
-        public IFormFile? Image { get; set; }
+        public required IFormFile Image { get; set; }
     }
 }

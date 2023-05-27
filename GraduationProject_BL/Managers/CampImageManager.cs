@@ -86,10 +86,12 @@ namespace GraduationProject_BL.Managers
                 await repository.InsertAsync(campImage);
             }
         }
+
         public async Task DeleteAsync(int id)
         {
             await repository.DeleteAsync(id);
         }
+
         private string GetDashboardImagesPath()
         {
             var currentPath = Directory.GetCurrentDirectory();
