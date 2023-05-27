@@ -1,5 +1,6 @@
 ﻿using GraduationProject_BL.DTO.DepartmentDTOs;
 using GraduationProject_BL.Managers;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -8,6 +9,7 @@ namespace GraduationProject.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class DepartmentController : ControllerBase
     {
         private readonly IHttpContextAccessor httpContextAccessor;
@@ -19,6 +21,7 @@ namespace GraduationProject.Controllers
             manager = _manager;
         }
 
+        [AllowAnonymous]
         [HttpGet]
         public async Task<ActionResult<List<DepartmentDTO>>> GetAll()
         {
@@ -37,6 +40,7 @@ namespace GraduationProject.Controllers
             return Ok(department);
         }
 
+        [AllowAnonymous]
         [HttpGet("{id:int}")]
         public async Task<ActionResult<DepartmentDTO>> GetById(int id)
         {

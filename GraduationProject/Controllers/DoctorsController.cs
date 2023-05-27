@@ -7,6 +7,7 @@ namespace GraduationProject.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class DoctorsController : ControllerBase
     {
 
@@ -19,6 +20,7 @@ namespace GraduationProject.Controllers
             manager = _manager;
         }
 
+        [AllowAnonymous]
         [HttpGet]
         public async Task<ActionResult<List<DoctorDTO>>> GetAll()
         {
@@ -27,6 +29,7 @@ namespace GraduationProject.Controllers
             return Ok(doctors);
         }
 
+        [AllowAnonymous]
         [HttpGet("DepartmentDoctors/{id:int}")]
         public async Task<ActionResult<List<DoctorDTO>>> GetDepartmentDoctors(int id)
         {
@@ -49,6 +52,7 @@ namespace GraduationProject.Controllers
             return Ok(doctor);
         }
 
+        [AllowAnonymous]
         [HttpGet("{id:int}")]
         public async Task<ActionResult<DoctorDTO>> GetById(int id)
         {
