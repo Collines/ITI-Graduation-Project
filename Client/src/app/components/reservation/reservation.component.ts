@@ -24,6 +24,8 @@ export class ReservationComponent {
       departmentTitle: '',
       image: '',
     },
+    patientId: 0,
+    doctorId: 0,
   };
   get reservationStatus() {
     return ReservationStatus[this.reservation.status];

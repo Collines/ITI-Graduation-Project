@@ -13,13 +13,15 @@ namespace GraduationProject.Controllers
     {
         private readonly IHttpContextAccessor httpContextAccessor;
         private readonly IPatientManager patientMgr;
+        private readonly IDoctorManager doctorMgr;
         private readonly IReservationManager manager;
 
-        public ReservationController(IReservationManager _manager, IHttpContextAccessor _httpContextAccessor, IPatientManager patientMgr)
+        public ReservationController(IReservationManager _manager, IHttpContextAccessor _httpContextAccessor, IPatientManager patientMgr,IDoctorManager doctormgr)
         {
             manager = _manager;
             httpContextAccessor = _httpContextAccessor;
             this.patientMgr = patientMgr;
+            doctorMgr = doctormgr;
         }
 
         [HttpGet]
@@ -61,9 +63,11 @@ namespace GraduationProject.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<Reservation>> CreateReservation(Reservation reservation)
+        public async Task<ActionResult<Reservation>> CreateReservation(Reservation reservation,string accessToken)
         {
-            if (ModelState.IsValid)
+            var patient =await patientMgr.GetPatientByAccessToken(accessToken);
+            var doctor =await doctorMgr.GetByIdAsync(reservation.DoctorId,Utils.GetLang(httpContextAccessor));
+            if (patient != null && doctor!=null && reservation.PatientId == patient.Id)
             {
                 await manager.InsertAsync(reservation);
                 return Ok();

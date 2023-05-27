@@ -78,6 +78,9 @@ namespace GraduationProject_BL.Managers
 
         public async Task InsertAsync(Reservation item)
         {
+            var reservations = await GetAllAsync("en");
+            var QueueNum = reservations.Where(r => r.DoctorId == item.DoctorId && r.DateTime == item.DateTime).Count();
+            item.Queue = QueueNum + 1;
             await repository.InsertAsync(item);
         }
 
