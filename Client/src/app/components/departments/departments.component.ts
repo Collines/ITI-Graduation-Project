@@ -15,7 +15,6 @@ export class DepartmentsComponent implements OnInit {
     private accountServices: AccountService,
     private router: Router
   ) {}
-  departments: Department[] = [];
   ngOnInit(): void {
     this.accountServices.currentUser$.subscribe({
       next: (user) => {
@@ -23,6 +22,7 @@ export class DepartmentsComponent implements OnInit {
           this.departmentServices.GetDepartments(user.accessToken).subscribe({
             next: (res) => {
               this.departments = res;
+              this.SearchResult = res;
             },
             error: (e) => {
               console.log(e);
@@ -34,5 +34,39 @@ export class DepartmentsComponent implements OnInit {
         this.router.navigate(['/login']);
       },
     });
+  }
+  departments: Department[] = [];
+  SearchResult: Department[] = [];
+  searchQuery: string = '';
+  searchTimer: any;
+
+  onSearch(): void {
+    clearTimeout(this.searchTimer);
+    this.searchTimer = setTimeout(() => {
+      this.performSearch();
+    }, 300);
+  }
+
+  performSearch(): void {
+    this.SearchResult = [];
+    if (this.searchQuery.length > 0) {
+      if (this.departments.length > 0) {
+        this.departments.forEach((item: Department) => {
+          if (
+            item.title
+              .toLocaleLowerCase()
+              .includes(this.searchQuery.toLocaleLowerCase())
+          ) {
+            this.SearchResult.push(item);
+          }
+        });
+      }
+    } else {
+      this.SearchResult = this.departments;
+    }
+  }
+
+  ngOnDestroy(): void {
+    clearTimeout(this.searchTimer);
   }
 }

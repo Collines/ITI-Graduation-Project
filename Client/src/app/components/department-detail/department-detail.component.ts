@@ -13,19 +13,6 @@ import { DoctorsService } from 'src/app/Services/doctors.service';
   styleUrls: ['./department-detail.component.css'],
 })
 export class DepartmentDetailComponent implements OnInit {
-  department: Department = {
-    id: 0,
-    title: '',
-    description: '',
-  };
-  doctors: Doctor[] = [];
-  user: User = {
-    id: 0,
-    fullName: '',
-    accessToken: '',
-    refreshToken: '',
-    expiration: 0,
-  };
   constructor(
     private Route: ActivatedRoute,
     private router: Router,
@@ -54,7 +41,59 @@ export class DepartmentDetailComponent implements OnInit {
     this.doctorService
       .GetDepartmentDoctors(this.department.id, this.user.accessToken)
       .subscribe({
-        next: (doctors) => (this.doctors = doctors),
+        next: (doctors) => {
+          this.doctors = doctors;
+          this.SearchResult = doctors;
+        },
       });
+  }
+  department: Department = {
+    id: 0,
+    title: '',
+    description: '',
+  };
+  doctors: Doctor[] = [];
+  user: User = {
+    id: 0,
+    fullName: '',
+    accessToken: '',
+    refreshToken: '',
+    expiration: 0,
+  };
+  SearchResult: Doctor[] = [];
+  searchQuery: string = '';
+  searchTimer: any;
+
+  onSearch(): void {
+    clearTimeout(this.searchTimer);
+    this.searchTimer = setTimeout(() => {
+      this.performSearch();
+    }, 300);
+  }
+
+  performSearch(): void {
+    this.SearchResult = [];
+    if (this.searchQuery.length > 0) {
+      if (this.doctors.length > 0) {
+        this.doctors.forEach((item: Doctor) => {
+          if (
+            item.firstName
+              .toLocaleLowerCase()
+              .includes(this.searchQuery.toLocaleLowerCase()) ||
+            item.lastName
+              .toLocaleLowerCase()
+              .includes(this.searchQuery.toLocaleLowerCase())
+          ) {
+            this.SearchResult.push(item);
+          }
+        });
+      }
+    } else {
+      this.SearchResult = this.doctors;
+    }
+  }
+
+  ngOnDestroy(): void {
+    clearTimeout(this.searchTimer);
   }
 }
