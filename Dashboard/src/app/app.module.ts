@@ -53,6 +53,8 @@ import { AllDepartmentsComponent } from './views/department-views/all-department
 import { DetailsDepartmentComponent } from './views/department-views/details-department/details-department.component';
 import { AddDepartmentComponent } from './views/department-views/add-department/add-department.component';
 import { EditDepartmentComponent } from './views/department-views/edit-department/edit-department.component';
+import { AllCampImagesComponent } from './views/campImage-views/all-camp-images/all-camp-images.component';
+import { AddCampImageComponent } from './views/campImage-views/add-camp-image/add-camp-image.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -71,7 +73,7 @@ const DOCTORS_COMPONENTS = [
 ];
 
 @NgModule({
-  declarations: [AppComponent, ...APP_CONTAINERS, ...DOCTORS_COMPONENTS, AllPatientsComponent, AllDepartmentsComponent, DetailsDepartmentComponent, AddDepartmentComponent, EditDepartmentComponent],
+  declarations: [AppComponent, ...APP_CONTAINERS, ...DOCTORS_COMPONENTS, AllPatientsComponent, AllDepartmentsComponent, DetailsDepartmentComponent, AddDepartmentComponent, EditDepartmentComponent, AllCampImagesComponent, AddCampImageComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,

@@ -15,6 +15,8 @@ import { AllDepartmentsComponent } from "./views/department-views/all-department
 import { EditDepartmentComponent } from "./views/department-views/edit-department/edit-department.component";
 import { AddDepartmentComponent } from "./views/department-views/add-department/add-department.component";
 import { DetailsDepartmentComponent } from "./views/department-views/details-department/details-department.component";
+import { AllCampImagesComponent } from "./views/campImage-views/all-camp-images/all-camp-images.component";
+import { AddCampImageComponent } from "./views/campImage-views/add-camp-image/add-camp-image.component";
 
 const routes: Routes = [
   {
@@ -71,6 +73,14 @@ const routes: Routes = [
       {
         path: 'Departments/:id',
         component: DetailsDepartmentComponent
+      },
+      {
+        path: 'CampImages',
+        component: AllCampImagesComponent
+      },
+      {
+        path: 'AddCampImage',
+        component: AddCampImageComponent
       },
       {
         path: "pages",

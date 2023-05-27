@@ -1,0 +1,23 @@
+<p>add-camp-image works!</p>
+<div class="container">
+    <div class="row">
+      <form #AddForm (ngSubmit)="Add(Image.value)" [formGroup]="validator" class="col">
+  
+  
+        <div class="mb-3 col-6">
+          <label for="Image" class="form-label">Image</label>
+          <input #Image (change)="ChangeSrc($event)" class="form-control" formControlName="Image" type="file" id="Image" accept="image/*">
+        </div>
+  
+        <div *ngIf="BaseImage != '' "class="mb-3 col-6">
+          <img [src]="BaseImage" *ngIf="Image" width="300" height="300">
+        </div>
+  
+        <div class="row mb-3 ms-10 me-10 text-center">
+          <div class="text-center">
+            <input class="col-6" type="submit" value="Add" class="w-50 btn rounded-pill btn-outline-primary">
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
