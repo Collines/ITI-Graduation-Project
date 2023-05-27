@@ -1,5 +1,7 @@
 <div class="wrapper">
-  <h1 class="text-center">{{ department.title }} Doctors</h1>
+  <h1 class="text-center">
+    {{ department.title }} {{ "Doctors" | translate }}
+  </h1>
   <div class="container my-5">
     <div class="row height d-flex justify-content-center align-items-center">
       <div class="col-md-8">
@@ -8,7 +10,7 @@
           <input
             type="text"
             class="form-control rounded-pill"
-            placeholder="Search by doctor name....."
+            [placeholder]="'SearchByDoctor' | translate"
             [(ngModel)]="searchQuery"
             (input)="onSearch()"
           />

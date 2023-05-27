@@ -37,6 +37,9 @@ namespace GraduationProject
             services.AddScoped<IPatientLoginManager, PatientLoginManager>();
             services.AddScoped<IRepository<Reservation>, ReservationRepository>();
             services.AddScoped<IReservationManager, ReservationManager>();
+            services.AddScoped<IRepository<CampImage>, CampImageRepository>();
+            services.AddScoped<ICampImageManager, CampImageManager>();
+
 
             services.AddScoped<IRepository<Banners>, BannerRepository>();
             services.AddScoped<ITranslations<BannerTranslation>, BannerTranslationRepository>();

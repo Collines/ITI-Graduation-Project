@@ -20,6 +20,8 @@ import { filter } from 'rxjs';
   animations: [slideInAnimation],
 })
 export class AppComponent implements OnInit {
+  loader=true;
+
   title = 'Client';
   constructor(
     private http: HttpClient,
@@ -75,4 +77,16 @@ export class AppComponent implements OnInit {
     const user: User = JSON.parse(x);
     this.accountService.setCurrentUser(user);
   }
+
+  // prepareRoute(outlet:RouterOutlet){
+  // return outlet && outlet.activatedRouteData
+  // }
+
+  loaderStop:any=setTimeout(() => {
+    this.loader=false;
+
+  }, 3000);
+
+
+
 }
