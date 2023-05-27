@@ -67,7 +67,7 @@
 }
 .services{
   padding-top: var(--padding-top);
-  padding-bottom: var(--padding-bootm);
+  padding-bottom:50px;
   background-color: var(--backgroundColor);
 }
 .services .icon{
@@ -167,3 +167,114 @@
 .blog h5{
   color: #081f3e;
 }
+.aon-med-appoint-area {
+  padding: 90px 0px;
+  background-image: url("/assets/images/bg_3.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  position: relative;
+}
+.aon-med-appoint-area .layer{
+  position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    opacity: .8;
+    background: #299adc;
+}
+.aon-med-appoint-area .container {
+  position: relative;
+}
+.section-head.center.white {
+  color: #fff;
+}
+.aon-med-appoint-area .section-head {
+  margin-bottom: 0px;
+}
+.aon-sub-title {
+  color: #081f3e;
+  text-transform: uppercase;
+  font-size: 16px;
+  letter-spacing: 5px;
+  font-weight: 600;
+}
+.section-head p{
+  line-height: 1.7;
+}
+.section-head.center {
+  text-align: center;
+  margin: 0px auto 60px;
+  max-width: 650px;
+}
+.aon-med-appoint-area .section-head.center.white .aon-title {
+  margin-bottom: 30px;
+}
+.section-head.center.white .aon-title {
+  color: #fff;
+}
+.section-head center h2 {
+  font-size: 40px;
+  font-weight: 700;
+}
+.aon-med-appoint-area .section-head.center.white p {
+  margin-bottom: 30px;
+}
+.site-button {
+  outline: none;
+  color: var(--backgroundColor);
+  padding: 10px 20px;
+  letter-spacing: 1px;
+  cursor: pointer;
+  background-color: #081f3e;
+  border: none;
+  font-size: 16px;
+  font-weight: 600;
+  transition:  0.3s all;
+  border-radius: 5px;
+}
+.site-button:hover{
+  color: #081f3e;
+  background-color: var(--backgroundColor);
+}
+.animate-v {
+  animation: upNdown1 2s infinite linear alternate;
+}
+
+.aon-med-appoint-area .media img {
+    border-style: none;
+    height: auto;
+    max-width: 100%;
+    vertical-align: middle;
+    position: absolute;
+    bottom: -140px;
+    transition: all 0.5s ease infinite ;
+}
+@media only screen and (max-width: 1600px){
+  .aon-med-appoint-area .media img {
+      left: calc(100% - 30%);
+      max-width: 400px;
+  }}
+
+
+@media only screen and (max-width: 1200px){
+  .aon-med-appoint-area .media img {
+      left: calc(100% - 30%);
+      max-width: 330px;
+  }}
+  @media only screen and (max-width: 880px){
+    .aon-med-appoint-area .media img {
+        display: none;
+    }}
+
+  @keyframes upNdown1 {
+    from {
+      transform: translateY(0px);
+}
+    to {
+      transform: translateY(50px);
+}
+  }
+
+
