@@ -2,17 +2,20 @@
   <div class="container">
     <div class="row d-flex align-items-center justify-content-center mt-5">
       <div class="col-lg-6 col-md-8 colsm-12">
-        <div class="box mt-5 mb-4 ">
-          <h3 class="text-center pt-2">Register</h3>
+        <div class="box mt-5 mb-4">
+          <h3 class="text-center pt-2">{{ "Register" | translate }}</h3>
 
           <form class="w-100" [formGroup]="Validation" (submit)="onSubmit()">
             <div class="mb-3">
-              <label for="FirstName" class="form-label">First Name</label>
+              <label for="FirstName" class="form-label">{{
+                "FirstName" | translate
+              }}</label>
               <input
                 formControlName="FirstName"
                 type="text"
                 required
-                [ngClass]=" !isFirstNameValid
+                [ngClass]="
+                  !isFirstNameValid
                     ? {
                         'is-invalid':
                           submitted && Validation.controls.FirstName.errors
@@ -21,7 +24,7 @@
                 "
                 class="form-control"
                 id="FirstName"
-                placeholder="First Name"
+                [placeholder]="'FirstName' | translate"
               />
               <div
                 *ngIf="submitted && Validation.controls.FirstName.errors"
@@ -33,7 +36,9 @@
               </div>
             </div>
             <div class="mb-3">
-              <label for="LastName" class="form-label">Last Name</label>
+              <label for="LastName" class="form-label">{{
+                "LastName" | translate
+              }}</label>
               <input
                 formControlName="LastName"
                 type="text"
@@ -48,7 +53,7 @@
                 "
                 class="form-control"
                 id="LastName"
-                placeholder="Last Name"
+                [placeholder]="'LastName' | translate"
               />
               <div
                 *ngIf="submitted && Validation.controls.LastName.errors"
@@ -60,13 +65,12 @@
               </div>
             </div>
             <div class="mb-3">
-              <label for="FirstNameAr" class="form-label float-end"
-                >الاسم الاول</label
-              >
+              <label for="FirstNameAr" class="form-label">{{
+                "FirstNameAr" | translate
+              }}</label>
               <input
                 formControlName="FirstNameAr"
                 type="text"
-                dir="rtl"
                 required
                 [ngClass]="
                   !isFirstNameArValid
@@ -78,9 +82,7 @@
                 "
                 class="form-control"
                 id="FirstNameAr"
-
-                placeholder="الاسم الاول"
-
+                [placeholder]="'FirstNameAr' | translate"
               />
               <div
                 *ngIf="submitted && Validation.controls.FirstNameAr.errors"
@@ -94,13 +96,12 @@
               </div>
             </div>
             <div class="mb-3">
-              <label for="LastNameAr" class="form-label float-end"
-                >اسم العائلة</label
-              >
+              <label for="LastNameAr" class="form-label">{{
+                "LastNameAr" | translate
+              }}</label>
               <input
                 formControlName="LastNameAr"
                 type="text"
-                dir="rtl"
                 required
                 [ngClass]="
                   !isLastNameArValid
@@ -112,7 +113,7 @@
                 "
                 class="form-control"
                 id="LastNameAr"
-                placeholder="اسم العائلة"
+                [placeholder]="'LastNameAr' | translate"
               />
               <div
                 *ngIf="submitted && Validation.controls.LastNameAr.errors"
@@ -124,7 +125,9 @@
               </div>
             </div>
             <div class="mb-3">
-              <label for="SSN" class="form-label">SSN</label>
+              <label for="SSN" class="form-label">{{
+                "SSN" | translate
+              }}</label>
               <input
                 formControlName="SSN"
                 type="text"
@@ -139,7 +142,7 @@
                 "
                 class="form-control"
                 id="SSN"
-                placeholder="Enter SSN"
+                [placeholder]="'SSN' | translate"
               />
               <div
                 *ngIf="submitted && Validation.controls.SSN.errors"
@@ -151,7 +154,9 @@
               </div>
             </div>
             <div class="mb-3">
-              <label for="email" class="form-label">Email address</label>
+              <label for="email" class="form-label">{{
+                "Email" | translate
+              }}</label>
               <input
                 formControlName="email"
                 type="email"
@@ -166,7 +171,7 @@
                 "
                 class="form-control"
                 id="email"
-                placeholder="Enter Email"
+                [placeholder]="'Email' | translate"
               />
               <div
                 *ngIf="submitted && Validation.controls.email.errors"
@@ -179,7 +184,9 @@
             </div>
 
             <div class="mb-3">
-              <label for="pass" class="form-label">Password</label>
+              <label for="pass" class="form-label">{{
+                "Password" | translate
+              }}</label>
               <input
                 formControlName="password"
                 type="password"
@@ -194,7 +201,7 @@
                 "
                 class="form-control"
                 id="pass"
-                placeholder="Enter Password"
+                [placeholder]="'Password' | translate"
               />
               <div
                 *ngIf="submitted && Validation.controls.password.errors"
@@ -206,7 +213,9 @@
               </div>
             </div>
             <div class="mb-3">
-              <label for="Phone" class="form-label">Phone</label>
+              <label for="Phone" class="form-label">{{
+                "Phone" | translate
+              }}</label>
               <input
                 formControlName="Phone"
                 type="text"
@@ -221,7 +230,7 @@
                 "
                 class="form-control"
                 id="Phone"
-                placeholder="Enter Phone"
+                [placeholder]="'Phone' | translate"
               />
               <div
                 *ngIf="submitted && Validation.controls.Phone.errors"
@@ -234,7 +243,9 @@
             </div>
 
             <div class="mb-3">
-              <label for="DOB" class="form-label">Date Of Birth</label>
+              <label for="DOB" class="form-label">{{
+                "DOB" | translate
+              }}</label>
               <input
                 formControlName="Date"
                 type="date"
@@ -262,7 +273,9 @@
             </div>
 
             <div class="mb-3">
-              <label for="Gender" class="form-label">Gender</label>
+              <label for="Gender" class="form-label">{{
+                "Gender" | translate
+              }}</label>
 
               <select
                 name="Gender"
@@ -278,9 +291,11 @@
                     : 'is-valid'
                 "
               >
-                <option selected value="0">Select Gender</option>
-                <option value="2">Male</option>
-                <option value="1">Female</option>
+                <option selected value="0">
+                  {{ "SelectGender" | translate }}
+                </option>
+                <option value="2">{{ "Male" | translate }}</option>
+                <option value="1">{{ "Female" | translate }}</option>
               </select>
               <div
                 *ngIf="submitted && Validation.controls.Gender.errors"
@@ -299,26 +314,31 @@
                 id="exampleCheck1"
               />
               <label class="form-check-label" for="exampleCheck1"
-                >I accept the <span> Terms of use</span> &
-                <span> Privacy Policy </span></label
+                >{{ "Iacceptthe" | translate }}
+                <span> {{ "Termsofuse" | translate }}</span> &
+                <span> {{"PrivacyPolicy"|translate}} </span></label
               >
             </div>
-            <button type="submit" class="btn submit-btn">Register</button>
+            <button type="submit" class="btn submit-btn">
+              {{ "Register" | translate }}
+            </button>
 
             <div class="login mt-3 text-muted">
               <h6>
-                Already have an account ?
-                <a href="../login/login.component.html" routerLink="/login"
-                  >Sign In</a
-                >
+                {{ "HaveAnAccount?" | translate }}
+                <a href="../login/login.component.html" routerLink="/login">{{
+                  "SignIn" | translate
+                }}</a>
               </h6>
             </div>
           </form>
 
           <div class="social">
-            <h5 class="text-center position-relative">Or</h5>
+            <h5 class="text-center position-relative">
+              {{ "Or" | translate }}
+            </h5>
             <h6 class="text-center position-relative linee mb-3">
-              Continue with
+              {{ "Continuewith" | translate }}
             </h6>
             <a href="http://www.google.com">
               <img src="assets/images/google.png " alt="" />
@@ -335,4 +355,3 @@
     </div>
   </div>
 </div>
-
