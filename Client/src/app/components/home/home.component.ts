@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Department } from 'src/app/Interfaces/Department';
 import { DepartmentService } from 'src/app/Services/department.service';
+import { DoctorsService } from 'src/app/Services/doctors.service';
 
 @Component({
   selector: 'app-home',
@@ -8,9 +9,28 @@ import { DepartmentService } from 'src/app/Services/department.service';
   styleUrls: ['./home.component.css'],
 })
 export class HomeComponent implements OnInit {
-  constructor(private departmentServices: DepartmentService) {}
+  constructor(
+    private doctorServices: DoctorsService,
+    private departmentServices: DepartmentService
+  ) {}
 
   ngOnInit(): void {
+    this.doctorServices.GetAllDoctors().subscribe({
+      next: (doctors) => {
+        if (doctors) {
+          let numberOfDoctors = doctors.length;
+          if (numberOfDoctors > 0) {
+            let doctorCountStop = setInterval(() => {
+              this.doctorCount++;
+              if (this.doctorCount >= numberOfDoctors) {
+                clearInterval(doctorCountStop);
+              }
+            }, 22);
+          }
+        }
+      },
+    });
+
     this.departmentServices.GetDepartments().subscribe({
       next: (departments) => {
         if (departments) {
@@ -18,25 +38,20 @@ export class HomeComponent implements OnInit {
           departments.forEach((item: Department) => {
             numberOfBeds += item.numberOfBeds;
           });
-          let bedCountStop = setInterval(() => {
-            this.bedCount++;
-            if (this.bedCount == numberOfBeds) {
-              clearInterval(bedCountStop);
-            }
-          }, 13);
+          if (numberOfBeds > 0) {
+            let bedCountStop = setInterval(() => {
+              this.bedCount++;
+              if (this.bedCount >= numberOfBeds) {
+                clearInterval(bedCountStop);
+              }
+            }, 13);
+          }
         }
       },
     });
   }
 
   doctorCount: number = 0;
-  doctorCountStop: any = setInterval(() => {
-    this.doctorCount++;
-    if (this.doctorCount == 300) {
-      clearInterval(this.doctorCountStop);
-    }
-  }, 22);
-
   patientCount: number = 0;
   patientCountStop: any = setInterval(() => {
     this.patientCount += 2;

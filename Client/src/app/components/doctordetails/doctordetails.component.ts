@@ -33,23 +33,12 @@ export class DoctordetailsComponent implements OnInit {
     this.ID = this.Route.snapshot.params['id'];
   }
   ngOnInit() {
-    this.myAccountService.currentUser$.subscribe({
-      next: (user) => {
-        if (user) {
-          this.DoctorsService.GetById(this.ID, user.accessToken).subscribe({
-            next: (data) => {
-              this.Doctor = data;
-              console.log(data);
-            },
-            error: (err) => console.log(err),
-          });
-        } else {
-          this.router.navigate(['/login']);
-        }
+    this.DoctorsService.GetById(this.ID).subscribe({
+      next: (data) => {
+        this.Doctor = data;
+        console.log(data);
       },
-      error: (e) => {
-        this.router.navigate(['/login']);
-      },
+      error: (err) => console.log(err),
     });
   }
   returnBack() {

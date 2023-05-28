@@ -39,7 +39,7 @@ export class DepartmentDetailComponent implements OnInit {
   }
   ngOnInit(): void {
     this.doctorService
-      .GetDepartmentDoctors(this.department.id, this.user.accessToken)
+      .GetDepartmentDoctors(this.department.id)
       .subscribe({
         next: (doctors) => {
           this.doctors = doctors;
