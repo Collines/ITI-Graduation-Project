@@ -17,6 +17,8 @@ import { AddDepartmentComponent } from "./views/department-views/add-department/
 import { DetailsDepartmentComponent } from "./views/department-views/details-department/details-department.component";
 import { AllCampImagesComponent } from "./views/campImage-views/all-camp-images/all-camp-images.component";
 import { AddCampImageComponent } from "./views/campImage-views/add-camp-image/add-camp-image.component";
+import { AllReservationsComponent } from "./views/reservations-views/all-reservations/all-reservations.component";
+import { DetailsPatientComponent } from "./views/patient-views/details-patient/details-patient.component";
 
 const routes: Routes = [
   {
@@ -59,6 +61,10 @@ const routes: Routes = [
         component: AllPatientsComponent
       },
       {
+        path: 'Patients/:id',
+        component: DetailsPatientComponent
+      },
+      {
         path: 'Departments',
         component: AllDepartmentsComponent
       },
@@ -81,6 +87,10 @@ const routes: Routes = [
       {
         path: 'AddCampImage',
         component: AddCampImageComponent
+      },
+      {
+        path: 'Reservations',
+        component: AllReservationsComponent
       },
       {
         path: "pages",

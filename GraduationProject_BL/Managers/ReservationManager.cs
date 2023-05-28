@@ -37,7 +37,8 @@ namespace GraduationProject_BL.Managers
                     PatientId = reservation.PatientId,
                     Patient = patientDTO,
                     DoctorId = reservation.DoctorId,
-                    Doctor = doctorDTO
+                    Doctor = doctorDTO,
+                    Status = reservation.Status,
                 };
 
                 reservationsDTO.Add(dto);
@@ -66,7 +67,8 @@ namespace GraduationProject_BL.Managers
                         PatientId = reservation.PatientId,
                         Patient = patientDTO,
                         DoctorId = reservation.DoctorId,
-                        Doctor = doctorDTO
+                        Doctor = doctorDTO,
+                        Status = reservation.Status
                     };
 
                     return dto;
@@ -97,6 +99,7 @@ namespace GraduationProject_BL.Managers
                     reservation.Queue = item.Queue;
                     reservation.PatientId = item.PatientId;
                     reservation.DoctorId = item.DoctorId;
+                    reservation.Status = item.Status;
 
                     await repository.UpdateAsync(reservation.Id, reservation);
                 }
