@@ -136,7 +136,7 @@ namespace GraduationProject.Controllers
                         return Unauthorized(new { ResponseMessage = "Invalid Attempt!" });
                     }
                 }
-                return Unauthorized(new {ResponseMessage= "Incorrect username or password!" });
+                return Unauthorized(new { ResponseMessage = "Incorrect username or password!" });
             }
             else return BadRequest(new { ResponseMessage = "Incorrect username or password!" });
         }
@@ -170,6 +170,16 @@ namespace GraduationProject.Controllers
             {
                 return Unauthorized();
             }
+        }
+
+        [AllowAnonymous]
+        [HttpGet]
+        [Route("Count")]
+        public async Task<IActionResult> GetPatientsCount()
+        {
+            var patients = await manager.GetAllAsync(Utils.GetLang(httpContextAccessor));
+
+            return Ok(patients.Count);
         }
     }
 }

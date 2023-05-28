@@ -31,6 +31,7 @@ export class DepartmentComponent {
     id: 0,
     title: '',
     description: '',
+    numberOfBeds: 0
   };
   doctors: Doctor[] = [];
   user: User = {

@@ -34,6 +34,7 @@ namespace GraduationProject_BL.Managers
                             Id = translation.DepartmentId,
                             Title = translation.Title_AR,
                             Description = translation.Description_AR,
+                            NumberOfBeds = department.NoOfBeds
                         };
                     }
                     else
@@ -43,6 +44,7 @@ namespace GraduationProject_BL.Managers
                             Id = translation.DepartmentId,
                             Title = translation.Title_EN,
                             Description = translation.Description_EN,
+                            NumberOfBeds = department.NoOfBeds
                         };
                     }
 
@@ -73,6 +75,7 @@ namespace GraduationProject_BL.Managers
                                 Id = translation.DepartmentId,
                                 Title = translation.Title_AR,
                                 Description = translation.Description_AR,
+                                NumberOfBeds = department.NoOfBeds
                             };
                         }
                         else
@@ -82,6 +85,7 @@ namespace GraduationProject_BL.Managers
                                 Id = translation.DepartmentId,
                                 Title = translation.Title_EN,
                                 Description = translation.Description_EN,
+                                NumberOfBeds = department.NoOfBeds
                             };
                         }
 
@@ -99,6 +103,7 @@ namespace GraduationProject_BL.Managers
             {
                 Title = item.Title_EN,
                 Description = item.Description_EN,
+                NoOfBeds = item.NumberOfBeds
             };
 
             await repository.InsertAsync(department);
@@ -149,15 +154,15 @@ namespace GraduationProject_BL.Managers
         }
         public async Task<DepartmentInsertDTO?> GetInsertDTOByIdAsync(int id)
         {
-            var doctors = await repository.GetAllAsync();
+            var departments = await repository.GetAllAsync();
 
-            if (doctors != null)
+            if (departments != null)
             {
-                var doctor = doctors.Find(x => x.Id == id);
-                if (doctor != null)
+                var department = departments.Find(x => x.Id == id);
+                if (department != null)
                 {
 
-                    var translation = await translations.FindAsync(doctor.Id);
+                    var translation = await translations.FindAsync(department.Id);
                     if (translation != null)
                     {
 
@@ -166,7 +171,8 @@ namespace GraduationProject_BL.Managers
                             Title_EN = translation.Title_EN,
                             Title_AR = translation.Title_AR,
                             Description_EN = translation.Description_EN,
-                            Description_AR = translation.Description_AR
+                            Description_AR = translation.Description_AR,
+                            NumberOfBeds = department.NoOfBeds
                         };
 
                         return dto;
@@ -174,8 +180,8 @@ namespace GraduationProject_BL.Managers
                     }
                 }
             }
-               return null;
-            
+            return null;
+
         }
     }
 }

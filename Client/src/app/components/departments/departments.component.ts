@@ -16,22 +16,13 @@ export class DepartmentsComponent implements OnInit {
     private router: Router
   ) {}
   ngOnInit(): void {
-    this.accountServices.currentUser$.subscribe({
-      next: (user) => {
-        if (user) {
-          this.departmentServices.GetDepartments(user.accessToken).subscribe({
-            next: (res) => {
-              this.departments = res;
-              this.SearchResult = res;
-            },
-            error: (e) => {
-              console.log(e);
-            },
-          });
-        } else this.router.navigate(['/login']);
+    this.departmentServices.GetDepartments().subscribe({
+      next: (res) => {
+        this.departments = res;
+        this.SearchResult = res;
       },
-      error: (error) => {
-        this.router.navigate(['/login']);
+      error: (e) => {
+        console.log(e);
       },
     });
   }
