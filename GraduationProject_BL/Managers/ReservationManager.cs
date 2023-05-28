@@ -1,5 +1,8 @@
-﻿using GraduationProject_BL.DTO.ReservationDTOs;
+﻿using GraduationProject_BL.DTO.DoctorDTOs;
+using GraduationProject_BL.DTO.PatientDTOs;
+using GraduationProject_BL.DTO.ReservationDTOs;
 using GraduationProject_BL.Interfaces;
+using GraduationProject_DAL.Data.Enums;
 using GraduationProject_DAL.Data.Models;
 using GraduationProject_DAL.Interfaces;
 
@@ -106,27 +109,29 @@ namespace GraduationProject_BL.Managers
             }
         }
 
-        public async Task<List<PatientReservationDTO>?> GetAllPatientReservationsAsync(string lang, int patientId)
+        public async Task<List<ReservationDTO>?> GetAllPatientReservationsAsync(string lang, int patientId)
         {
             var reservations = await repository.GetAllAsync();
-            var patientReservations = reservations.Where(r=> r.PatientId== patientId).ToList();
+            var patientReservations = reservations.Where(r => r.PatientId == patientId).ToList();
 
             if (patientReservations != null && patientReservations.Count > 0)
             {
-                var reservationsDTO = new List<PatientReservationDTO>();
+                var reservationsDTO = new List<ReservationDTO>();
 
                 foreach (var reservation in patientReservations)
                 {
                     var patientDTO = await patients.GetByIdAsync(reservation.PatientId, lang);
                     var doctorDTO = await doctors.GetByIdAsync(reservation.DoctorId, lang);
 
-                    PatientReservationDTO dto = new PatientReservationDTO()
+                    ReservationDTO dto = new ReservationDTO()
                     {
                         Id = reservation.Id,
                         DateTime = reservation.DateTime,
                         Queue = reservation.Queue,
                         Doctor = doctorDTO,
-                        Status = reservation.Status
+                        Status = reservation.Status,
+                        PatientId = reservation.PatientId,
+                        DoctorId = reservation.DoctorId,
                     };
 
                     reservationsDTO.Add(dto);
@@ -137,6 +142,22 @@ namespace GraduationProject_BL.Managers
             else
                 return null;
         }
+
+        public async Task CancelReservation(int id)
+        {
+            var reservations = await repository.GetAllAsync();
+
+            if (reservations != null)
+            {
+                var reservation = reservations.Find(x => x.Id == id);
+                if (reservation != null)
+                {
+                    reservation.Status = ReservationStatus.Cancelled;
+                    await repository.UpdateAsync(reservation.Id, reservation);
+                }
+            }
+        }
+
 
         public async Task DeleteAsync(int id)
         {

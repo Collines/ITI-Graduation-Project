@@ -77,6 +77,7 @@ export class ProfileComponent implements OnInit {
               this.Validation.controls['email'].status = 'VALID';
               this.Validation.controls['Phone'].status = 'VALID';
               this.Validation.controls['Date'].status = 'VALID';
+              this.Validation.status = 'VALID';
               this.textArea = this.userEdit.medicalHistory;
             },
           });
