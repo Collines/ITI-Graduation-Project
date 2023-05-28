@@ -23,7 +23,7 @@ export const navItems: INavData[] = [
   },
   {
     name: 'Reservations',
-    url: '/reservations',
+    url: '/Reservations',
     iconComponent: { name: 'cil-task' }
   },
 ];

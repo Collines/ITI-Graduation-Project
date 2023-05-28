@@ -9,6 +9,7 @@ namespace GraduationProject.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class PatientController : ControllerBase
     {
         private readonly IHttpContextAccessor httpContextAccessor;
