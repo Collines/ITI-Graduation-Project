@@ -32,7 +32,8 @@ export class AllCampImagesComponent implements OnInit {
   if(confirm(`Do You Want To Image No. ${value}`))
   {
     this.ImagesService.DeleteCampImage(value).subscribe({
-      next: response=>{this.Router.navigate(['/CampImages']);},
+      next: response=>{this.Router.navigate(['/CampImages']),
+      location.reload()},
       error: error=>{alert('item Still exist')}
     })};
 }

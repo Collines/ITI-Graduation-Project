@@ -26,4 +26,9 @@ export const navItems: INavData[] = [
     url: '/Reservations',
     iconComponent: { name: 'cil-task' }
   },
+  {
+    name: 'Camp Images',
+    url: '/CampImages',
+    iconComponent: { name: 'cil-map' }
+  },
 ];
