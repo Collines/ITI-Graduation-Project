@@ -141,6 +141,7 @@ namespace GraduationProject_BL.Managers
 
                     department.Title = item.Title_EN;
                     department.Description = item.Description_EN;
+                    department.NoOfBeds = item.NumberOfBeds;
 
                     await repository.UpdateAsync(department.Id, department);
                 }

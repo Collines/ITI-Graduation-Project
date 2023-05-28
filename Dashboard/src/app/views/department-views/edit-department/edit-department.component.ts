@@ -52,15 +52,20 @@ export class EditDepartmentComponent {
       [Validators.required,
         Validators.minLength(2),
         Validators.maxLength(50),
-        Validators.pattern(this.ArabicPatternForParagraph)])
+        Validators.pattern(this.ArabicPatternForParagraph)]),
+    NoOfBeds: new FormControl(0,
+      [Validators.required,
+        Validators.min(0)])
       });
       get Title_EN_Valid(){return this.validator.controls["title_EN"].valid;}
       get Title_AR_Valid(){return this.validator.controls["title_AR"].valid;}
       get Description_EN_Valid(){return this.validator.controls["description_EN"].valid;}
       get Description_AR_Valid(){return this.validator.controls["description_AR"].valid;}
+      get NoOfBeds_Valid(){return this.validator.controls["NoOfBeds"].valid;}
 
 
-  Edit(title_EN:any, title_AR:any, description_EN:any, description_AR:any){
+
+  Edit(title_EN:any, title_AR:any, description_EN:any, description_AR:any, NoOfBeds:any){
     if(this.validator.valid)
     {
       const formData: FormData = new FormData();
@@ -68,10 +73,12 @@ export class EditDepartmentComponent {
       formData.append('title_EN', title_EN.trim());
       formData.append('title_AR', title_AR.trim());
       formData.append('description_EN', description_EN.trim());
-      formData.append('description_AR', description_AR.trim())
+      formData.append('description_AR', description_AR.trim());
+      formData.append('numberOfBeds', String(NoOfBeds));
+
       this.DepartmentsService.EditDepartment(this.ID,formData).subscribe({
         next: data => {
-          alert("Department Edited Successfully");
+          alert("Department hss been Edited Successfully");
           this.Router.navigate(['/Departments'])},
         error: err => console.log(formData)
       });
