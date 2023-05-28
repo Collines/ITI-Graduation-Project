@@ -184,50 +184,15 @@ h6 {
   transform: scale(1.2);
 }
 /*  End Work Section */
-
-#testimonial {
-  padding-top: 30px;
-  padding-bottom: var(--padding-bootm);
+.Healthcare{
+  padding-bottom: 30px;
   background-color: var(--backgroundColor);
 }
-
-.feadback {
-  background-color: #fff;
-  padding: 50px;
-  width: 60%;
+.bgColor{
+  background-color: #299adc;
+  color: #fff;
 }
-
-@media only screen and (max-width: 992px) {
-  .feadback {
-    width: 100%;
-  }
+.Color{
+  background-color: #cde1f8;
+  color: #299adc;
 }
-.img-feadback img {
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
-}
-.carousel-indicators [type="button"] {
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  background-color: transparent;
-  border: 1px solid var(--mainColor);
-  margin-top: 20px;
-}
-.carousel-indicators .active {
-  background-color: var(--mainColor);
-  width: 30px;
-  height: 12px;
-  border-radius: 20px;
-}
-.color {
-  width: 350px;
-  height: 350px;
-  background-color: var(--mainColor);
-  position: absolute;
-  top: -200px;
-  left: -200px;
-  transform: rotate(45deg);
-}
-/* End Testimonial Section */

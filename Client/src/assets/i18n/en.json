@@ -128,5 +128,19 @@
   "CreateNewaccount?": "Create New account ?",
   "ToVisit": "Waiting to Visit",
   "Visited":"Visited",
-  "Cancelled":"Cancelled"
+  "Cancelled":"Cancelled",
+
+  "QualityHealth":"Quality Health",
+  "AboutHealthcare":"About Healthcare",
+  "Vision":"Our Vision",
+  "medical":"Positioning Egypt as a One Country Brand showcasing its exceptional medical, wellness, hospitality and concierge services globally.",
+  "mission":"our mission",
+  "wellness":"Enhancing patients’ experience through integrating medical, wellness, hospitality and concierge services by using technology.",
+  "CoreValues":" Our Core Values",
+  "Justice":"Justice",
+  "JusticeText":"access of all global patients to quality medical and wellness services without financial, geographic, or social barriers.",
+  "QualityandExcellence":"Quality and Excellence",
+  "QualityandExcellenceText":"high quality safe medical and wellness institutions that maintain the leading position of Egypt.",
+  "Professionalism":"Professionalism",
+  "Professionalismtext":"a staff who is trained on the latest scientific and technical developments and responsive to the needs of patients."
 }
