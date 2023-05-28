@@ -100,5 +100,17 @@
 
   "notfound":"Page Not Found",
   "Page404":"The Page You Are Looking For Doesn't Exist...",
-  "btn404":"back to home"
+  "btn404":"back to home",
+
+  "Address":"Address",
+  "cairo":"Cairo , Egypt",
+  "ContactInformation":"Contact Information",
+  "map":"Find Us On Map",
+  "LeaveMessage":"Leave Message",
+  "sendmessage":"send message",
+  "entername":"enter your name",
+  "enteremail":"enter your email",
+  "entersubject":"enter subject",
+  "entermessage":"enter message"
+
 }
