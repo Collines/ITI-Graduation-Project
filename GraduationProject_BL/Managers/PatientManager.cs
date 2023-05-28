@@ -6,9 +6,7 @@ using GraduationProject_DAL.Handlers;
 using GraduationProject_DAL.Interfaces;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
-using NuGet.Common;
 using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
 using System.Text;
 
 namespace GraduationProject_BL.Managers

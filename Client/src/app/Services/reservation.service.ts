@@ -26,6 +26,14 @@ export class ReservationService {
     );
   }
 
+  CancelReservation(id: number, reservation: Reservation, accessToken: string) {
+    return this.http.patch<Reservation>(
+      this.BaseURL + '/CancelReservation/' + id,
+      reservation,
+      { headers: this.Header.set('Authorization', `bearer ${accessToken}`) }
+    );
+  }
+
   AddReservation(reservation: Reservation, accessToken: string) {
     return this.http.post(
       this.BaseURL + `?accessToken=${accessToken}`,
@@ -35,6 +43,8 @@ export class ReservationService {
   }
 
   getReservationsCount() {
-    return this.http.get<number>(`${this.BaseURL}/Count`, { headers: this.Headers });
+    return this.http.get<number>(`${this.BaseURL}/Count`, {
+      headers: this.Headers,
+    });
   }
 }
