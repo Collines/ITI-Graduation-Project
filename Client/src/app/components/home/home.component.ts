@@ -3,6 +3,7 @@ import { Department } from 'src/app/Interfaces/Department';
 import { DepartmentService } from 'src/app/Services/department.service';
 import { DoctorsService } from 'src/app/Services/doctors.service';
 import { PatientsService } from 'src/app/Services/patients.service';
+import { ReservationService } from 'src/app/Services/reservation.service';
 
 @Component({
   selector: 'app-home',
@@ -13,7 +14,8 @@ export class HomeComponent implements OnInit {
   constructor(
     private doctorServices: DoctorsService,
     private patientServices: PatientsService,
-    private departmentServices: DepartmentService
+    private departmentServices: DepartmentService,
+    private reservationServices: ReservationService
   ) {}
 
   ngOnInit(): void {
@@ -66,17 +68,25 @@ export class HomeComponent implements OnInit {
         }
       },
     });
+
+    this.reservationServices.getReservationsCount().subscribe({
+      next: (numberOfReservations) => {
+        if (numberOfReservations) {
+          if (numberOfReservations > 0) {
+            let appointmentCountStop = setInterval(() => {
+              this.appointmentCount++;
+              if (this.appointmentCount == numberOfReservations) {
+                clearInterval(appointmentCountStop);
+              }
+            }, 15);
+          }
+        }
+      },
+    });
   }
 
   doctorCount: number = 0;
   patientCount: number = 0;
   bedCount: number = 0;
-
   appointmentCount: number = 0;
-  appointmentCountStop: any = setInterval(() => {
-    this.appointmentCount += 5;
-    if (this.appointmentCount == 2000) {
-      clearInterval(this.appointmentCountStop);
-    }
-  }, 15);
 }
