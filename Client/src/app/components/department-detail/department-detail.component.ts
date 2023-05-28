@@ -25,9 +25,6 @@ export class DepartmentDetailComponent implements OnInit {
       next: (user) => {
         if (user) this.user = user;
       },
-      error: (er) => {
-        router.navigate(['/login']);
-      },
     });
     departmentService
       .GetById(this.department.id, this.user.accessToken)
@@ -38,20 +35,18 @@ export class DepartmentDetailComponent implements OnInit {
       });
   }
   ngOnInit(): void {
-    this.doctorService
-      .GetDepartmentDoctors(this.department.id)
-      .subscribe({
-        next: (doctors) => {
-          this.doctors = doctors;
-          this.SearchResult = doctors;
-        },
-      });
+    this.doctorService.GetDepartmentDoctors(this.department.id).subscribe({
+      next: (doctors) => {
+        this.doctors = doctors;
+        this.SearchResult = doctors;
+      },
+    });
   }
   department: Department = {
     id: 0,
     title: '',
     description: '',
-    numberOfBeds: 0
+    numberOfBeds: 0,
   };
   doctors: Doctor[] = [];
   user: User = {
