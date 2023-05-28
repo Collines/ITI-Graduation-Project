@@ -4,6 +4,7 @@ using GraduationProject_DAL.Data.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GraduationProject_DAL.Migrations
 {
     [DbContext(typeof(HospitalDBContext))]
-    partial class HospitalDBContextModelSnapshot : ModelSnapshot
+    [Migration("20230527152901_banner")]
+    partial class banner
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -44,7 +47,42 @@ namespace GraduationProject_DAL.Migrations
                     b.ToTable("Admins");
                 });
 
-            modelBuilder.Entity("GraduationProject_DAL.Data.Models.CampImage", b =>
+            modelBuilder.Entity("GraduationProject_DAL.Data.Models.BannerTranslation", b =>
+                {
+                    b.Property<int>("Id")
+                        .HasColumnType("int")
+                        .HasColumnOrder(0);
+
+                    b.Property<int>("BannerId")
+                        .HasColumnType("int")
+                        .HasColumnOrder(1);
+
+                    b.Property<string>("Description_AR")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("Description_EN")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("Title_AR")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("Title_EN")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.HasKey("Id", "BannerId");
+
+                    b.ToTable("BannerTranslations");
+                });
+
+            modelBuilder.Entity("GraduationProject_DAL.Data.Models.Banners", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -52,61 +90,22 @@ namespace GraduationProject_DAL.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Image")
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ImagePath")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Title")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("CampImages");
+                    b.ToTable("Banners");
                 });
-
-            modelBuilder.Entity("GraduationProject_DAL.Data.Models.BannerTranslation", b =>
-            {
-                b.Property<int>("Id")
-                    .HasColumnType("int")
-                    .HasColumnOrder(0);
-                b.Property<int>("BannerId")
-                    .HasColumnType("int")
-                    .HasColumnOrder(1);
-                b.Property<string>("Description_AR")
-                    .IsRequired()
-                    .HasMaxLength(50)
-                    .HasColumnType("nvarchar(50)");
-                b.Property<string>("Description_EN")
-                    .IsRequired()
-                    .HasMaxLength(50)
-                    .HasColumnType("nvarchar(50)");
-                b.Property<string>("Title_AR")
-                    .IsRequired()
-                    .HasMaxLength(50)
-                    .HasColumnType("nvarchar(50)");
-                b.Property<string>("Title_EN")
-                    .IsRequired()
-                    .HasMaxLength(50)
-                    .HasColumnType("nvarchar(50)");
-                b.HasKey("Id", "BannerId");
-                b.ToTable("BannerTranslations");
-            });
-
-            modelBuilder.Entity("GraduationProject_DAL.Data.Models.Banners", b =>
-            {
-                b.Property<int>("Id")
-                    .ValueGeneratedOnAdd()
-                    .HasColumnType("int");
-                SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-                b.Property<string>("Description")
-                    .IsRequired()
-                    .HasColumnType("nvarchar(max)");
-                b.Property<string>("ImagePath")
-                    .IsRequired()
-                    .HasColumnType("nvarchar(max)");
-                b.Property<string>("Title")
-                    .IsRequired()
-                    .HasColumnType("nvarchar(max)");
-                b.HasKey("Id");
-                b.ToTable("Banners");
-            });
 
             modelBuilder.Entity("GraduationProject_DAL.Data.Models.Department", b =>
                 {
