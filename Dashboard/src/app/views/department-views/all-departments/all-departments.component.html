@@ -7,6 +7,7 @@
         <th>ID</th>
         <th class="">Title</th>
         <th class="">Description</th>
+        <th class="">No. Of Beds</th>
         <th class="text-center">Actions</th>
       </tr>
     </thead>
@@ -18,6 +19,9 @@
         </td>
         <td class="">
           <p class="fw-bold mb-1">{{d.description}}</p>
+        </td>
+        <td class="">
+          <p class="fw-bold mb-1">{{d.numberOfBeds}}</p>
         </td>
         <td class="text-center">
           <a routerLink="/Departments/{{d.id}}" class="btn" title="Details"><i class="fa-solid fa-desktop text-info" ></i></a>
