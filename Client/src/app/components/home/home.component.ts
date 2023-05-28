@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Department } from 'src/app/Interfaces/Department';
 import { DepartmentService } from 'src/app/Services/department.service';
 import { DoctorsService } from 'src/app/Services/doctors.service';
+import { PatientsService } from 'src/app/Services/patients.service';
 
 @Component({
   selector: 'app-home',
@@ -11,6 +12,7 @@ import { DoctorsService } from 'src/app/Services/doctors.service';
 export class HomeComponent implements OnInit {
   constructor(
     private doctorServices: DoctorsService,
+    private patientServices: PatientsService,
     private departmentServices: DepartmentService
   ) {}
 
@@ -26,6 +28,21 @@ export class HomeComponent implements OnInit {
                 clearInterval(doctorCountStop);
               }
             }, 22);
+          }
+        }
+      },
+    });
+
+    this.patientServices.GetPatientsCount().subscribe({
+      next: (numberOfPatients) => {
+        if (numberOfPatients) {
+          if (numberOfPatients > 0) {
+            let patientCountStop = setInterval(() => {
+              this.patientCount++;
+              if (this.patientCount == numberOfPatients) {
+                clearInterval(patientCountStop);
+              }
+            }, 12);
           }
         }
       },
@@ -53,13 +70,6 @@ export class HomeComponent implements OnInit {
 
   doctorCount: number = 0;
   patientCount: number = 0;
-  patientCountStop: any = setInterval(() => {
-    this.patientCount += 2;
-    if (this.patientCount == 1040) {
-      clearInterval(this.patientCountStop);
-    }
-  }, 12);
-
   bedCount: number = 0;
 
   appointmentCount: number = 0;
