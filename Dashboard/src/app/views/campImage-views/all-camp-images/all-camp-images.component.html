@@ -1,0 +1,33 @@
+<div class="text-center">
+    <a routerLink="/AddCampImage" class="btn btn-outline-primary rounded-pill mb-4">Create New CampImage</a>
+</div>
+<table class="table align-middle mb-0 bg-white">
+    <thead class="table-dark">
+      <tr>
+        <th>ID</th>
+        <th>Image</th>
+        <th class="text-center">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let i of Images">
+        <td>{{i.id}}</td>
+        <td>
+          <div class="d-flex align-items-center">
+            <img
+                src="{{i.image}}"
+                alt=""
+                style="width: 45px; height: 45px; border: 1px solid black;"
+                class="rounded-circle"
+                />
+          </div>
+        </td>
+        <td class="text-center">
+          <!-- <a routerLink="/CampImages/{{i.id}}" class="btn" title="Details"><i class="fa-solid fa-desktop text-info" ></i></a>
+          <a routerLink="/EditImage/{{i.id}}" class="btn" title="Edit"><i class="fa-solid fa-pen-to-square text-warning" ></i></a> -->
+          <button (click)="DeleteImage(i.id)" class="btn " title="Delete"><i class="fa-solid fa-trash text-danger" ></i></button>
+        </td>
+      </tr>
+    </tbody>
+</table>
+

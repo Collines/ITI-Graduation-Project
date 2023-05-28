@@ -4,7 +4,7 @@ import { HttpHeaders } from '@angular/common/http';
 export class Headers {
 
   private Header:HttpHeaders = new HttpHeaders()
-  .set('content-type', 'application/json')
+  // .set('content-type', 'multipart/form-data')
   .set('Access-Control-Allow-Origin', '*')
   
 

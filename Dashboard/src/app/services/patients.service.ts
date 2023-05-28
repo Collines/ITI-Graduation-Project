@@ -17,9 +17,11 @@ export class PatientsService {
   GetAll(){
     return this.Client.get(this.Base_URL, { headers: this.Header });
   }
+
   GetByID(id:any){
     return this.Client.get(`${this.Base_URL}/${id}`, { headers: this.Header });
   }
+  
   Delete(id: any) {
     return this.Client.delete(`${this.Base_URL}/${id}`, { headers: this.Header });
   }
