@@ -83,7 +83,7 @@
   "HardWork":"Hard work",
   "Ambition":"Ambition",
   "Donations":"Donations",
-  "Features":"Features",
+  "Features":"OUR Features",
   "WorkingHours":"Working Hours",
   "Monday":"Monday",
   "Thursday":"Thursday",
@@ -96,5 +96,9 @@
   "EmergencyCases":"Emergency Cases",
   "emergency": "The emergency unit operates 24 hours a day and is staffed by highly qualified doctors.",
   "Intensivecare":"Intensive care",
-  "urgentcare":"Our urgent care centers provide rapid-access to the care you deserve immediately."
+  "urgentcare":"Our urgent care centers provide rapid-access to the care you deserve immediately.",
+
+  "notfound":"Page Not Found",
+  "Page404":"The Page You Are Looking For Doesn't Exist...",
+  "btn404":"back to home"
 }
