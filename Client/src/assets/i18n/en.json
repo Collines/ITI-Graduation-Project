@@ -10,6 +10,16 @@
   "Profile": "Profile",
   "Settings": "Settings",
 
+  "HaveQuestion": "Have a Question?",
+  "CairoEgypt": "Cairo , Egypt",
+  "Copyright": "Copyright ©2023 All rights reserved | This template is made with",
+  "By": "by",
+  "TeamName": "Medical Team",
+  "BusinessHours":"Business Hours:",
+  "WorkingTime":"From 08:00 AM To 12:00 AM",
+  "MobileNumber":"+20 1016017395",
+
+
   "TheBest": "The Best",
   "MedServices": "Medical Services",
   "MakeAppointment": "Make an appointment",
@@ -110,19 +120,18 @@
   "RememberMe": "Remember Me",
   "CreateNewaccount?": "Create New account ?",
   "ToVisit": "Waiting to Visit",
-  "Visited":"Visited",
-  "Cancelled":"Cancelled",
-  "Status":"Status",
+  "Visited": "Visited",
+  "Cancelled": "Cancelled",
+  "Status": "Status",
 
-  "FNameValidation":"First Name Should be 3 characters or more",
-  "LNameValidation":"Last Name Should be 3 characters or more",
-  "FNameARValidation":"Arabic First Name Should be 3 characters or more",
-  "LNameARValidation":"Arabic Last Name Should be 3 characters or more",
-  "SSNValidation":"SSN is required and should be 14 numbers",
-  "EmailValidation":"Enter a valid Email",
-  "PasswordValidation":"Password Should be at least 8 characters",
-  "PhoneValidation":"Phone is required and should start with (011, 012 or 015)",
-  "DateValidation":"Date is required",
-  "GenderValidation":"Gender is required"
-
+  "FNameValidation": "First Name Should be 3 characters or more",
+  "LNameValidation": "Last Name Should be 3 characters or more",
+  "FNameARValidation": "Arabic First Name Should be 3 characters or more",
+  "LNameARValidation": "Arabic Last Name Should be 3 characters or more",
+  "SSNValidation": "SSN is required and should be 14 numbers",
+  "EmailValidation": "Enter a valid Email",
+  "PasswordValidation": "Password Should be at least 8 characters",
+  "PhoneValidation": "Phone is required and should start with (011, 012 or 015)",
+  "DateValidation": "Date is required",
+  "GenderValidation": "Gender is required"
 }

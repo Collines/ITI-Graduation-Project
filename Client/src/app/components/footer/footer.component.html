@@ -24,7 +24,9 @@
         <div class="col-lg-4 col-sm-12">
           <div class="footer-widget-area">
             <div class="widget-title pt-3">
-              <h5 class="fw-bold">Latest News</h5>
+              <h5 class="fw-bold">
+                {{ "LatestNews" | translate | titlecase }}
+              </h5>
             </div>
             <div class="widget-blog-post mt-3">
               <div class="widget-single-blog-post d-flex py-2">
@@ -52,7 +54,7 @@
 
         <div class="col-lg-4 col-sm-12">
           <div class="data mb-4 pt-3">
-            <h5 class="ms-3 fw-bold">Have a Questions?</h5>
+            <h5 class="ms-3 fw-bold">{{ "HaveQuestion" | translate }}</h5>
             <div class="block-23 mb-3">
               <ul>
                 <li class="py-2">
@@ -60,17 +62,20 @@
                     class="fa-solid fa-location-dot mx-2"
                     style="color: #18a3eb"
                   ></i
-                  ><span class="text">Cairo , Egypt</span>
+                  ><span class="text">{{ "CairoEgypt" | translate }}</span>
                 </li>
                 <li class="py-2">
                   <i class="fa-solid fa-clock mx-2" style="color: #18a3eb"></i
                   ><span class="text"
-                    >Business Hours: From 08:00 AM To 12:00 AM</span
+                    >{{ "BusinessHours" | translate }}
+                    {{ "WorkingTime" | translate }}</span
                   >
                 </li>
                 <li class="py-2">
                   <i class="fa-solid fa-phone mx-2" style="color: #18a3eb"></i
-                  ><span class="text">+20 1016017395 </span>
+                  ><span class="text" dir="rtl" style="direction: rtl"
+                    >{{ "MobileNumber" | translate }}
+                  </span>
                 </li>
                 <li class="py-2">
                   <i
@@ -88,30 +93,48 @@
   </footer>
 
   <div class="credit">
-    Copyright ©2023 All rights reserved | This template is made with
-    <span class="fs-4">&hearts;</span> by <span> Medical Team</span>
+    {{ "Copyright" | translate }}
+    <span class="fs-4">&hearts;</span> {{ "By" | translate }}
+    <span> {{ "TeamName" | translate }}</span>
   </div>
 </div>
 <!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+<button
+  type="button"
+  class="btn btn-primary"
+  data-toggle="modal"
+  data-target="#exampleModal"
+>
   Launch demo modal
 </button>
 
 <!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div
+  class="modal fade"
+  id="exampleModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body">
-        ...
-      </div>
+      <div class="modal-body">...</div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">
+          Close
+        </button>
         <button type="button" class="btn btn-primary">Save changes</button>
       </div>
     </div>
