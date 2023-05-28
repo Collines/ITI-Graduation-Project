@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Department } from 'src/app/Interfaces/Department';
 import { AccountService } from 'src/app/Services/account.service';
 import { DepartmentService } from 'src/app/Services/department.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-departments',
@@ -10,6 +11,8 @@ import { DepartmentService } from 'src/app/Services/department.service';
   styleUrls: ['./departments.component.css'],
 })
 export class DepartmentsComponent implements OnInit {
+
+   langauge = localStorage.getItem('language');
   constructor(
     private departmentServices: DepartmentService,
     private accountServices: AccountService,
@@ -60,4 +63,6 @@ export class DepartmentsComponent implements OnInit {
   ngOnDestroy(): void {
     clearTimeout(this.searchTimer);
   }
+
+
 }
