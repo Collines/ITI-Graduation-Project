@@ -16,7 +16,7 @@ namespace GraduationProject.Controllers
         private readonly IDoctorManager doctorMgr;
         private readonly IReservationManager manager;
 
-        public ReservationController(IReservationManager _manager, IHttpContextAccessor _httpContextAccessor, IPatientManager patientMgr,IDoctorManager doctormgr)
+        public ReservationController(IReservationManager _manager, IHttpContextAccessor _httpContextAccessor, IPatientManager patientMgr, IDoctorManager doctormgr)
         {
             manager = _manager;
             httpContextAccessor = _httpContextAccessor;
@@ -46,7 +46,7 @@ namespace GraduationProject.Controllers
         }
 
         [HttpPost("My-Reservations")]
-        public async Task<ActionResult<List<PatientReservationDTO>>> GetAllPatientReservations(int patientId,[FromBody]string accessToken)
+        public async Task<ActionResult<List<PatientReservationDTO>>> GetAllPatientReservations(int patientId, [FromBody] string accessToken)
         {
             var patient = await patientMgr.GetPatientByAccessToken(accessToken);
             if (patient != null)
@@ -63,11 +63,11 @@ namespace GraduationProject.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<Reservation>> CreateReservation(Reservation reservation,string accessToken)
+        public async Task<ActionResult<Reservation>> CreateReservation(Reservation reservation, string accessToken)
         {
-            var patient =await patientMgr.GetPatientByAccessToken(accessToken);
-            var doctor =await doctorMgr.GetByIdAsync(reservation.DoctorId,Utils.GetLang(httpContextAccessor));
-            if (patient != null && doctor!=null && reservation.PatientId == patient.Id)
+            var patient = await patientMgr.GetPatientByAccessToken(accessToken);
+            var doctor = await doctorMgr.GetByIdAsync(reservation.DoctorId, Utils.GetLang(httpContextAccessor));
+            if (patient != null && doctor != null && reservation.PatientId == patient.Id)
             {
                 await manager.InsertAsync(reservation);
                 return Ok();
@@ -90,6 +90,16 @@ namespace GraduationProject.Controllers
 
             await manager.UpdateAsync(id, reservation);
             return Ok(reservation);
+        }
+
+        [AllowAnonymous]
+        [HttpGet]
+        [Route("Count")]
+        public async Task<IActionResult> GetReservationsCount()
+        {
+            var reservations = await manager.GetAllAsync(Utils.GetLang(httpContextAccessor));
+
+            return Ok(reservations.Count);
         }
     }
 }

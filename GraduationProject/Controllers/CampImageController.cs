@@ -49,6 +49,7 @@ namespace GraduationProject.Controllers
             }
             return BadRequest();
         }
+
         [HttpDelete("{id:int}")]
         public async Task<ActionResult<int>> DeleteCampImage(int id)
         {

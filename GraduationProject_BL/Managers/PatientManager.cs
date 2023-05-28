@@ -68,6 +68,7 @@ namespace GraduationProject_BL.Managers
                     dto.Email = patient.Email;
                     dto.PhoneNumber = patient.PhoneNumber;
                     dto.MedicalHistory = patient.MedicalHistory;
+                    dto.Reservations = patient.Reservations;
 
                     patientsDTO.Add(dto);
                 }
@@ -112,6 +113,7 @@ namespace GraduationProject_BL.Managers
                         dto.Email = patient.Email;
                         dto.PhoneNumber = patient.PhoneNumber;
                         dto.MedicalHistory = patient.MedicalHistory;
+                        dto.Reservations = patient.Reservations;
 
                         return dto;
 

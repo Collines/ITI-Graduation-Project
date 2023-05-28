@@ -1,30 +1,30 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Doctor } from '../Interfaces/Doctor';
-import { HeaderService } from './header.service';
+import { Headers } from '../utils/headers.utils';
 
 @Injectable({
   providedIn: 'root',
 })
 export class DoctorsService {
-  constructor(private http: HttpClient, private header: HeaderService) {}
+  constructor(private http: HttpClient, private headers: Headers) {}
 
   private BaseURL = 'https://localhost:7035/api/Doctors';
-  private Header: HttpHeaders = this.header.Header;
+  private Headers: HttpHeaders = this.headers.getHeaders();
 
-  GetAllDoctors(accessToken: string) {
+  GetAllDoctors() {
     return this.http.get<Doctor[]>(this.BaseURL, {
-      headers: this.Header.set('Authorization', `bearer ${accessToken}`),
+      headers: this.Headers,
     });
   }
-  GetById(id: number, accessToken: string) {
+  GetById(id: number) {
     return this.http.get<Doctor>(`${this.BaseURL}/${id}`, {
-      headers: this.Header.set('Authorization', `bearer ${accessToken}`),
+      headers: this.Headers,
     });
   }
-  GetDepartmentDoctors(id: number, accessToken: string) {
+  GetDepartmentDoctors(id: number) {
     return this.http.get<Doctor[]>(`${this.BaseURL}/DepartmentDoctors/${id}`, {
-      headers: this.Header.set('Authorization', `bearer ${accessToken}`),
+      headers: this.Headers,
     });
   }
 }

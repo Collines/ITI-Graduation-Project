@@ -13,6 +13,9 @@ namespace GraduationProject_DAL.Data.Models
         [Required, MaxLength(500)]
         public required string Description { get; set; }
 
+        [Required]
+        public required int NoOfBeds { get; set; }
+
         public virtual IEnumerable<Doctor> Doctors { get; set; } = new HashSet<Doctor>();
     }
 }

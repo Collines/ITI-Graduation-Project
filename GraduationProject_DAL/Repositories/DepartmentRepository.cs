@@ -32,6 +32,7 @@ namespace GraduationProject_DAL.Repositories
             {
                 department.Title = item.Title;
                 department.Description = item.Description;
+                department.NoOfBeds = item.NoOfBeds;
                 await context.SaveChangesAsync();
             }
         }

@@ -1,0 +1,130 @@
+<a class="btn btn-outline-primary" routerLink="/Patients">Back To List</a>
+
+<section>
+    <div class="py-3">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="card mb-4">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-sm-3">
+                  <p class="mb-0">ID</p>
+                </div>
+                <div class="col-sm-9">
+                  <p class="text-muted mb-0">{{Patient.id}}</p>
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-sm-3">
+                  <p class="mb-0">Full Name</p>
+                </div>
+                <div class="col-sm-9">
+                  <p class="text-muted mb-0">{{Patient.fullName}}</p>
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-sm-3">
+                  <p class="mb-0">Date Of Birth</p>
+                </div>
+                <div class="d-flex col-sm-9">
+                  <p class="text-muted mb-0 me-3">{{Patient.dob | date : 'MMMM d, y'}}</p>
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-sm-3">
+                  <p class="mb-0">Gender</p>
+                </div>
+                <div class="d-flex col-sm-9">
+                  <p class="text-muted mb-0 me-3">{{Gender[Patient.gender]}}</p>
+                  <span *ngIf="Patient.gender == Gender.Male" class="badge badge-info rounded-pill text-bg-info d-inline"><i class="fa-solid fa-mars fa-lg" style="color: #ffffff;"></i></span>
+                  <span *ngIf="Patient.gender == Gender.Female" class="badge badge-info rounded-pill text-bg-danger d-inline"><i class="fa-solid fa-venus fa-lg" style="color: #ffffff;"></i></span>
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-sm-3">
+                  <p class="mb-0">Email</p>
+                </div>
+                <div class="col-sm-9">
+                  <p class="text-muted mb-0">{{Patient.email}}</p>
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-sm-3">
+                  <p class="mb-0">Phone Number</p>
+                </div>
+                <div class="col-sm-9">
+                  <p class="text-muted mb-0">{{Patient.phoneNumber}}</p>
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-sm-3">
+                  <p class="mb-0">SSN</p>
+                </div>
+                <div class="col-sm-9">
+                  <p class="text-muted mb-0">{{Patient.ssn}}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <textarea *ngIf="Patient.medicalHistory" class="form-control border-success" cols="10" rows="7"  disabled [value]="Patient.medicalHistory"></textarea>
+          <c-row class="mt-4">
+            <c-col >
+              <c-card class="mb-4">
+                <c-card-header class="mb-4">Reservations</c-card-header>
+                <c-row class="justify-content-md-center mb-4">
+                  <c-col [sm]="4">
+                    <c-card class="text-center">
+                      <c-card-body class="bg-info rounded">
+                        <h1 cCardTitle>{{ Patient.reservations.length }}</h1>
+                        <h6 cCardSubtitle class="mb-2 text-medium-emphasis">
+                          Total Reservations
+                        </h6>
+                      </c-card-body>
+                    </c-card>
+                  </c-col>
+                  <c-col [sm]="4">
+                    <c-card class="text-center">
+                      <c-card-body class="bg-warning rounded">
+                        <h1 cCardTitle>{{ToVisit}}</h1>
+                        <h6 cCardSubtitle class="mb-2 text-medium-emphasis">
+                          To Visit
+                        </h6>
+                      </c-card-body>
+                    </c-card>
+                  </c-col>
+                </c-row>
+                <c-row class="justify-content-md-center mb-4">
+                  <c-col [sm]="4">
+                    <c-card class="text-center">
+                      <c-card-body class="bg-success rounded">
+                        <h1 cCardTitle>{{Visited}}</h1>
+                        <h6 cCardSubtitle class="mb-2 text-medium-emphasis">
+                          Visited
+                        </h6>
+                      </c-card-body>
+                    </c-card>
+                  </c-col>
+                  <c-col [sm]="4">
+                    <c-card class="text-center">
+                      <c-card-body class="bg-danger rounded">
+                        <h1 cCardTitle>{{Cancelled}}</h1>
+                        <h6 cCardSubtitle class="mb-2 text-medium-emphasis">
+                          Cancelled
+                        </h6>
+                      </c-card-body>
+                    </c-card>
+                  </c-col>
+                </c-row>
+              </c-card>
+            </c-col>
+          </c-row>
+        </div>
+      </div>
+    </div>
+  </section>
