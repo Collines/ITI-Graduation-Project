@@ -1,12 +1,12 @@
 <h1 class="text-center mb-5">Add New Department</h1>
 <div class="container">
     <div class="row">
-      <form #AddForm (ngSubmit)="AddDept(title_EN.value,title_AR.value,description_EN.value,description_AR.value)" [formGroup]="validator" class="col">
+      <form #AddForm (ngSubmit)="AddDept(title_EN.value,title_AR.value,description_EN.value,description_AR.value,NoOfBeds.value)" [formGroup]="validator" class="col">
   
         <div class="row">
           <div class="mb-3 col">
-            <label class="form-label" for="title_EN">Title English</label>
-            <input #title_EN formControlName="title_EN" type="text" class="form-control" id="title_EN" placeholder="title_EN "
+            <label class="form-label" for="title_EN">Title In English</label>
+            <input #title_EN formControlName="title_EN" type="text" class="form-control" id="title_EN" placeholder="Title In English "
             [ngClass]="
             !Title_EN_Valid && title_EN.value
               ? {
@@ -24,8 +24,8 @@
           </div>
   
           <div class="mb-3 col">
-            <label class="form-label" for="description_EN">description English</label>
-            <input #description_EN formControlName="description_EN" type="text" class="form-control" id="description_EN" placeholder="description_EN" />
+            <label class="form-label" for="description_EN">Description In English</label>
+            <input #description_EN formControlName="description_EN" type="text" class="form-control" id="description_EN" placeholder="Description In English" />
             <br>
             <div class="alert alert-danger" *ngIf="!Description_EN_Valid && description_EN.value">
               <p>*Description Must be 3 Letters or More</p>
@@ -37,8 +37,8 @@
   
         <div class="row">
           <div class="mb-3 col">
-            <label class="form-label " for="title_AR">Title Arabic</label>
-            <input #title_AR formControlName="title_AR" type="text" class="form-control text-end" id="title_AR" placeholder="العنوان "/>
+            <label class="form-label " for="title_AR">Title In Arabic</label>
+            <input #title_AR formControlName="title_AR" type="text" class="form-control text-end" id="title_AR" placeholder="اسم القسم "/>
             <br>
             <div class="alert alert-danger" *ngIf="!Title_AR_Valid && title_AR.value">
               <p>*Title in Arabic Must be 2 Letters or More</p>
@@ -49,8 +49,8 @@
           </div>
   
           <div class="mb-3 col">
-            <label class="form-label" for="description_AR">description Arabic</label>
-            <input #description_AR formControlName="description_AR" type="text" class="form-control text-end" id="description_AR" placeholder="التعريف"/>
+            <label class="form-label" for="description_AR">Description In Arabic</label>
+            <input #description_AR formControlName="description_AR" type="text" class="form-control text-end" id="description_AR" placeholder="الوصف"/>
             <br>
             <div class="alert alert-danger" *ngIf="!Description_AR_Valid && description_AR.value">
               <p>*Description in Arabic Must be 2 Letters or More</p>
@@ -60,8 +60,16 @@
             </div>
           </div>
         </div>
-  
-  
+
+        <div class="mb-3 col">
+          <label class="form-label" for="NoOfBeds">Number Of Beds</label>
+          <input #NoOfBeds formControlName="NoOfBeds" type="number" min="0" class="form-control" id="NoOfBeds" placeholder="Number Of Beds"/>
+          <br>
+          <div class="alert alert-danger" *ngIf="!NoOfBeds_Valid && NoOfBeds.value">
+            <p>Must Be Positive Number</p>
+          </div>
+        </div>
+
         <div class="row mb-3 ms-10 me-10 text-center">
           <div class="text-center">
             <input class="col-6" type="submit" value="Add" class="w-50 btn rounded-pill btn-outline-primary">

@@ -1,6 +1,8 @@
-<div class="container">
+<button class="btn btn-outline-primary mb-4" routerLink="/Departments" >Back To List</button>
+
+<div>
     <div class="row">
-      <form #AddForm (ngSubmit)="Edit(title_EN.value,title_AR.value,description_EN.value,description_AR.value)" [formGroup]="validator" class="col">
+      <form #AddForm (ngSubmit)="Edit(title_EN.value,title_AR.value,description_EN.value,description_AR.value, NoOfBeds.value)" [formGroup]="validator" class="col">
   
         <div class="row">
           <div class="mb-3 col">
@@ -49,6 +51,15 @@
               <p>*Must be Writen in Arabic</p>
               <p>*No Special Characters or Numbers</p>
             </div>
+          </div>
+        </div>
+
+        <div class="mb-3 col">
+          <label class="form-label" for="NoOfBeds">Number Of Beds</label>
+          <input #NoOfBeds formControlName="NoOfBeds" type="number" min="0"  [(ngModel)]="Department.numberOfBeds" class="form-control" id="NoOfBeds" placeholder="Number Of Beds"/>
+          <br>
+          <div class="alert alert-danger" *ngIf="!NoOfBeds_Valid && NoOfBeds.value">
+            <p>Must Be Positive Number</p>
           </div>
         </div>
   

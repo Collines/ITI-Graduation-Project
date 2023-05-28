@@ -34,8 +34,17 @@ export class AllDepartmentsComponent implements OnInit {
     if(confirm(`Do You Want To Delete Department No. ${id}`))
     {
     this.myService.DeleteDepartment(id).subscribe({
-      next: response=>{this.router.navigate(['/Departments']);},
+      next: response=>this.departments =  this.RemoveObjectWithId(this.departments,id),
       error: error=>{alert('item Still exist')}
     })};
+  }
+
+  RemoveObjectWithId(arr:any, id:number) {
+    const objWithIdIndex = arr.findIndex((obj:any) => obj.id == id);
+
+    if (objWithIdIndex > -1) {
+      arr.splice(objWithIdIndex, 1);
+    }
+    return arr;
   }
 }
