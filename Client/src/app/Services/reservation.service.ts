@@ -10,19 +10,27 @@ import { Headers } from '../utils/headers.utils';
 export class ReservationService {
   constructor(
     private http: HttpClient,
-    private header: HeaderService,
+    // private header: HeaderService,
     private headers: Headers
   ) {}
 
   private BaseURL = 'https://localhost:7035/api/Reservation';
-  private Header: HttpHeaders = this.header.Header;
+  // private Header: HttpHeaders = this.header.Header;
   private Headers = this.headers.getHeaders();
 
   GetAllReservations(id: number, accessToken: string) {
     return this.http.post<Reservation[]>(
       this.BaseURL + '/My-Reservations?patientId=' + id,
       `\"${accessToken}\"`,
-      { headers: this.Header.set('Authorization', `bearer ${accessToken}`) }
+      { headers: this.Headers.set('Authorization', `bearer ${accessToken}`) }
+    );
+  }
+
+  CancelReservation(id: number, reservation: Reservation, accessToken: string) {
+    return this.http.patch<Reservation>(
+      this.BaseURL + '/CancelReservation/' + id,
+      reservation,
+      { headers: this.Headers.set('Authorization', `bearer ${accessToken}`) }
     );
   }
 
@@ -30,11 +38,13 @@ export class ReservationService {
     return this.http.post(
       this.BaseURL + `?accessToken=${accessToken}`,
       reservation,
-      { headers: this.Header.set('Authorization', `bearer ${accessToken}`) }
+      { headers: this.Headers.set('Authorization', `bearer ${accessToken}`) }
     );
   }
 
   getReservationsCount() {
-    return this.http.get<number>(`${this.BaseURL}/Count`, { headers: this.Headers });
+    return this.http.get<number>(`${this.BaseURL}/Count`, {
+      headers: this.Headers,
+    });
   }
 }

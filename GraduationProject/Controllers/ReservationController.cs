@@ -46,7 +46,7 @@ namespace GraduationProject.Controllers
         }
 
         [HttpPost("My-Reservations")]
-        public async Task<ActionResult<List<PatientReservationDTO>>> GetAllPatientReservations(int patientId, [FromBody] string accessToken)
+        public async Task<ActionResult<List<ReservationDTO>>> GetAllPatientReservations(int patientId, [FromBody] string accessToken)
         {
             var patient = await patientMgr.GetPatientByAccessToken(accessToken);
             if (patient != null)
@@ -90,6 +90,15 @@ namespace GraduationProject.Controllers
 
             await manager.UpdateAsync(id, reservation);
             return Ok(reservation);
+        }
+
+        [HttpPatch("CancelReservation/{id:int}")]
+        public async Task<ActionResult<ReservationDTO>> CancelReservation(int id, ReservationDTO reservation)
+        {
+            if (id != reservation.Id || User.Claims.FirstOrDefault().Value != reservation.PatientId.ToString())
+                return BadRequest();
+            await manager.CancelReservation(id);
+            return Ok();
         }
 
         [AllowAnonymous]

@@ -60,12 +60,14 @@ export class DoctorComponent implements OnInit {
   closeModal() {
     this.modal.hide();
   }
+  isSubmit = false;
+  error = false;
   OnSubmit(/*time: any, */ date: any) {
     let dt1 = new Date(date.value).setHours(8);
     let dt = new Date(dt1);
-    console.log(dt);
-
+    this.isSubmit = true;
     if (dt.getTime() > new Date().getTime()) {
+      this.error = false;
       this.reservation.dateTime = `${dt.toLocaleString()}`;
       this.reservation.doctorId = this.doctor.id;
       this.reservation.patientId = this.user.id;
@@ -76,11 +78,13 @@ export class DoctorComponent implements OnInit {
         .subscribe({
           next: (e) => {
             console.log('reservation added!');
-            this.closeModal();
+            setTimeout((e: any) => {
+              this.closeModal();
+            }, 1000);
           },
         });
     } else {
-      // show error
+      this.error = true;
     }
   }
 }

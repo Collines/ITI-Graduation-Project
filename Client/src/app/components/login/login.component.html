@@ -28,7 +28,9 @@
               [ngClass]="submitted && !isResponseSuccess ? 'd-block' : 'd-none'"
             ></div>
             <div class="mb-3">
-              <label for="email" class="form-label">Email address</label>
+              <label for="email" class="form-label">{{
+                "Email" | translate
+              }}</label>
               <input
                 formControlName="email"
                 type="email"
@@ -56,7 +58,9 @@
             </div>
 
             <div class="mb-3">
-              <label for="pass" class="form-label">Password</label>
+              <label for="pass" class="form-label">{{
+                "Password" | translate
+              }}</label>
               <input
                 formControlName="password"
                 type="password"
@@ -89,16 +93,18 @@
                 class="form-check-input"
                 id="exampleCheck1"
               />
-              <label class="form-check-label" for="exampleCheck1"
-                >Remember Me</label
-              >
+              <label class="form-check-label" for="exampleCheck1">{{
+                "RememberMe" | translate
+              }}</label>
             </div>
-            <button type="submit" class="btn submit-btn">Login</button>
+            <button type="submit" class="btn submit-btn">
+              {{ "Login" | translate }}
+            </button>
 
             <div class="login mt-3 text-muted">
               <h6>
-                Create New account ?
-                <a routerLink="/register">Register</a>
+                {{ "CreateNewaccount?" | translate }}
+                <a routerLink="/register">{{ "Register" | translate }}</a>
               </h6>
             </div>
           </form>

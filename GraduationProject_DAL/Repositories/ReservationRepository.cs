@@ -16,7 +16,7 @@ namespace GraduationProject_DAL.Repositories
 
         public async Task<List<Reservation>> GetAllAsync()
         {
-            return await context.Reservations.Include(r => r.Doctor)
+            return await context.Reservations.Include(r => r.Doctor).ThenInclude(d=>d.Department)
                                        .Include(p => p.Patient)
                                        .ToListAsync();
         }
@@ -36,6 +36,7 @@ namespace GraduationProject_DAL.Repositories
                 reservation.Queue = item.Queue;
                 reservation.PatientId = item.PatientId;
                 reservation.DoctorId = item.DoctorId;
+                reservation.Status = item.Status;
                 await context.SaveChangesAsync();
             }
         }
