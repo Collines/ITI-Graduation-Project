@@ -52,7 +52,7 @@
                 class="text-danger"
               >
                 <div *ngIf="submitted && Validation.controls.email.errors">
-                  Enter a valid Email
+                  {{ "EmailValidation" | translate }}
                 </div>
               </div>
             </div>
@@ -82,7 +82,7 @@
                 class="text-danger"
               >
                 <div *ngIf="submitted && Validation.controls.password.errors">
-                  Password Should be at least 8 characters
+                  {{ "PasswordValidation" | translate }}
                 </div>
               </div>
             </div>
