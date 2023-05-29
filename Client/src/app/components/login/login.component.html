@@ -45,7 +45,7 @@
                 "
                 class="form-control"
                 id="email"
-                placeholder="Enter Email"
+                [placeholder]="'Email' | translate"
               />
               <div
                 *ngIf="submitted && Validation.controls.email.errors"
@@ -75,7 +75,7 @@
                 "
                 class="form-control"
                 id="pass"
-                placeholder="Enter Password"
+                [placeholder]="'Password' | translate"
               />
               <div
                 *ngIf="submitted && Validation.controls.password.errors"

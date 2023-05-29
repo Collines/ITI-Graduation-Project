@@ -30,6 +30,7 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { ReservationComponent } from './components/reservation/reservation.component';
 import { DepartmentDetailComponent } from './components/department-detail/department-detail.component';
 import { NotfoundComponent } from './components/notfound/notfound.component';
+import { SettingsComponent } from './components/settings/settings.component';
 
 //For Google SignIn
 import { SocialLoginModule, SocialAuthServiceConfig } from '@abacritt/angularx-social-login';
@@ -56,6 +57,7 @@ import { GoogleLoginProvider } from '@abacritt/angularx-social-login';
     DepartmentComponent,
     DepartmentDetailComponent,
     NotfoundComponent,
+    SettingsComponent,
   ],
   imports: [
     BrowserModule,
