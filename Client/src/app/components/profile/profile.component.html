@@ -102,7 +102,7 @@
                           Validation.controls['FirstName'].status == 'INVALID'
                         "
                       >
-                        First Name Should be 3 characters or more
+                        {{ "FNameValidation" | translate }}
                       </div>
                     </div>
                   </div>
@@ -144,7 +144,7 @@
                           Validation.controls['LastName'].status == 'INVALID'
                         "
                       >
-                        Last Name Should be 3 characters or more
+                        {{ "LNameValidation" | translate }}
                       </div>
                     </div>
                   </div>
@@ -186,7 +186,7 @@
                           Validation.controls['FirstNameAr'].status == 'INVALID'
                         "
                       >
-                        First Name Should be 3 characters or more
+                        {{ "FNameARValidation" | translate }}
                       </div>
                     </div>
                   </div>
@@ -228,7 +228,7 @@
                           Validation.controls['LastNameAr'].status == 'INVALID'
                         "
                       >
-                        Last Name Should be 3 characters or more
+                        {{ "LNameARValidation" | translate }}
                       </div>
                     </div>
                   </div>
@@ -245,8 +245,8 @@
                       disabled
                       value="{{ userEdit.gender }}"
                     >
-                      <option value="1">Female</option>
-                      <option value="2">Male</option>
+                      <option value="2">{{ "Male" | translate }}</option>
+                      <option value="1">{{ "Female" | translate }}</option>
                     </select>
                   </div>
                 </div>
@@ -286,7 +286,7 @@
                           Validation.controls['email'].status == 'INVALID'
                         "
                       >
-                        Enter a valid Email
+                        {{ "EmailValidation" | translate }}
                       </div>
                     </div>
                   </div>
@@ -324,7 +324,7 @@
                           submitted && Validation.controls['password'].errors
                         "
                       >
-                        Password Should be at least 8 characters
+                        {{ "PasswordValidation" | translate }}
                       </div>
                     </div>
                   </div>
@@ -364,7 +364,7 @@
                           Validation.controls['Date'].status == 'INVALID'
                         "
                       >
-                        Date is required
+                        {{ "DateValidation" | translate }}
                       </div>
                     </div>
                   </div>
@@ -405,8 +405,7 @@
                           Validation.controls['Phone'].status == 'INVALID'
                         "
                       >
-                        Phone is required and should start with (010, 011, 012
-                        or 015)
+                        {{ "PhoneValidation" | translate }}
                       </div>
                     </div>
                   </div>
