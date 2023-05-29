@@ -22,7 +22,6 @@ export class DoctorComponent implements OnInit {
     this.accountService.currentUser$.subscribe({
       next: (user) => {
         if (user) this.user = user;
-        else this.router.navigate(['/login']);
       },
     });
   }
@@ -59,6 +58,9 @@ export class DoctorComponent implements OnInit {
   }
   closeModal() {
     this.modal.hide();
+  }
+  get Logged(): boolean {
+    return this.user.refreshToken.length >0;
   }
   isSubmit = false;
   error = false;

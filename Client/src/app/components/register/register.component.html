@@ -31,7 +31,7 @@
                 class="text-danger"
               >
                 <div *ngIf="submitted && Validation.controls.FirstName.errors">
-                  First Name Should be 3 characters or more
+                  {{ "FNameValidation" | translate }}
                 </div>
               </div>
             </div>
@@ -60,7 +60,7 @@
                 class="text-danger"
               >
                 <div *ngIf="submitted && Validation.controls.LastName.errors">
-                  Last Name Should be 3 characters or more
+                  {{ "LNameValidation" | translate }}
                 </div>
               </div>
             </div>
@@ -91,7 +91,7 @@
                 <div
                   *ngIf="submitted && Validation.controls.FirstNameAr.errors"
                 >
-                  الاسم الاول يجب الا يقل عن 3 احرف
+                  {{ "FNameARValidation" | translate }}
                 </div>
               </div>
             </div>
@@ -120,7 +120,7 @@
                 class="text-danger"
               >
                 <div *ngIf="submitted && Validation.controls.LastNameAr.errors">
-                  اسم الاب يجب الا يقل عن 3 احرف
+                  {{ "LNameARValidation" | translate }}
                 </div>
               </div>
             </div>
@@ -149,7 +149,7 @@
                 class="text-danger"
               >
                 <div *ngIf="submitted && Validation.controls.SSN.errors">
-                  SSN is required and should be 14 numbers
+                  {{ "SSNValidation" | translate }}
                 </div>
               </div>
             </div>
@@ -178,7 +178,7 @@
                 class="text-danger"
               >
                 <div *ngIf="submitted && Validation.controls.email.errors">
-                  Enter a valid Email
+                  {{ "EmailValidation" | translate }}
                 </div>
               </div>
             </div>
@@ -208,7 +208,7 @@
                 class="text-danger"
               >
                 <div *ngIf="submitted && Validation.controls.password.errors">
-                  Password Should be at least 8 characters
+                  {{ "PasswordValidation" | translate }}
                 </div>
               </div>
             </div>
@@ -237,7 +237,7 @@
                 class="text-danger"
               >
                 <div *ngIf="submitted && Validation.controls.Phone.errors">
-                  Phone is required and should start with (011, 012 or 015)
+                  {{ "PhoneValidation" | translate }}
                 </div>
               </div>
             </div>
@@ -267,7 +267,7 @@
                 class="text-danger"
               >
                 <div *ngIf="submitted && Validation.controls.Date.errors">
-                  Date is required
+                  {{ "DateValidation" | translate }}
                 </div>
               </div>
             </div>
@@ -302,7 +302,7 @@
                 class="text-danger"
               >
                 <div *ngIf="submitted && Validation.controls.Gender.errors">
-                  Gender is required
+                  {{ "GenderValidation" | translate }}
                 </div>
               </div>
             </div>
@@ -316,7 +316,7 @@
               <label class="form-check-label  me-4 px-2" for="exampleCheck1"
                 >{{ "Iacceptthe" | translate }}
                 <span> {{ "Termsofuse" | translate }}</span> &
-                <span> {{"PrivacyPolicy"|translate}} </span></label
+                <span> {{ "PrivacyPolicy" | translate }} </span></label
               >
             </div>
             <button type="submit" class="btn submit-btn">
