@@ -1,3 +1,4 @@
+import { GoogleAuthService } from './../../Services/google-auth.service';
 import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
@@ -13,7 +14,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private accountService: AccountService,
     private router: Router,
-    private location: Location
+    private location: Location,
+    private GoogleAuthService:GoogleAuthService
   ) {}
   ngOnInit(): void {
     this.accountService.currentUser$.subscribe({
@@ -72,5 +74,9 @@ export class LoginComponent implements OnInit {
           },
         });
     }
+  }
+
+  GoogleLogin = () => {
+    this.GoogleAuthService.signInWithGoogle();
   }
 }
