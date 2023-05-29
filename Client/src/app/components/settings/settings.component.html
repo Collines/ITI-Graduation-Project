@@ -1,0 +1,438 @@
+<div class="container pt-4">
+  <div class="row my-5 gy-5">
+    <div class="col-md-3">
+      <div class="list-group">
+        <a class="list-group-item list-group-item-action " routerLink="/profile"
+          >{{ "Profile" | translate }}</a >
+        <a class="list-group-item list-group-item-action"
+          routerLink="/reservations"
+          >{{ "Reservation" | translate }}</a>
+        <a href="#" class="list-group-item list-group-item-action active">{{  "Settings" | translate}}</a>
+        <a
+          class="list-group-item list-group-item-action logout"
+          (click)="logout()"
+          >{{  "Logout" | translate}}</a>
+      </div>
+    </div>
+    <div class="col-md-9">
+      <div class="card">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-12">
+              <h4>{{ "YourProfile" | translate }}</h4>
+              <hr />
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <form
+                [formGroup]="Validation"
+                (submit)="onSubmit(ErrDiv, SuccessDiv)"
+              >
+                <div
+                  [ngClass]="
+                    submitted && !error && !Validation.invalid && isResponsed
+                      ? 'd-block'
+                      : 'd-none'
+                  "
+                  #SuccessDiv
+                  class="alert alert-success text-center"
+                ></div>
+                <div
+                  #ErrDiv
+                  [ngClass]="submitted && error ? 'd-block' : 'd-none'"
+                  class="alert alert-danger text-center"
+                ></div>
+                <div class="form-group row mb-2">
+                  <label for="ssn" class="col-4 col-form-label">{{
+                    "SSN" | translate
+                  }}</label>
+                  <div class="col-8">
+                    <input
+                      id="ssn"
+                      name="ssn"
+                      readonly
+                      disabled
+                      value="{{ userEdit.ssn }}"
+                      class="form-control here"
+                      type="text"
+                    />
+                  </div>
+                </div>
+
+                <div class="form-group row mb-2">
+                  <label for="fname" class="col-4 col-form-label">{{
+                    "FirstName" | translate
+                  }}</label>
+                  <div class="col-8">
+                    <input
+                      formControlName="FirstName"
+                      id="name"
+                      name="fname"
+                      placeholder="First Name"
+                      class="form-control here"
+                      type="text"
+                      value="{{ userEdit.firstName_EN }}"
+                      [ngClass]="
+                        !isFirstNameValid
+                          ? {
+                              'is-invalid':
+                                submitted &&
+                                Validation.controls['FirstName'].status ==
+                                  'INVALID'
+                            }
+                          : 'is-valid'
+                      "
+                    />
+                    <div
+                      *ngIf="
+                        submitted &&
+                        Validation.controls['FirstName'].status == 'INVALID'
+                      "
+                      class="text-danger"
+                    >
+                      <div
+                        *ngIf="
+                          submitted &&
+                          Validation.controls['FirstName'].status == 'INVALID'
+                        "
+                      >
+                        First Name Should be 3 characters or more
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group row mb-2">
+                  <label for="lname" class="col-4 col-form-label">{{
+                    "LastName" | translate
+                  }}</label>
+                  <div class="col-8">
+                    <input
+                      formControlName="LastName"
+                      id="lname"
+                      name="lastname"
+                      placeholder="Last Name"
+                      class="form-control here"
+                      type="text"
+                      value="{{ userEdit.lastName_EN }}"
+                      [ngClass]="
+                        !isLastNameValid
+                          ? {
+                              'is-invalid':
+                                submitted &&
+                                Validation.controls['LastName'].status ==
+                                  'INVALID'
+                            }
+                          : 'is-valid'
+                      "
+                    />
+                    <div
+                      *ngIf="
+                        submitted &&
+                        Validation.controls['LastName'].status == 'INVALID'
+                      "
+                      class="text-danger"
+                    >
+                      <div
+                        *ngIf="
+                          submitted &&
+                          Validation.controls['LastName'].status == 'INVALID'
+                        "
+                      >
+                        Last Name Should be 3 characters or more
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group row mb-2">
+                  <label for="fnameAR" class="col-4 col-form-label">{{
+                    "FirstNameAr" | translate
+                  }}</label>
+                  <div class="col-8">
+                    <input
+                      formControlName="FirstNameAr"
+                      id="fnameAR"
+                      name="text"
+                      placeholder="First Name in Arabic"
+                      class="form-control here"
+                      type="text"
+                      value="{{ userEdit.firstName_AR }}"
+                      [ngClass]="
+                        !isFirstNameArValid
+                          ? {
+                              'is-invalid':
+                                submitted &&
+                                Validation.controls['FirstNameAr'].status ==
+                                  'INVALID'
+                            }
+                          : 'is-valid'
+                      "
+                    />
+                    <div
+                      *ngIf="
+                        submitted &&
+                        Validation.controls['FirstNameAr'].status == 'INVALID'
+                      "
+                      class="text-danger"
+                    >
+                      <div
+                        *ngIf="
+                          submitted &&
+                          Validation.controls['FirstNameAr'].status == 'INVALID'
+                        "
+                      >
+                        First Name Should be 3 characters or more
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group row mb-2">
+                  <label for="lnameAR" class="col-4 col-form-label">{{
+                    "LastNameAr" | translate
+                  }}</label>
+                  <div class="col-8">
+                    <input
+                      formControlName="LastNameAr"
+                      id="lnameAR"
+                      name="text"
+                      placeholder="Last Name in Arabic"
+                      class="form-control here"
+                      type="text"
+                      value="{{ userEdit.lastName_AR }}"
+                      [ngClass]="
+                        !isLastNameArValid
+                          ? {
+                              'is-invalid':
+                                submitted &&
+                                Validation.controls['LastNameAr'].status ==
+                                  'INVALID'
+                            }
+                          : 'is-valid'
+                      "
+                    />
+                    <div
+                      *ngIf="
+                        submitted &&
+                        Validation.controls['LastNameAr'].status == 'INVALID'
+                      "
+                      class="text-danger"
+                    >
+                      <div
+                        *ngIf="
+                          submitted &&
+                          Validation.controls['LastNameAr'].status == 'INVALID'
+                        "
+                      >
+                        Last Name Should be 3 characters or more
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-group row mb-2">
+                  <label for="fname" class="col-4 col-form-label">{{
+                    "Gender" | translate
+                  }}</label>
+                  <div class="col-8">
+                    <select
+                      class="form-select"
+                      aria-label="Default select example"
+                      disabled
+                      value="{{ userEdit.gender }}"
+                    >
+                      <option value="1">Female</option>
+                      <option value="2">Male</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="form-group row mb-2">
+                  <label for="email" class="col-4 col-form-label">{{
+                    "Email" | translate
+                  }}</label>
+                  <div class="col-8">
+                    <input
+                      formControlName="email"
+                      id="email"
+                      name="email"
+                      placeholder="Email Adress"
+                      class="form-control here"
+                      type="email"
+                      value="{{ userEdit.email }}"
+                      [ngClass]="
+                        !isEmailValid
+                          ? {
+                              'is-invalid':
+                                submitted &&
+                                Validation.controls['email'].status == 'INVALID'
+                            }
+                          : 'is-valid'
+                      "
+                    />
+                    <div
+                      *ngIf="
+                        submitted &&
+                        Validation.controls['email'].status == 'INVALID'
+                      "
+                      class="text-danger"
+                    >
+                      <div
+                        *ngIf="
+                          submitted &&
+                          Validation.controls['email'].status == 'INVALID'
+                        "
+                      >
+                        Enter a valid Email
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group row mb-2">
+                  <label for="pass" class="col-4 col-form-label">{{
+                    "Password" | translate
+                  }}</label>
+                  <div class="col-8">
+                    <input
+                      formControlName="password"
+                      id="pass"
+                      name="password"
+                      class="form-control here"
+                      type="password"
+                      placeholder="Leave blank for unchange"
+                      [ngClass]="
+                        !isPasswordValid
+                          ? {
+                              'is-invalid':
+                                submitted &&
+                                Validation.controls['password'].errors
+                            }
+                          : 'is-valid'
+                      "
+                    />
+                    <div
+                      *ngIf="
+                        submitted && Validation.controls['password'].errors
+                      "
+                      class="text-danger"
+                    >
+                      <div
+                        *ngIf="
+                          submitted && Validation.controls['password'].errors
+                        "
+                      >
+                        Password Should be at least 8 characters
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group row mb-2">
+                  <label for="DOB" class="col-4 col-form-label">{{
+                    "DOB" | translate
+                  }}</label>
+                  <div class="col-8">
+                    <input
+                      formControlName="Date"
+                      id="DOB"
+                      name="DOB"
+                      class="form-control here"
+                      type="date"
+                      value="{{ dateStr }}"
+                      [ngClass]="
+                        !isDateValid
+                          ? {
+                              'is-invalid':
+                                submitted &&
+                                Validation.controls['Date'].status == 'INVALID'
+                            }
+                          : 'is-valid'
+                      "
+                    />
+                    <div
+                      *ngIf="
+                        submitted &&
+                        Validation.controls['Date'].status == 'INVALID'
+                      "
+                      class="text-danger"
+                    >
+                      <div
+                        *ngIf="
+                          submitted &&
+                          Validation.controls['Date'].status == 'INVALID'
+                        "
+                      >
+                        Date is required
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group row mb-2">
+                  <label for="phone" class="col-4 col-form-label">{{
+                    "Phone" | translate
+                  }}</label>
+                  <div class="col-8">
+                    <input
+                      formControlName="Phone"
+                      id="phone"
+                      name="phone"
+                      placeholder="Phone"
+                      class="form-control here"
+                      type="text"
+                      value="{{ userEdit.phone }}"
+                      [ngClass]="
+                        !isPhoneValid
+                          ? {
+                              'is-invalid':
+                                submitted &&
+                                Validation.controls['Phone'].status == 'INVALID'
+                            }
+                          : 'is-valid'
+                      "
+                    />
+                    <div
+                      *ngIf="
+                        submitted &&
+                        Validation.controls['Phone'].status == 'INVALID'
+                      "
+                      class="text-danger"
+                    >
+                      <div
+                        *ngIf="
+                          submitted &&
+                          Validation.controls['Phone'].status == 'INVALID'
+                        "
+                      >
+                        Phone is required and should start with (010, 011, 012
+                        or 015)
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group row mb-2">
+                  <label for="MH" class="col-4 col-form-label">{{
+                    "MedicalHistory" | translate
+                  }}</label>
+                  <div class="col-8">
+                    <textarea
+                      (input)="onValueChange($event)"
+                      class="form-control"
+                      id="MH"
+                      rows="3"
+                      placeholder="Medical History"
+                      >{{ userEdit.medicalHistory }}</textarea
+                    >
+                  </div>
+                </div>
+                <div class="form-group row mt-4">
+                  <div class="offset-4 col-8">
+                    <button name="submit" type="submit" class="btn">
+                      {{ "UpdateMyProfile" | translate }}
+                    </button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
