@@ -1,0 +1,63 @@
+<div class="container">
+    <div class="row">
+      <form #AddForm (ngSubmit)="Edit(Title_EN.value,Title_AR.value,Description_EN.value,Description_AR.value)" [formGroup]="validator" class="col">
+        <div class="mb-3">
+          <label class="form-label" for="Title_EN">Title</label>
+          <input #Title_EN formControlName="Title_EN" [(ngModel)]="Banner.title_EN" type="text" class="form-control" id="Title_EN" placeholder="Title" />
+          <br>
+            <div class="alert alert-danger" *ngIf="!Title_EN_Valid && Title_EN.value">
+              <p>*Title Must be 5 Letters or More</p>
+              <p>*Less Than 50</p>
+            </div>
+        </div>
+  
+        <div class="mb-3">
+          <label class="form-label" for="Title_AR">Title in Arabic</label>
+          <input #Title_AR formControlName="Title_AR" type="text" [(ngModel)]="Banner.title_AR" class="form-control text-end" id="Title_AR" placeholder="العنوان"/>
+          <br>
+            <div class="alert alert-danger" *ngIf="!Title_AR_Valid && Title_AR.value">
+              <p>*Title in Arabic Must be 5 Letters or More</p>
+              <p>*Less Than 50</p>
+              <p>*Must be Writen in Arabic</p>
+              <p>*Only (.) or (,) Are Allowed</p>
+            </div>
+        </div>
+  
+        <div class="mb-3">
+          <label class="form-label" for="Description_EN">Description</label>
+          <input #Description_EN formControlName="Description_EN" type="text" [(ngModel)]="Banner.Description_EN" class="form-control" id="Description_EN" placeholder="Description" />
+          <div class="alert alert-danger" *ngIf="!Description_EN_Valid && Description_EN.value">
+            <p>*Bio Must be 10 Letters or More</p>
+            <p>*Less Than 500</p>
+          </div>
+        </div>
+  
+        <div class="mb-3">
+          <label class="form-label " for="Description_AR">Description in Arabic</label>
+          <input #Description_AR formControlName="Description_AR" type="text" [(ngModel)]="Banner.Description_AR" class="form-control text-end" id="Description_AR" placeholder="الوصف" />
+          <br>
+            <div class="alert alert-danger" *ngIf="!Description_AR_Valid && Description_AR.value">
+              <p>*Description in Arabic Must be 10 Letters or More</p>
+              <p>*Less Than 500</p>
+              <p>*Must be Writen in Arabic</p>
+              <p>*Only (.) or (,) Are Allowed</p>
+            </div>
+        </div>
+        <div class="mb-3 col-6">
+          <label for="Image" class="form-label">Image</label>
+          <input #image (change)="ChangeSrc($event)" class="form-control" formControlName="Image" type="file" id="Image" accept="image/*">
+        </div>
+  
+        <div *ngIf="BaseImage != '' "class="mb-3 col-6">
+          <img [src]="BaseImage" *ngIf="image" width="300" height="300">
+        </div>
+  
+        <div class="row mb-3 ms-10 me-10 text-center">
+          <div class="text-center">
+            <input class="col-6" type="submit" value="Edit" class="w-50 btn rounded-pill btn-outline-primary">
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  

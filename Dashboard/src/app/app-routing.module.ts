@@ -19,6 +19,9 @@ import { AllCampImagesComponent } from "./views/campImage-views/all-camp-images/
 import { AddCampImageComponent } from "./views/campImage-views/add-camp-image/add-camp-image.component";
 import { AllReservationsComponent } from "./views/reservations-views/all-reservations/all-reservations.component";
 import { DetailsPatientComponent } from "./views/patient-views/details-patient/details-patient.component";
+import { AllBannerComponent } from "./views/Banner/all-banner/all-banner.component";
+import { AddBannerComponent } from "./views/Banner/add-banner/add-banner.component";
+import { EditBannerComponent } from "./views/Banner/edit-banner/edit-banner.component";
 
 const routes: Routes = [
   {
@@ -87,6 +90,18 @@ const routes: Routes = [
       {
         path: 'AddCampImage',
         component: AddCampImageComponent
+      },
+      
+      {
+        path: 'Banners',
+        component: AddBannerComponent
+      },
+      {
+        path: 'EditBanner/:id',
+        component: EditBannerComponent
+      },{
+        path: 'AddBanner',
+        component: AddBannerComponent
       },
       {
         path: 'Reservations',
