@@ -22,6 +22,7 @@ import { DetailsPatientComponent } from "./views/patient-views/details-patient/d
 import { AllBannerComponent } from "./views/Banner/all-banner/all-banner.component";
 import { AddBannerComponent } from "./views/Banner/add-banner/add-banner.component";
 import { EditBannerComponent } from "./views/Banner/edit-banner/edit-banner.component";
+import { DetailComponent } from "./views/Banner/detail/detail.component";
 
 const routes: Routes = [
   {
@@ -95,6 +96,10 @@ const routes: Routes = [
       {
         path: 'Banners',
         component: AllBannerComponent
+      },
+      {
+        path: 'Banners/:id',
+        component: DetailComponent
       },
       {
         path: 'EditBanner/:id',

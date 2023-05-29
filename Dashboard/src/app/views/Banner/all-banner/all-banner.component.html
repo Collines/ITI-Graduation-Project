@@ -30,6 +30,7 @@
           <p class="fw-normal mb-1">{{d.Description}}</p>
         </td>
         <td class="text-center">
+          <a routerLink="/Banners/{{d.id}}" class="btn" title="Details"><i class="fa-solid fa-desktop text-info" ></i></a>
           <a routerLink="/EditBanner/{{d.id}}" class="btn" title="Edit"><i class="fa-solid fa-pen-to-square text-warning" ></i></a>
           <button (click)="DeleteBanner(d.id)" class="btn " title="Delete"><i class="fa-solid fa-trash text-danger" ></i></button>
         </td>

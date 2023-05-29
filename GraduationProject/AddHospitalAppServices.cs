@@ -62,6 +62,7 @@ namespace GraduationProject
                         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config["JWT:Key"]))
                     };
                 });
+            
 
             // End of JWT Authentication
 

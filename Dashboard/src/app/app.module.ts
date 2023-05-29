@@ -60,6 +60,7 @@ import { DetailsPatientComponent } from './views/patient-views/details-patient/d
 import { AddBannerComponent } from './views/Banner/add-banner/add-banner.component';
 import { AllBannerComponent } from './views/Banner/all-banner/all-banner.component';
 import { EditBannerComponent } from './views/Banner/edit-banner/edit-banner.component';
+import { DetailComponent } from './views/Banner/detail/detail.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -78,7 +79,7 @@ const DOCTORS_COMPONENTS = [
 ];
 
 @NgModule({
-  declarations: [AppComponent, ...APP_CONTAINERS, ...DOCTORS_COMPONENTS, AllPatientsComponent, AllDepartmentsComponent, DetailsDepartmentComponent, AddDepartmentComponent, EditDepartmentComponent, AllCampImagesComponent, AddCampImageComponent, AllReservationsComponent, DetailsPatientComponent,AddBannerComponent, AllBannerComponent, EditBannerComponent],
+  declarations: [AppComponent, ...APP_CONTAINERS, ...DOCTORS_COMPONENTS, AllPatientsComponent, AllDepartmentsComponent, DetailsDepartmentComponent, AddDepartmentComponent, EditDepartmentComponent, AllCampImagesComponent, AddCampImageComponent, AllReservationsComponent, DetailsPatientComponent,AddBannerComponent, AllBannerComponent, EditBannerComponent, DetailComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,

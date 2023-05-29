@@ -30,6 +30,7 @@ export class EditBannerComponent implements OnInit {
       console.log(data)},
       error: err => console.log(err)
     })
+
 }
 
 
@@ -67,6 +68,7 @@ export class EditBannerComponent implements OnInit {
   });
 
 
+
   get Title_EN_Valid(){return this.validator.controls["Title_EN"].valid;}
   get Title_AR_Valid(){return this.validator.controls["Title_AR"].valid;}
   get Description_EN_Valid(){return this.validator.controls["Description_EN"].valid;}
@@ -89,12 +91,12 @@ if(this.validator.valid)
   formData.append('Id', String(this.ID));
   formData.append('Title_EN', Title_EN);
   formData.append('Title_AR', Title_AR);
-  formData.append('Bio_EN', Description_EN);
-  formData.append('Bio_AR', Description_AR);
+  formData.append('Description_EN', Description_EN);
+  formData.append('Description_AR', Description_AR);
   this.BannerServ.EditBanner(this.ID,formData).subscribe({
     next: () => {
-      alert("Doctor Edited Successfully");
-      this.Router.navigate(['/Doctors'])},
+      alert("Banner Edited Successfully");
+      this.Router.navigate(['/Banners'])},
     error: err => console.log(formData)
   });
 }
