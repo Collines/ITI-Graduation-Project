@@ -27,6 +27,7 @@ import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { ReservationComponent } from './components/reservation/reservation.component';
 import { DepartmentDetailComponent } from './components/department-detail/department-detail.component';
+import { NotfoundComponent } from './components/notfound/notfound.component';
 
 @NgModule({
   declarations: [
@@ -47,6 +48,7 @@ import { DepartmentDetailComponent } from './components/department-detail/depart
     ReservationComponent,
     DepartmentComponent,
     DepartmentDetailComponent,
+    NotfoundComponent,
   ],
   imports: [
     BrowserModule,

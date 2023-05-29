@@ -72,6 +72,23 @@
   "YourReservations": "Your Reservations",
   "Date": "Date",
   "Time": "Time",
+
+
+  "notfound":"Page Not Found",
+  "Page404":"The Page You Are Looking For Doesn't Exist...",
+  "btn404":"back to home",
+
+  "Address":"Address",
+  "cairo":"Cairo , Egypt",
+  "ContactInformation":"Contact Information",
+  "map":"Find Us On Map",
+  "LeaveMessage":"Leave Message",
+  "sendmessage":"send message",
+  "entername":"enter your name",
+  "enteremail":"enter your email",
+  "entersubject":"enter subject",
+  "entermessage":"enter message",
+
   "welcome": "Welcome To Our Hospital",
   "firstAboutParagraph": "This Hospital is a corporate entity operating in the healthcare field aiming to lead the private health care sectors in Egypt, MENA Region, East Europe, and East Asia into new frontiers building on Alameda’s vast experience and reputation",
   "secondAboutParagraph": "This Hospital is a network that has various healthcare subsidiaries all over Egypt which also include affiliation with Royal free hospital in London, outpatient clinics, diagnostic centers, specialist centers, pharmacies, International Relations Department to support all our expats’ medical needs (including facilitating their visa application, bookings at contracted hotels and concierge services), and video conferencing with our eminent consultants 24/7 through our Tele-medicine service and the German Rehabilitation Center.",
@@ -111,5 +128,19 @@
   "CreateNewaccount?": "Create New account ?",
   "ToVisit": "Waiting to Visit",
   "Visited":"Visited",
-  "Cancelled":"Cancelled"
+  "Cancelled":"Cancelled",
+
+  "QualityHealth":"Quality Health",
+  "AboutHealthcare":"About Healthcare",
+  "Vision":"Our Vision",
+  "medical":"Positioning Egypt as a One Country Brand showcasing its exceptional medical, wellness, hospitality and concierge services globally.",
+  "mission":"our mission",
+  "wellness":"Enhancing patients’ experience through integrating medical, wellness, hospitality and concierge services by using technology.",
+  "CoreValues":" Our Core Values",
+  "Justice":"Justice",
+  "JusticeText":"access of all global patients to quality medical and wellness services without financial, geographic, or social barriers.",
+  "QualityandExcellence":"Quality and Excellence",
+  "QualityandExcellenceText":"high quality safe medical and wellness institutions that maintain the leading position of Egypt.",
+  "Professionalism":"Professionalism",
+  "Professionalismtext":"a staff who is trained on the latest scientific and technical developments and responsive to the needs of patients."
 }
