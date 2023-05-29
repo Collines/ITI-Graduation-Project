@@ -25,7 +25,7 @@
   
         <div class="mb-3">
           <label class="form-label" for="Description_EN">Description</label>
-          <input #Bio_EN formControlName="Description_EN" type="text" class="form-control" id="Description_EN" placeholder="Description" />
+          <input #Description_EN formControlName="Description_EN" type="text" class="form-control" id="Description_EN" placeholder="Description" />
           <div class="alert alert-danger" *ngIf="!Description_EN_Valid && Description_EN.value">
             <p>*Description Must be 10 Letters or More</p>
             <p>*Less Than 500</p>
@@ -34,7 +34,7 @@
   
         <div class="mb-3">
           <label class="form-label " for="Description_AR">Description in Arabic</label>
-          <input #Bio_AR formControlName="Description_AR" type="text" class="form-control text-end" id="Description_AR" placeholder="الوصف" />
+          <input #Description_AR formControlName="Description_AR" type="text" class="form-control text-end" id="Description_AR" placeholder="الوصف" />
           <br>
             <div class="alert alert-danger" *ngIf="!Description_AR_Valid && Description_AR.value">
               <p>*Description in Arabic Must be 10 Letters or More</p>

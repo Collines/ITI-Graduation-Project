@@ -94,7 +94,7 @@ const routes: Routes = [
       
       {
         path: 'Banners',
-        component: AddBannerComponent
+        component: AllBannerComponent
       },
       {
         path: 'EditBanner/:id',

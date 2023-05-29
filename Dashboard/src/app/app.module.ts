@@ -57,7 +57,6 @@ import { AllCampImagesComponent } from './views/campImage-views/all-camp-images/
 import { AddCampImageComponent } from './views/campImage-views/add-camp-image/add-camp-image.component';
 import { AllReservationsComponent } from './views/reservations-views/all-reservations/all-reservations.component';
 import { DetailsPatientComponent } from './views/patient-views/details-patient/details-patient.component';
-import { BannerComponent } from './views/banner/banner.component';
 import { AddBannerComponent } from './views/Banner/add-banner/add-banner.component';
 import { AllBannerComponent } from './views/Banner/all-banner/all-banner.component';
 import { EditBannerComponent } from './views/Banner/edit-banner/edit-banner.component';
@@ -79,7 +78,7 @@ const DOCTORS_COMPONENTS = [
 ];
 
 @NgModule({
-  declarations: [AppComponent, ...APP_CONTAINERS, ...DOCTORS_COMPONENTS, AllPatientsComponent, AllDepartmentsComponent, DetailsDepartmentComponent, AddDepartmentComponent, EditDepartmentComponent, AllCampImagesComponent, AddCampImageComponent, AllReservationsComponent, DetailsPatientComponent, BannerComponent, AddBannerComponent, AllBannerComponent, EditBannerComponent],
+  declarations: [AppComponent, ...APP_CONTAINERS, ...DOCTORS_COMPONENTS, AllPatientsComponent, AllDepartmentsComponent, DetailsDepartmentComponent, AddDepartmentComponent, EditDepartmentComponent, AllCampImagesComponent, AddCampImageComponent, AllReservationsComponent, DetailsPatientComponent,AddBannerComponent, AllBannerComponent, EditBannerComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
