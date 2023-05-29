@@ -13,6 +13,7 @@ import { DoctorsService } from 'src/app/Services/doctors.service';
   styleUrls: ['./department-detail.component.css'],
 })
 export class DepartmentDetailComponent implements OnInit {
+  langauge = localStorage.getItem('language');
   constructor(
     private Route: ActivatedRoute,
     private router: Router,

@@ -1,10 +1,10 @@
-.search {
+.search,.searchArabic {
   position: relative;
   box-shadow: 0 0 40px rgba(51, 51, 51, 0.1);
   margin-bottom: 50px;
 }
 
-.search input {
+.search input,.searchArabic input {
   height: 60px;
   text-indent: 25px;
   border: 2px solid #d6d4d4;
@@ -14,7 +14,7 @@ span {
   font-weight: 600;
 }
 
-.search input:focus {
+.search input:focus,.searchArabic input:focus {
   box-shadow: none;
   border: 2px solid var(--mainColor);
 }
@@ -24,11 +24,24 @@ span {
   top: 20px;
   left: 16px;
 }
+.searchArabic .fa-search{
+  position: absolute;
+  top: 20px;
+  right: 16px;
+}
 
-.search button {
+.search button{
   position: absolute;
   top: 5px;
   right: 5px;
+  height: 50px;
+  width: 110px;
+  background: var(--mainColor);
+}
+.searchArabic button{
+  position: absolute;
+  top: 5px;
+  left: 5px;
   height: 50px;
   width: 110px;
   background: var(--mainColor);
@@ -79,3 +92,4 @@ span {
 .first {
   padding-bottom: 80px;
 }
+
