@@ -5,19 +5,39 @@
   <div class="container my-5">
     <div class="row height d-flex justify-content-center align-items-center">
       <div class="col-md-8">
-        <div class="search">
-          <i class="fa fa-search"></i>
-          <input
-            type="text"
-            class="form-control rounded-pill"
-            [placeholder]="'SearchByDoctor' | translate"
-            [(ngModel)]="searchQuery"
-            (input)="onSearch()"
-          />
-          <button class="btn btn-primary rounded-pill" (click)="onSearch()">
-            Search
-          </button>
+
+        <div *ngIf="langauge == 'en' else searchArabic">
+          <div class="search" >
+            <i class="fa fa-search "></i>
+            <input
+              type="text"
+              class="form-control rounded-pill"
+              [placeholder]="'SearchByDoctor' | translate"
+              [(ngModel)]="searchQuery"
+              (input)="onSearch()"
+            />
+            <button class="btn btn-primary rounded-pill" (click)="onSearch()">
+              {{ "Search" | translate }}
+            </button>
+          </div>
         </div>
+
+        <ng-template #searchArabic>
+          <div class="searchArabic" >
+            <i class="fa fa-search "></i>
+            <input
+              type="text"
+              class="form-control rounded-pill"
+              [placeholder]="'SearchByDoctor' | translate"
+              [(ngModel)]="searchQuery"
+              (input)="onSearch()"
+            />
+            <button class="btn btn-primary rounded-pill" (click)="onSearch()">
+              {{ "Search" | translate }}
+            </button>
+          </div>
+        </ng-template>
+
       </div>
     </div>
   </div>
