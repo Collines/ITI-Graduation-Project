@@ -139,6 +139,10 @@
   "Cancelled": "Cancelled",
   "Status": "Status",
 
+  "Welcome":"Welcome Back",
+  "EDIT":"EDIT PROFILE",
+  "NEWAPPOINTMENT":" CREATE NEW APPOINTMENT",
+  "Trust":"Your Trust is Our Greatest Incentive!",
   "FNameValidation": "First Name Should be 3 characters or more",
   "LNameValidation": "Last Name Should be 3 characters or more",
   "FNameARValidation": "Arabic First Name Should be 3 characters or more",
