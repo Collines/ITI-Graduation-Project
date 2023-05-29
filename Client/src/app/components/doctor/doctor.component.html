@@ -19,10 +19,11 @@
         {{ doctor.departmentTitle }}
       </p>
 
-      <a class="btn btn1 me-2" routerLink="/doctor/{{ doctor.id }}">{{
+      <a class="btn btn1 mx-2" routerLink="/doctor/{{ doctor.id }}">{{
         "ViewProfile" | translate
       }}</a>
       <button
+        *ngIf="Logged"
         type="button"
         class="btn btn2"
         data-toggle="modal"

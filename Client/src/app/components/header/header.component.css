@@ -8,6 +8,9 @@
   -ms-transform: translateY(-50%);
   -o-transform: translateY(-50%);
 }
+.data h2{
+  font-size: 55px;
+}
 .bg-image1{
   min-height: 100vh;
   position: relative;
@@ -74,8 +77,8 @@ h2{
 }
 
 @media screen and (max-width: 600px) {
-  h2 {
-      font-size: 40px;
+  .data h2{
+    font-size: 40px;
   }
 }
 

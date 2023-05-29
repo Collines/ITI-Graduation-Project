@@ -7,6 +7,9 @@
   font-size: 18px;
   position: relative;
 }
+.navWidth{
+  width: 90%;
+}
 .nav-item a::after {
   content: "";
   position: absolute;

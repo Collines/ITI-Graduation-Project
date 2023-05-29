@@ -34,4 +34,7 @@ export class ReservationsComponent implements OnInit {
       },
     });
   }
+  logout() {
+    this.accountService.logout();
+  }
 }

@@ -13,6 +13,7 @@ import { DoctorsService } from 'src/app/Services/doctors.service';
   styleUrls: ['./department-detail.component.css'],
 })
 export class DepartmentDetailComponent implements OnInit {
+  langauge = localStorage.getItem('language');
   constructor(
     private Route: ActivatedRoute,
     private router: Router,
@@ -25,9 +26,6 @@ export class DepartmentDetailComponent implements OnInit {
       next: (user) => {
         if (user) this.user = user;
       },
-      error: (er) => {
-        router.navigate(['/login']);
-      },
     });
     departmentService
       .GetById(this.department.id, this.user.accessToken)
@@ -38,20 +36,18 @@ export class DepartmentDetailComponent implements OnInit {
       });
   }
   ngOnInit(): void {
-    this.doctorService
-      .GetDepartmentDoctors(this.department.id)
-      .subscribe({
-        next: (doctors) => {
-          this.doctors = doctors;
-          this.SearchResult = doctors;
-        },
-      });
+    this.doctorService.GetDepartmentDoctors(this.department.id).subscribe({
+      next: (doctors) => {
+        this.doctors = doctors;
+        this.SearchResult = doctors;
+      },
+    });
   }
   department: Department = {
     id: 0,
     title: '',
     description: '',
-    numberOfBeds: 0
+    numberOfBeds: 0,
   };
   doctors: Doctor[] = [];
   user: User = {

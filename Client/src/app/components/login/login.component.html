@@ -45,14 +45,14 @@
                 "
                 class="form-control"
                 id="email"
-                placeholder="Enter Email"
+                [placeholder]="'Email' | translate"
               />
               <div
                 *ngIf="submitted && Validation.controls.email.errors"
                 class="text-danger"
               >
                 <div *ngIf="submitted && Validation.controls.email.errors">
-                  Enter a valid Email
+                  {{ "EmailValidation" | translate }}
                 </div>
               </div>
             </div>
@@ -75,25 +75,25 @@
                 "
                 class="form-control"
                 id="pass"
-                placeholder="Enter Password"
+                [placeholder]="'Password' | translate"
               />
               <div
                 *ngIf="submitted && Validation.controls.password.errors"
                 class="text-danger"
               >
                 <div *ngIf="submitted && Validation.controls.password.errors">
-                  Password Should be at least 8 characters
+                  {{ "PasswordValidation" | translate }}
                 </div>
               </div>
             </div>
 
-            <div class="mb-3 form-check">
+            <div class="mb-3 form-check d-flex justify-content-start">
               <input
                 type="checkbox"
                 class="form-check-input"
                 id="exampleCheck1"
               />
-              <label class="form-check-label" for="exampleCheck1">{{
+              <label class="form-check-label me-4 px-2" for="exampleCheck1">{{
                 "RememberMe" | translate
               }}</label>
             </div>

@@ -13,6 +13,8 @@ import { ReservationsComponent } from './components/reservations/reservations.co
 import { ReservationComponent } from './components/reservation/reservation.component';
 import { DepartmentComponent } from './components/department/department.component';
 import { DepartmentDetailComponent } from './components/department-detail/department-detail.component';
+import { NotfoundComponent } from './components/notfound/notfound.component';
+import { SettingsComponent } from './components/settings/settings.component';
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'home', component: HomeComponent, data: { title: 'Home' } },
@@ -59,6 +61,16 @@ const routes: Routes = [
     path: 'department/:id',
     component: DepartmentDetailComponent,
     data: { title: 'Department Details' },
+  },
+  {
+    path: 'Settings',
+    component: SettingsComponent,
+    data: { title: 'Settings' },
+  },
+  {
+    path: '**',
+    component: NotfoundComponent,
+    data: { title: '404' },
   },
 ];
 
