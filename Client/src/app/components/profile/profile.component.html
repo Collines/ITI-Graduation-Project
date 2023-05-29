@@ -21,9 +21,18 @@
       <div class="aon-newChart-edit">
         <div class="row ">
             <div class="col-md-8 d-flex">
-            <div class="pecen-pic ">
-              <img src="/assets/images/testimonial-4.jpg" alt="">
+              
+              <!-- Image Profile -->
+            <div class="pecen-pic " *ngIf="Gender[userEdit.gender] == 'Male' else womanImage">
+              <img src="/assets/images/User-Profile-PNG.png" alt="">
             </div>
+            <ng-template #womanImage>
+              <div class="pecen-pic ">
+                <img src="/assets/images/woman.jpg" alt="">
+              </div>
+
+            </ng-template>
+
             <div class="pecen-info mx-3">
               <div  *ngIf="langauge == 'en' else namehArabic">
                 <h4 class="pecen-name">{{ userEdit.firstName_EN + " " + userEdit.lastName_EN }}</h4>
