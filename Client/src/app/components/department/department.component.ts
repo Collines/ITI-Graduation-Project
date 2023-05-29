@@ -21,9 +21,6 @@ export class DepartmentComponent {
       next: (user) => {
         if (user) this.user = user;
       },
-      error: (er) => {
-        router.navigate(['/login']);
-      },
     });
   }
 
@@ -31,7 +28,7 @@ export class DepartmentComponent {
     id: 0,
     title: '',
     description: '',
-    numberOfBeds: 0
+    numberOfBeds: 0,
   };
   doctors: Doctor[] = [];
   user: User = {
