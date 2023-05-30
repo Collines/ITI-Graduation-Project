@@ -1,20 +1,20 @@
-import { Component,OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AccountService } from 'src/app/Services/account.service';
 import { Router } from '@angular/router';
 import { UserEdit } from 'src/app/Interfaces/User/UserEdit';
-import { Gender } from 'src/app/Enums/Gender'
-
+import { Gender } from 'src/app/Enums/Gender';
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.css'],
 })
-export class ProfileComponent implements OnInit  {
+export class ProfileComponent implements OnInit {
   langauge = localStorage.getItem('language');
-  constructor(private accountService: AccountService, private router: Router){}
+  constructor(private accountService: AccountService, private router: Router) {}
   Gender = Gender;
   userEdit: UserEdit = {
+    id: 0,
     gender: 1,
     ssn: '',
     firstName_EN: '',
@@ -26,6 +26,7 @@ export class ProfileComponent implements OnInit  {
     dob: new Date(),
     medicalHistory: null,
     password: null,
+    image: '',
   };
   ngOnInit(): void {
     this.accountService.currentUser$.subscribe({
@@ -35,8 +36,8 @@ export class ProfileComponent implements OnInit  {
             next: (udata) => {
               this.userEdit = udata;
               let date = new Date(udata.dob);
-              this
-                date.getFullYear() +
+              this;
+              date.getFullYear() +
                 '-' +
                 (date.getMonth() + 1).toString().padStart(2, '0') +
                 '-' +
