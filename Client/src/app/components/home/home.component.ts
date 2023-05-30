@@ -44,7 +44,7 @@ export class HomeComponent implements OnInit {
               if (this.patientCount == numberOfPatients) {
                 clearInterval(patientCountStop);
               }
-            }, 12);
+            }, 22);
           }
         }
       },

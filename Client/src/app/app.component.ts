@@ -9,7 +9,7 @@ import {
   Router,
   RouterOutlet,
 } from '@angular/router';
-import { slideInAnimation } from './animations/app.animation';
+import { fadeAnimation } from './animations/app.animation';
 import { Title } from '@angular/platform-browser';
 import { filter } from 'rxjs';
 
@@ -17,7 +17,7 @@ import { filter } from 'rxjs';
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
-  animations: [slideInAnimation],
+  animations: [fadeAnimation],
 })
 export class AppComponent implements OnInit {
   loader=true;
@@ -77,10 +77,6 @@ export class AppComponent implements OnInit {
     const user: User = JSON.parse(x);
     this.accountService.setCurrentUser(user);
   }
-
-  // prepareRoute(outlet:RouterOutlet){
-  // return outlet && outlet.activatedRouteData
-  // }
 
   loaderStop:any=setTimeout(() => {
     this.loader=false;
