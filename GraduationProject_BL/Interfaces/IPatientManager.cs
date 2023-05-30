@@ -14,8 +14,8 @@ namespace GraduationProject_BL.Interfaces
 
         // Used to get the patient depending on the user selected language
         public Task<PatientDTO?> GetByIdAsync(int id, string lang);
-        public Task<LoginDTO?> InsertAsync(PatientInsertDTO item);
-        public Task UpdateAsync(int id, PatientUpdateDTO item);
+        public Task<LoginDTO?> InsertAsync(PatientFormData item);
+        public Task UpdateAsync(int id, PatientFormData item);
         public Task DeleteAsync(int id);
 
         // Used to check if the email already exists or not
