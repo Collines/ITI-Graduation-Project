@@ -2,16 +2,24 @@
   <div class="row my-5 gy-5">
     <div class="col-md-3">
       <div class="list-group">
-        <a class="list-group-item list-group-item-action " routerLink="/profile"
-          >{{ "Profile" | translate }}</a >
-        <a class="list-group-item list-group-item-action"
+        <a
+          class="list-group-item list-group-item-action"
+          routerLink="/profile"
+          >{{ "Profile" | translate }}</a
+        >
+        <a
+          class="list-group-item list-group-item-action"
           routerLink="/reservations"
-          >{{ "Reservation" | translate }}</a>
-        <a href="#" class="list-group-item list-group-item-action active">{{  "Settings" | translate}}</a>
+          >{{ "Reservation" | translate }}</a
+        >
+        <a href="#" class="list-group-item list-group-item-action active">{{
+          "Settings" | translate
+        }}</a>
         <a
           class="list-group-item list-group-item-action logout"
           (click)="logout()"
-          >{{  "Logout" | translate}}</a>
+          >{{ "Logout" | translate }}</a
+        >
       </div>
     </div>
     <div class="col-md-9">
@@ -28,6 +36,7 @@
               <form
                 [formGroup]="Validation"
                 (submit)="onSubmit(ErrDiv, SuccessDiv)"
+                enctype="multipart/form-data"
               >
                 <div
                   [ngClass]="
@@ -420,6 +429,23 @@
                     >
                   </div>
                 </div>
+
+                <div class="form-group row mb-2">
+                  <label for="PP" class="col-4 col-form-label">{{
+                    "ProfilePicture" | translate
+                  }}</label>
+                  <div class="col-8">
+                    <input
+                      type="file"
+                      class="form-control"
+                      id="PP"
+                      rows="3"
+                      accept="image/*"
+                      (change)="ChangeSrc($event)"
+                    />
+                  </div>
+                </div>
+
                 <div class="form-group row mt-4">
                   <div class="offset-4 col-8">
                     <button name="submit" type="submit" class="btn">

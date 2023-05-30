@@ -46,7 +46,7 @@ namespace GraduationProject.Controllers
 
         [HttpPost("Register")]
         [AllowAnonymous]
-        public async Task<ActionResult<LoginDTO>> Register(PatientInsertDTO patient)
+        public async Task<ActionResult<LoginDTO>> Register(PatientFormData patient)
         {
             if (await manager.FindPatient(patient.Email))
                 ModelState.AddModelError("Email", "Email Already Exist");
@@ -76,12 +76,14 @@ namespace GraduationProject.Controllers
         }
 
         [Authorize(Roles = "Patient")]
+        [Consumes("multipart/form-data")]
         [HttpPatch("Update")]
-        public async Task<ActionResult<Patient>> UpdatePatient(string accessToken, PatientUpdateDTO patientUDTO)
+        public async Task<ActionResult<Patient>> UpdatePatient(string accessToken, [FromForm] PatientFormData patientUDTO)
         {
             var patient = await manager.GetPatientByAccessToken(accessToken);
             if (patient != null)
             {
+                patientUDTO.Password = patientUDTO.Password=="null"?null: patientUDTO.Password;
                 if (patientUDTO.Email != patient.Email)
                 {
                     if (await manager.FindPatient(patientUDTO.Email))

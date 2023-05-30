@@ -1,4 +1,4 @@
-import { Component,OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { UserEdit } from 'src/app/Interfaces/User/UserEdit';
@@ -8,9 +8,9 @@ import { AccountService } from 'src/app/Services/account.service';
 @Component({
   selector: 'app-settings',
   templateUrl: './settings.component.html',
-  styleUrls: ['./settings.component.css']
+  styleUrls: ['./settings.component.css'],
 })
-export class SettingsComponent implements OnInit{
+export class SettingsComponent implements OnInit {
   constructor(private accountService: AccountService, private router: Router) {
     this.Validation = new FormGroup({
       FirstName: new FormControl(null, [
@@ -78,7 +78,7 @@ export class SettingsComponent implements OnInit{
               this.Validation.controls['Phone'].status = 'VALID';
               this.Validation.controls['Date'].status = 'VALID';
               this.Validation.status = 'VALID';
-              this.textArea = this.userEdit.medicalHistory;
+              this.textArea = this.userEdit.medicalHistory ?? '';
             },
           });
         } else {
@@ -90,6 +90,7 @@ export class SettingsComponent implements OnInit{
   submitted = false;
   error = false;
   userEdit: UserEdit = {
+    id: 0,
     gender: 1,
     ssn: '',
     firstName_EN: '',
@@ -101,13 +102,17 @@ export class SettingsComponent implements OnInit{
     dob: new Date(),
     medicalHistory: null,
     password: null,
+    image: '',
   };
 
+  BaseImage: any = '';
+  FileToUpload: any;
   dateStr = '';
   Validation: any;
   isDataLoaded = false;
   isResponsed = false;
-  textArea: string | null = '';
+  textArea: string = '';
+  test: any;
 
   get isFirstNameValid() {
     return this.Validation.controls['FirstName'].status == 'VALID';
@@ -158,18 +163,54 @@ export class SettingsComponent implements OnInit{
         },
       });
       if (accessToken) {
-        let user: UserUpdate = {
-          firstName_EN: this.Validation.controls['FirstName'].value,
-          firstName_AR: this.Validation.controls['FirstNameAr'].value,
-          lastName_EN: this.Validation.controls['LastName'].value,
-          lastName_AR: this.Validation.controls['LastNameAr'].value,
-          email: this.Validation.controls['email'].value,
-          phone: this.Validation.controls['Phone'].value,
-          dob: this.Validation.controls['Date'].value,
-          medicalHistory: this.textArea,
-          password: this.Validation.controls['password'].value,
-        };
-        this.accountService.update(accessToken, user).subscribe({
+        const formData: FormData = new FormData();
+        if (this.FileToUpload) formData.append('Image', this.FileToUpload);
+
+        formData.append(
+          'FirstName_EN',
+          this.Validation.controls['FirstName'].value
+        );
+        formData.append(
+          'LastName_EN',
+          this.Validation.controls['LastName'].value
+        );
+        formData.append(
+          'FirstName_AR',
+          this.Validation.controls['FirstNameAr'].value
+        );
+        formData.append(
+          'LastName_AR',
+          this.Validation.controls['LastNameAr'].value
+        );
+        formData.append('Gender', `${this.userEdit.gender}`);
+        formData.append('Email', this.Validation.controls['email'].value);
+        formData.append('Phone', this.Validation.controls['Phone'].value);
+        formData.append('DOB', this.Validation.controls['Date'].value);
+        formData.append('MedicalHistory', this.textArea);
+        formData.append('SSN', this.userEdit.ssn);
+        let pass = this.Validation.controls['password'].value;
+        formData.append('Password', pass == '' ? null : pass);
+        if (this.FileToUpload) {
+          // this.DoctorsService.AddDoctor(formData).subscribe({
+          //   next: data => {alert("Doctor Added Successfully")
+          //                   this.Router.navigate(['/Doctors'])},
+          //   error: err => console.log(err)});
+        }
+        this.test = formData;
+        // let user: UserUpdate = {
+        //   firstName_EN: this.Validation.controls['FirstName'].value,
+        //   firstName_AR: this.Validation.controls['FirstNameAr'].value,
+        //   lastName_EN: this.Validation.controls['LastName'].value,
+        //   lastName_AR: this.Validation.controls['LastNameAr'].value,
+        //   email: this.Validation.controls['email'].value,
+        //   phone: this.Validation.controls['Phone'].value,
+        //   dob: this.Validation.controls['Date'].value,
+        //   medicalHistory: this.textArea,
+        //   password: this.Validation.controls['password'].value,
+        //   image: { id: 0, name: this.BaseImage, patientId: this.userEdit.id },
+        //   gender:this.userEdit.gender
+        // };
+        this.accountService.update(accessToken, formData).subscribe({
           next: (r: any) => {
             this.error = false;
             errorElement.classList.add('d-none');
@@ -180,10 +221,32 @@ export class SettingsComponent implements OnInit{
             this.error = true;
             this.isResponsed = false;
             errorElement.innerHTML = e.error;
+            this.test.forEach((el: any, key: any) => {
+              console.log(el, key);
+            });
+            console.log(e);
           },
         });
       }
     }
   }
 
+  async ChangeSrc(e: any) {
+    var file = e.target.files[0];
+    if (file) {
+      this.BaseImage = await this.ConvertBase64(file);
+      this.FileToUpload = file;
+    }
+  }
+
+  ConvertBase64 = (file: any) => {
+    return new Promise((resolve, reject) => {
+      const fileReader = new FileReader();
+
+      fileReader.readAsDataURL(file);
+      fileReader.onload = () => resolve(fileReader.result);
+
+      fileReader.onerror = (error) => reject(error);
+    });
+  };
 }

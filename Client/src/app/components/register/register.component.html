@@ -4,8 +4,16 @@
       <div class="col-lg-6 col-md-8 colsm-12">
         <div class="box mt-5 mb-4">
           <h3 class="text-center pt-2">{{ "Register" | translate }}</h3>
-
-          <form class="w-100" [formGroup]="Validation" (submit)="onSubmit()">
+          <div
+            [ngClass]="submitted && isError ? 'd-block' : 'd-none'"
+            class="alert alert-danger text-center"
+            #error
+          ></div>
+          <form
+            class="w-100"
+            [formGroup]="Validation"
+            (submit)="onSubmit(error)"
+          >
             <div class="mb-3">
               <label for="FirstName" class="form-label">{{
                 "FirstName" | translate
@@ -313,7 +321,7 @@
                 class="form-check-input"
                 id="exampleCheck1"
               />
-              <label class="form-check-label  me-4 px-2" for="exampleCheck1"
+              <label class="form-check-label me-4 px-2" for="exampleCheck1"
                 >{{ "Iacceptthe" | translate }}
                 <span> {{ "Termsofuse" | translate }}</span> &
                 <span> {{ "PrivacyPolicy" | translate }} </span></label

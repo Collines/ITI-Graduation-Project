@@ -58,12 +58,15 @@ export class AccountService {
     this.location.back();
   }
 
-  update(accessToken: string, model: UserUpdate) {
+  update(accessToken: string, model: FormData) {
     return this.http.patch(
       this.BaseURL + 'update?accessToken=' + accessToken,
       model,
       {
-        headers: this.Header.set('Authorization', `bearer ${accessToken}`),
+        headers: new HttpHeaders()
+          .set('Access-Control-Allow-Origin', '*')
+          .set('Lang', localStorage.getItem('language') || 'en')
+          .set('Authorization', `bearer ${accessToken}`),
       }
     );
   }
