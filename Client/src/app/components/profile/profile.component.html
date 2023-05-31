@@ -36,23 +36,26 @@
               *ngIf="Gender[userEdit.gender] == 'Male'; else womanImage"
             >
               <img
+                class="pecen-pic"
                 *ngIf="userEdit.image?.length == 0 || !userEdit.image"
                 src="/assets/images/User-Profile-PNG.png"
                 alt=""
               />
               <img
+                class="pecen-pic"
                 *ngIf="userEdit.image && userEdit.image.length > 0"
                 src="{{ userEdit.image }}"
                 alt=""
               />
             </div>
-            
+
             <ng-template #womanImage>
               <div class="pecen-pic">
                 <img *ngIf="userEdit.image?.length == 0 || !userEdit.image"
                  src="/assets/images/woman.jpg" alt="" />
 
                 <img
+                class="pecen-pic"
                 *ngIf="userEdit.image && userEdit.image.length > 0"
                 src="{{ userEdit.image }}"
                 alt="">
