@@ -1,5 +1,6 @@
 using GraduationProject;
 using GraduationProject.Middlewares;
+
 internal class Program
 {
     private static void Main(string[] args)

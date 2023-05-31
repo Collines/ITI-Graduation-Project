@@ -12,5 +12,7 @@ namespace GraduationProject_BL.Interfaces
         public Task InsertAsync(BannerFormData item);
         public Task UpdateAsync(int id, BannerFormData item);
         public Task DeleteAsync(int id);
+
+        public Task<BannerInsertDTO?> GetInsertDTOByIdAsync(int id);
     }
 }
