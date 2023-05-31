@@ -18,7 +18,7 @@
     </h6>
     <div class="line mb-5"></div>
     <div class="row height d-flex justify-content-center align-items-center">
-      <div class="col-md-8">
+      <div class="col-lg-8 col-md-11">
 
         <div *ngIf="langauge == 'en' else searchArabic">
           <div class="search" >
@@ -57,7 +57,7 @@
     <div class="container">
       <div class="row mb-3 gy-3">
         <app-department
-          class="col-lg-4"
+          class="col-lg-4 offest-md-2 col-md-6"
           [department]="dept"
           *ngFor="let dept of SearchResult"
         ></app-department>
