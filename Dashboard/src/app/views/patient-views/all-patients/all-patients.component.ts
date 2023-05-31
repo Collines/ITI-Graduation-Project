@@ -35,9 +35,18 @@ export class AllPatientsComponent implements OnInit {
     if(confirm(`Do You Want To Delete Patient No. ${id}`))
     {
       this.myService.Delete(id).subscribe({
-        next: ()=>{console.log('Patient Deleted successfully!')},
+        next: ()=>this.Patients =  this.RemoveObjectWithId(this.Patients,id),
         error: ()=>{console.log('Patient Still exist')}
       });
     }
+  }
+
+  RemoveObjectWithId(arr:any, id:number) {
+    const objWithIdIndex = arr.findIndex((obj:any) => obj.id == id);
+
+    if (objWithIdIndex > -1) {
+      arr.splice(objWithIdIndex, 1);
+    }
+    return arr;
   }
 }
