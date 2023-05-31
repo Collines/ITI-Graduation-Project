@@ -77,6 +77,7 @@ export class LoginComponent implements OnInit {
   }
 
   GoogleLogin = () => {
-    this.GoogleAuthService.signInWithGoogle();
+    // this.GoogleAuthService.signInWithGoogle();
+    console.log("logged")
   }
 }
