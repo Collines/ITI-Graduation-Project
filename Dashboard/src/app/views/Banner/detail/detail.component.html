@@ -1,0 +1,47 @@
+<a class="btn btn-outline-primary" routerLink="/Banners">Back To List</a>
+<section>
+    <div class="py-3">
+      <div class="row">
+        <div class="col-lg-3">
+          <div class="card mb-4">
+            <div class="card-body text-center">
+              <img src="{{Banner.imagePath}}" alt="avatar"
+                class="rounded-circle img-fluid" style="width: 150px;height: 150px; border: 1px solid black;">
+              <h5 class="my-3">{{Banner.Title}}</h5>
+              <div class="d-flex justify-content-center mb-2">
+                <a class="btn btn-outline-primary" routerLink="/EditBanner/{{Banner.id}}">Edit</a>
+                <button (click)="DeleteBanner(Banner.id)" class="btn btn-outline-danger ms-1" title="Delete">Delete</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-9">
+          <div class="card mb-4">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-sm-3">
+                  <p class="mb-0">ID</p>
+                </div>
+                <div class="col-sm-9">
+                  <p class=" mb-0">{{Banner.id}}</p>
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-sm-3">
+                  <p class="mb-0">Title</p>
+                </div>
+                <div class="col-sm-9">
+                  <p class=" mb-0">{{Banner.title}}</p>
+                </div>
+              </div>
+              <hr>
+            </div>
+          </div>
+          <div class="row">
+            <textarea class="form-control border-success" cols="10" rows="7"  disabled [value]="Banner.description"></textarea>
+                 </div>
+        </div>
+      </div>
+    </div>
+  </section>

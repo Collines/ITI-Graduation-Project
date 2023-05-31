@@ -250,5 +250,37 @@ namespace GraduationProject_BL.Managers
                 }
             }
         }
+
+
+        public async Task<BannerInsertDTO?> GetInsertDTOByIdAsync(int id)
+        {
+            var Banners = await repository.GetAllAsync();
+
+            if (Banners != null)
+            {
+                var Banner = Banners.Find(x => x.Id == id);
+                if (Banner != null)
+                {
+                    var translation = await translations.FindAsync(Banner.Id);
+                    if (translation != null)
+                    {
+                        var path = Path.Combine(retrievePath, Banner.ImagePath);
+                        Banner.ImagePath = path;
+                        BannerInsertDTO dto = new()
+                        {
+                            Id = translation.BannerId,
+                            Title_EN = translation.Title_EN,
+                            Title_AR = translation.Title_AR,
+                            Description_EN = translation.Description_EN,
+                            Description_AR = translation.Description_AR,
+                            Image = Banner.ImagePath,
+                        };
+
+                        return dto;
+                    }
+                }
+            }
+            return null;
+        }
     }
 }

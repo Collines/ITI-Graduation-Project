@@ -31,7 +31,7 @@ namespace GraduationProject.Controllers
 
         [AllowAnonymous]
         [HttpGet("{id:int}")]
-        public async Task<ActionResult<DoctorDTO>> GetById(int id)
+        public async Task<ActionResult<BannerDTO>> GetById(int id)
         {
             var banner = await manager.GetByIdAsync(id, Utils.GetLang(httpContextAccessor));
 
@@ -39,6 +39,16 @@ namespace GraduationProject.Controllers
                 return NotFound();
 
             return Ok(banner);
+        }
+        [HttpGet("InsertDTO/{id:int}")]
+        public async Task<ActionResult<BannerInsertDTO>> GetBannerInsertDTO(int id)
+        {
+            var Banner = await manager.GetInsertDTOByIdAsync(id);
+
+            if (Banner == null)
+                return NotFound();
+
+            return Ok(Banner);
         }
 
         [HttpPost]
