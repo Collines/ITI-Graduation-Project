@@ -46,9 +46,16 @@
                 alt=""
               />
             </div>
+            
             <ng-template #womanImage>
               <div class="pecen-pic">
-                <img src="/assets/images/woman.jpg" alt="" />
+                <img *ngIf="userEdit.image?.length == 0 || !userEdit.image"
+                 src="/assets/images/woman.jpg" alt="" />
+
+                <img
+                *ngIf="userEdit.image && userEdit.image.length > 0"
+                src="{{ userEdit.image }}"
+                alt="">
               </div>
             </ng-template>
 
