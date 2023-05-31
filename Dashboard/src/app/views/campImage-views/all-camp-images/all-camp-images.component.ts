@@ -29,11 +29,21 @@ export class AllCampImagesComponent implements OnInit {
   }
   
   DeleteImage(value:number){
-  if(confirm(`Do You Want To Image No. ${value}`))
-  {
-    this.ImagesService.DeleteCampImage(value).subscribe({
-      next: response=>{this.Router.navigate(['/CampImages']);},
-      error: error=>{alert('item Still exist')}
-    })};
+    if(confirm(`Do You Want To Delete Doctor No. ${value}`))
+    {
+      this.ImagesService.DeleteCampImage(value).subscribe({
+        next: () => this.Images =  this.RemoveObjectWithId(this.Images,value),
+        error: err => console.log(err)
+      })
+    }
+  }
+
+RemoveObjectWithId(arr:any, id:number) {
+  const objWithIdIndex = arr.findIndex((obj:any) => obj.id == id);
+
+  if (objWithIdIndex > -1) {
+    arr.splice(objWithIdIndex, 1);
+  }
+  return arr;
 }
 }
