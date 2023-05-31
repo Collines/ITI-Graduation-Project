@@ -7,13 +7,13 @@ import { HeaderService } from './header.service';
   providedIn: 'root'
 })
 export class CampImageService {
-  private baseURL = "https://localhost:44372/api/CampImage";
+  private baseURL = "https://localhost:7035/api/CampImage";
   private Header: HttpHeaders = this.header.Header;
   constructor(private http: HttpClient, private header: HeaderService) {}
 
-  GetImages(accessToken: string) {
+  GetImages() {
     return this.http.get<CampImage[]>(this.baseURL, {
-      headers: this.Header.set('Authorization', `bearer ${accessToken}`),
+      headers: this.Header,
     });
   }
   GetById(id: number, accessToken: string) {

@@ -36,13 +36,6 @@ export class AllCampImagesComponent implements OnInit {
       location.reload()},
       error: error=>{alert('item Still exist')}
     })};
-    if(confirm(`Do You Want To Delete Doctor No. ${value}`))
-    {
-      this.ImagesService.DeleteCampImage(value).subscribe({
-        next: () => this.Images =  this.RemoveObjectWithId(this.Images,value),
-        error: err => console.log(err)
-      })
-    }
   }
 
 RemoveObjectWithId(arr:any, id:number) {
