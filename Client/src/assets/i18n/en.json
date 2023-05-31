@@ -10,6 +10,9 @@
   "Profile": "Profile",
   "Settings": "Settings",
 
+  "aboutus":"About Us",
+  "Contactus": "Contact Us",
+
   "HaveQuestion": "Have a Question?",
   "CairoEgypt": "Cairo , Egypt",
   "Copyright": "Copyright ©2023 All rights reserved | This template is made with",
@@ -50,12 +53,12 @@
   "YourHealthTxt": "The hospital provides its patients with many foreign experts through an integrated program for visiting doctors.",
   "LatestNews": "LATEST NEWS",
 
-  "SearchByDept": "Search by department name...",
+  "SearchByDept": "Search by name...",
   "Search": "Search",
   "View": "View",
   "ViewProfile": "View Profile",
   "Book": "Book",
-  "SearchByDoctor": "Search by doctor name...",
+  "SearchByDoctor": "Search by name...",
   "Dr.": "Dr.",
   "Name": "Name",
   "Title": "Title",
@@ -91,11 +94,11 @@
   "ContactInformation": "Contact Information",
   "map": "Find Us On Map",
   "LeaveMessage": "Leave Message",
-  "sendmessage": "send message",
-  "entername": "enter your name",
-  "enteremail": "enter your email",
-  "entersubject": "enter subject",
-  "entermessage": "enter message",
+  "sendmessage": "Send Message",
+  "entername": "Enter your name",
+  "enteremail": "Enter your email",
+  "entersubject": "Enter subject",
+  "entermessage": "Enter message",
 
   "welcome": "Welcome To Our Hospital",
   "firstAboutParagraph": "This Hospital is a corporate entity operating in the healthcare field aiming to lead the private health care sectors in Egypt, MENA Region, East Europe, and East Asia into new frontiers building on Alameda’s vast experience and reputation",
@@ -167,4 +170,5 @@
   "QualityandExcellenceText": "high quality safe medical and wellness institutions that maintain the leading position of Egypt.",
   "Professionalism": "Professionalism",
   "Professionalismtext": "a staff who is trained on the latest scientific and technical developments and responsive to the needs of patients."
+
 }

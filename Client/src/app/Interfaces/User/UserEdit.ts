@@ -1,6 +1,7 @@
 import { Gender } from 'src/app/Enums/Gender';
 
 export interface UserEdit {
+  id: number;
   ssn: string;
   gender: Gender;
   firstName_EN: string;
@@ -12,4 +13,5 @@ export interface UserEdit {
   dob: Date;
   medicalHistory: string | null;
   password: string | null;
+  image:string|null;
 }

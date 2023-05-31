@@ -17,17 +17,21 @@
             <img
                 src="{{i.image}}"
                 alt=""
-                style="width: 45px; height: 45px; border: 1px solid black;"
-                class="rounded-circle"
+                style="width: 300px; height: 300px; border: 1px solid #4f5d73;"
+                class="img-fluid"
                 />
           </div>
         </td>
         <td class="text-center">
           <!-- <a routerLink="/CampImages/{{i.id}}" class="btn" title="Details"><i class="fa-solid fa-desktop text-info" ></i></a>
-          <a routerLink="/EditImage/{{i.id}}" class="btn" title="Edit"><i class="fa-solid fa-pen-to-square text-warning" ></i></a> -->
+          <a routerLink="/EditImage/{{i.id}}" class="btn" title="Edit"><i class="fa-solid fa-pen-to-square text-warning" ></i></a>  -->
           <button (click)="DeleteImage(i.id)" class="btn " title="Delete"><i class="fa-solid fa-trash text-danger" ></i></button>
         </td>
       </tr>
     </tbody>
 </table>
+
+
+
+
 

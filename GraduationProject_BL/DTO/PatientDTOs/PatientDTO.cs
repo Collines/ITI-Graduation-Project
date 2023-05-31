@@ -19,6 +19,8 @@ namespace GraduationProject_BL.DTO.PatientDTOs
 
         public string PhoneNumber { get; set; }
 
+        public string Image { get;set; }
+
         public string? MedicalHistory { get; set; }
 
         public IEnumerable<Reservation> Reservations { get; set; } = new HashSet<Reservation>();

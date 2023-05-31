@@ -22,8 +22,6 @@
         <th>Name</th>
         <th>SSN</th>
         <th>Email</th>
-        <th>Phone Number</th>
-        <th>Date Of Birth</th>
         <th>Gender</th>
         <th class="text-center">Actions</th>
       </tr>
@@ -32,19 +30,35 @@
       <tr *ngFor="let p of Patients">
         <td>{{p.id}}</td>
         <td>
-          <p class="fw-bold mb-1">{{p.fullName}}</p>
+          <div class="d-flex align-items-center">
+            <img
+                *ngIf="p.image"
+                src="{{p.image}}"
+                alt=""
+                style="width: 50px; height: 50px; border: 1px solid black;"
+                class="rounded-circle"/>
+                <img
+                *ngIf="!p.image && p.gender === Gender.Male"
+                src="/assets/images/User-Profile-PNG.png"
+                alt=""
+                style="width: 45px; height: 45px; border: 1px solid black;"
+                class="rounded-circle"/>
+                <img
+                *ngIf="!p.image&& p.gender === Gender.Female"
+                src="/assets/images/woman.jpg"
+                alt=""
+                style="width: 45px; height: 45px; border: 1px solid black;"
+                class="rounded-circle"/>
+            <div class="ms-3">
+              <p class="fw-bold mb-1">{{p.fullName}}</p>
+            </div>
+          </div>
         </td>
         <td>
           <p class="fw-bold text-muted mb-1">{{p.ssn}}</p>
         </td>
         <td>
           <p class="fw-bold text-muted mb-1">{{p.email}}</p>
-        </td>
-        <td>
-          <p class="fw-bold text-muted mb-1">{{p.phoneNumber}}</p>
-        </td>
-        <td>
-          <p class="fw-bold text-muted mb-1">{{p.dob | date:'MMMM d, y'}}</p>
         </td>
         <td>
           <p class="fw-normal mb-1">{{Gender[p.gender]}}</p>

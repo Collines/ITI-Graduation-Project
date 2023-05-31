@@ -7,7 +7,7 @@ namespace GraduationProject_BL.Managers
 {
     public class DoctorManager : IDoctorManager
     {
-        private readonly string retrievePath = "assets\\images";
+        private readonly string retrievePath = "assets\\images\\doctors";
         private readonly IRepository<Doctor> repository;
         private readonly ITranslations<DoctorTranslations> translations;
         private readonly ITranslations<DepartmentTranslations> departmentTranslations;

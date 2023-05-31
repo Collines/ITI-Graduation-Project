@@ -23,11 +23,13 @@ span {
   position: absolute;
   top: 20px;
   left: 16px;
+  background-color: var(--backgroundColor);
 }
 .searchArabic .fa-search{
   position: absolute;
   top: 20px;
   right: 16px;
+  background-color: var(--backgroundColor);
 }
 
 .search button{
@@ -64,7 +66,7 @@ span {
   -o-transform: translateY(-40%);
 }
 .title h2 {
-  font-size: 60px;
+  font-size: 50px;
 }
 .title a {
   color: #081f3e;
@@ -87,7 +89,6 @@ span {
 
 .search {
   color: #081f3e;
-  background-color: var(--backgroundColor);
 }
 .first {
   padding-bottom: 80px;

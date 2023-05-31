@@ -2,78 +2,125 @@
   <div class="row my-5 gy-5">
     <div class="col-md-3">
       <div class="list-group">
-        <a class="list-group-item list-group-item-action active"
-          >{{ "Profile" | translate }}</a >
-        <a class="list-group-item list-group-item-action"
+        <a class="list-group-item list-group-item-action active">{{
+          "Profile" | translate
+        }}</a>
+        <a
+          class="list-group-item list-group-item-action"
           routerLink="/reservations"
-          >{{ "Reservation" | translate }}</a>
-        <a href="#" class="list-group-item list-group-item-action"  routerLink="/Settings">{{  "Settings" | translate}}</a>
+          >{{ "Reservation" | translate }}</a
+        >
+        <a
+          href="#"
+          class="list-group-item list-group-item-action"
+          routerLink="/Settings"
+          >{{ "Settings" | translate }}</a
+        >
         <a
           class="list-group-item list-group-item-action logout"
           (click)="logout()"
-          >{{  "Logout" | translate}}</a>
+          >{{ "Logout" | translate }}</a
+        >
       </div>
     </div>
 
     <div class="col-md-9">
-      <h3 class="mb-4">{{"Welcome" | translate}}</h3>
+      <h3 class="mb-4">{{ "Welcome" | translate }}</h3>
 
       <div class="aon-newChart-edit">
-        <div class="row ">
-            <div class="col-md-8 d-flex">
-              
-              <!-- Image Profile -->
-            <div class="pecen-pic " *ngIf="Gender[userEdit.gender] == 'Male' else womanImage">
-              <img src="/assets/images/User-Profile-PNG.png" alt="">
+        <div class="row">
+          <div class="col-md-8 d-flex">
+            <!-- Image Profile -->
+            <div
+              class="pecen-pic"
+              *ngIf="Gender[userEdit.gender] == 'Male'; else womanImage"
+            >
+              <img
+                class="pecen-pic"
+                *ngIf="userEdit.image?.length == 0 || !userEdit.image"
+                src="/assets/images/User-Profile-PNG.png"
+                alt=""
+              />
+              <img
+                class="pecen-pic"
+                *ngIf="userEdit.image && userEdit.image.length > 0"
+                src="{{ userEdit.image }}"
+                alt=""
+              />
             </div>
-            <ng-template #womanImage>
-              <div class="pecen-pic ">
-                <img src="/assets/images/woman.jpg" alt="">
-              </div>
 
+            <ng-template #womanImage>
+              <div class="pecen-pic">
+                <img *ngIf="userEdit.image?.length == 0 || !userEdit.image"
+                 src="/assets/images/woman.jpg" alt="" />
+
+                <img
+                class="pecen-pic"
+                *ngIf="userEdit.image && userEdit.image.length > 0"
+                src="{{ userEdit.image }}"
+                alt="">
+              </div>
             </ng-template>
 
             <div class="pecen-info mx-3">
-              <div  *ngIf="langauge == 'en' else namehArabic">
-                <h4 class="pecen-name">{{ userEdit.firstName_EN + " " + userEdit.lastName_EN }}</h4>
+              <div *ngIf="langauge == 'en'; else namehArabic">
+                <h4 class="pecen-name">
+                  {{ userEdit.firstName_EN + " " + userEdit.lastName_EN }}
+                </h4>
               </div>
 
               <ng-template #namehArabic>
-                <h4 class="pecen-name">{{ userEdit.firstName_AR + " " + userEdit.lastName_AR}}</h4>
-
+                <h4 class="pecen-name">
+                  {{ userEdit.firstName_AR + " " + userEdit.lastName_AR }}
+                </h4>
               </ng-template>
 
-              <div ><span class="fw-bold">{{"Gender"| translate}}:</span> {{Gender[userEdit.gender]}}</div>
-                <div ><span class="fw-bold">{{"Email" | translate}} :</span>  {{userEdit.email}}</div>
-                <div ><span class="fw-bold">{{"Phone"|translate}} :</span>  {{userEdit.phone}}</div>
+              <div>
+                <span class="fw-bold">{{ "Gender" | translate }}:</span>
+                {{ Gender[userEdit.gender] | translate}}
+              </div>
+              <div>
+                <span class="fw-bold">{{ "Email" | translate }} :</span>
+                {{ userEdit.email  }}
+              </div>
+              <div>
+                <span class="fw-bold">{{ "Phone" | translate }} :</span>
+                {{ userEdit.phone }}
+              </div>
             </div>
-            </div>
-            <div class="col-md-4 text-right mt-4">
-                <button class="Patient-button edit-profile-btn" routerLink="/Settings"><i class="fa-solid fa-pen"></i> {{"EDIT" | translate}}</button>
-
-            </div>
+          </div>
+          <div class="col-md-4 text-right mt-4">
+            <button
+              class="Patient-button edit-profile-btn"
+              routerLink="/Settings"
+            >
+              <i class="fa-solid fa-pen"></i> {{ "EDIT" | translate }}
+            </button>
+          </div>
         </div>
+      </div>
+      <div class="mb-5">
+        <button
+          class="Patient-button add-newchart-btn"
+          routerLink="/departments"
+        >
+          <i class="fa-solid fa-plus mx-1"> </i
+          >{{ "NEWAPPOINTMENT" | translate }}
+        </button>
+      </div>
+
+      <div class="row boxBorder">
+        <div class="col-md-6">
+          <div class="data-text">
+            <h5>{{ "Trust" | translate }}</h5>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="data-pic">
+            <img src="/assets/images/doctor.png" class="img-fluid" alt="" />
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="mb-5">
-      <button class="Patient-button add-newchart-btn" routerLink="/departments"> <i class="fa-solid fa-plus mx-1"> </i>{{"NEWAPPOINTMENT"|translate}} </button>
   </div>
-
-
-  <div class="row boxBorder ">
-     <div class="col-md-6">
-      <div class="data-text">
-        <h5>{{"Trust" | translate}}</h5>
-    </div>
-     </div>
-     <div class="col-md-6">
-      <div class="data-pic">
-        <img src="/assets/images/doctor.png" class=" img-fluid" alt="">
-    </div>
-
-     </div>
-  </div>
-   </div>
-
-    </div>
-
 </div>

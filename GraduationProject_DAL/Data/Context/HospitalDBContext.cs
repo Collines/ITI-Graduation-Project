@@ -29,5 +29,6 @@ namespace GraduationProject_DAL.Data.Context
         public virtual DbSet<Banners> Banners { get; set; }
         public virtual DbSet<BannerTranslation> BannerTranslations { get; set; }
         public virtual DbSet<CampImage> CampImages { get; set; }
+        public virtual DbSet<PatientImage> PatientImages { get; set; }
     }
 }

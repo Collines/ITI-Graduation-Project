@@ -2,18 +2,18 @@
   <div class="row py-3">
     <div class="col-lg-7">
       <div class="row my-2">
-        <div class="col-lg-6 col-sm-5">
+        <div class="col-lg-6 col-sm-4">
           <h6 class="mb-0">{{ "Department" | translate }}:</h6>
         </div>
-        <div class="col-lg-6 col-sm-3 text-secondary">
+        <div class="col-lg-6 col-sm-8 text-secondary">
           <p>{{ reservation.doctor?.departmentTitle }}</p>
         </div>
       </div>
       <div class="row my-2">
-        <div class="col-lg-6">
+        <div class="col-lg-6 col-sm-4">
           <h6 class="mb-0">{{ "Doctor" | translate }}:</h6>
         </div>
-        <div class="col-lg-6 text-secondary">
+        <div class="col-lg-6 col-sm-8 text-secondary">
           <p>
             {{ reservation.doctor?.firstName | titlecase }}
             {{ reservation.doctor?.lastName | titlecase }}
@@ -22,10 +22,10 @@
       </div>
 
       <div class="row my-2">
-        <div class="col-lg-6">
+        <div class="col-lg-6 col-sm-4">
           <h6 class="mb-0">{{ "Status" | translate }} :</h6>
         </div>
-        <div class="col-lg-6 text-secondary">
+        <div class="col-lg-6 col-sm-8 text-secondary">
           <p
             class="status"
             [ngStyle]="
@@ -44,28 +44,28 @@
 
     <div class="col-lg-5">
       <div class="row my-2">
-        <div class="col-lg-6">
+        <div class="col-lg-6 col-sm-4">
           <h6 class="mb-0">{{ "Date" | translate }} :</h6>
         </div>
-        <div class="col-lg-6 text-secondary">
+        <div class="col-lg-6 col-sm-8 text-secondary">
           <p>{{ reservation.dateTime | date }}</p>
         </div>
       </div>
 
       <div class="row my-2">
-        <div class="col-lg-6">
+        <div class="col-lg-6 col-sm-4">
           <h6 class="mb-0">{{ "Time" | translate }} :</h6>
         </div>
-        <div class="col-lg-6 text-secondary">
+        <div class="col-lg-6 col-sm-8 text-secondary">
           <p>{{ reservationTime }}</p>
         </div>
       </div>
 
       <div class="row my-2">
-        <div class="col-lg-6">
+        <div class="col-lg-6 col-sm-4">
           <h6 class="mb-0">{{ "QueueNumber" | translate }} :</h6>
         </div>
-        <div class="col-lg-6 text-secondary">
+        <div class="col-lg-6 col-sm-8 text-secondary">
           <p>{{ reservation.queue }}</p>
         </div>
       </div>

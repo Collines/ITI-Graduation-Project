@@ -7,12 +7,14 @@ using GraduationProject_DAL.Interfaces;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
+using System.Numerics;
 using System.Text;
 
 namespace GraduationProject_BL.Managers
 {
     public class PatientManager : IPatientManager
     {
+        private readonly string retrievePath = "assets\\images\\patients";
         private readonly IConfiguration iConfiguration;
         private readonly IRepository<Patient> repository;
         private readonly IRepository<PatientsLogins> logins;
@@ -42,6 +44,9 @@ namespace GraduationProject_BL.Managers
                 if (translation != null)
                 {
                     PatientDTO dto;
+                    var path = "";
+                    if (patient.Image != null)
+                        path = Path.Combine(retrievePath, patient.Image.Name);
                     if (lang == "ar")
                     {
                         dto = new()
@@ -66,6 +71,7 @@ namespace GraduationProject_BL.Managers
                     dto.Email = patient.Email;
                     dto.PhoneNumber = patient.PhoneNumber;
                     dto.MedicalHistory = patient.MedicalHistory;
+                    dto.Image = path;
                     dto.Reservations = patient.Reservations;
 
                     patientsDTO.Add(dto);
@@ -85,6 +91,9 @@ namespace GraduationProject_BL.Managers
                 if (patient != null)
                 {
                     PatientDTO dto;
+                    var path = "";
+                    if (patient.Image != null)
+                        path = Path.Combine(retrievePath, patient.Image.Name);
                     var translation = await translations.FindAsync(patient.Id);
                     if (translation != null)
                     {
@@ -112,6 +121,7 @@ namespace GraduationProject_BL.Managers
                         dto.PhoneNumber = patient.PhoneNumber;
                         dto.MedicalHistory = patient.MedicalHistory;
                         dto.Reservations = patient.Reservations;
+                        dto.Image = path;
 
                         return dto;
 
@@ -127,7 +137,9 @@ namespace GraduationProject_BL.Managers
                             DOB = patient.DOB,
                             Email = patient.Email,
                             PhoneNumber = patient.PhoneNumber,
-                            MedicalHistory = patient.MedicalHistory
+                            MedicalHistory = patient.MedicalHistory,
+                            Image = path
+
                     };
                         return dto;
                     }
@@ -137,38 +149,45 @@ namespace GraduationProject_BL.Managers
             return null;
         }
 
-        public async Task<LoginDTO?> InsertAsync(PatientInsertDTO item)
+        public async Task<LoginDTO?> InsertAsync(PatientFormData formData)
         {
-            Patient patient = new()
+            var item = await PatientFormDataToPatientInsertDTO(formData);
+            if(item !=null)
             {
-                SSN = item.SSN,
-                FirstName = item.FirstName_EN,
-                LastName = item.LastName_EN,
-                Gender = item.Gender,
-                Email = item.Email.ToLower(),
-                Password = PasswordHandler.Hash(item.Password, out byte[] salt),
-                PasswordSalt = Convert.ToHexString(salt),
-                DOB = item.DOB,
-                PhoneNumber = item.Phone,
-                MedicalHistory = item.MedicalHistory
-            };
 
-            await repository.InsertAsync(patient);
+                Patient patient = new()
+                {
+                    SSN = item.SSN,
+                    FirstName = item.FirstName_EN,
+                    LastName = item.LastName_EN,
+                    Gender = item.Gender,
+                    Email = item.Email.ToLower(),
+                    Password = PasswordHandler.Hash(item.Password, out byte[] salt),
+                    PasswordSalt = Convert.ToHexString(salt),
+                    DOB = item.DOB,
+                    PhoneNumber = item.Phone,
+                    Image = item.Image,
+                    MedicalHistory = item.MedicalHistory
+                };
 
-            PatientTranslations translation = new()
-            {
-                FirstName_EN = item.FirstName_EN,
-                FirstName_AR = item.FirstName_AR,
-                LastName_EN = item.LastName_EN,
-                LastName_AR = item.LastName_AR,
-                PatientId = patient.Id
-            };
-            await translations.InsertAsync(translation);
+                await repository.InsertAsync(patient);
 
-            return await GetLoginDTO(patient);
+                PatientTranslations translation = new()
+                {
+                    FirstName_EN = item.FirstName_EN,
+                    FirstName_AR = item.FirstName_AR,
+                    LastName_EN = item.LastName_EN,
+                    LastName_AR = item.LastName_AR,
+                    PatientId = patient.Id
+                };
+                await translations.InsertAsync(translation);
+                return await GetLoginDTO(patient);
+
+            }
+            return null;
         }
 
-        public async Task UpdateAsync(int id, PatientUpdateDTO item)
+        public async Task UpdateAsync(int id, PatientFormData form)
         {
             var patients = await repository.GetAllAsync();
 
@@ -178,6 +197,7 @@ namespace GraduationProject_BL.Managers
                 if (patient != null)
                 {
                     var translation = await translations.FindAsync(patient.Id);
+                    PatientInsertDTO item = await PatientFormDataToPatientInsertDTO(form);
                     if (translation != null)
                     {
                         translation.FirstName_EN = item.FirstName_EN;
@@ -196,6 +216,15 @@ namespace GraduationProject_BL.Managers
                     patient.DOB = item.DOB;
                     patient.PhoneNumber = item.Phone;
                     patient.MedicalHistory = item.MedicalHistory;
+
+                    if (item.Image != null)
+                    {
+                        if (patient.Image != null)
+                        {
+                            DeletePatientImage(patient.Image.Name);
+                        }
+                        patient.Image = item.Image;
+                    }
                     await repository.UpdateAsync(patient.Id, patient);
                 }
             }
@@ -203,8 +232,17 @@ namespace GraduationProject_BL.Managers
 
         public async Task DeleteAsync(int id)
         {
-            await translations.DeleteAsync(id);
-            await repository.DeleteAsync(id);
+            var patients = await repository.GetAllAsync();
+            var patient = patients.Find(x => x.Id == id);
+            if(patient!=null)
+            {
+                if (patient.Image != null)
+                {
+                    DeletePatientImage(patient.Image.Name);
+                }
+                await translations.DeleteAsync(id);
+                await repository.DeleteAsync(id);
+            }
         }
 
         public async Task<bool> FindPatient(string email)
@@ -257,9 +295,13 @@ namespace GraduationProject_BL.Managers
             var patient = await GetPatientByAccessToken(accessToken);
             if (patient != null)
             {
+                var path = "";
+                if (patient.Image != null)
+                    path = Path.Combine(retrievePath, patient.Image.Name);
                 var translation = await translations.FindAsync(patient.Id);
                 var patientUDTO = new PatientEditDTO()
                 {
+                    Id = patient.Id,
                     SSN = patient.SSN,
                     Gender = patient.Gender,
                     FirstName_EN = patient.FirstName,
@@ -270,6 +312,7 @@ namespace GraduationProject_BL.Managers
                     Phone = patient.PhoneNumber,
                     MedicalHistory = patient.MedicalHistory,
                     DOB = patient.DOB,
+                    Image = path
                 };
                 return patientUDTO;
             }
@@ -413,5 +456,71 @@ namespace GraduationProject_BL.Managers
 
             return null;
         }
+
+        // Convert formData to DoctorInsertDTO and create the image file
+        public async Task<PatientInsertDTO> PatientFormDataToPatientInsertDTO(PatientFormData item)
+        {
+            PatientInsertDTO patient = new()
+            {
+                FirstName_EN = item.FirstName_EN,
+                LastName_EN = item.LastName_EN,
+                FirstName_AR = item.FirstName_AR,
+                LastName_AR = item.LastName_AR,
+                Email=item.Email,
+                Phone=item.Phone,
+                DOB=item.DOB,
+                SSN=item.SSN,
+                Gender = item.Gender,
+                MedicalHistory = item.MedicalHistory,
+                Password = item.Password,
+            };
+
+            if (item.Image != null && item.Image.Length > 0)
+            {
+                var uniqueFileName = DateTime.Now.ToString("yyyyMMdd_HHmmss") + "_" + item.Image.FileName;
+
+                var dashboardFilePath = Path.Combine(GetDashboardImagesPath(), uniqueFileName);
+                using (var stream = new FileStream(dashboardFilePath, FileMode.Create))
+                {
+                    await item.Image.CopyToAsync(stream);
+                }
+
+                var clientFilePath = Path.Combine(GetClientImagesPath(), uniqueFileName);
+                using (var stream = new FileStream(clientFilePath, FileMode.Create))
+                {
+                    await item.Image.CopyToAsync(stream);
+                }
+
+                patient.Image = new PatientImage { Name = uniqueFileName };
+            }
+
+            return patient;
+        }
+
+        private void DeletePatientImage(string imageName)
+        {
+            var dasboardPreviousImagePath = Path.Combine(GetDashboardImagesPath(), imageName);
+            if (File.Exists(dasboardPreviousImagePath))
+                File.Delete(dasboardPreviousImagePath);
+
+            var clientPreviousImagePath = Path.Combine(GetClientImagesPath(), imageName);
+            if (File.Exists(clientPreviousImagePath))
+                File.Delete(clientPreviousImagePath);
+        }
+
+        private string GetDashboardImagesPath()
+        {
+            var currentPath = Directory.GetCurrentDirectory();
+            var newPath = Path.GetDirectoryName(currentPath) + "\\Dashboard\\src\\" + retrievePath;
+            return newPath;
+        }
+
+        private string GetClientImagesPath()
+        {
+            var currentPath = Directory.GetCurrentDirectory();
+            var newPath = Path.GetDirectoryName(currentPath) + "\\Client\\src\\" + retrievePath;
+            return newPath;
+        }
+
     }
 }

@@ -94,7 +94,8 @@ export class RegisterComponent implements OnInit {
   get isSSNValid() {
     return this.Validation.controls.SSN.valid;
   }
-  onSubmit() {
+  isError = false;
+  onSubmit(error: any) {
     this.submitted = true;
     console.log(this.Validation.value);
     if (this.Validation.invalid) {
@@ -115,9 +116,11 @@ export class RegisterComponent implements OnInit {
       this.accountService.register(user).subscribe({
         next: (res) => {
           this.router.navigate(['/profile']);
+          this.isError = false;
         },
         error: (err) => {
-          console.log(err.error);
+          this.isError = true;
+          error.innerHTML = err.error;
         },
       });
     }
