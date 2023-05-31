@@ -16,7 +16,7 @@ namespace GraduationProject_DAL.Repositories
 
         public async Task<List<Patient>> GetAllAsync()
         {
-            return await context.Patients.Include(p => p.Reservations).ToListAsync();
+            return await context.Patients.Include(p => p.Reservations).Include(p=>p.Image).ToListAsync();
         }
 
         public async Task InsertAsync(Patient item)

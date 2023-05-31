@@ -22,13 +22,20 @@ import { ContactComponent } from './components/contact/contact.component';
 import { ReservationsComponent } from './components/reservations/reservations.component';
 import { DepartmentComponent } from './components/department/department.component';
 
-//For Translarion
+//For Translation
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+//
+
 import { ReservationComponent } from './components/reservation/reservation.component';
 import { DepartmentDetailComponent } from './components/department-detail/department-detail.component';
 import { NotfoundComponent } from './components/notfound/notfound.component';
 import { SettingsComponent } from './components/settings/settings.component';
+
+//For Google SignIn
+import { SocialLoginModule, SocialAuthServiceConfig } from '@abacritt/angularx-social-login';
+import { GoogleLoginProvider } from '@abacritt/angularx-social-login';
+//
 
 @NgModule({
   declarations: [
@@ -66,8 +73,28 @@ import { SettingsComponent } from './components/settings/settings.component';
         deps: [HttpClient],
       },
     }),
+    SocialLoginModule
   ],
-  providers: [Title],
+  providers: [
+    Title,
+    {
+      provide: 'SocialAuthServiceConfig',
+      useValue: {
+        autoLogin: false,
+        providers: [
+          {
+            id: GoogleLoginProvider.PROVIDER_ID,
+            provider: new GoogleLoginProvider(
+              '551365345955-tl754n7j47hofn2au1t8ouchrpon9fsq.apps.googleusercontent.com'
+            )
+          },
+        ],
+        onError: (err) => {
+          console.error(err);
+        }
+      } as SocialAuthServiceConfig
+    }
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

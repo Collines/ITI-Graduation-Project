@@ -10,6 +10,9 @@
   "Profile": "Profile",
   "Settings": "Settings",
 
+  "aboutus":"About Us",
+  "Contactus": "Contact Us",
+
   "HaveQuestion": "Have a Question?",
   "CairoEgypt": "Cairo , Egypt",
   "Copyright": "Copyright ©2023 All rights reserved | This template is made with",
@@ -167,4 +170,5 @@
   "QualityandExcellenceText": "high quality safe medical and wellness institutions that maintain the leading position of Egypt.",
   "Professionalism": "Professionalism",
   "Professionalismtext": "a staff who is trained on the latest scientific and technical developments and responsive to the needs of patients."
+
 }

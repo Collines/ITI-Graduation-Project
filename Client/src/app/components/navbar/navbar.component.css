@@ -8,7 +8,7 @@
   position: relative;
 }
 .navWidth{
-  width: 90%;
+  width: 92%;
 }
 .nav-item a::after {
   content: "";
@@ -55,3 +55,10 @@ li:hover a::after {
     width: unset;
   }
 }
+
+@media screen and (max-width: 1199px) {
+  .navWidth{
+    width: 100%;
+  }
+}
+

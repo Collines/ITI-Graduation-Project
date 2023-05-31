@@ -44,6 +44,66 @@ namespace GraduationProject_DAL.Migrations
                     b.ToTable("Admins");
                 });
 
+            modelBuilder.Entity("GraduationProject_DAL.Data.Models.BannerTranslation", b =>
+                {
+                    b.Property<int>("Id")
+                        .HasColumnType("int")
+                        .HasColumnOrder(0);
+
+                    b.Property<int>("BannerId")
+                        .HasColumnType("int")
+                        .HasColumnOrder(1);
+
+                    b.Property<string>("Description_AR")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("Description_EN")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("Title_AR")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("Title_EN")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.HasKey("Id", "BannerId");
+
+                    b.ToTable("BannerTranslations");
+                });
+
+            modelBuilder.Entity("GraduationProject_DAL.Data.Models.Banners", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ImagePath")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Banners");
+                });
+
             modelBuilder.Entity("GraduationProject_DAL.Data.Models.CampImage", b =>
                 {
                     b.Property<int>("Id")
@@ -60,53 +120,6 @@ namespace GraduationProject_DAL.Migrations
 
                     b.ToTable("CampImages");
                 });
-
-            modelBuilder.Entity("GraduationProject_DAL.Data.Models.BannerTranslation", b =>
-            {
-                b.Property<int>("Id")
-                    .HasColumnType("int")
-                    .HasColumnOrder(0);
-                b.Property<int>("BannerId")
-                    .HasColumnType("int")
-                    .HasColumnOrder(1);
-                b.Property<string>("Description_AR")
-                    .IsRequired()
-                    .HasMaxLength(50)
-                    .HasColumnType("nvarchar(50)");
-                b.Property<string>("Description_EN")
-                    .IsRequired()
-                    .HasMaxLength(50)
-                    .HasColumnType("nvarchar(50)");
-                b.Property<string>("Title_AR")
-                    .IsRequired()
-                    .HasMaxLength(50)
-                    .HasColumnType("nvarchar(50)");
-                b.Property<string>("Title_EN")
-                    .IsRequired()
-                    .HasMaxLength(50)
-                    .HasColumnType("nvarchar(50)");
-                b.HasKey("Id", "BannerId");
-                b.ToTable("BannerTranslations");
-            });
-
-            modelBuilder.Entity("GraduationProject_DAL.Data.Models.Banners", b =>
-            {
-                b.Property<int>("Id")
-                    .ValueGeneratedOnAdd()
-                    .HasColumnType("int");
-                SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-                b.Property<string>("Description")
-                    .IsRequired()
-                    .HasColumnType("nvarchar(max)");
-                b.Property<string>("ImagePath")
-                    .IsRequired()
-                    .HasColumnType("nvarchar(max)");
-                b.Property<string>("Title")
-                    .IsRequired()
-                    .HasColumnType("nvarchar(max)");
-                b.HasKey("Id");
-                b.ToTable("Banners");
-            });
 
             modelBuilder.Entity("GraduationProject_DAL.Data.Models.Department", b =>
                 {
@@ -348,6 +361,29 @@ namespace GraduationProject_DAL.Migrations
                     b.ToTable("Patients");
                 });
 
+            modelBuilder.Entity("GraduationProject_DAL.Data.Models.PatientImage", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("PatientId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PatientId")
+                        .IsUnique();
+
+                    b.ToTable("PatientImages");
+                });
+
             modelBuilder.Entity("GraduationProject_DAL.Data.Models.PatientTranslations", b =>
                 {
                     b.Property<int>("Id")
@@ -493,6 +529,17 @@ namespace GraduationProject_DAL.Migrations
                     b.Navigation("Doctor");
                 });
 
+            modelBuilder.Entity("GraduationProject_DAL.Data.Models.PatientImage", b =>
+                {
+                    b.HasOne("GraduationProject_DAL.Data.Models.Patient", "Patient")
+                        .WithOne("Image")
+                        .HasForeignKey("GraduationProject_DAL.Data.Models.PatientImage", "PatientId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Patient");
+                });
+
             modelBuilder.Entity("GraduationProject_DAL.Data.Models.PatientTranslations", b =>
                 {
                     b.HasOne("GraduationProject_DAL.Data.Models.Patient", "Patient")
@@ -548,6 +595,8 @@ namespace GraduationProject_DAL.Migrations
 
             modelBuilder.Entity("GraduationProject_DAL.Data.Models.Patient", b =>
                 {
+                    b.Navigation("Image");
+
                     b.Navigation("Reservations");
                 });
 #pragma warning restore 612, 618

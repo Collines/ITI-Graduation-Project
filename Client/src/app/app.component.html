@@ -6,9 +6,9 @@
 
 <div [dir]="" *ngIf="!loader">
   <app-navbar></app-navbar>
-<!-- <main  [@slideInAnimation]="prepareRoute(outlet)"> -->
+<main  class="position-relative" [@fadeAnimation]="outlet.isActivated ? outlet.activatedRoute : ''">
   <router-outlet #outlet="outlet"></router-outlet>
   <app-footer></app-footer>
-<!-- </main> -->
+</main>
 </div>
 

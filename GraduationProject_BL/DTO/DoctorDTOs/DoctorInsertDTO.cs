@@ -1,11 +1,5 @@
 ﻿using GraduationProject_DAL.Data.Enums;
 using GraduationProject_DAL.Data.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 namespace GraduationProject_BL.DTO.DoctorDTOs
 {
     public class DoctorInsertDTO
