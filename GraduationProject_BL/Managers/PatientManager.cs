@@ -7,6 +7,7 @@ using GraduationProject_DAL.Interfaces;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
+using System.Numerics;
 using System.Text;
 
 namespace GraduationProject_BL.Managers
@@ -215,7 +216,15 @@ namespace GraduationProject_BL.Managers
                     patient.DOB = item.DOB;
                     patient.PhoneNumber = item.Phone;
                     patient.MedicalHistory = item.MedicalHistory;
-                    patient.Image = item.Image;
+
+                    if (item.Image != null)
+                    {
+                        if (patient.Image != null)
+                        {
+                            DeletePatientImage(patient.Image.Name);
+                        }
+                        patient.Image = item.Image;
+                    }
                     await repository.UpdateAsync(patient.Id, patient);
                 }
             }

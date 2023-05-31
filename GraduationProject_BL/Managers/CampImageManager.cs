@@ -14,7 +14,7 @@ namespace GraduationProject_BL.Managers
 {
     public class CampImageManager:ICampImageManager
     {
-        private readonly string retrievePath = "assets\\images";
+        private readonly string retrievePath = "assets\\images\\camp";
         private readonly IRepository<CampImage> repository;
         public CampImageManager(IRepository<CampImage> _repository)
         {
@@ -89,7 +89,17 @@ namespace GraduationProject_BL.Managers
 
         public async Task DeleteAsync(int id)
         {
-            await repository.DeleteAsync(id);
+            var campImages = await repository.GetAllAsync();
+            var campImage = campImages.Find(d => d.Id == id);
+            if (campImage != null)
+            {
+                if (campImage.Image != null)
+                {
+                    DeleteCampImage(campImage.Image);
+                }
+                await repository.DeleteAsync(id);
+            }
+                
         }
 
         private string GetDashboardImagesPath()
@@ -105,6 +115,18 @@ namespace GraduationProject_BL.Managers
             var newPath = Path.GetDirectoryName(currentPath) + "\\Client\\src\\" + retrievePath;
             return newPath;
         }
+
+        private void DeleteCampImage(string imageName)
+        {
+            var dasboardPreviousImagePath = Path.Combine(GetDashboardImagesPath(), imageName);
+            if (File.Exists(dasboardPreviousImagePath))
+                File.Delete(dasboardPreviousImagePath);
+
+            var clientPreviousImagePath = Path.Combine(GetClientImagesPath(), imageName);
+            if (File.Exists(clientPreviousImagePath))
+                File.Delete(clientPreviousImagePath);
+        }
+
 
     }
 }
