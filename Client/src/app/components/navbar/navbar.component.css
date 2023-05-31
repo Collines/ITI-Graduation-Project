@@ -20,7 +20,6 @@
   background-color: var(--mainColor);
   transition: all 0.5s;
 }
-li .active::after,
 li:hover a::after {
   width: 70%;
 }
