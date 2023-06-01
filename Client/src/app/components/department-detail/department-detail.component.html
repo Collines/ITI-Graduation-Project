@@ -1,10 +1,14 @@
 <div class="wrapper">
+
+
   <h1 class="text-center">
     {{ department.title }} {{ "Doctors" | translate }}
   </h1>
-  <div class="container my-5">
+
+
+  <div class="container mt-5 mb-3">
     <div class="row height d-flex justify-content-center align-items-center">
-      <div class="col-md-8">
+      <div class="col-lg-8 col-md-11">
 
         <div *ngIf="langauge == 'en' else searchArabic">
           <div class="search" >
@@ -40,6 +44,10 @@
 
       </div>
     </div>
+
+    <div class="mt-5">
+      <a class="btn btn1" (click)="returnBack()">{{ "Back" | translate }}</a>
+    </div>
   </div>
 
   <div class="container mt-5">
@@ -47,7 +55,7 @@
       <div class="aon-med-team-section">
         <div class="row gy-1" *ngIf="SearchResult.length > 0">
           <app-doctor
-            class="col-lg-6 col-md-6"
+            class="col-lg-6 col-md-12"
             [doctor]="doc"
             *ngFor="let doc of SearchResult"
           ></app-doctor>
@@ -58,4 +66,7 @@
       </div>
     </div>
   </div>
+
+
+
 </div>

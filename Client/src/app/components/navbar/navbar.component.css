@@ -8,7 +8,7 @@
   position: relative;
 }
 .navWidth{
-  width: 90%;
+  width: 92%;
 }
 .nav-item a::after {
   content: "";
@@ -20,7 +20,6 @@
   background-color: var(--mainColor);
   transition: all 0.5s;
 }
-li .active::after,
 li:hover a::after {
   width: 70%;
 }
@@ -55,3 +54,10 @@ li:hover a::after {
     width: unset;
   }
 }
+
+@media screen and (max-width: 1199px) {
+  .navWidth{
+    width: 100%;
+  }
+}
+

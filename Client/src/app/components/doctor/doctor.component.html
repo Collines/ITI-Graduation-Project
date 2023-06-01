@@ -1,6 +1,6 @@
 <div>
-  <div class="aon-med-team d-flex">
-    <div class="aon-med-team-pic mx-3">
+  <div class="aon-med-team ">
+    <div class="aon-med-team-pic mx-2">
       <!-- <img src="/assets/images/pic1.jpg" alt="Doctor Image"> -->
 
       <img src="{{ doctor.image }}" alt="Doctor Image" />
@@ -19,13 +19,13 @@
         {{ doctor.departmentTitle }}
       </p>
 
-      <a class="btn btn1 mx-2" routerLink="/doctor/{{ doctor.id }}">{{
+      <a class="btn btn1 mx-1 mb-1" routerLink="/doctor/{{ doctor.id }}">{{
         "ViewProfile" | translate
       }}</a>
       <button
         *ngIf="Logged"
         type="button"
-        class="btn btn2"
+        class="btn btn2  mx-1 mb-1"
         data-toggle="modal"
         attr.data-target="#exampleModal-{{ doctor.id }}"
         (click)="openModal(DoctorModal)"

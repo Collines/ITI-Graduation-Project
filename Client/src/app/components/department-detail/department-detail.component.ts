@@ -6,6 +6,7 @@ import { User } from 'src/app/Interfaces/User/user';
 import { AccountService } from 'src/app/Services/account.service';
 import { DepartmentService } from 'src/app/Services/department.service';
 import { DoctorsService } from 'src/app/Services/doctors.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-department-detail',
@@ -19,7 +20,8 @@ export class DepartmentDetailComponent implements OnInit {
     private router: Router,
     private accountService: AccountService,
     private departmentService: DepartmentService,
-    private doctorService: DoctorsService
+    private doctorService: DoctorsService,
+    private _location: Location
   ) {
     this.department.id = Route.snapshot.params['id'];
     accountService.currentUser$.subscribe({
@@ -92,5 +94,8 @@ export class DepartmentDetailComponent implements OnInit {
 
   ngOnDestroy(): void {
     clearTimeout(this.searchTimer);
+  }
+  returnBack() {
+    this._location.back();
   }
 }

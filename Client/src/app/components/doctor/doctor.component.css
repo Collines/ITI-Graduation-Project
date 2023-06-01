@@ -13,14 +13,14 @@ h5 > a {
   color: #081f3e;
   font-weight: 700;
 }
-
 .aon-med-team {
   background-color:#f3f6f9;
   margin-bottom: 30px;
   border: 1px solid #ebebeb;
   border-radius: 4px;
-  padding: 20px 15px;
+  padding: 10px;
   display: flex;
+  flex-direction: row;
   transition: all 0.5s ease;
 }
 .aon-med-team:hover {
@@ -85,4 +85,13 @@ h5 > a {
   -moz-transition: 0.3s;
   -ms-transition: 0.3s;
   -o-transition: 0.3s;
+}
+
+@media screen and (max-width:485px){
+  .aon-med-team {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
 }
