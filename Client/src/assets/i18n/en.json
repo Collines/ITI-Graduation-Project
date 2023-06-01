@@ -84,6 +84,8 @@
   "YourReservations": "Your Reservations",
   "Date": "Date",
   "Time": "Time",
+  "Blank": "Leave blank for unchange",
+  "ProfilePicture":"Profile Picture",
 
   "notfound": "Page Not Found",
   "Page404": "The Page You Are Looking For Doesn't Exist...",
