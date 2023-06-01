@@ -17,10 +17,10 @@ export class HomeComponent implements OnInit {
     private patientServices: PatientsService,
     private departmentServices: DepartmentService,
     private reservationServices: ReservationService,
-    private imageServices : CampImageService 
+    private imageServices: CampImageService
   ) {}
-  Images:any;
-    
+  Images: any;
+
   ngOnInit(): void {
     this.doctorServices.GetAllDoctors().subscribe({
       next: (doctors) => {
@@ -54,12 +54,13 @@ export class HomeComponent implements OnInit {
     });
 
     this.imageServices.GetImages().subscribe({
-      next: data => {this.Images = data.map(i => {
-        i.image = '/' + i.image.replaceAll("\\", "/");
-        return i.image;
-      });
-    },
-      error: err => console.log(err)
+      next: (data) => {
+        this.Images = data.map((i) => {
+          i.image = '/' + i.image.replaceAll('\\', '/');
+          return i.image;
+        });
+      },
+      error: (err) => console.log(err),
     });
 
     this.departmentServices.GetDepartments().subscribe({

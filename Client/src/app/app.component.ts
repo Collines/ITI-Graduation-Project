@@ -12,7 +12,7 @@ import {
 import { fadeAnimation } from './animations/app.animation';
 import { Title } from '@angular/platform-browser';
 import { filter } from 'rxjs';
-import { ChangeDetectorRef, AfterContentChecked} from '@angular/core';
+import { ChangeDetectorRef, AfterContentChecked } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -21,7 +21,7 @@ import { ChangeDetectorRef, AfterContentChecked} from '@angular/core';
   animations: [fadeAnimation],
 })
 export class AppComponent implements OnInit {
-  loader=true;
+  loader = true;
 
   title = 'Client';
   constructor(
@@ -80,16 +80,11 @@ export class AppComponent implements OnInit {
     this.accountService.setCurrentUser(user);
   }
 
-  loaderStop:any=setTimeout(() => {
-    this.loader=false;
-
+  loaderStop: any = setTimeout(() => {
+    this.loader = false;
   }, 3000);
 
   ngAfterContentChecked() {
-
     this.cdref.detectChanges();
-
   }
-
-
 }
