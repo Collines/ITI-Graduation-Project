@@ -7,7 +7,7 @@
         <th>ID</th>
         <th class="">Title</th>
         <th class="">Description</th>
-        <th class="">No. Of Beds</th>
+        <th class="">#Beds</th>
         <th class="text-center">Actions</th>
       </tr>
     </thead>
@@ -17,8 +17,11 @@
         <td class="">
           <p class="fw-bold mb-1">{{d.title}}</p>
         </td>
-        <td class="">
-          <p class="fw-bold mb-1">{{d.description}}</p>
+        <td class="" >
+          <p class="fw-bold mb-1" style="width: 35vw;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;">{{d.description}}</p>
         </td>
         <td class="">
           <p class="fw-bold mb-1">{{d.numberOfBeds}}</p>
