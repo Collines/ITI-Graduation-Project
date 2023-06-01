@@ -1,13 +1,12 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
 
-
-import { DefaultLayoutComponent } from './containers';
-import { Page404Component } from './views/pages/page404/page404.component';
-import { Page500Component } from './views/pages/page500/page500.component';
-import { LoginComponent } from './views/pages/login/login.component';
-import { AllDoctorsComponent } from './views/doctors-views/all-doctors/all-doctors.component';
-import { AddDoctorComponent } from './views/doctors-views/add-doctor/add-doctor.component';
+import { DefaultLayoutComponent } from "./containers";
+import { Page404Component } from "./views/pages/page404/page404.component";
+import { Page500Component } from "./views/pages/page500/page500.component";
+import { LoginComponent } from "./views/pages/login/login.component";
+import { AllDoctorsComponent } from "./views/doctors-views/all-doctors/all-doctors.component";
+import { AddDoctorComponent } from "./views/doctors-views/add-doctor/add-doctor.component";
 import { EditDoctorComponent } from "./views/doctors-views/edit-doctor/edit-doctor.component";
 import { DetailsDoctorComponent } from "./views/doctors-views/details-doctor/details-doctor.component";
 import { AllPatientsComponent } from "./views/patient-views/all-patients/all-patients.component";
@@ -23,6 +22,8 @@ import { AllBannerComponent } from "./views/Banner/all-banner/all-banner.compone
 import { AddBannerComponent } from "./views/Banner/add-banner/add-banner.component";
 import { EditBannerComponent } from "./views/Banner/edit-banner/edit-banner.component";
 import { DetailComponent } from "./views/Banner/detail/detail.component";
+import { MessagesComponent } from "./views/messages-views/messages/messages.component";
+import { MessageComponent } from "./views/messages-views/message/message.component";
 
 const routes: Routes = [
   {
@@ -45,72 +46,81 @@ const routes: Routes = [
           ),
       },
       {
-        path: 'Doctors',
-        component: AllDoctorsComponent
+        path: "Doctors",
+        component: AllDoctorsComponent,
       },
       {
-        path: 'AddDoctor',
-        component: AddDoctorComponent
+        path: "AddDoctor",
+        component: AddDoctorComponent,
       },
       {
-        path: 'EditDoctor/:id',
-        component: EditDoctorComponent
+        path: "EditDoctor/:id",
+        component: EditDoctorComponent,
       },
       {
-        path: 'Doctors/:id',
-        component: DetailsDoctorComponent
+        path: "Doctors/:id",
+        component: DetailsDoctorComponent,
       },
       {
-        path: 'Patients',
-        component: AllPatientsComponent
+        path: "Patients",
+        component: AllPatientsComponent,
       },
       {
-        path: 'Patients/:id',
-        component: DetailsPatientComponent
+        path: "Patients/:id",
+        component: DetailsPatientComponent,
       },
       {
-        path: 'Departments',
-        component: AllDepartmentsComponent
+        path: "Departments",
+        component: AllDepartmentsComponent,
       },
       {
-        path: 'AddDepartment',
-        component: AddDepartmentComponent
+        path: "AddDepartment",
+        component: AddDepartmentComponent,
       },
       {
-        path: 'EditDepartment/:id',
-        component: EditDepartmentComponent
+        path: "EditDepartment/:id",
+        component: EditDepartmentComponent,
       },
       {
-        path: 'Departments/:id',
-        component: DetailsDepartmentComponent
+        path: "Departments/:id",
+        component: DetailsDepartmentComponent,
       },
       {
-        path: 'CampImages',
-        component: AllCampImagesComponent
+        path: "CampImages",
+        component: AllCampImagesComponent,
       },
       {
-        path: 'AddCampImage',
-        component: AddCampImageComponent
-      },
-      
-      {
-        path: 'Banners',
-        component: AllBannerComponent
+        path: "Messages",
+        component: MessagesComponent,
       },
       {
-        path: 'Banners/:id',
-        component: DetailComponent
+        path: "Messages/:id",
+        component: MessageComponent,
       },
       {
-        path: 'EditBanner/:id',
-        component: EditBannerComponent
-      },{
-        path: 'AddBanner',
-        component: AddBannerComponent
+        path: "AddCampImage",
+        component: AddCampImageComponent,
+      },
+
+      {
+        path: "Banners",
+        component: AllBannerComponent,
       },
       {
-        path: 'Reservations',
-        component: AllReservationsComponent
+        path: "Banners/:id",
+        component: DetailComponent,
+      },
+      {
+        path: "EditBanner/:id",
+        component: EditBannerComponent,
+      },
+      {
+        path: "AddBanner",
+        component: AddBannerComponent,
+      },
+      {
+        path: "Reservations",
+        component: AllReservationsComponent,
       },
       {
         path: "pages",
