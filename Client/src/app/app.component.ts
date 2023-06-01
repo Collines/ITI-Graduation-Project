@@ -12,6 +12,7 @@ import {
 import { fadeAnimation } from './animations/app.animation';
 import { Title } from '@angular/platform-browser';
 import { filter } from 'rxjs';
+import { ChangeDetectorRef, AfterContentChecked} from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -28,7 +29,8 @@ export class AppComponent implements OnInit {
     private accountService: AccountService,
     private router: Router,
     private titleService: Title,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private cdref: ChangeDetectorRef
   ) {
     router.events.subscribe((event) => {
       if (event instanceof NavigationStart) {
@@ -83,6 +85,11 @@ export class AppComponent implements OnInit {
 
   }, 3000);
 
+  ngAfterContentChecked() {
+
+    this.cdref.detectChanges();
+
+  }
 
 
 }
