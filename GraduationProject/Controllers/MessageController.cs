@@ -51,5 +51,17 @@ namespace GraduationProject.Controllers
             return BadRequest();
         }
 
+        [HttpDelete("{id:int}")]
+        public async Task<ActionResult> Delete(int id)
+        {
+            var message = await Manager.GetByIdAsync(id);
+            if (message != null)
+            {
+                await Manager.DeleteAsync(id);
+                return Ok();
+            }
+            return BadRequest();
+        }
+
     }
 }
