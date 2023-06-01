@@ -78,7 +78,7 @@
                       formControlName="FirstName"
                       id="name"
                       name="fname"
-                      placeholder="First Name"
+                      placeholder="{{'FirstName' | translate}}"
                       class="form-control here"
                       type="text"
                       value="{{ userEdit.firstName_EN }}"
@@ -120,7 +120,7 @@
                       formControlName="LastName"
                       id="lname"
                       name="lastname"
-                      placeholder="Last Name"
+                      placeholder="{{'LastName' | translate}}"
                       class="form-control here"
                       type="text"
                       value="{{ userEdit.lastName_EN }}"
@@ -162,7 +162,7 @@
                       formControlName="FirstNameAr"
                       id="fnameAR"
                       name="text"
-                      placeholder="First Name in Arabic"
+                      placeholder="{{'FirstNameAr' | translate}}"
                       class="form-control here"
                       type="text"
                       value="{{ userEdit.firstName_AR }}"
@@ -204,7 +204,7 @@
                       formControlName="LastNameAr"
                       id="lnameAR"
                       name="text"
-                      placeholder="Last Name in Arabic"
+                      placeholder="{{'LastNameAr' | translate}}"
                       class="form-control here"
                       type="text"
                       value="{{ userEdit.lastName_AR }}"
@@ -263,7 +263,7 @@
                       formControlName="email"
                       id="email"
                       name="email"
-                      placeholder="Email Adress"
+                      placeholder="{{ 'Email' | translate}}"
                       class="form-control here"
                       type="email"
                       value="{{ userEdit.email }}"
@@ -306,7 +306,7 @@
                       name="password"
                       class="form-control here"
                       type="password"
-                      placeholder="Leave blank for unchange"
+                      placeholder="{{ 'Blank' | translate}}"
                       [ngClass]="
                         !isPasswordValid
                           ? {
@@ -382,7 +382,7 @@
                       formControlName="Phone"
                       id="phone"
                       name="phone"
-                      placeholder="Phone"
+                      placeholder="{{'Phone' | translate}}"
                       class="form-control here"
                       type="text"
                       value="{{ userEdit.phone }}"
@@ -424,16 +424,14 @@
                       class="form-control"
                       id="MH"
                       rows="3"
-                      placeholder="Medical History"
+                      placeholder="{{'MedicalHistory' | translate}}"
                       >{{ userEdit.medicalHistory }}</textarea
                     >
                   </div>
                 </div>
 
                 <div class="form-group row mb-2">
-                  <label for="PP" class="col-4 col-form-label">{{
-                    "ProfilePicture" | translate
-                  }}</label>
+                  <label for="PP" class="col-4 col-form-label">{{"ProfilePicture" | translate}}</label>
                   <div class="col-8">
                     <input
                       type="file"
