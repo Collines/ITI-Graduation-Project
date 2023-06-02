@@ -63,5 +63,17 @@ namespace GraduationProject.Controllers
             return BadRequest();
         }
 
+        [HttpPost]
+        [AllowAnonymous]
+        public async Task<ActionResult> Create(Message msg)
+        {
+            if (msg != null)
+            {
+                await Manager.InsertAsync(msg);
+                return Ok();
+            }
+            return BadRequest();
+        }
+
     }
 }

@@ -33,5 +33,11 @@ namespace GraduationProject_BL.Managers
         {
             await Repository.UpdateAsync(id, item);
         }
+
+        public async Task InsertAsync(Message item)
+        {
+            if(item !=null)
+                await Repository.InsertAsync(item);
+        }
     }
 }

@@ -18,6 +18,6 @@ namespace GraduationProject_BL.Interfaces
 
         public Task<Message?> GetByIdAsync(int id);
 
-
+        public Task InsertAsync(Message item);
     }
 }
