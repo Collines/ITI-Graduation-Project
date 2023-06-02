@@ -1,99 +1,192 @@
 <div class="contact">
-  <div class="banner ">
-   <div class="container">
-    <div class="title ">
-      <h2 > {{"Contactus" | translate}}</h2>
-      <p class="text-white link-nav">
-        <a routerLink="/home">{{"Home" | translate}} </a> <i class="fa-solid fa-arrow-right" style="color: #081f3e;"></i>
-        <a routerLink="contact"> {{"Contactus" | translate}}</a></p>
-     </div>
-   </div>
-
-
-
-
+  <div class="banner">
+    <div class="container">
+      <div class="title">
+        <h2>{{ "Contactus" | translate }}</h2>
+        <p class="text-white link-nav">
+          <a routerLink="/home">{{ "Home" | translate }} </a>
+          <i class="fa-solid fa-arrow-right" style="color: #081f3e"></i>
+          <a routerLink="/contact"> {{ "Contactus" | translate }}</a>
+        </p>
+      </div>
+    </div>
   </div>
 
   <div class="first">
     <div class="row py-5 gy-3 w-75 m-auto">
-        <div class="col-lg-4 col-sm-12">
-            <div class="box text-center ">
-                <div class="icon  m-auto">
-                    <i class="fa-solid fa-location-arrow fs-4"></i>
-                </div>
-                <h4 class="my-2 fs-5">{{"Address" | translate}}</h4>
-                <p class="text-muted text-light ">{{"cairo" | translate}}</p>
-            </div>
+      <div class="col-lg-4 col-sm-12">
+        <div class="box text-center">
+          <div class="icon m-auto">
+            <i class="fa-solid fa-location-arrow fs-4"></i>
+          </div>
+          <h4 class="my-2 fs-5">{{ "Address" | translate }}</h4>
+          <p class="text-muted text-light">{{ "cairo" | translate }}</p>
         </div>
+      </div>
 
-        <div class="col-lg-4 col-sm-12">
-            <div class="box text-center ">
-                <div class="icon m-auto">
-                    <i class="fa-solid fa-envelope fs-4"></i>
-                </div>
-                <h4 class="my-2 fs-5">{{"Email"| translate}}</h4>
-                <p class="text-muted text-light ">MedicalTeam@gmail.com</p>
-            </div>
+      <div class="col-lg-4 col-sm-12">
+        <div class="box text-center">
+          <div class="icon m-auto">
+            <i class="fa-solid fa-envelope fs-4"></i>
+          </div>
+          <h4 class="my-2 fs-5">{{ "Email" | translate }}</h4>
+          <p class="text-muted text-light">MedicalTeam@gmail.com</p>
         </div>
+      </div>
 
-        <div class="col-lg-4 col-sm-12">
-            <div class="box text-center ">
-                <div class="icon m-auto">
-                    <i class="fa-solid fa-phone fs-4"></i>
-                </div>
-                <h4 class="my-2 fs-5">{{"Phone"|translate}}</h4>
-                <p class="text-muted text-light ">2207812558</p>
-            </div>
+      <div class="col-lg-4 col-sm-12">
+        <div class="box text-center">
+          <div class="icon m-auto">
+            <i class="fa-solid fa-phone fs-4"></i>
+          </div>
+          <h4 class="my-2 fs-5">{{ "Phone" | translate }}</h4>
+          <p class="text-muted text-light">2207812558</p>
         </div>
-
+      </div>
     </div>
-</div>
-
+  </div>
 
   <section class="second">
-    <div class="mx-3 m-auto">
-        <div class="box row gy-4 py-4 mx-1 bg-white ">
-          <h4>{{"ContactInformation" | translate}}</h4>
+    <div class="mx-4 m-auto">
+      <div class="box row gy-4 py-4 mx-1 bg-white">
+        <h4>{{ "ContactInformation" | translate }}</h4>
 
-            <div class="col-md-6 my-3">
-              <div class="map h-75 ">
-               <h5 class="fs-5 fw-semibold mb-4">{{"map" | translate}}</h5>
-               <div class="mapouter"><div class="gmap_canvas">
-                 <iframe width="100%" height="100%" id="gmap_canvas" src="https://maps.google.com/maps?q=Cairo,Egypt&t=&z=10&ie=UTF8&iwloc=&output=embed"
-                 frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>
-                 <br><style>.mapouter{position:relative;text-align:right;height:100%;width:100%;}</style>
-                 <style>.gmap_canvas {overflow:hidden;background:none!important;height:100%;width:100%;}
-                 </style>
-                 </div>
-               </div>
+        <div class="col-md-6 my-3">
+          <div class="map h-75">
+            <h5 class="fs-5 fw-semibold mb-4">{{ "map" | translate }}</h5>
+            <div class="mapouter">
+              <div class="gmap_canvas">
+                <iframe
+                  width="100%"
+                  height="100%"
+                  id="gmap_canvas"
+                  src="https://maps.google.com/maps?width=100%25&amp;height=100%25&amp;hl=en&amp;q=ITI%20Cairo%20University,%2026H2+9MC,%20Ad%20Doqi,%20Dokki,%20Giza%20Governorate%203750010+(My%20Business%20Name)&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"
+                  frameborder="0"
+                  scrolling="no"
+                  marginheight="0"
+                  marginwidth="0"
+                ></iframe>
+                <br /><style>
+                  .mapouter {
+                    position: relative;
+                    text-align: right;
+                    height: 100%;
+                    width: 100%;
+                  }
+                </style>
+                <style>
+                  .gmap_canvas {
+                    overflow: hidden;
+                    background: none !important;
+                    height: 100%;
+                    width: 100%;
+                  }
+                </style>
               </div>
-           </div>
-
-         <div class="col-md-6 my-3">
-           <h5 class="fs-5 fw-semibold mx-1 mb-3">{{"LeaveMessage" | translate}}</h5>
-           <form action="#" class=" contact-form">
-             <div class="form-group mb-3">
-             <input type="text" class="form-control" [placeholder]=" 'entername'| translate">
-             </div>
-             <div class="form-group mb-3">
-             <input type="text" class="form-control"  [placeholder]=" 'enteremail'| translate">
-             </div>
-             <div class="form-group mb-3">
-             <input type="text" class="form-control" [placeholder]=" 'entersubject'| translate">
-             </div>
-             <div class="form-group mb-3">
-             <textarea name="" id="" cols="30" rows="7" class="form-control"  [placeholder]=" 'entermessage'| translate"></textarea>
-             </div>
-             <div class="form-group mt-4">
-             <button type="submit" class="btn py-3 px-5 rounded-pill"> {{"sendmessage" | translate}}</button>
-             </div>
-             </form>
-         </div>
-
+            </div>
+          </div>
         </div>
+
+        <div class="col-md-6 my-3">
+          <h5 class="fs-5 fw-semibold mx-1 mb-3">
+            {{ "LeaveMessage" | translate }}
+          </h5>
+          <div
+            [ngClass]="submitted && isError ? 'd-block' : 'd-none'"
+            class="alert alert-danger text-center"
+            #error
+          ></div>
+          <div
+            [ngClass]="submitted && isSuccess && !isError ? 'd-block' : 'd-none'"
+            class="alert alert-success text-center"
+          >
+            Message Sent Successfully.. We'll get back to you very soon
+          </div>
+          <form
+            [formGroup]="Validation"
+            class="contact-form"
+            (submit)="onSubmit(error)"
+          >
+            <div class="form-group mb-3">
+              <input
+                [ngClass]="
+                  !isSenderNameValid
+                    ? {
+                        'is-invalid':
+                          submitted && Validation.controls.SenderName.errors
+                      }
+                    : 'is-valid'
+                "
+                formControlName="SenderName"
+                type="text"
+                class="form-control"
+                [placeholder]="'entername' | translate"
+              />
+              <div class="invalid-feedback">Please enter a valid name</div>
+            </div>
+            <div class="form-group mb-3">
+              <input
+                [ngClass]="
+                  !isEmailValid
+                    ? {
+                        'is-invalid':
+                          submitted && Validation.controls.Email.errors
+                      }
+                    : 'is-valid'
+                "
+                type="text"
+                formControlName="Email"
+                class="form-control"
+                [placeholder]="'enteremail' | translate"
+              />
+              <div class="invalid-feedback">
+                Please enter a valid Email address
+              </div>
+            </div>
+            <div class="form-group mb-3">
+              <input
+                [ngClass]="
+                  !isSubjectValid
+                    ? {
+                        'is-invalid':
+                          submitted && Validation.controls.Subject.errors
+                      }
+                    : 'is-valid'
+                "
+                type="text"
+                formControlName="Subject"
+                class="form-control"
+                [placeholder]="'entersubject' | translate"
+              />
+              <div class="invalid-feedback">Please enter a valid Subject</div>
+            </div>
+            <div class="form-group mb-3">
+              <textarea
+                [ngClass]="
+                  !isBodyValid
+                    ? {
+                        'is-invalid':
+                          submitted && Validation.controls.Body.errors
+                      }
+                    : 'is-valid'
+                "
+                formControlName="Body"
+                id=""
+                cols="30"
+                rows="7"
+                class="form-control"
+                [placeholder]="'entermessage' | translate"
+              ></textarea>
+              <div class="invalid-feedback">Please enter a valid Subject</div>
+            </div>
+            <div class="form-group mt-4">
+              <button type="submit" class="btn py-3 px-5 rounded-pill">
+                {{ "sendmessage" | translate }}
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
     </div>
-</section>
-
-
+  </section>
 </div>
-

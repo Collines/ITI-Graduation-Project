@@ -29,13 +29,13 @@ export class AllCampImagesComponent implements OnInit {
   }
   
   DeleteImage(value:number){
-    if(confirm(`Do You Want To Delete Doctor No. ${value}`))
-    {
-      this.ImagesService.DeleteCampImage(value).subscribe({
-        next: () => this.Images =  this.RemoveObjectWithId(this.Images,value),
-        error: err => console.log(err)
-      })
-    }
+  if(confirm(`Do You Want To Image No. ${value}`))
+  {
+    this.ImagesService.DeleteCampImage(value).subscribe({
+      next: response=>{this.Router.navigate(['/CampImages']),
+      location.reload()},
+      error: error=>{alert('item Still exist')}
+    })};
   }
 
 RemoveObjectWithId(arr:any, id:number) {

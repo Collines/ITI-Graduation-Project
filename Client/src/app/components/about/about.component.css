@@ -63,7 +63,7 @@ h6 {
 }
 @keyframes progress2 {
   to {
-    --progress-value: 95;
+    --progress-value: 100;
   }
 }
 @keyframes progress3 {
@@ -78,12 +78,12 @@ h6 {
 }
 @keyframes progress5 {
   to {
-    --progress-value: 85;
+    --progress-value: 100;
   }
 }
 @keyframes progress6 {
   to {
-    --progress-value: 95;
+    --progress-value: 100;
   }
 }
 

@@ -12,6 +12,7 @@ import {
 import { fadeAnimation } from './animations/app.animation';
 import { Title } from '@angular/platform-browser';
 import { filter } from 'rxjs';
+import { ChangeDetectorRef, AfterContentChecked } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -20,7 +21,7 @@ import { filter } from 'rxjs';
   animations: [fadeAnimation],
 })
 export class AppComponent implements OnInit {
-  loader=true;
+  loader = true;
 
   title = 'Client';
   constructor(
@@ -28,7 +29,8 @@ export class AppComponent implements OnInit {
     private accountService: AccountService,
     private router: Router,
     private titleService: Title,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private cdref: ChangeDetectorRef
   ) {
     router.events.subscribe((event) => {
       if (event instanceof NavigationStart) {
@@ -78,11 +80,11 @@ export class AppComponent implements OnInit {
     this.accountService.setCurrentUser(user);
   }
 
-  loaderStop:any=setTimeout(() => {
-    this.loader=false;
-
+  loaderStop: any = setTimeout(() => {
+    this.loader = false;
   }, 3000);
 
-
-
+  ngAfterContentChecked() {
+    this.cdref.detectChanges();
+  }
 }

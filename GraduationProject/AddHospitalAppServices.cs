@@ -27,6 +27,7 @@ namespace GraduationProject
             services.AddScoped<ITranslations<DepartmentTranslations>, DepartmentTranslationsRepository>();
             services.AddScoped<IDepartmentManager, DepartmentManager>();
             services.AddScoped<IRepository<Doctor>, DoctorRepository>();
+            services.AddScoped<IRepository<Message>, MessageRepository>();
             services.AddScoped<ITranslations<DoctorTranslations>, DoctorTranslationsRepository>();
             services.AddScoped<IDoctorManager, DoctorManager>();
 
@@ -39,6 +40,7 @@ namespace GraduationProject
             services.AddScoped<IReservationManager, ReservationManager>();
             services.AddScoped<IRepository<CampImage>, CampImageRepository>();
             services.AddScoped<ICampImageManager, CampImageManager>();
+            services.AddScoped<IMessageManager, MessageManager>();
 
 
             services.AddScoped<IRepository<Banners>, BannerRepository>();

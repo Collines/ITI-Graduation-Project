@@ -37,11 +37,7 @@ export class NavbarComponent implements OnInit {
   }
 
   Username = '';
-  dropdownShow = false;
 
-  dropDownClick() {
-    this.dropdownShow = !this.dropdownShow;
-  }
 
   isLogged: boolean = false;
   Logout() {

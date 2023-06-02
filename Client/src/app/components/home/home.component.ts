@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Department } from 'src/app/Interfaces/Department';
+import { CampImageService } from 'src/app/Services/camp-image.service';
 import { DepartmentService } from 'src/app/Services/department.service';
 import { DoctorsService } from 'src/app/Services/doctors.service';
 import { PatientsService } from 'src/app/Services/patients.service';
@@ -15,8 +16,10 @@ export class HomeComponent implements OnInit {
     private doctorServices: DoctorsService,
     private patientServices: PatientsService,
     private departmentServices: DepartmentService,
-    private reservationServices: ReservationService
+    private reservationServices: ReservationService,
+    private imageServices: CampImageService
   ) {}
+  Images: any;
 
   ngOnInit(): void {
     this.doctorServices.GetAllDoctors().subscribe({
@@ -48,6 +51,16 @@ export class HomeComponent implements OnInit {
           }
         }
       },
+    });
+
+    this.imageServices.GetImages().subscribe({
+      next: (data) => {
+        this.Images = data.map((i) => {
+          i.image = '/' + i.image.replaceAll('\\', '/');
+          return i.image;
+        });
+      },
+      error: (err) => console.log(err),
     });
 
     this.departmentServices.GetDepartments().subscribe({
