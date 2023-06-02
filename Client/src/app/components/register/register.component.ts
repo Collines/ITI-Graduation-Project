@@ -97,7 +97,6 @@ export class RegisterComponent implements OnInit {
   isError = false;
   onSubmit(error: any) {
     this.submitted = true;
-    console.log(this.Validation.value);
     if (this.Validation.invalid) {
       return;
     } else {

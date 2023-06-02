@@ -1,1 +1,10 @@
-<app-message></app-message>
+<div class="content p-4">
+  <div class="box position-relative">
+    <div class="heading mb-5 pb-2">
+      <h3 class="fw-bold">Messages</h3>
+    </div>
+    <ul class="feedback-list position-relative">
+      <li *ngFor="let msg of Messages" [message]="msg" app-message></li>
+    </ul>
+  </div>
+</div>
