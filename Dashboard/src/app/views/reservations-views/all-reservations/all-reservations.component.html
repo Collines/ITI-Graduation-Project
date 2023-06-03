@@ -34,10 +34,10 @@
             <span class="badge text-bg-danger text-light">{{ReservationStatus[ReservationStatus.Cancelled]}}</span>
           </div> -->
 
-          <select [selectedIndex]="r.status-1" class="form-select" [ngClass]="{
-            'text-bg-warning':r.status === ReservationStatus.ToVisit,
-            'text-bg-success':r.status === ReservationStatus.Visited,
-            'text-bg-danger text-light':r.status === ReservationStatus.Cancelled}" 
+          <select #status [selectedIndex]="r.status-1" class="form-select" [ngClass]="{
+            'text-bg-warning':status.value == ReservationStatus.ToVisit.toString(),
+            'text-bg-success':status.value == ReservationStatus.Visited.toString(),
+            'text-bg-danger text-light':status.value == ReservationStatus.Cancelled.toString()}" 
             name="status" aria-label="status" (change)="ChangeReservationStatus($event,r.id)">
             <option class="text-bg-warning" value="{{ReservationStatus.ToVisit}}">{{ReservationStatus[ReservationStatus.ToVisit]}}</option>
             <option class="text-bg-success" value="{{ReservationStatus.Visited}}">{{ReservationStatus[ReservationStatus.Visited]}}</option>
