@@ -34,7 +34,7 @@
             <span class="badge text-bg-danger text-light">{{ReservationStatus[ReservationStatus.Cancelled]}}</span>
           </div> -->
 
-          <select [selectedIndex]="r.status-1" selc class="form-select" [ngClass]="{
+          <select [selectedIndex]="r.status-1" class="form-select" [ngClass]="{
             'text-bg-warning':r.status === ReservationStatus.ToVisit,
             'text-bg-success':r.status === ReservationStatus.Visited,
             'text-bg-danger text-light':r.status === ReservationStatus.Cancelled}" 
