@@ -49,4 +49,19 @@ export class AllPatientsComponent implements OnInit {
     }
     return arr;
   }
+
+  ChangePatientBlockStatus(element:any, id:number){
+    if(confirm(`Do You Want To ${element.target.checked?'Block':'Unblock'} Patient No. ${id}`))
+    {
+      let formData: FormData = new FormData();
+      formData.append('BlockStatus', element.target.checked.toString());
+
+      this.myService.ChangeBlockStatus(id, formData).subscribe({
+        next: ()=>alert(`Patient No. ${id} has been ${element.target.checked?'Blocked':'Unblocked'}`),
+        error: ()=>{alert(`Error happend patient block status did't change`);
+        element.target.checked = !element.target.checked;
+      }
+      });
+    }
+  }
 }
