@@ -1,5 +1,6 @@
 ﻿using GraduationProject_BL.DTO.ReservationDTOs;
 using GraduationProject_BL.Interfaces;
+using GraduationProject_DAL.Data.Enums;
 using GraduationProject_DAL.Data.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -109,6 +110,19 @@ namespace GraduationProject.Controllers
             var reservations = await manager.GetAllAsync(Utils.GetLang(httpContextAccessor));
 
             return Ok(reservations.Count);
+        }
+
+        [Authorize(Roles = "Admin")]
+        [HttpPost("ReservationStatus/{id:int}")]
+        public async Task<ActionResult<Reservation>> ChangeReservationStatus(int id, [FromForm] ReservationStatus status)
+        {
+            var reservation = await manager.GetByIdAsync(id, Utils.GetLang(httpContextAccessor));
+            if (reservation != null)
+            {
+                await manager.ChangeReservationStatus(id, status);
+                return Ok();
+            }
+            return BadRequest();
         }
     }
 }

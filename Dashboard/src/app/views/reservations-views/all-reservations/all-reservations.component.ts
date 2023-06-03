@@ -31,4 +31,19 @@ export class AllReservationsComponent implements OnInit {
     })
   }
 
+  ChangeReservationStatus(element:any, id:number){
+    if(confirm(`Do You Want To Change Reservation No. ${id} Status`))
+    {
+      let formData: FormData = new FormData();
+      formData.append('status', element.target.value.toString());
+
+      this.ReservationsService.ChangeReservationStatus(id, formData).subscribe({
+        next: ()=>{alert(`Reservation No. ${id} status has been changed`);
+      },
+        error: ()=>{alert(`Error happend reservation status did't change`);
+      }
+      });
+    }
+  }
+
 }

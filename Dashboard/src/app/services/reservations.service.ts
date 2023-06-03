@@ -16,4 +16,8 @@ export class ReservationsService {
   getAll(){
     return this.Client.get(this.BaseURL, { headers: this.Header });
   }
+
+  ChangeReservationStatus(id:any, status:any){
+    return this.Client.post(`${this.BaseURL}/ReservationStatus/${id}`, status, { headers: this.Header });
+  }
 }
