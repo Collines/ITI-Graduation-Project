@@ -2,17 +2,35 @@
     <thead class="table-dark">
       <tr>
         <th>ID</th>
-        <th>Status</th>
         <th>Date</th>
         <th>Queue</th>
         <th>Patient Data</th>
         <th>Doctor Data</th>
+        <th>Status</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let r of Reservations">
         <td>
           <p>{{r.id}}</p>
+        </td>
+        <td>
+          <p>{{r.dateTime | date:'MMMM d, y'}}</p>
+        </td>
+        <td>
+          <p>{{r.queue}}</p>
+        </td>
+        <td>
+          <a class="nav-link active" routerLink="/Patients/{{r.patientId}}" title="Patient Details">
+            <p class="fw-normal mb-1">{{r.patient.email}}</p>
+            <p class="text-muted mb-0">{{r.patient.phoneNumber}}</p>
+          </a>
+        </td>
+        <td>
+          <a class="nav-link" routerLink="/Doctors/{{r.doctorId}}" title="Doctor Details">
+            <p class="fw-normal mb-1">{{r.doctor.firstName+" "+r.doctor.lastName}}</p>
+            <p class="text-muted mb-0">{{r.doctor.departmentTitle}}</p>
+          </a>
         </td>
         <td>
           <!-- <p><span class="badge rounded-pill" [ngClass]="{
@@ -44,24 +62,6 @@
             <option class="text-bg-danger text-light" value="{{ReservationStatus.Cancelled}}">{{ReservationStatus[ReservationStatus.Cancelled]}}</option>
         </select>
 
-        </td>
-        <td>
-          <p>{{r.dateTime | date:'MMMM d, y'}}</p>
-        </td>
-        <td>
-          <p>{{r.queue}}</p>
-        </td>
-        <td>
-          <a class="nav-link active" routerLink="/Patients/{{r.patientId}}" title="Patient Details">
-            <p class="fw-normal mb-1">{{r.patient.email}}</p>
-            <p class="text-muted mb-0">{{r.patient.phoneNumber}}</p>
-          </a>
-        </td>
-        <td>
-          <a class="nav-link" routerLink="/Doctors/{{r.doctorId}}" title="Doctor Details">
-            <p class="fw-normal mb-1">{{r.doctor.firstName+" "+r.doctor.lastName}}</p>
-            <p class="text-muted mb-0">{{r.doctor.departmentTitle}}</p>
-          </a>
         </td>
       </tr>
     </tbody>
