@@ -1,28 +1,20 @@
-import { Component, Input, OnInit } from "@angular/core";
+import { Component, EventEmitter, Input, Output } from "@angular/core";
 import { Message } from "../../../interfaces/Message";
 import { MessageStatus } from "../../../enums/messageStatus";
-import { MessageService } from './../../../services/message.service';
-import { Router } from '@angular/router';
-declare var window :any;
+import { MessageService } from "./../../../services/message.service";
+import { Router } from "@angular/router";
+declare var window: any;
 
 @Component({
   selector: "li[app-message]",
   templateUrl: "./message.component.html",
   styleUrls: ["./message.component.scss"],
 })
-export class MessageComponent  implements OnInit{
- formModel:any;
-
-  constructor( private MessageService:MessageService,private Router:Router){}
-
-  ngOnInit(): void {
-    this.formModel=new window.bootstrap.Model(
-      document.getElementById(`#exampleModal-${this.message.id}`)
-    )
-  }
+export class MessageComponent {
+  constructor(private MessageService: MessageService, private Router: Router) {}
 
   toDisplay = false;
-  model: any;
+  modal: any;
 
   showButton() {
     this.toDisplay = !this.toDisplay;
@@ -36,6 +28,18 @@ export class MessageComponent  implements OnInit{
     body: "",
     created_at: "",
   };
+
+  @Output() removeMessageEvent = new EventEmitter<Message>();
+
+  DeleteBtnModal(element: any) {
+    // this.modal = new window.bootstrap.Modal(element);
+    this.modal = element;
+    console.log(this.modal);
+  }
+
+  MessageIsDeleted() {
+    this.removeMessageEvent.emit(this.message);
+  }
 
   get Status() {
     return MessageStatus[this.message.status];
@@ -56,24 +60,28 @@ export class MessageComponent  implements OnInit{
   splitted(date: string) {
     var arr = date.split(" ");
     return arr;
-
   }
 
-  DeleteMessage(value:number){
-      this.MessageService.Delete(value).subscribe({
-        next: () => this.message =  this.RemoveObjectWithId(this.message,value),
-        error: err => console.log(err)
-      })
-      this.formModel.hide();
+  DeleteMessage(value: number) {
+    this.MessageService.Delete(value).subscribe({
+      next: () => (this.message = this.RemoveObjectWithId(this.message, value)),
+      error: (err) => console.log(err),
+      complete: () => {
+        this.MessageIsDeleted();
+        this.modal.classList.remove("show");
+        this.modal.classList.add("d-none");
+        document.getElementsByClassName("modal-backdrop")[0].remove();
+        document.body.classList.remove("modal-open");
+        document.body.classList.add("overflow-auto");
+      },
+    });
   }
-  RemoveObjectWithId(arr:any, id:number) {
-    const objWithIdIndex = arr.findIndex((obj:any) => obj.id == id);
+  RemoveObjectWithId(arr: any, id: number) {
+    const objWithIdIndex = arr.findIndex((obj: any) => obj.id == id);
 
     if (objWithIdIndex > -1) {
       arr.splice(objWithIdIndex, 1);
     }
     return arr;
   }
-
-  
 }
