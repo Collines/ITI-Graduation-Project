@@ -21,5 +21,8 @@ export class MessagesComponent implements OnInit {
     });
   }
   Messages: Message[] = [];
-
+  removeMessage(Msg: Message) {
+    console.log(Msg.senderName + " deleted");
+    this.Messages = this.Messages.filter((item) => item.id !== Msg.id);
+  }
 }
