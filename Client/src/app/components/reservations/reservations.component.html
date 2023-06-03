@@ -2,21 +2,30 @@
   <div class="row my-5 gy-5">
     <div class="col-md-3">
       <div class="list-group">
-        <a class="list-group-item list-group-item-action"
+        <a
+          class="list-group-item list-group-item-action"
           routerLink="/profile"
-          >{{ "Profile" | translate }}</a>
+          >{{ "Profile" | translate }}</a
+        >
         <a class="list-group-item list-group-item-action active">{{
           "Reservation" | translate
         }}</a>
-        <a class="list-group-item list-group-item-action" routerLink="/Settings">{{
-          "Settings" | translate
-        }}</a>
-        <a href="#" class="list-group-item list-group-item-action" (click)="logout()">
-          {{ "Logout" | translate }}</a>
+        <a
+          class="list-group-item list-group-item-action"
+          routerLink="/Settings"
+          >{{ "Settings" | translate }}</a
+        >
+        <a
+          href="#"
+          class="list-group-item list-group-item-action"
+          (click)="logout()"
+        >
+          {{ "Logout" | translate }}</a
+        >
       </div>
     </div>
 
-    <div class="col-md-9 ">
+    <div class="col-md-9">
       <h4 class="mb-4">{{ "YourReservations" | translate }}</h4>
       <div *ngIf="reservations.length > 0">
         <app-reservation

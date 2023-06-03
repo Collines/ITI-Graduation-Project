@@ -97,7 +97,9 @@
             #error
           ></div>
           <div
-            [ngClass]="submitted && isSuccess && !isError ? 'd-block' : 'd-none'"
+            [ngClass]="
+              submitted && isSuccess && !isError ? 'd-block' : 'd-none'
+            "
             class="alert alert-success text-center"
           >
             Message Sent Successfully.. We'll get back to you very soon
@@ -113,7 +115,9 @@
                   !isSenderNameValid
                     ? {
                         'is-invalid':
-                          submitted && Validation.controls.SenderName.errors
+                          submitted &&
+                          Validation.controls.SenderName.errors &&
+                          !isSuccess
                       }
                     : 'is-valid'
                 "
@@ -130,7 +134,9 @@
                   !isEmailValid
                     ? {
                         'is-invalid':
-                          submitted && Validation.controls.Email.errors
+                          submitted &&
+                          Validation.controls.Email.errors &&
+                          !isSuccess
                       }
                     : 'is-valid'
                 "
@@ -149,7 +155,9 @@
                   !isSubjectValid
                     ? {
                         'is-invalid':
-                          submitted && Validation.controls.Subject.errors
+                          submitted &&
+                          Validation.controls.Subject.errors &&
+                          !isSuccess
                       }
                     : 'is-valid'
                 "
@@ -166,7 +174,9 @@
                   !isBodyValid
                     ? {
                         'is-invalid':
-                          submitted && Validation.controls.Body.errors
+                          submitted &&
+                          Validation.controls.Body.errors &&
+                          !isSuccess
                       }
                     : 'is-valid'
                 "
@@ -177,7 +187,7 @@
                 class="form-control"
                 [placeholder]="'entermessage' | translate"
               ></textarea>
-              <div class="invalid-feedback">Please enter a valid Subject</div>
+              <div class="invalid-feedback">Please enter a valid Body</div>
             </div>
             <div class="form-group mt-4">
               <button type="submit" class="btn py-3 px-5 rounded-pill">

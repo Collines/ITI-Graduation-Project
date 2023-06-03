@@ -16,6 +16,7 @@ export class ContactComponent {
     Subject: '',
     Body: '',
   };
+
   Validation = new FormGroup({
     SenderName: new FormControl(null, [
       Validators.required,
@@ -68,12 +69,16 @@ export class ContactComponent {
       this.messageService.Add(this.Msg).subscribe({
         next: (res) => {
           this.isError = false;
-          this.isSuccess = true;
         },
         error: (e) => {
           this.isError = true;
           this.isSuccess = false;
           error.innerHTML = 'An Error Has been occurred';
+        },
+        complete: () => {
+          console.log(this.Validation);
+          this.isSuccess = true;
+          this.Validation.reset();
         },
       });
     }
