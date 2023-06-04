@@ -6,7 +6,7 @@ import { PatientsService } from "src/app/services/patients.service";
 import { ReservationsService } from "src/app/services/reservations.service";
 
 import { Router, ActivatedRoute } from "@angular/router";
-import { AccountService } from "src/app/Services/account.service";
+import { AccountService } from "src/app/services/account.service";
 
 interface ISearchData {
   id: number;

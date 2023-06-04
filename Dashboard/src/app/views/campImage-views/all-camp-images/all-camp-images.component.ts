@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CampImageService } from 'src/app/services/camp-image.service';
-import { AccountService } from 'src/app/Services/account.service';
+import { AccountService } from 'src/app/services/account.service';
 
 @Component({
   selector: 'app-all-camp-images',

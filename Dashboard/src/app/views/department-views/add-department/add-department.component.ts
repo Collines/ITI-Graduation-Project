@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { DepartmentsService } from 'src/app/services/departments.service';
-import { AccountService } from 'src/app/Services/account.service';
+import { AccountService } from 'src/app/services/account.service';
 
 @Component({
   selector: 'app-add-department',

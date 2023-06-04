@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute,Router } from '@angular/router';
-import { AccountService } from 'src/app/Services/account.service';
+import { AccountService } from 'src/app/services/account.service';
 import { DepartmentsService } from 'src/app/services/departments.service';
 
 @Component({

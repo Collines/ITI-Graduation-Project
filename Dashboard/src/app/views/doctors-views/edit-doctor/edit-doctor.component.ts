@@ -4,7 +4,7 @@ import { Router, ActivatedRoute} from '@angular/router';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { Gender } from 'src/app/enums/gender';
-import { AccountService } from 'src/app/Services/account.service';
+import { AccountService } from 'src/app/services/account.service';
 @Component({
   selector: 'app-edit-doctor',
   templateUrl: './edit-doctor.component.html',

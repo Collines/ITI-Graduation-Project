@@ -1,7 +1,7 @@
 import { PatientsService } from 'src/app/services/patients.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AccountService } from 'src/app/Services/account.service';
+import { AccountService } from 'src/app/services/account.service';
 import { Gender } from 'src/app/enums/gender';
 
 @Component({

@@ -2,7 +2,7 @@ import { DoctorsService } from 'src/app/services/doctors.service';
 import { Router, ActivatedRoute} from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { Gender } from 'src/app/enums/gender';
-import { AccountService } from 'src/app/Services/account.service';
+import { AccountService } from 'src/app/services/account.service';
 @Component({
   selector: 'app-details-doctor',
   templateUrl: './details-doctor.component.html',

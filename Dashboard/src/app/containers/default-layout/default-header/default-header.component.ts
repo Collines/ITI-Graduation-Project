@@ -1,4 +1,4 @@
-import { AccountService } from "src/app/Services/account.service";
+import { AccountService } from "src/app/services/account.service";
 import { Component, Input } from "@angular/core";
 
 import { ClassToggleService, HeaderComponent } from "@coreui/angular";

@@ -1,4 +1,4 @@
-import { AccountService } from 'src/app/Services/account.service';
+import { AccountService } from 'src/app/services/account.service';
 import { DoctorsService } from 'src/app/services/doctors.service';
 import { DepartmentsService } from 'src/app/services/departments.service';
 import { Router } from '@angular/router';

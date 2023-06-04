@@ -1,7 +1,7 @@
 import { ReservationStatus } from 'src/app/enums/reservationStatus';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AccountService } from 'src/app/Services/account.service';
+import { AccountService } from 'src/app/services/account.service';
 import { ReservationsService } from 'src/app/services/reservations.service';
 
 @Component({
