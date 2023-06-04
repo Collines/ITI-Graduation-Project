@@ -16,7 +16,7 @@ import { DepartmentDetailComponent } from './components/department-detail/depart
 import { NotfoundComponent } from './components/notfound/notfound.component';
 import { SettingsComponent } from './components/settings/settings.component';
 const routes: Routes = [
-  { path: '', component: HomeComponent },
+  { path: '', redirectTo:'home', pathMatch:'full' },
   { path: 'home', component: HomeComponent, data: { title: 'Home' } },
   { path: 'about', component: AboutComponent, data: { title: 'About' } },
   {
