@@ -123,6 +123,7 @@ const DOCTORS_COMPONENTS = [
     ListGroupModule,
     CardModule,
     HttpClientModule,
+    FormsModule,
   ],
   providers: [
     {

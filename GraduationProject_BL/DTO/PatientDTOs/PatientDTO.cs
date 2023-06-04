@@ -23,6 +23,8 @@ namespace GraduationProject_BL.DTO.PatientDTOs
 
         public string? MedicalHistory { get; set; }
 
+        public bool Blocked { get; set; } = false;
+
         public IEnumerable<Reservation> Reservations { get; set; } = new HashSet<Reservation>();
 
     }

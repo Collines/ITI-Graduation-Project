@@ -73,6 +73,7 @@ namespace GraduationProject_BL.Managers
                     dto.MedicalHistory = patient.MedicalHistory;
                     dto.Image = path;
                     dto.Reservations = patient.Reservations;
+                    dto.Blocked = patient.Blocked;
 
                     patientsDTO.Add(dto);
                 }
@@ -122,6 +123,7 @@ namespace GraduationProject_BL.Managers
                         dto.MedicalHistory = patient.MedicalHistory;
                         dto.Reservations = patient.Reservations;
                         dto.Image = path;
+                        dto.Blocked = patient.Blocked;
 
                         return dto;
 
@@ -138,9 +140,10 @@ namespace GraduationProject_BL.Managers
                             Email = patient.Email,
                             PhoneNumber = patient.PhoneNumber,
                             MedicalHistory = patient.MedicalHistory,
-                            Image = path
+                            Image = path,
+                            Blocked = patient.Blocked
+                        };
 
-                    };
                         return dto;
                     }
                 }
@@ -167,7 +170,8 @@ namespace GraduationProject_BL.Managers
                     DOB = item.DOB,
                     PhoneNumber = item.Phone,
                     Image = item.Image,
-                    MedicalHistory = item.MedicalHistory
+                    MedicalHistory = item.MedicalHistory,
+                    Blocked = false
                 };
 
                 await repository.InsertAsync(patient);
@@ -520,6 +524,17 @@ namespace GraduationProject_BL.Managers
             var currentPath = Directory.GetCurrentDirectory();
             var newPath = Path.GetDirectoryName(currentPath) + "\\Client\\src\\" + retrievePath;
             return newPath;
+        }
+
+        public async Task ChangeBolckStatusAsync(int id, bool blockStatus)
+        {
+            var patients = await repository.GetAllAsync();
+            var patient = patients.Find(x => x.Id == id);
+            if (patient != null)
+            {
+                patient.Blocked = blockStatus;
+                await repository.UpdateAsync(id,patient);
+            }
         }
 
     }
