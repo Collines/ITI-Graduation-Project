@@ -20,6 +20,7 @@ export class HomeComponent implements OnInit {
     private imageServices: CampImageService
   ) {}
   Images: any;
+  showImages: boolean = false;
 
   ngOnInit(): void {
     this.doctorServices.GetAllDoctors().subscribe({
@@ -59,6 +60,7 @@ export class HomeComponent implements OnInit {
           i.image = '/' + i.image.replaceAll('\\', '/');
           return i.image;
         });
+        this.showImages = data.length >= 6;
       },
       error: (err) => console.log(err),
     });
