@@ -8,7 +8,7 @@ import { Message } from "./../interfaces/Message";
   providedIn: "root",
 })
 export class MessageService {
-  private BaseURL: string = "https://localhost:7035/api/message";
+  private BaseURL: string = "http://35.204.41.209:7035/api/message";
   private Header: Headers = new Headers();
   constructor(private http: HttpClient, private router: Router) {}
   GetAll() {

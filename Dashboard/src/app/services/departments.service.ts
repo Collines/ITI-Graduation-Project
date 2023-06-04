@@ -10,7 +10,7 @@ export class DepartmentsService {
 
   constructor(private Client:HttpClient) { }
 
-  private BaseURL = "https://localhost:7035/api/Department";
+  private BaseURL = "http://35.204.41.209:7035/api/Department";
   private Header = new Headers().getHeaders();
 
   GetAllDepartments(){
