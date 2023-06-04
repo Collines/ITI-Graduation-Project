@@ -13,6 +13,9 @@ export class AllPatientsComponent implements OnInit {
 
   Patients:any;
   Gender = Gender;
+  searchQuery: string = "";
+  private searchTimer: any;
+  SearchResult: any;
 
   constructor(
     public myService:PatientsService,
@@ -26,7 +29,9 @@ export class AllPatientsComponent implements OnInit {
     }
 
     this.myService.GetAll().subscribe({
-      next:(data)=>{this.Patients = data;},
+      next:(data)=>{this.Patients = data;
+        this.SearchResult = data;
+      },
       error:(err)=>{console.log(err)}
     })
   }
@@ -35,7 +40,10 @@ export class AllPatientsComponent implements OnInit {
     if(confirm(`Do You Want To Delete Patient No. ${id}`))
     {
       this.myService.Delete(id).subscribe({
-        next: ()=>this.Patients =  this.RemoveObjectWithId(this.Patients,id),
+        next: ()=>{this.Patients =  this.RemoveObjectWithId(this.Patients,id);
+          this.SearchResult =  this.Patients;
+          alert(`Patient No. ${id} has been deleted`)
+        },
         error: ()=>{console.log('Patient Still exist')}
       });
     }
@@ -63,5 +71,44 @@ export class AllPatientsComponent implements OnInit {
       }
       });
     }
+  }
+
+  onSearch(): void {
+    clearTimeout(this.searchTimer);
+    this.searchTimer = setTimeout(() => {
+      this.performSearch();
+    }, 300);
+  }
+
+  performSearch(): void {
+    this.SearchResult = [];
+
+    if (this.searchQuery.length > 0) {
+      if (this.Patients.length > 0) {
+        this.Patients.forEach((item: any) => {
+          if (
+            item.fullName
+              .toLocaleLowerCase()
+              .includes(this.searchQuery.toLocaleLowerCase()) ||
+            item.email
+              .toLocaleLowerCase()
+              .includes(this.searchQuery.toLocaleLowerCase()) ||
+              item.ssn
+                .toLocaleLowerCase()
+                .includes(this.searchQuery.toLocaleLowerCase())
+          ) {
+
+            this.SearchResult.push(item);
+          }
+        });
+      }
+    }  
+    else{
+      this.SearchResult = this.Patients;
+    }
+  }
+
+  ngOnDestroy(): void {
+    clearTimeout(this.searchTimer);
   }
 }

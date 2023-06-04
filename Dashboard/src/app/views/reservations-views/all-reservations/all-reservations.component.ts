@@ -13,6 +13,7 @@ export class AllReservationsComponent implements OnInit {
 
   Reservations:any;
   ReservationStatus = ReservationStatus;
+  SearchResult: any;
 
   constructor(
     private ReservationsService:ReservationsService,
@@ -26,7 +27,9 @@ export class AllReservationsComponent implements OnInit {
     }
 
     this.ReservationsService.getAll().subscribe({
-      next: data => {this.Reservations = data;},
+      next: data => {this.Reservations = data;
+        this.SearchResult = data;
+      },
       error: err => console.log(err)
     })
   }
@@ -46,4 +49,21 @@ export class AllReservationsComponent implements OnInit {
     }
   }
 
+  FilterByDate(element:any){
+    this.SearchResult = [];
+
+    if(element.target.value){
+      if (this.Reservations.length > 0) {
+        this.Reservations.forEach((item: any) => {
+          if (new Date(item.dateTime).toISOString().split('T')[0] === element.target.value) {
+            console.log(item);
+            this.SearchResult.push(item);
+          }
+        });
+      }
+    }
+    else{
+      this.SearchResult = this.Reservations;
+    }
+  }
 }
