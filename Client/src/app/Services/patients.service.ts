@@ -8,7 +8,7 @@ import { Headers } from '../utils/headers.utils';
 export class PatientsService {
   constructor(private http: HttpClient, private headers: Headers) {}
 
-  private BaseURL: string = 'https://localhost:7035/api/patient';
+  private BaseURL: string = 'http://localhost:7035/api/patient';
   private Headers: HttpHeaders = this.headers.getHeaders();
 
   GetPatientsCount() {

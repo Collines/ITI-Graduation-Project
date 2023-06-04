@@ -13,7 +13,7 @@ import { Location } from '@angular/common';
 })
 export class AccountService {
   private CurrentUserSource = new BehaviorSubject<User | null>(null);
-  private BaseURL: string = 'https://localhost:7035/api/patient/';
+  private BaseURL: string = 'http://localhost:7035/api/patient/';
   private Header: HttpHeaders = this.header.Header;
   currentUser$ = this.CurrentUserSource.asObservable();
 

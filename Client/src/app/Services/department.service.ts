@@ -7,7 +7,7 @@ import { Headers } from '../utils/headers.utils';
   providedIn: 'root',
 })
 export class DepartmentService {
-  private baseURL = 'https://localhost:7035/api/Department/';
+  private baseURL = 'http://localhost:7035/api/Department/';
   private Headers: HttpHeaders = this.headers.getHeaders();
 
   constructor(private http: HttpClient, private headers: Headers) {}

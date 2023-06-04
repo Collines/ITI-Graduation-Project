@@ -10,7 +10,7 @@ import { Headers } from '../utils/headers.utils';
 export class ReservationService {
   constructor(private http: HttpClient, private headers: Headers) {}
 
-  private BaseURL = 'https://localhost:7035/api/Reservation';
+  private BaseURL = 'http://localhost:7035/api/Reservation';
   private Headers = this.headers.getHeaders();
 
   GetAllReservations(id: number, accessToken: string) {
