@@ -11,6 +11,9 @@
 .data h2{
   font-size: 55px;
 }
+.entry-content p{
+  line-height: 1.7;
+}
 .bg-image1{
   min-height: 100vh;
   position: relative;
