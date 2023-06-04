@@ -22,7 +22,12 @@ export class PatientsService {
     return this.Client.get(`${this.Base_URL}/${id}`, { headers: this.Header });
   }
   
-  Delete(id: any) {
+  Delete(id:any) {
     return this.Client.delete(`${this.Base_URL}/${id}`, { headers: this.Header });
   }
+
+  ChangeBlockStatus (id:any, blockStatus:any){
+    return this.Client.post(`${this.Base_URL}/BlockStatus/${id}`, blockStatus, { headers: this.Header });
+  }
+  
 }

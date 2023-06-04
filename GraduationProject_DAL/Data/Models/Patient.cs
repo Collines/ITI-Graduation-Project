@@ -43,6 +43,8 @@ namespace GraduationProject_DAL.Data.Models
         [MaxLength(500)]
         public string? MedicalHistory { get; set; }
 
+        public bool Blocked { get; set; } = false;
+
         public virtual PatientImage? Image { get; set; }
 
         public virtual IEnumerable<Reservation> Reservations { get; set; } = new HashSet<Reservation>();

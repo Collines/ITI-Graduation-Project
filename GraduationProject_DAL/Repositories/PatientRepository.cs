@@ -38,6 +38,7 @@ namespace GraduationProject_DAL.Repositories
                 patient.DOB = item.DOB;
                 patient.PhoneNumber = item.PhoneNumber;
                 patient.MedicalHistory = item.MedicalHistory;
+                patient.Blocked = item.Blocked;
                 await context.SaveChangesAsync();
             }
         }

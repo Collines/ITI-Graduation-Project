@@ -183,5 +183,18 @@ namespace GraduationProject.Controllers
 
             return Ok(patients.Count);
         }
+
+        [Authorize(Roles = "Admin")]
+        [HttpPost("BlockStatus/{id:int}")]
+        public async Task<ActionResult<Patient>> ChangePatientBlockStatus(int id, [FromForm] bool blockStatus)
+        {
+            var patient = await manager.GetByIdAsync(id, Utils.GetLang(httpContextAccessor));
+            if (patient != null)
+            {
+                await manager.ChangeBolckStatusAsync(id, blockStatus);
+                return Ok();
+            }
+            return BadRequest();
+        }
     }
 }

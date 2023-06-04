@@ -1,19 +1,18 @@
-<!-- <p>all-patients works!</p>
-<table class="table text-center">
-    <thead>
-      <tr>
-        <th>Patient</th>
-        <th>Delete</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let p of Patients">
-        <td>{{p.fullName}}</td>
-        <td>
-            <a class="btn btn-danger" (click)="DeletePatient(p.id)">Delete</a></td>
-      </tr>
-    </tbody>
-  </table> -->
+
+<c-row class="justify-content-md-center mb-4">
+  <c-col [sm]="10">
+    <div class="input-group">
+      <input
+        type="text"
+        class="form-control app-search"
+        placeholder="Search By Name, email, SSN"
+        [(ngModel)]="searchQuery"
+        (keyup)="onSearch()"
+      />
+    </div>
+  </c-col>
+</c-row>
+
 <div class="w-100" style="background-color: #ebedef;">
 <table class="table align-middle mb-0 bg-white">
     <thead class="table-dark">
@@ -23,11 +22,12 @@
         <th>SSN</th>
         <th>Email</th>
         <th>Gender</th>
+        <th>Blocked</th>
         <th class="text-center">Actions</th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let p of Patients">
+      <tr *ngFor="let p of SearchResult">
         <td>{{p.id}}</td>
         <td>
           <div class="d-flex align-items-center">
@@ -64,6 +64,9 @@
           <p class="fw-normal mb-1">{{Gender[p.gender]}}</p>
           <span *ngIf="p.gender == 2" class="badge badge-info rounded-pill text-bg-info d-inline"><i class="fa-solid fa-mars fa-lg" style="color: #ffffff;"></i></span>
           <span *ngIf="p.gender == 1" class="badge badge-info rounded-pill text-bg-danger d-inline"><i class="fa-solid fa-venus fa-lg" style="color: #ffffff;"></i></span>
+        </td>
+        <td class="text-center">
+          <input id="BlockStatus" type="checkbox" class="form-check-input" [checked]="p.blocked" (change)="ChangePatientBlockStatus($event,p.id)">
         </td>
         <td class="text-center">
           <a routerLink="/Patients/{{p.id}}" class="btn" title="Details"><i class="fa-solid fa-desktop text-info" ></i></a>
