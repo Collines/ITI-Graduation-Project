@@ -36,9 +36,9 @@ export class DetailsPatientComponent implements OnInit {
     this.PatientsService.GetByID(this.ID).subscribe({
       next: data => {
         this.Patient = data;
-        this.ToVisit = this.Patient.reservations.filter( (x:any) => x.status == 1).length
-        this.Visited = this.Patient.reservations.filter( (x:any) => x.status == 2).length
-        this.Cancelled = this.Patient.reservations.filter( (x:any) => x.status == 3).length
+        this.ToVisit = this.Patient.reservations.filter( (x:any) => x.status == 1).length;
+        this.Visited = this.Patient.reservations.filter( (x:any) => x.status == 2).length;
+        this.Cancelled = this.Patient.reservations.filter( (x:any) => x.status == 3).length;
       },
       error: err => console.log(err)
     })

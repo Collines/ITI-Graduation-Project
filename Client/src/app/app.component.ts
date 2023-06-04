@@ -82,7 +82,7 @@ export class AppComponent implements OnInit {
 
   loaderStop: any = setTimeout(() => {
     this.loader = false;
-  }, 3000);
+  }, 1500);
 
   ngAfterContentChecked() {
     this.cdref.detectChanges();

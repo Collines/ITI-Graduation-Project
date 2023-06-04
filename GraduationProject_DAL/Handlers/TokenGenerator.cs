@@ -9,7 +9,7 @@ namespace GraduationProject_DAL.Handlers
     public static class TokenGenerator
     {
 
-        private static readonly int ExpireTimeInHrs = 2;
+        private static readonly int ExpireTimeInDays = 7;
 
         public static string GenerateAccessToken(Patient patient, string secretKey)
         {
@@ -43,7 +43,7 @@ namespace GraduationProject_DAL.Handlers
             var key = Encoding.UTF8.GetBytes(secretKey);
             var token = new JwtSecurityToken(
                 claims: claims,
-                expires: DateTime.UtcNow.AddHours(ExpireTimeInHrs), // Set the access token expiration time
+                expires: DateTime.UtcNow.AddDays(ExpireTimeInDays), // Set the access token expiration time
                 signingCredentials: new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256)
             );
 

@@ -17,6 +17,7 @@ namespace GraduationProject_BL.Interfaces
         public Task<LoginDTO?> InsertAsync(PatientFormData item);
         public Task UpdateAsync(int id, PatientFormData item);
         public Task DeleteAsync(int id);
+        public Task ChangeBolckStatusAsync(int id, bool blockStatus);
 
         // Used to check if the email already exists or not
         public Task<bool> FindPatient(string email);

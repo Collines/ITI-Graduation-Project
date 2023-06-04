@@ -163,5 +163,16 @@ namespace GraduationProject_BL.Managers
         {
             await repository.DeleteAsync(id);
         }
+
+        public async Task ChangeReservationStatus(int id, ReservationStatus status)
+        {
+            var reservations = await repository.GetAllAsync();
+            var reservation = reservations.Find(x => x.Id == id);
+            if (reservation != null)
+            {
+                reservation.Status = status;
+                await repository.UpdateAsync(id, reservation);
+            }
+        }
     }
 }

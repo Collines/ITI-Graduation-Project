@@ -4,7 +4,12 @@
       <h3 class="fw-bold">Messages</h3>
     </div>
     <ul class="feedback-list position-relative">
-      <li *ngFor="let msg of Messages" [message]="msg" app-message></li>
+      <li
+        *ngFor="let msg of Messages"
+        [message]="msg"
+        app-message
+        (removeMessageEvent)="removeMessage($event)"
+      ></li>
     </ul>
   </div>
 </div>

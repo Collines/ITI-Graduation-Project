@@ -1,4 +1,5 @@
 ﻿using GraduationProject_BL.DTO.ReservationDTOs;
+using GraduationProject_DAL.Data.Enums;
 using GraduationProject_DAL.Data.Models;
 
 namespace GraduationProject_BL.Interfaces
@@ -12,6 +13,7 @@ namespace GraduationProject_BL.Interfaces
         public Task DeleteAsync(int id);
         public Task<List<ReservationDTO>?> GetAllPatientReservationsAsync(string lang, int patientId);
         public Task CancelReservation(int id);
+        public Task ChangeReservationStatus(int id, ReservationStatus status);
 
 
     }

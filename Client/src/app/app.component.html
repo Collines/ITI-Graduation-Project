@@ -1,14 +1,18 @@
-<div class="d-flex justify-content-center align-items-center " *ngIf="loader" style="height: 100vh;">
-
+<div
+  class="d-flex justify-content-center align-items-center"
+  *ngIf="loader"
+  style="height: 100vh"
+>
   <span class="loader"></span>
-
 </div>
 
 <div [dir]="" *ngIf="!loader">
   <app-navbar></app-navbar>
-<main  class="position-relative" [@fadeAnimation]="outlet.isActivated ? outlet.activatedRoute : ''">
-  <router-outlet #outlet="outlet"></router-outlet>
-  <app-footer></app-footer>
-</main>
+  <main
+    class="position-relative"
+    [@fadeAnimation]="outlet.isActivated ? outlet.activatedRoute : ''"
+  >
+    <router-outlet #outlet="outlet"></router-outlet>
+    <app-footer></app-footer>
+  </main>
 </div>
-

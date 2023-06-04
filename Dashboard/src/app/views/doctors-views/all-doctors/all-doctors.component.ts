@@ -4,6 +4,7 @@ import { Gender } from 'src/app/enums/gender';
 import { AccountService } from 'src/app/Services/account.service';
 import { Router } from '@angular/router';
 
+
 @Component({
   selector: 'app-all-doctors',
   templateUrl: './all-doctors.component.html',
@@ -11,11 +12,15 @@ import { Router } from '@angular/router';
 })
 export class AllDoctorsComponent implements OnInit {
 
+  Doctors:any;
+  Gender = Gender;
+  searchQuery: string = "";
+  private searchTimer: any;
+  SearchResult: any;
+
   constructor(
     private DoctorsService:DoctorsService,private Router:Router,
     private AccountService:AccountService){}
-  Doctors:any;
-  Gender = Gender;
 
   ngOnInit(): void {
     let admin = this.AccountService.getAdmin()
@@ -25,6 +30,7 @@ export class AllDoctorsComponent implements OnInit {
 
     this.DoctorsService.GetAllDoctors().subscribe({
       next: data => {this.Doctors = data;
+        this.SearchResult = data;
     },
       error: err => console.log(err)
     })
@@ -34,7 +40,10 @@ export class AllDoctorsComponent implements OnInit {
     if(confirm(`Do You Want To Delete Doctor No. ${value}`))
     {
       this.DoctorsService.DeleteDoctor(value).subscribe({
-        next: () => this.Doctors =  this.RemoveObjectWithId(this.Doctors,value),
+        next: () => {this.Doctors =  this.RemoveObjectWithId(this.Doctors,value);
+          this.SearchResult = this.Doctors;
+          alert(`Doctor No. ${value} has been deleted`)
+        },
         error: err => console.log(err)
       })
     }
@@ -47,6 +56,45 @@ export class AllDoctorsComponent implements OnInit {
       arr.splice(objWithIdIndex, 1);
     }
     return arr;
+  }
+
+  onSearch(): void {
+    clearTimeout(this.searchTimer);
+    this.searchTimer = setTimeout(() => {
+      this.performSearch();
+    }, 300);
+  }
+
+  performSearch(): void {
+    this.SearchResult = [];
+
+    if (this.searchQuery.length > 0) {
+      if (this.Doctors.length > 0) {
+        this.Doctors.forEach((item: any) => {
+          if (
+            item.firstName
+              .toLocaleLowerCase()
+              .includes(this.searchQuery.toLocaleLowerCase()) ||
+            item.lastName
+              .toLocaleLowerCase()
+              .includes(this.searchQuery.toLocaleLowerCase()) ||
+              item.departmentTitle
+                .toLocaleLowerCase()
+                .includes(this.searchQuery.toLocaleLowerCase())
+          ) {
+
+            this.SearchResult.push(item);
+          }
+        });
+      }
+    }  
+    else{
+      this.SearchResult = this.Doctors;
+    }
+  }
+
+  ngOnDestroy(): void {
+    clearTimeout(this.searchTimer);
   }
 
 }
