@@ -69,8 +69,8 @@
             'text-bg-warning':status.value == ReservationStatus.ToVisit.toString(),
             'text-bg-success':status.value == ReservationStatus.Visited.toString(),
             'text-bg-danger text-light':status.value == ReservationStatus.Cancelled.toString()}"
-             
-            name="status" aria-label="status" (change)="ChangeReservationStatus($event,r.id)">
+
+            name="status" id="status{{r.id}}" aria-label="status" (change)="ChangeReservationStatus($event,r.id)">
             <option class="text-bg-warning" value="{{ReservationStatus.ToVisit}}">{{ReservationStatus[ReservationStatus.ToVisit]}}</option>
             <option class="text-bg-success" value="{{ReservationStatus.Visited}}">{{ReservationStatus[ReservationStatus.Visited]}}</option>
             <option class="text-bg-danger text-light" value="{{ReservationStatus.Cancelled}}">{{ReservationStatus[ReservationStatus.Cancelled]}}</option>

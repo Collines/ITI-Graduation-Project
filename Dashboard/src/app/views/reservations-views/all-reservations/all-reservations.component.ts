@@ -47,6 +47,10 @@ export class AllReservationsComponent implements OnInit {
       }
       });
     }
+    else{
+      let select = document.getElementById(`status${id}`) as HTMLSelectElement;
+      select.selectedIndex =  this.Reservations.find((x:any) => x.id === id).status - 1;
+    }
   }
 
   FilterByDate(element:any){
