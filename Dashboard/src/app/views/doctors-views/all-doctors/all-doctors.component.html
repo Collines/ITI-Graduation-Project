@@ -49,7 +49,7 @@
         <td>
           <p class="fw-normal mb-1">{{Gender[d.gender]}}</p>
           <span *ngIf="d.gender == 2" class="badge badge-info rounded-pill text-bg-info d-inline"><i class="fa-solid fa-mars fa-lg" style="color: #ffffff;"></i></span>
-          <span *ngIf="d.gender == 1" class="badge badge-info rounded-pill text-bg-danger d-inline"><i class="fa-solid fa-venus fa-lg" style="color: #ffffff;"></i></span>
+          <span *ngIf="d.gender == 1" class="badge badge-info rounded-pill d-inline" style="background-color: #f77b94;"><i class="fa-solid fa-venus fa-lg" style="color: #ffffff;"></i></span>
         </td>
         <td class="text-center">
           <a routerLink="/Doctors/{{d.id}}" class="btn" title="Details"><i class="fa-solid fa-desktop text-info" ></i></a>
