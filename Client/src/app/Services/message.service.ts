@@ -13,7 +13,7 @@ export class MessageService {
     private router: Router,
     private header: Headers
   ) {}
-  private BaseURL: string = 'http://localhost:7035/api/message';
+  private BaseURL: string = 'http://35.204.41.209:7035/api/message';
   private Header: HttpHeaders = this.header.getHeaders();
 
   Add(msg: Message) {
