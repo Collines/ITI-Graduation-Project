@@ -66,6 +66,10 @@
   "Bio": "Bio",
   "Doctors": "Doctors",
   "Doctor": "Doctors",
+  "NoDoctors": "No Doctors in this department",
+  "Reserve with Dr.":"Reserve with Dr.",
+  "ReservationDateValidation": "Please pickup a valid reservation date",
+  "ReservationAdded": "Reservation Added Successfully!",
 
   "YourProfile": "Your Profile",
   "SSN": "SSN",

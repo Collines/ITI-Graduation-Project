@@ -66,6 +66,10 @@
   "Bio": "نبذة مختصرة",
   "Doctors": "الأطباء",
   "Doctor": "الطبيب",
+  "NoDoctors": "نأسف لا يوجد اطباء حاليا فى هذا القسم",
+  "Reserve with Dr.":"إحجز مع د.",
+  "ReservationDateValidation": "الرجاء اختيار موعد صحيح",
+  "ReservationAdded": "تم حجز الموعد بنجاح",
 
   "YourProfile": "ملفك الشخصي",
   "SSN": "الرقم القومي",
