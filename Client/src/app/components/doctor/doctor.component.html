@@ -70,10 +70,18 @@
                 </div>
                 <div
                   class="alert alert-success text-center"
-                  *ngIf="isSubmit && !error"
+                  *ngIf="isSubmit && !error && !requestError"
                 >
                   {{ "ReservationAdded" | translate }}
                 </div>
+
+                <div
+                  class="alert alert-danger text-center"
+                  *ngIf="isSubmit && !error && requestError"
+                >
+                  {{ "ReservationFailed" | translate }}
+                </div>
+
                 <div class="form-group row mb-2">
                   <label for="fname" class="col-4 col-form-label">{{"Date" | translate}}</label>
                   <div class="col-8">
