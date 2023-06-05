@@ -24,6 +24,11 @@ import { EditBannerComponent } from "./views/Banner/edit-banner/edit-banner.comp
 import { DetailComponent } from "./views/Banner/detail/detail.component";
 import { MessagesComponent } from "./views/messages-views/messages/messages.component";
 import { MessageComponent } from "./views/messages-views/message/message.component";
+import { AllNewsComponent } from "./views/news-views/all-news/all-news.component";
+import { NewsComponent } from "./views/news-views/news/news.component";
+import { AddNewsComponent } from "./views/news-views/add-news/add-news.component";
+import { DetailsNewsComponent } from "./views/news-views/details-news/details-news.component";
+import { EditNewsComponent } from "./views/news-views/edit-news/edit-news.component";
 
 const routes: Routes = [
   {
@@ -121,6 +126,22 @@ const routes: Routes = [
       {
         path: "Reservations",
         component: AllReservationsComponent,
+      },
+      {
+        path: "News",
+        component: AllNewsComponent,
+      },
+      {
+        path: "AddNews",
+        component: AddNewsComponent,
+      },
+      {
+        path: "News/:id",
+        component: DetailsNewsComponent,
+      },
+      {
+        path: "editNews/:id",
+        component: EditNewsComponent,
       },
       {
         path: "pages",

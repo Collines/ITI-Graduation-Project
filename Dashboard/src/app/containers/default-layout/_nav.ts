@@ -41,4 +41,9 @@ export const navItems: INavData[] = [
     url: "/Messages",
     iconComponent: { name: "cilCommentBubble" },
   },
+  {
+    name: "News",
+    url: "/News",
+    iconComponent: { name: "cil-newspaper" },
+  },
 ];
