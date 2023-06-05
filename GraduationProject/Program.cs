@@ -5,7 +5,6 @@ internal class Program
 {
     private static void Main(string[] args)
     {
-        string CorsPolicy = "";
         var builder = WebApplication.CreateBuilder(args);
 
         // Add All Our needed Services here
@@ -18,7 +17,7 @@ internal class Program
         //Enable Cors
         builder.Services.AddCors(o =>
         {
-            o.AddPolicy(CorsPolicy, builder =>
+            o.AddDefaultPolicy(builder =>
             {
                 builder.AllowAnyOrigin();
                 builder.AllowAnyMethod();
@@ -41,7 +40,7 @@ internal class Program
         app.UseHttpsRedirection();
 
         //Use Cors
-        app.UseCors(CorsPolicy);
+        app.UseCors();
 
         app.UseMiddleware<TokenAuthenticationMiddleware>();
         app.UseAuthentication();
@@ -49,7 +48,7 @@ internal class Program
 
         app.MapControllers();
 
-        
+
 
         app.Run();
     }
