@@ -63,7 +63,7 @@
         <td>
           <p class="fw-normal mb-1">{{Gender[p.gender]}}</p>
           <span *ngIf="p.gender == 2" class="badge badge-info rounded-pill text-bg-info d-inline"><i class="fa-solid fa-mars fa-lg" style="color: #ffffff;"></i></span>
-          <span *ngIf="p.gender == 1" class="badge badge-info rounded-pill text-bg-danger d-inline"><i class="fa-solid fa-venus fa-lg" style="color: #ffffff;"></i></span>
+          <span *ngIf="p.gender == 1" class="badge badge-info rounded-pill d-inline" style="background-color: #f77b94;"><i class="fa-solid fa-venus fa-lg" style="color: #ffffff;"></i></span>
         </td>
         <td class="text-center">
           <input id="BlockStatus" type="checkbox" class="form-check-input" [checked]="p.blocked" (change)="ChangePatientBlockStatus($event,p.id)">
