@@ -16,7 +16,7 @@ namespace GraduationProject_DAL.Repositories
 
         public async Task<List<Article>> GetAllAsync()
         {
-            return await context.Articles.Include(a => a.Image).ToListAsync();
+            return await context.Articles.OrderByDescending(a=>a.PostedAt).Include(a => a.Image).ToListAsync();
         }
 
         public async Task InsertAsync(Article item)

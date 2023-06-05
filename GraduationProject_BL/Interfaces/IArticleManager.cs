@@ -11,5 +11,7 @@ namespace GraduationProject_BL.Interfaces
         public Task UpdateAsync(int id, ArticleFormData formData);
         public Task DeleteAsync(int id);
         public Task<ArticleInsertDTO> ArticleFormDataToArticleInsertDTO(ArticleFormData item);
+        public Task<ArticleEditDTO?> GetArticeEditDTOByIdAsync(int id, string lang);
+
     }
 }

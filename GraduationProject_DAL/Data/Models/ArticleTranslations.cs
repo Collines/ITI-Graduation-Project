@@ -22,7 +22,7 @@ namespace GraduationProject_DAL.Data.Models
         public required string Description_AR { get; set; }
 
         [ForeignKey("Article")]
-        public  int ArticleId { get; set; }
+        public int ArticleId { get; set; }
 
         public virtual Article? Article { get; set; }
     }

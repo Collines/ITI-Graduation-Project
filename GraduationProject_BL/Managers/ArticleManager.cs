@@ -113,6 +113,41 @@ namespace GraduationProject_BL.Managers
 
             return null;
         }
+        public async Task<ArticleEditDTO?> GetArticeEditDTOByIdAsync(int id, string lang)
+        {
+            var articles = await repository.GetAllAsync();
+
+            if (articles != null)
+            {
+                var article = articles.Find(x => x.Id == id);
+                if (article != null)
+                {
+                    var translation = await translations.FindAsync(article.Id);
+                    if (translation != null)
+                    {
+
+                        ArticleEditDTO dto;
+                        var path = "";
+                        if (article.Image != null)
+                            path = Path.Combine(retrievePath, article.Image.Name);
+                        dto = new()
+                        {
+                            Id = translation.ArticleId,
+                            Title_EN = translation.Title_EN,
+                            Description_EN = translation.Description_EN,
+                            Title_AR = translation.Title_AR,
+                            Description_AR = translation.Description_AR,
+                            Image = path,
+                        };
+
+                        return dto;
+                    }
+                }
+            }
+
+            return null;
+        }
+
 
         public async Task InsertAsync(ArticleFormData formData)
         {
@@ -134,6 +169,7 @@ namespace GraduationProject_BL.Managers
                     Title_AR = item.Title_AR,
                     Description_EN = item.Description_EN,
                     Description_AR = item.Description_AR,
+                    ArticleId = article.Id,
                 };
                 await translations.InsertAsync(translation);
             }
