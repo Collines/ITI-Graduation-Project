@@ -6,9 +6,9 @@ namespace GraduationProject_DAL.Data.Models
     public class Article
     {
         public int Id { get; set; }
-        [Required]
+        [Required, MaxLength(255)]
         public required string Title { get; set; }
-        [Required]
+        [Required, MaxLength(255)]
         public required string Description { get; set; }
         [Required]
         public ArticleImage? Image { get; set; }
