@@ -6,5 +6,6 @@ import { Component } from '@angular/core';
   styleUrls: ['./news-aside.component.css']
 })
 export class NewsAsideComponent {
+  langauge = localStorage.getItem('language');
 
 }

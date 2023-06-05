@@ -19,7 +19,6 @@ export class AddNewsComponent implements OnInit{
     private ArabicPattern = /^[[ء-ي\s]+$/;
     private ArabicPatternForParagraph = /^[[ء-ي]|\s]|\.|\,+$/;
 
-  isLogged = false;
   Validation = new FormGroup({
     Image: new FormControl(null, [Validators.required]),
     Title: new FormControl(null,

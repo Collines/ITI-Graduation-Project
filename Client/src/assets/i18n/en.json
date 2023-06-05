@@ -59,6 +59,7 @@
   "ViewProfile": "View Profile",
   "Book": "Book",
   "SearchByDoctor": "Search by name...",
+  "SearchByNews":"Search by name...",
   "Dr.": "Dr.",
   "Name": "Name",
   "Title": "Title",
@@ -196,7 +197,10 @@
   "complexquestions":"even the most complex questions with confidence.",
   "footerData":"When you care for patients, the stakes are high and every decision counts. You need the best evidence and clinical guidance at your fingertips to answer even the most complex questions with confidence.",
 
-  "news":"News"
+  "news":"News",
+  "RecentPosts":"Recent Posts",
+  "ReadMore":"Read More"
+
 
 
 
