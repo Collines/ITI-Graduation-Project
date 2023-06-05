@@ -17,7 +17,7 @@ export class HomeComponent implements OnInit {
     private patientServices: PatientsService,
     private departmentServices: DepartmentService,
     private reservationServices: ReservationService,
-    private imageServices: CampImageService
+    private imageServices: CampImageService,
   ) {}
   Images: any;
   showImages: boolean = false;
