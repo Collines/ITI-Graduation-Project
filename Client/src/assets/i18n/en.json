@@ -71,7 +71,7 @@
   "Reserve with Dr.":"Reserve with Dr.",
   "ReservationDateValidation": "Please pickup a valid reservation date",
   "ReservationAdded": "Reservation Added Successfully",
-  "ReservationFailed": "This day is fully occupied try an other one",
+  "ReservationFaild": "This day is fully occupied try an other one",
 
   "YourProfile": "Your Profile",
   "SSN": "SSN",
