@@ -64,10 +64,11 @@ export class DoctorComponent implements OnInit {
   }
   isSubmit = false;
   error = false;
+  requestError = false;
   OnSubmit(/*time: any, */ date: any) {
+    this.isSubmit = false;
     let dt1 = new Date(date.value).setHours(8);
     let dt = new Date(dt1);
-    this.isSubmit = true;
     if (dt.getTime() > new Date().getTime()) {
       this.error = false;
       this.reservation.dateTime = `${dt.toLocaleString()}`;
@@ -79,13 +80,18 @@ export class DoctorComponent implements OnInit {
         .AddReservation(this.reservation, this.user.accessToken)
         .subscribe({
           next: (e) => {
+            this.isSubmit = true;
+            this.requestError = false;
             console.log('reservation added!');
             setTimeout((e: any) => {
               this.closeModal();
             }, 1000);
           },
+          error: () => {this.isSubmit = true;
+            this.requestError = true;}
         });
     } else {
+      this.isSubmit = true;
       this.error = true;
     }
   }
