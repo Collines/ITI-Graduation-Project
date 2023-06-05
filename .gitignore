@@ -396,11 +396,29 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
-Dashboard/src/assets/images/20230527_113942_Screenshot_7.png
-Dashboard/src/assets/images/20230527_113540_coverpage-js.jpg
-Dashboard/src/assets/images/20230526_185249_solid.jpg
-Dashboard/src/assets/images/20230526_155454_tje2bf01273-fig-0001-m.webp
-Dashboard/src/assets/images/20230525_231553_Screenshot_7.png
+Client/src/assets/images/camp/20230527_213223_images (1).jpeg
+Client/src/assets/images/camp/20230527_213223_images (1).jpeg
+Client/src/assets/images/camp/20230527_213223_images (1).jpeg
+Client/src/assets/images/camp/20230601_231502_1.jpeg
+Client/src/assets/images/camp/20230601_231529_2.jpeg
+Client/src/assets/images/camp/20230601_231547_4.jpeg
+Client/src/assets/images/camp/20230601_231539_3.jpeg
+Client/src/assets/images/camp/20230601_231554_5.jpeg
+Client/src/assets/images/patients/20230530_235159_mido-final-3.jpg
+Client/src/assets/images/patients/20230530_234830_code.png
+Client/src/assets/images/patients/20230530_234830_code.png
+Client/src/assets/images/patients/20230530_235159_mido-final-3.jpg
+Client/src/assets/images/patients/20230530_235159_mido-final-3.jpg
+Client/src/assets/images/doctors/doctor_male.jpeg
+Client/src/assets/images/doctors/doctor_female.jpeg
+Client/src/assets/images/camp/20230601_231628_6.jpg
 Client/src/assets/images/20230526_185249_solid.jpg
 Client/src/assets/images/20230526_155454_tje2bf01273-fig-0001-m.webp
 Client/src/assets/images/20230525_232632_Screenshot_7.png
+Client/src/assets/images/patients/20230602_201442_3.jpeg
+Client/src/assets/images/20230525_132359_pic2.jpg
+Dashboard/src/assets/images/20230525_231553_Screenshot_7.png
+Dashboard/src/assets/images/20230526_155454_tje2bf01273-fig-0001-m.webp
+Dashboard/src/assets/images/20230526_185249_solid.jpg
+Dashboard/src/assets/images/20230527_113540_coverpage-js.jpg
+Dashboard/src/assets/images/20230527_113942_Screenshot_7.png
