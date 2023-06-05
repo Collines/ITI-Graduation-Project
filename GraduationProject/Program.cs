@@ -37,7 +37,7 @@ internal class Program
             app.UseSwaggerUI();
         }
 
-        app.UseHttpsRedirection();
+        // app.UseHttpsRedirection();
 
         //Use Cors
         app.UseCors();
