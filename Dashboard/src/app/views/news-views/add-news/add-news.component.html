@@ -1,0 +1,140 @@
+<div class="container">
+    <div class="row">
+
+      <form
+            class="w-100"
+            [formGroup]="Validation"
+            (submit)="onSubmit()">
+
+            <div class="mb-3">
+              <label class="form-label" for="Title">Title</label>
+              <input  formControlName="Title" type="text" class="form-control" required id="Title" placeholder="Title"
+              [ngClass]="
+                  !isTitleValid
+                    ? {
+                        'is-invalid':
+                          submitted && Validation.controls.Title.errors
+                      }
+                    : 'is-valid'
+                " />
+                <div
+                *ngIf="submitted && Validation.controls.Title.errors"
+                class="text-danger"
+              >
+                <div *ngIf="submitted && Validation.controls.Title.errors">
+                  Title Must be 10 Letters or More
+                </div>
+              </div>
+            </div>
+      
+            <div class="mb-3">
+              <label class="form-label" for="Title_AR">Title in Arabic</label>
+              <input  formControlName="TitleAR" type="text" class="form-control text-end" required id="Title_AR" placeholder="العنوان "
+              [ngClass]="
+                  !isTitleArValid
+                    ? {
+                        'is-invalid':
+                          submitted && Validation.controls.TitleAR.errors
+                      }
+                    : 'is-valid'
+                " />
+            <div
+            *ngIf="submitted && Validation.controls.Title.errors"
+            class="text-danger"
+          >
+            <div *ngIf="submitted && Validation.controls.Title.errors">
+              Title in Arabic Must be 10 Letters or More
+            </div>
+          </div>
+            </div>
+      
+            <div class="mb-3">
+              <label class="form-label" for="body">Body</label>
+              <textarea formControlName="Body" class="form-control" type="text" rows="7"required  id="body" placeholder="Body" 
+              [ngClass]="
+              !isBodyValid
+                ? {
+                    'is-invalid':
+                      submitted && Validation.controls.Body.errors
+                  }
+                : 'is-valid'
+            "></textarea>
+             
+            <div
+            *ngIf="submitted && Validation.controls.Body.errors"
+            class="text-danger"
+          >
+            <div *ngIf="submitted && Validation.controls.Body.errors">
+              Body Must be between 10 Letters and less than 500 Letters
+            </div>
+          </div>
+            </div>
+      
+            <div class="mb-3">
+              <label class="form-label " for="bodyAr">Body in Arabic</label>
+              <textarea formControlName="BodyAr" class="form-control text-end" type="text" rows="7"required  id="body" placeholder="نبذة مختصرة" 
+              [ngClass]="
+              !isBodyArValid
+                ? {
+                    'is-invalid':
+                      submitted && Validation.controls.BodyAr.errors
+                  }
+                : 'is-valid'
+            "></textarea>
+             
+            <div
+            *ngIf="submitted && Validation.controls.BodyAr.errors"
+            class="text-danger"
+          >
+            <div *ngIf="submitted && Validation.controls.BodyAr.errors">
+              Body in Arabic Must be between 10 Letters and less than 500 Letters
+            </div>
+          </div>
+            </div>
+
+
+            <div class="mb-3">
+              <label for="DOB" class="form-label">Post Date</label>
+              <input formControlName="Date" type="date" required
+                [ngClass]="
+                  !isDateValid
+                    ? {
+                        'is-invalid':
+                          submitted && Validation.controls.Date.errors
+                      }
+                    : 'is-valid'
+                "
+                class="form-control"
+                id="Date"
+                placeholder="Enter Date"
+              />
+              <div
+                *ngIf="submitted && Validation.controls.Date.errors"
+                class="text-danger"
+              >
+                <div *ngIf="submitted && Validation.controls.Date.errors">
+                  Date is required
+                </div>
+              </div>
+            </div>
+
+            <div class="mb-3 col-6">
+              <label for="Image" class="form-label">Image</label>
+              <input #Image (change)="ChangeSrc($event)" class="form-control" formControlName="Image" type="file" id="Image" accept="image/*">
+            </div>
+      
+            <div *ngIf="BaseImage != '' "class="mb-3 col-6">
+              <img [src]="BaseImage" *ngIf="Image" width="300" height="300">
+            </div>
+
+
+             <div class="row mb-3 ms-10 me-10 text-center">
+          <div class="text-center">
+            <input class="col-6" type="submit" value="Add" class="w-50 btn rounded-pill btn-outline-primary">
+          </div>
+        </div>
+
+      </form>
+
+    </div>
+  </div>
