@@ -1,0 +1,50 @@
+<div class="news">
+  <div class="banner ">
+   <div class="container">
+    <div class="title ">
+      <h2 > {{"news" | translate}}</h2>
+      <p class="text-white link-nav">
+        <a routerLink="/home">{{"Home" | translate}} </a> <i class="fa-solid fa-arrow-right" style="color: #081f3e;"></i>
+        <a routerLink="/news"> {{"news" | translate}}</a></p>
+     </div>
+   </div>
+  </div>
+
+<div class="newsPage">
+  <div class="container">
+      <div class="row mt-5">
+          <div class="col-lg-8">
+              <div class="post">
+                  <div class="post-thum mx-auto mb-3">
+                    <img title="title" alt="news" src="/assets/images/10.jpg" class="img-fluid" style="width: 700px;height: 400px;">
+                  </div>
+                  <div class="post-info" >
+                    <div class="post-meta mb-3" >
+                        <p class="post-date"><span>June 18, 2022</span></p>
+                    </div>
+
+                    <div class="post-text">
+                      <h5 class="post-title mb-3">
+                        <a >Helping Companies in  Their Green Transition</a>
+                      </h5>
+                    </div>
+                    <div class="post-text">
+                     <p >Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente voluptates est praesentium nostrum,
+                       dicta tempore animi a molestiae repellat voluptatem optio exercitationem ipsa eligendi sed at magnam
+                       consectetur mollitia esse</p>
+                    </div>
+
+                  </div>
+              </div>
+          </div>
+
+
+          <div class="col-lg-4">
+
+            <app-news-aside></app-news-aside>
+
+          </div>
+
+      </div>
+  </div>
+</div>
