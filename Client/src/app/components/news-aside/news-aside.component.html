@@ -46,10 +46,10 @@
 
   <div class="widget recent-posts-entry rounded-sidebar-widget">
 
-    <div class="text-left mb-3" *ngIf="langauge == 'en' else titleArabic">
+    <div class="text-left mb-3" *ngIf="langauge == 'en' else newsArabic">
         <h3 class="searchTitle">{{"RecentPosts" | translate}}</h3>
     </div>
-    <ng-template #titleArabic>
+    <ng-template #newsArabic>
       <div class="mb-3">
         <h3 class="searchTitleAr">{{"RecentPosts" | translate}}</h3>
       </div>
