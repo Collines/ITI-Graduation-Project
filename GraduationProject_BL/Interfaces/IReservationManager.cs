@@ -8,7 +8,7 @@ namespace GraduationProject_BL.Interfaces
     {
         public Task<List<ReservationDTO>> GetAllAsync(string lang);
         public Task<ReservationDTO?> GetByIdAsync(int id, string lang);
-        public Task InsertAsync(Reservation item);
+        public Task<bool> InsertAsync(Reservation item);
         public Task UpdateAsync(int id, Reservation item);
         public Task DeleteAsync(int id);
         public Task<List<ReservationDTO>?> GetAllPatientReservationsAsync(string lang, int patientId);

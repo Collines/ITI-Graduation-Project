@@ -34,19 +34,17 @@ export class AllReservationsComponent implements OnInit {
     })
   }
 
-  ChangeReservationStatus(element:any, id:number){
-    if(confirm(`Do You Want To Change Reservation No. ${id} Status`))
-    {
+  ChangeReservationStatus(id:number,reservationStatus:any){
+
       let formData: FormData = new FormData();
-      formData.append('status', element.target.value.toString());
+      formData.append('status', reservationStatus);
 
       this.ReservationsService.ChangeReservationStatus(id, formData).subscribe({
-        next: ()=>{alert(`Reservation No. ${id} status has been changed`);
+        next: ()=>{this.Reservations.find((x:any) => x.id === id).status = reservationStatus;
       },
         error: ()=>{alert(`Error happend reservation status did't change`);
       }
-      });
-    }
+    });
   }
 
   FilterByDate(element:any){
@@ -56,7 +54,6 @@ export class AllReservationsComponent implements OnInit {
       if (this.Reservations.length > 0) {
         this.Reservations.forEach((item: any) => {
           if (new Date(item.dateTime).toISOString().split('T')[0] === element.target.value) {
-            console.log(item);
             this.SearchResult.push(item);
           }
         });

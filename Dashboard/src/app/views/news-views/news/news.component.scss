@@ -1,0 +1,39 @@
+.card {
+    box-shadow: 0 20px 27px 0 rgb(0 0 0 / 5%);
+}
+
+.size {
+    width: 120px;
+   height: 120px;
+}
+a {
+    color: #0c2443;
+    text-decoration: none;
+}
+
+.favorite-icon a ,
+.favorite-icon button {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    font-size: 18px;
+    line-height: 30px;
+    text-align: center;
+    border-radius: 6px;
+    color: rgba(173,181,189,.55);
+    -webkit-transition: all .5s ease;
+    transition: all .5s ease;
+    margin-right: 10px;
+}
+.candidate-list-box .favorite-icon {
+    position: absolute;
+    right: 22px;
+    top: 22px;
+}
+.bg-soft-secondary {
+    background-color: rgba(116,120,141,.15)!important;
+    color: #74788d!important;
+}
+.mt-1 {
+    margin-top: 0.25rem!important;
+}
