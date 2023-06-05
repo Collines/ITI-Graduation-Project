@@ -35,6 +35,11 @@ import { SettingsComponent } from './components/settings/settings.component';
 //For Google SignIn
 import { SocialLoginModule, SocialAuthServiceConfig } from '@abacritt/angularx-social-login';
 import { GoogleLoginProvider } from '@abacritt/angularx-social-login';
+import { HomeNewsComponent } from './components/home-news/home-news.component';
+import { NewsComponent } from './components/news/news.component';
+import { NewsItemComponent } from './components/news-item/news-item.component';
+import { NewsDetailComponent } from './components/news-detail/news-detail.component';
+import { NewsAsideComponent } from './components/news-aside/news-aside.component';
 //
 
 @NgModule({
@@ -58,6 +63,11 @@ import { GoogleLoginProvider } from '@abacritt/angularx-social-login';
     DepartmentDetailComponent,
     NotfoundComponent,
     SettingsComponent,
+    HomeNewsComponent,
+    NewsComponent,
+    NewsItemComponent,
+    NewsDetailComponent,
+    NewsAsideComponent,
   ],
   imports: [
     BrowserModule,

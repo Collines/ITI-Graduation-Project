@@ -15,6 +15,8 @@ import { DepartmentComponent } from './components/department/department.componen
 import { DepartmentDetailComponent } from './components/department-detail/department-detail.component';
 import { NotfoundComponent } from './components/notfound/notfound.component';
 import { SettingsComponent } from './components/settings/settings.component';
+import { NewsComponent } from './components/news/news.component';
+import { NewsDetailComponent } from './components/news-detail/news-detail.component';
 const routes: Routes = [
   { path: '', redirectTo:'home', pathMatch:'full' },
   { path: 'home', component: HomeComponent, data: { title: 'Home' } },
@@ -66,6 +68,16 @@ const routes: Routes = [
     path: 'Settings',
     component: SettingsComponent,
     data: { title: 'Settings' },
+  },
+  {
+  path: 'news',
+  component: NewsComponent,
+  data: { title: 'News' },
+  },
+  {
+  path: 'news/:id',
+  component: NewsDetailComponent,
+  data: { title: 'News Details' },
   },
   {
     path: '**',
