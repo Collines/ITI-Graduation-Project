@@ -1,6 +1,7 @@
 ﻿using GraduationProject_BL.DTO.ArticleDTOs;
 using GraduationProject_BL.DTO.DoctorDTOs;
 using GraduationProject_BL.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -9,6 +10,7 @@ namespace GraduationProject.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class ArticleController : ControllerBase
     {
         public IHttpContextAccessor HttpContextAccessor { get; }
@@ -21,6 +23,7 @@ namespace GraduationProject.Controllers
         }
 
         [HttpGet]
+        [AllowAnonymous]
         public async Task<ActionResult<List<ArticleDTO>>> GetAll()
         {
             var Articles = await manager.GetAllAsync(Utils.GetLang(HttpContextAccessor));
@@ -31,9 +34,22 @@ namespace GraduationProject.Controllers
         }
 
         [HttpGet("{id:int}")]
+        [AllowAnonymous]
         public async Task<ActionResult<List<ArticleDTO>>> GetById(int id)
         {
             var Article = await manager.GetByIdAsync(id,Utils.GetLang(HttpContextAccessor));
+            if (Article != null)
+            {
+                return Ok(Article);
+            }
+            return NotFound();
+        }
+
+        [HttpGet("GetEditData/{id:int}")]
+        [AllowAnonymous]
+        public async Task<ActionResult<List<ArticleEditDTO>>> GetEditData(int id)
+        {
+            var Article = await manager.GetArticeEditDTOByIdAsync(id, Utils.GetLang(HttpContextAccessor));
             if (Article != null)
             {
                 return Ok(Article);
