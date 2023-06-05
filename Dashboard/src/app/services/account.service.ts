@@ -9,7 +9,7 @@ import { Router } from "@angular/router";
   providedIn: "root",
 })
 export class AccountService {
-  private BaseURL: string = "http://35.204.41.209:7035/api/Admin/";
+  private BaseURL: string = "https://medical-api.creteagency.com/api/Admin/";
   private Header :Headers = new Headers();
 
   constructor(private http: HttpClient, private router: Router) {}

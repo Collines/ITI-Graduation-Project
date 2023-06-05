@@ -10,7 +10,7 @@ export class ReservationsService {
 
   constructor(private Client:HttpClient) { }
 
-  private BaseURL = "http://35.204.41.209:7035/api/Reservation"
+  private BaseURL = "https://medical-api.creteagency.com/api/Reservation"
   private Header = new Headers().getHeaders();
 
   getAll(){

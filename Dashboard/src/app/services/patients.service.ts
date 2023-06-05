@@ -11,7 +11,7 @@ export class PatientsService {
   constructor(private Client:HttpClient) { }
 
 
-  private Base_URL = "http://35.204.41.209:7035/api/Patient";
+  private Base_URL = "https://medical-api.creteagency.com/api/Patient";
   private Header = new Headers().getHeaders();
 
   GetAll(){

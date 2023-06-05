@@ -8,7 +8,7 @@ import { Headers } from '../utils/headers.utils';
   providedIn: 'root',
 })
 export class CampImageService {
-  private baseURL = 'http://35.204.41.209:7035/api/CampImage';
+  private baseURL = 'https://medical-api.creteagency.com/api/CampImage';
   constructor(private http: HttpClient, private Header: Headers) {}
   private headers = this.Header.getHeaders();
 

@@ -9,7 +9,7 @@ import { Headers } from "./Header";
 export class DoctorsService {
   constructor(private Client: HttpClient) {}
 
-  private BaseURL = "http://35.204.41.209:7035/api/Doctors";
+  private BaseURL = "https://medical-api.creteagency.com/api/Doctors";
   private Header = new Headers().getHeaders();
 
   GetAllDoctors() { 

@@ -13,7 +13,7 @@ import { Location } from '@angular/common';
 })
 export class AccountService {
   private CurrentUserSource = new BehaviorSubject<User | null>(null);
-  private BaseURL: string = 'http://35.204.41.209:7035/api/patient/';
+  private BaseURL: string = 'https://medical-api.creteagency.com/api/patient/';
   private Header: HttpHeaders = this.header.Header;
   currentUser$ = this.CurrentUserSource.asObservable();
 

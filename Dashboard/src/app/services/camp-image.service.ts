@@ -7,7 +7,7 @@ import { Headers } from "./Header";
 })
 export class CampImageService {
   constructor(private Client: HttpClient) { }
-  private BaseURL = "http://35.204.41.209:7035/api/CampImage";
+  private BaseURL = "https://medical-api.creteagency.com/api/CampImage";
   private Header = new Headers().getHeaders();
 
   GetAllCampImages() { 
