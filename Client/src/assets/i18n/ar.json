@@ -70,6 +70,7 @@
   "Reserve with Dr.":"إحجز مع د.",
   "ReservationDateValidation": "الرجاء اختيار موعد صحيح",
   "ReservationAdded": "تم حجز الموعد بنجاح",
+  "ReservationFailed": "عذرا هذا اليوم محجوز بالكامل حاول اختبار يوما اخر",
 
   "YourProfile": "ملفك الشخصي",
   "SSN": "الرقم القومي",

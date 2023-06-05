@@ -84,7 +84,7 @@ namespace GraduationProject_BL.Managers
             return null;   
         }
 
-        public async Task InsertAsync(Reservation item)
+        public async Task<bool> InsertAsync(Reservation item)
         {
             var reservations = await GetAllAsync("en");
             var QueueNum = reservations.Where(r => r.DoctorId == item.DoctorId && r.DateTime.ToString("MM/dd/yyyy") == item.DateTime.ToString("MM/dd/yyyy")).Count();
@@ -93,7 +93,10 @@ namespace GraduationProject_BL.Managers
                 item.Queue = QueueNum + 1;
                 item.DateTime = item.DateTime.AddMinutes(configuration.GetValue<double>("ReservationSettings:Duration") * Convert.ToDouble(item.Queue - 1));
                 await repository.InsertAsync(item);
+
+                return true;
             }
+            return false;
         }
 
         public async Task UpdateAsync(int id, Reservation item)

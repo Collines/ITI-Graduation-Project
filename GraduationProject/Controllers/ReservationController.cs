@@ -70,8 +70,9 @@ namespace GraduationProject.Controllers
             var doctor = await doctorMgr.GetByIdAsync(reservation.DoctorId, Utils.GetLang(httpContextAccessor));
             if (patient != null && doctor != null && reservation.PatientId == patient.Id)
             {
-                await manager.InsertAsync(reservation);
-                return Ok();
+                if(await manager.InsertAsync(reservation))
+                    return Ok();
+                return BadRequest("This day is fully occupied");
             }
             return BadRequest();
         }
