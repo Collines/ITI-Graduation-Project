@@ -39,7 +39,7 @@ Thumbs.db
 
 # Assets - Images - Files
 
-/src/Assets/Images/banners
-/src/Assets/Images/camp
-/src/Assets/Images/doctors
-/src/Assets/Images/patients
+/src/Assets/Images/banners/
+/src/Assets/Images/camp/
+/src/Assets/Images/doctors/
+/src/Assets/Images/patients/

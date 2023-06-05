@@ -5,6 +5,7 @@ using GraduationProject_BL.Interfaces;
 using GraduationProject_DAL.Data.Enums;
 using GraduationProject_DAL.Data.Models;
 using GraduationProject_DAL.Interfaces;
+using Microsoft.Extensions.Configuration;
 
 namespace GraduationProject_BL.Managers
 {
@@ -13,12 +14,14 @@ namespace GraduationProject_BL.Managers
         private readonly IRepository<Reservation> repository;
         private readonly IPatientManager patients;
         private readonly IDoctorManager doctors;
+        private readonly IConfiguration configuration;
 
-        public ReservationManager(IRepository<Reservation> _repository,IPatientManager _patients, IDoctorManager _doctors)
+        public ReservationManager(IRepository<Reservation> _repository,IPatientManager _patients, IDoctorManager _doctors, IConfiguration _configuration)
         {
             repository = _repository;
             patients = _patients;
             doctors = _doctors;
+            configuration = _configuration;
         }
 
         public async Task<List<ReservationDTO>> GetAllAsync(string lang)
@@ -81,12 +84,19 @@ namespace GraduationProject_BL.Managers
             return null;   
         }
 
-        public async Task InsertAsync(Reservation item)
+        public async Task<bool> InsertAsync(Reservation item)
         {
             var reservations = await GetAllAsync("en");
-            var QueueNum = reservations.Where(r => r.DoctorId == item.DoctorId && r.DateTime == item.DateTime).Count();
-            item.Queue = QueueNum + 1;
-            await repository.InsertAsync(item);
+            var QueueNum = reservations.Where(r => r.DoctorId == item.DoctorId && r.DateTime.ToString("MM/dd/yyyy") == item.DateTime.ToString("MM/dd/yyyy")).Count();
+            if (QueueNum < configuration.GetValue<int>("ReservationSettings:QueueMax"))
+            {
+                item.Queue = QueueNum + 1;
+                item.DateTime = item.DateTime.AddMinutes(configuration.GetValue<double>("ReservationSettings:Duration") * Convert.ToDouble(item.Queue - 1));
+                await repository.InsertAsync(item);
+
+                return true;
+            }
+            return false;
         }
 
         public async Task UpdateAsync(int id, Reservation item)

@@ -69,8 +69,10 @@
                 <div class="col-sm-3">
                   <p class="mb-0">Gender</p>
                 </div>
-                <div class="col-sm-9">
-                  <p class="text-muted mb-0">{{Gender[Doctor.gender]}}</p>
+                <div class="d-flex col-sm-9">
+                  <p class="text-muted mb-0 me-3">{{Gender[Doctor.gender]}}</p>
+                  <span *ngIf="Doctor.gender == Gender.Male" class="badge badge-info rounded-pill text-bg-info d-inline"><i class="fa-solid fa-mars fa-lg" style="color: #ffffff;"></i></span>
+                  <span *ngIf="Doctor.gender == Gender.Female" class="badge badge-info rounded-pill d-inline" style="background-color: #f77b94;"><i class="fa-solid fa-venus fa-lg" style="color: #ffffff;"></i></span>
                 </div>
               </div>
               <hr>

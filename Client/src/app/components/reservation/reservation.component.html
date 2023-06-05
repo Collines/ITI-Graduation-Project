@@ -48,7 +48,7 @@
           <h6 class="mb-0">{{ "Date" | translate }} :</h6>
         </div>
         <div class="col-lg-6 col-sm-8 text-secondary">
-          <p>{{ reservation.dateTime | date }}</p>
+          <p>{{ reservation.dateTime | translate | date: 'd/M/yyyy'}}</p>
         </div>
       </div>
 
