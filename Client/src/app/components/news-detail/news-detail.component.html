@@ -16,22 +16,20 @@
           <div class="col-lg-8">
               <div class="post">
                   <div class="post-thum mx-auto mb-3">
-                    <img title="title" alt="news" src="/assets/images/10.jpg" class="img-fluid" style="width: 700px;height: 400px;">
+                    <img title="title" alt="news" src="{{article.image}}" class="img-fluid" style="width: 700px;height: 400px;">
                   </div>
                   <div class="post-info" >
                     <div class="post-meta mb-3" >
-                        <p class="post-date"><span>June 18, 2022</span></p>
+                        <p class="post-date"><span>{{article.postedAt |date}}</span></p>
                     </div>
 
                     <div class="post-text">
                       <h5 class="post-title mb-3">
-                        <a >Helping Companies in  Their Green Transition</a>
+                        <a >{{article.title}}</a>
                       </h5>
                     </div>
-                    <div class="post-text">
-                     <p >Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente voluptates est praesentium nostrum,
-                       dicta tempore animi a molestiae repellat voluptatem optio exercitationem ipsa eligendi sed at magnam
-                       consectetur mollitia esse</p>
+                    <div class="post-text" style="overflow-wrap: break-word">
+                     <p >{{article.description}}</p>
                     </div>
 
                   </div>
