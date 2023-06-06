@@ -17,4 +17,8 @@ export class AllNewsComponent implements OnInit {
     });
   }
   news: Article[] = [];
+  removeNews(article: Article) {
+    console.log(article.title + " deleted");
+    this.news = this.news.filter((item) => item.id !== article.id);
+  }
 }

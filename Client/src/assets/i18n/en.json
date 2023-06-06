@@ -59,6 +59,7 @@
   "ViewProfile": "View Profile",
   "Book": "Book",
   "SearchByDoctor": "Search by name...",
+  "SearchByNews": "Search by name...",
   "Dr.": "Dr.",
   "Name": "Name",
   "Title": "Title",
@@ -172,7 +173,7 @@
   "AboutHealthcare": "About Healthcare",
   "Vision": "Our Vision",
   "medical": "Positioning Egypt as a One Country Brand showcasing its exceptional medical, wellness, hospitality and concierge services globally.",
-  "mission": "our mission",
+  "mission": "Our mission",
   "wellness": "Enhancing patients’ experience through integrating medical, wellness, hospitality and concierge services by using technology.",
   "CoreValues": " Our Core Values",
   "Justice": "Justice",
@@ -191,7 +192,9 @@
   "20min": "20 min",
   "MartaSocrate": "Marta Socrate",
   "10min": "10 min",
-
+  "news": "News",
+  "RecentPosts": "Recent Posts",
+  "ReadMore": "Read More",
   "HealthCare": "Better Health Care",
   "Healthdepartment": "Health department advice",
 
