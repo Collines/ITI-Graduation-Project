@@ -11,6 +11,9 @@ import { DepartmentsService } from 'src/app/services/departments.service';
 export class AllDepartmentsComponent implements OnInit {
 
   departments:any;
+  searchQuery: string = "";
+  private searchTimer: any;
+  SearchResult: any;
 
   constructor(
     public myService:DepartmentsService,
@@ -26,6 +29,7 @@ export class AllDepartmentsComponent implements OnInit {
     this.myService.GetAllDepartments().subscribe({
       next:(data)=>{
         this.departments = data;
+        this.SearchResult = this.departments;
       },
       error:(err)=>{console.log(err)}
     })
@@ -46,5 +50,38 @@ export class AllDepartmentsComponent implements OnInit {
       arr.splice(objWithIdIndex, 1);
     }
     return arr;
+  }
+
+  onSearch(): void {
+    clearTimeout(this.searchTimer);
+    this.searchTimer = setTimeout(() => {
+      this.performSearch();
+    }, 300);
+  }
+
+  performSearch(): void {
+    this.SearchResult = [];
+
+    if (this.searchQuery.length > 0) {
+      if (this.departments.length > 0) {
+        this.departments.forEach((item: any) => {
+          if (
+            item.title
+              .toLocaleLowerCase()
+              .includes(this.searchQuery.toLocaleLowerCase()) 
+          ) {
+
+            this.SearchResult.push(item);
+          }
+        });
+      }
+    }  
+    else{
+      this.SearchResult = this.departments;
+    }
+  }
+
+  ngOnDestroy(): void {
+    clearTimeout(this.searchTimer);
   }
 }
