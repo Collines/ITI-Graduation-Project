@@ -215,56 +215,9 @@
 
   <div class="container py-3">
     <div class="row g-4 pt-5">
-      <div class="col-lg-4 col-md-6 col-sm-12">
-        <div class="card h-100 w-100">
-          <img src="/assets/images/4.jpg" class="card-img-top" alt="..." />
-
-          <div class="card-body p-4">
-            <h5 class="card-title">{{"Goodnews" | translate}}</h5>
-          </div>
-          <div class="card-footer p-3">
-            <a href="#" class="float-start">
-              <img src="/assets/images/testimonial-4.jpg" alt="" />
-              <span class="mx-2">{{"MartaSocrate" | translate}}</span>
-            </a>
-            <span class="float-end">{{"10min" | translate}}</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-lg-4 col-md-6 col-sm-12">
-        <div class="card h-100">
-          <img src="/assets/images/1.jpg" class="card-img-top" alt="..." />
-
-          <div class="card-body p-4">
-            <h5 class="card-title">{{"drug" | translate}}</h5>
-          </div>
-          <div class="card-footer p-3">
-            <a href="#" class="float-start">
-              <img src="/assets/images/3.jpg" alt="" />
-              <span class="mx-2">{{"MorganFree" | translate}}</span>
-            </a>
-            <span class="float-end">{{"20min" | translate}}</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-lg-4 col-md-6 col-sm-12">
-        <div class="card h-100">
-          <img src="/assets/images/new.jpg" class="card-img-top" alt="..." />
-
-          <div class="card-body p-4">
-            <h5 class="card-title">{{"post-operative" | translate}}</h5>
-          </div>
-          <div class="card-footer p-3">
-            <a href="#" class="float-start">
-              <img src="/assets/images/testimonial-2.jpg" alt="" />
-              <span class="mx-2">{{"AlexAnder" | translate}}</span>
-            </a>
-            <span class="float-end">{{"30min" | translate}}</span>
-          </div>
-        </div>
-      </div>
+        <app-home-news *ngFor="let n of news" [new]="n" class="col-lg-4 col-md-6 col-sm-12"></app-home-news>
+        <!-- <app-home-news class="col-lg-4 col-md-6 col-sm-12"></app-home-news>
+        <app-home-news class="col-lg-4 col-md-6 col-sm-12"></app-home-news> -->
     </div>
   </div>
 </section>
