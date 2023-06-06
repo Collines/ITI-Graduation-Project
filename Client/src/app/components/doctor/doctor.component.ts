@@ -69,7 +69,8 @@ export class DoctorComponent implements OnInit {
     this.isSubmit = false;
     let dt1 = new Date(date.value).setHours(8);
     let dt = new Date(dt1);
-    if (dt.getTime() > new Date().getTime()) {
+    // if (dt.getTime() > new Date().getTime()) {
+      if (dt.getTime() > new Date().getTime()) {
       this.error = false;
       this.reservation.dateTime = `${dt.toLocaleString()}`;
       this.reservation.doctorId = this.doctor.id;

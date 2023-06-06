@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { UserEdit } from 'src/app/Interfaces/User/UserEdit';
 import { AccountService } from 'src/app/Services/account.service';
+import { User } from 'src/app/Interfaces/User/user';
 
 @Component({
   selector: 'app-settings',
@@ -198,11 +199,24 @@ export class SettingsComponent implements OnInit {
             errorElement.classList.add('d-none');
             SuccessElement.innerHTML = r.message;
             this.isResponsed = true;
+            let user = localStorage.getItem('user');
+            let language: string | null = localStorage.getItem('language');
+            if (user) {
+              let userObj: User = JSON.parse(user);
+              userObj.fullName =
+                language && language == 'en'
+                  ? this.Validation.controls['FirstName'].value +
+                    ' ' +
+                    this.Validation.controls['LastName'].value
+                  : this.Validation.controls['FirstNameAr'].value +
+                    ' ' +
+                    this.Validation.controls['LastNameAr'].value;
+              localStorage.setItem('user', JSON.stringify(userObj));
+            }
           },
           error: (e: any) => {
             this.error = true;
             this.isResponsed = false;
-            // errorElement.innerHTML = 'An error occurred';
           },
         });
       }
