@@ -36,7 +36,8 @@
         </div>
 
         <div class="candidate-list">
-          <app-news [new]="n" *ngFor="let n of news"
+
+          <app-news   [new]="n" *ngFor="let n of news"
           (removeNewsEvent)="removeNews($event)"
           ></app-news>
         </div>

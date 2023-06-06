@@ -14,7 +14,9 @@
           <h5 class="fs-19 mb-0">
             <a class="primary-link" routerLink="/News/:id">{{ new.title }}</a>
           </h5>
-          <p class="my-2">
+          <p class="my-2" style="overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;">
             <!-- Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quidem
             earum quod optio aspernatur magnam voluptatibus sequi id, quia alias
             voluptate, dolorem numquam deserunt molestiae maiores doloribus.
@@ -22,7 +24,7 @@
             {{ new.description }}
           </p>
           <!-- <p class="text-muted">June 18, 2022</p> -->
-          <p class="text-muted">{{ new.postedAt }}</p>
+          <p class="text-muted">{{ new.postedAt | date}}</p>
           <a class="primary-link" routerLink="/News/{{ new.id }}"
             >Read More...</a
           >
