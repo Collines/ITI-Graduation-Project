@@ -7,19 +7,13 @@
           <div class="mb-3 col">
             <label class="form-label" for="title_EN">Title In English</label>
             <input #title_EN formControlName="title_EN" type="text" class="form-control" id="title_EN" placeholder="Title In English "
-            [ngClass]="
-            !Title_EN_Valid && title_EN.value
-              ? {
-                  'is-invalid':
-                    validator.controls.title_EN.errors
-                }
-              : ''
-          " />
+            />
             <br>
             <div class="alert alert-danger" *ngIf="!Title_EN_Valid && title_EN.value">
               <p>*Title Must be 3 Letters or More</p>
               <p>*Less Than 50</p>
-              <p>*No Special Characters</p>
+              <p>*Must be Writen in English</p>
+              <p>*No Special Characters or Numbers</p>
             </div>
           </div>
   
@@ -30,7 +24,8 @@
             <div class="alert alert-danger" *ngIf="!Description_EN_Valid && description_EN.value">
               <p>*Description Must be 3 Letters or More</p>
               <p>*Less Than 50</p>
-              <p>*No Special Characters</p>
+              <p>*Must be Writen in English</p>
+              <p>*No Special Characters or Numbers</p>
             </div>
           </div>
         </div>
