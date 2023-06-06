@@ -15,10 +15,6 @@ export class AddNewsComponent implements OnInit {
   constructor(private articleService: ArticleService,  private Router:Router,) {}
   ngOnInit(): void {}
 
-  // Pattern For Arabic Letters Only
-  private ArabicPattern = /^[[ء-ي\s]+$/;
-  private ArabicPatternForParagraph = /^[[ء-ي]|\s]|\.|\,+$/;
-
   Validation = new FormGroup({
     Image: new FormControl(null, [Validators.required]),
     Title: new FormControl(null, [
@@ -28,7 +24,7 @@ export class AddNewsComponent implements OnInit {
     TitleAR: new FormControl(null, [
       Validators.required,
       Validators.minLength(10),
-      Validators.pattern(this.ArabicPatternForParagraph),
+      Validators.pattern(RegExp("^[\u0621-\u064A\u0660-\u0669 0-9 a-zA-Z \$&\+,:;=?@#|'<>.^*()%!\-]+\$")),
     ]),
     Body: new FormControl(null, [
       Validators.required,
@@ -39,7 +35,8 @@ export class AddNewsComponent implements OnInit {
       Validators.required,
       Validators.minLength(10),
       Validators.maxLength(500),
-      Validators.pattern(this.ArabicPatternForParagraph),
+      Validators.pattern(RegExp("^[\u0621-\u064A\u0660-\u0669 0-9 a-zA-Z \$&\+,:;=?@#|'<>.^*()%!\-]+\$")),
+
     ]),
   });
   get isImageValid() {

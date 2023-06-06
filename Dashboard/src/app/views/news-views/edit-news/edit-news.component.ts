@@ -41,8 +41,6 @@ export class EditNewsComponent implements OnInit {
     this.Validation.status = "VALID";
   }
   new: ArticleEdit | null = null;
-  private ArabicPattern = /^[[ء-ي\s]+$/;
-  private ArabicPatternForParagraph = /^[[ء-ي]|\s]|\.|\,+$/;
 
   Validation: any = new FormGroup({
     Image: new FormControl(null, [Validators.required]),
@@ -53,7 +51,7 @@ export class EditNewsComponent implements OnInit {
     TitleAR: new FormControl(null, [
       Validators.required,
       Validators.minLength(10),
-      Validators.pattern(this.ArabicPatternForParagraph),
+      Validators.pattern(RegExp("^[\u0621-\u064A\u0660-\u0669 0-9 a-zA-Z \$&\+,:;=?@#|'<>.^*()%!\-]+\$")),
     ]),
     Body: new FormControl(null, [
       Validators.required,
@@ -64,7 +62,7 @@ export class EditNewsComponent implements OnInit {
       Validators.required,
       Validators.minLength(10),
       Validators.maxLength(500),
-      Validators.pattern(this.ArabicPatternForParagraph),
+      Validators.pattern(RegExp("^[\u0621-\u064A\u0660-\u0669 0-9 a-zA-Z \$&\+,:;=?@#|'<>.^*()%!\-]+\$")),
     ]),
   });
   get isImageValid() {
