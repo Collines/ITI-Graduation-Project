@@ -14,7 +14,10 @@ export class AllBannerComponent implements OnInit {
     private Bannerserv:BannerService,
     private Router:Router,
     private AccountService:AccountService){}
-    Banners:any;
+
+  Banners:any;
+  NoData:boolean = false;
+  ErrorMessage:any;
 
   ngOnInit(): void {
     let admin = this.AccountService.getAdmin()
@@ -23,8 +26,17 @@ export class AllBannerComponent implements OnInit {
     }
 
     this.Bannerserv.GetAllBanners().subscribe({
-      next: data => this.Banners = data,
-      error: err => console.log(err)
+      next: data => {this.Banners = data;
+        this.NoData = false;
+        if(!this.Banners.length){
+          this.NoData = true;
+          this.ErrorMessage = "No Banners Found"
+        }
+      },
+      error: err => {
+        this.NoData = true;
+        this.ErrorMessage = "Can't Connect to Server"
+      }
     })
   }
 

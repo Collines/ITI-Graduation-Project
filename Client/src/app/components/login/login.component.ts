@@ -15,7 +15,7 @@ export class LoginComponent implements OnInit {
     private accountService: AccountService,
     private router: Router,
     private location: Location,
-    private GoogleAuthService:GoogleAuthService
+    // private GoogleAuthService:GoogleAuthService
   ) {}
   ngOnInit(): void {
     this.accountService.currentUser$.subscribe({
@@ -30,6 +30,8 @@ export class LoginComponent implements OnInit {
   submitted = false;
   isLogged = false;
   isResponseSuccess = true;
+  responseErrorMessage:any;
+
   Validation = new FormGroup({
     email: new FormControl(null, [
       Validators.required,
@@ -41,13 +43,16 @@ export class LoginComponent implements OnInit {
       Validators.pattern(/[a-zA-Z1-9]/),
     ]),
   });
+
   get isEmailValid() {
     return this.Validation.controls.email.valid;
   }
+
   get isPasswordValid() {
     return this.Validation.controls.password.valid;
   }
-  onSubmit(ErrorDiv: any) {
+
+  onSubmit() {
     this.submitted = true;
 
     if (this.Validation.invalid) {
@@ -67,17 +72,17 @@ export class LoginComponent implements OnInit {
             console.log(err);
 
             if (err.error.responseMessage) {
-              ErrorDiv.innerHTML = err.error.responseMessage;
+              this.responseErrorMessage = err.error.responseMessage;
             } else {
-              ErrorDiv.innerHTML = "Can't Connect to Server";
+              this.responseErrorMessage = "Can't Connect to Server";
             }
           },
         });
     }
   }
 
-  GoogleLogin = () => {
-    // this.GoogleAuthService.signInWithGoogle();
-    console.log("logged")
-  }
+  // GoogleLogin = () => {
+  //   this.GoogleAuthService.signInWithGoogle();
+  //   console.log("logged")
+  // }
 }

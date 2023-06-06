@@ -1,94 +1,107 @@
-<c-row class="justify-content-md-center mb-4">
-  <c-col [sm]="10">
-    <div class="input-group">
-      <input
-        type="date"
-        class="form-control app-search"
-        (change)="FilterByDate($event)"
-      />
-    </div>
-  </c-col>
-</c-row>
 
-<table class="table align-middle mb-0 bg-white">
-    <thead class="table-dark">
-      <tr>
-        <th>ID</th>
-        <th>Date</th>
-        <th>Queue</th>
-        <th>Patient Data</th>
-        <th>Doctor Data</th>
-        <th class="text-center">Status</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let r of SearchResult">
-        <td>
-          <p>{{r.id}}</p>
-        </td>
-        <td>
-          <p>{{r.dateTime | date:'MMMM d, y'}}</p>
-        </td>
-        <td>
-          <p>{{r.queue}}</p>
-        </td>
-        <td>
-          <a class="nav-link active" routerLink="/Patients/{{r.patientId}}" title="Patient Details">
-            <p class="fw-normal mb-1">{{r.patient.email}}</p>
-            <p class="text-muted mb-0">{{r.patient.phoneNumber}}</p>
-          </a>
-        </td>
-        <td>
-          <a class="nav-link" routerLink="/Doctors/{{r.doctorId}}" title="Doctor Details">
-            <p class="fw-normal mb-1">{{r.doctor.firstName+" "+r.doctor.lastName}}</p>
-            <p class="text-muted mb-0">{{r.doctor.departmentTitle}}</p>
-          </a>
-        </td>
-        <td class="text-center">
-          
-          <!-- Button trigger modal -->
-          <button type="button" class="border-0 bg-white" data-bs-toggle="modal" attr.data-bs-target="#staticBackdrop-{{r.id}}">
-            <p><span class="badge rounded-pill" [ngClass]="{
-            'text-bg-warning':r.status === ReservationStatus.ToVisit,
-            'text-bg-success':r.status === ReservationStatus.Visited,
-            'text-bg-danger text-light':r.status === ReservationStatus.Cancelled
-          }">{{ReservationStatus[r.status]}}</span></p>
-          </button>
+<div class="text-center" *ngIf="!Reservations && !NoData">
+  <div class="spinner-border text-primary" role="status">
+    <span class="visually-hidden">Loading...</span>
+  </div>
+</div>
 
-          <!-- Modal -->
-          <div class="modal fade" id="staticBackdrop-{{r.id}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h1 class="modal-title fs-5" id="staticBackdropLabel">Change Reservation Status</h1>
-                  <span class="badge rounded-pill fs-5 ms-5" [ngClass]="{
-                    'text-bg-warning':r.status === ReservationStatus.ToVisit,
-                    'text-bg-success':r.status === ReservationStatus.Visited,
-                    'text-bg-danger text-light':r.status === ReservationStatus.Cancelled
-                  }">{{ReservationStatus[r.status]}}</span>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                  <h3 class="mb-4">Choose the updated status</h3>
-                  <div class="d-flex justify-content-around">
-                    <button class="btn btn-outline-warning rounded-pill" (click)="ChangeReservationStatus(r.id,ReservationStatus.ToVisit)" data-bs-dismiss="modal">
-                      {{ReservationStatus[ReservationStatus.ToVisit]}}
-                    </button>
-                    <button class="btn btn-outline-success rounded-pill" (click)="ChangeReservationStatus(r.id,ReservationStatus.Visited)" data-bs-dismiss="modal">
-                      {{ReservationStatus[ReservationStatus.Visited]}}
-                    </button>
-                    <button class="btn btn-outline-danger rounded-pill" (click)="ChangeReservationStatus(r.id,ReservationStatus.Cancelled)" data-bs-dismiss="modal">
-                      {{ReservationStatus[ReservationStatus.Cancelled]}}
-                    </button>
+<h1 class="text-center">
+  {{ErrorMessage}}
+</h1>
+
+<div *ngIf="Reservations.length > 0">
+  <c-row class="justify-content-md-center mb-4">
+    <c-col [sm]="10">
+      <div class="input-group">
+        <input
+          type="date"
+          class="form-control app-search"
+          (change)="FilterByDate($event)"
+        />
+      </div>
+    </c-col>
+  </c-row>
+
+  <table class="table align-middle mb-0 bg-white">
+      <thead class="table-dark">
+        <tr>
+          <th>ID</th>
+          <th>Date</th>
+          <th>Queue</th>
+          <th>Patient Data</th>
+          <th>Doctor Data</th>
+          <th class="text-center">Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let r of SearchResult">
+          <td>
+            <p>{{r.id}}</p>
+          </td>
+          <td>
+            <p>{{r.dateTime | date:'MMMM d, y'}}</p>
+          </td>
+          <td>
+            <p>{{r.queue}}</p>
+          </td>
+          <td>
+            <a class="nav-link active" routerLink="/Patients/{{r.patientId}}" title="Patient Details">
+              <p class="fw-normal mb-1">{{r.patient.email}}</p>
+              <p class="text-muted mb-0">{{r.patient.phoneNumber}}</p>
+            </a>
+          </td>
+          <td>
+            <a class="nav-link" routerLink="/Doctors/{{r.doctorId}}" title="Doctor Details">
+              <p class="fw-normal mb-1">{{r.doctor.firstName+" "+r.doctor.lastName}}</p>
+              <p class="text-muted mb-0">{{r.doctor.departmentTitle}}</p>
+            </a>
+          </td>
+          <td class="text-center">
+
+            <!-- Button trigger modal -->
+            <button type="button" class="border-0 bg-white" data-bs-toggle="modal" attr.data-bs-target="#staticBackdrop-{{r.id}}">
+              <p><span class="badge rounded-pill" [ngClass]="{
+              'text-bg-warning':r.status === ReservationStatus.ToVisit,
+              'text-bg-success':r.status === ReservationStatus.Visited,
+              'text-bg-danger text-light':r.status === ReservationStatus.Cancelled
+            }">{{ReservationStatus[r.status]}}</span></p>
+            </button>
+
+            <!-- Modal -->
+            <div class="modal fade" id="staticBackdrop-{{r.id}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Change Reservation Status</h1>
+                    <span class="badge rounded-pill fs-5 ms-5" [ngClass]="{
+                      'text-bg-warning':r.status === ReservationStatus.ToVisit,
+                      'text-bg-success':r.status === ReservationStatus.Visited,
+                      'text-bg-danger text-light':r.status === ReservationStatus.Cancelled
+                    }">{{ReservationStatus[r.status]}}</span>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  <div class="modal-body">
+                    <h3 class="mb-4">Choose the updated status</h3>
+                    <div class="d-flex justify-content-around">
+                      <button class="btn btn-outline-warning rounded-pill" (click)="ChangeReservationStatus(r.id,ReservationStatus.ToVisit)" data-bs-dismiss="modal">
+                        {{ReservationStatus[ReservationStatus.ToVisit]}}
+                      </button>
+                      <button class="btn btn-outline-success rounded-pill" (click)="ChangeReservationStatus(r.id,ReservationStatus.Visited)" data-bs-dismiss="modal">
+                        {{ReservationStatus[ReservationStatus.Visited]}}
+                      </button>
+                      <button class="btn btn-outline-danger rounded-pill" (click)="ChangeReservationStatus(r.id,ReservationStatus.Cancelled)" data-bs-dismiss="modal">
+                        {{ReservationStatus[ReservationStatus.Cancelled]}}
+                      </button>
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        </td>
-      </tr>
-    </tbody>
-</table>
+          </td>
+        </tr>
+      </tbody>
+  </table>
+</div>

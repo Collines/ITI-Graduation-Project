@@ -2,60 +2,72 @@
     <a routerLink="/AddDoctor" class="btn btn-outline-primary rounded-pill mb-4">Create New Doctor</a>
 </div>
 
-<c-row class="justify-content-md-center mb-4">
-  <c-col [sm]="10">
-    <div class="input-group">
-      <input
-        type="text"
-        class="form-control app-search"
-        placeholder="Search By Department or Name"
-        [(ngModel)]="searchQuery"
-        (keyup)="onSearch()"
-      />
-    </div>
-  </c-col>
-</c-row>
+<div class="text-center" *ngIf="!Doctors && !NoDoctors">
+  <div class="spinner-border text-primary" role="status">
+    <span class="visually-hidden">Loading...</span>
+  </div>
+</div>
 
-<table class="table align-middle mb-0 bg-white mb-4">
-    <thead class="table-dark">
-      <tr>
-        <th>ID</th>
-        <th>Name</th>
-        <th>Title</th>
-        <th>Gender</th>
-        <th class="text-center">Actions</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let d of SearchResult">
-        <td>{{d.id}}</td>
-        <td>
-          <div class="d-flex align-items-center">
-            <img
-                src="{{d.image}}"
-                alt=""
-                style="width: 45px; height: 45px; border: 1px solid black;"
-                class="rounded-circle"
-                />
-            <div class="ms-3">
-              <p class="fw-bold mb-1">{{d.firstName+" "+d.lastName}}</p>
+<h1 class="text-center">
+  {{ErrorMessage}}
+</h1>
+
+<div *ngIf="Doctors.length > 0">
+  <c-row class="justify-content-md-center mb-4">
+    <c-col [sm]="10">
+      <div class="input-group">
+        <input
+          type="text"
+          class="form-control app-search"
+          placeholder="Search By Department or Name"
+          [(ngModel)]="searchQuery"
+          (keyup)="onSearch()"
+        />
+      </div>
+    </c-col>
+  </c-row>
+
+  <table class="table align-middle mb-0 bg-white mb-4">
+      <thead class="table-dark">
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Title</th>
+          <th>Gender</th>
+          <th class="text-center">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let d of SearchResult">
+          <td>{{d.id}}</td>
+          <td>
+            <div class="d-flex align-items-center">
+              <img
+                  src="{{d.image}}"
+                  alt=""
+                  style="width: 45px; height: 45px; border: 1px solid black;"
+                  class="rounded-circle"
+                  />
+              <div class="ms-3">
+                <p class="fw-bold mb-1">{{d.firstName+" "+d.lastName}}</p>
+              </div>
             </div>
-          </div>
-        </td>
-        <td>
-          <p class="fw-normal mb-1">{{d.title}}</p>
-          <p class="text-muted mb-0">{{d.departmentTitle}}</p>
-        </td>
-        <td>
-          <p class="fw-normal mb-1">{{Gender[d.gender]}}</p>
-          <span *ngIf="d.gender == 2" class="badge badge-info rounded-pill text-bg-info d-inline"><i class="fa-solid fa-mars fa-lg" style="color: #ffffff;"></i></span>
-          <span *ngIf="d.gender == 1" class="badge badge-info rounded-pill d-inline" style="background-color: #f77b94;"><i class="fa-solid fa-venus fa-lg" style="color: #ffffff;"></i></span>
-        </td>
-        <td class="text-center">
-          <a routerLink="/Doctors/{{d.id}}" class="btn" title="Details"><i class="fa-solid fa-desktop text-info" ></i></a>
-          <a routerLink="/EditDoctor/{{d.id}}" class="btn" title="Edit"><i class="fa-solid fa-pen-to-square text-warning" ></i></a>
-          <button (click)="DeleteDoctor(d.id)" class="btn " title="Delete"><i class="fa-solid fa-trash text-danger" ></i></button>
-        </td>
-      </tr>
-    </tbody>
-</table>
+          </td>
+          <td>
+            <p class="fw-normal mb-1">{{d.title}}</p>
+            <p class="text-muted mb-0">{{d.departmentTitle}}</p>
+          </td>
+          <td>
+            <p class="fw-normal mb-1">{{Gender[d.gender]}}</p>
+            <span *ngIf="d.gender == 2" class="badge badge-info rounded-pill text-bg-info d-inline"><i class="fa-solid fa-mars fa-lg" style="color: #ffffff;"></i></span>
+            <span *ngIf="d.gender == 1" class="badge badge-info rounded-pill d-inline" style="background-color: #f77b94;"><i class="fa-solid fa-venus fa-lg" style="color: #ffffff;"></i></span>
+          </td>
+          <td class="text-center">
+            <a routerLink="/Doctors/{{d.id}}" class="btn" title="Details"><i class="fa-solid fa-desktop text-info" ></i></a>
+            <a routerLink="/EditDoctor/{{d.id}}" class="btn" title="Edit"><i class="fa-solid fa-pen-to-square text-warning" ></i></a>
+            <button (click)="DeleteDoctor(d.id)" class="btn " title="Delete"><i class="fa-solid fa-trash text-danger" ></i></button>
+          </td>
+        </tr>
+      </tbody>
+  </table>
+</div>

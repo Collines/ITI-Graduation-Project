@@ -33,5 +33,8 @@ namespace GraduationProject_BL.Interfaces
 
         // Used to return a new access token to the user
         public Task<LoginDTO?> Refresh(string refreshToken);
+
+        // Used to verify if patient is blocked or not
+        public Task<bool> IsBlocked(string email);
     }
 }

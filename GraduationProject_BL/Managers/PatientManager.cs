@@ -537,5 +537,19 @@ namespace GraduationProject_BL.Managers
             }
         }
 
+        public async Task<bool> IsBlocked(string email)
+        {
+            var patients = await repository.GetAllAsync();
+            if (patients != null)
+            {
+                var patient = patients.Find(p => p.Email.ToLower() == email.ToLower());
+                if (patient != null)
+                {
+                    return patient.Blocked;
+                }
+            }
+            return true;
+        }
+
     }
 }
