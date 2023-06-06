@@ -33,12 +33,15 @@ export class EditDepartmentComponent {
   }
   private ArabicPattern = /^[[ء-ي\s]+$/;
   private ArabicPatternForParagraph = /^[[ء-ي]|\s]|\.|\,+$/;
+  private EnglishPattern = /^[[A-Za-z\s]+$/;
+  private EnglishPatternForParagraph = /^[[A-Za-z]|\s]|\.|\,+$/;
 
   validator = new FormGroup({
     title_EN: new FormControl(null,
       [Validators.required,
       Validators.minLength(3),
-      Validators.maxLength(50)]),
+      Validators.maxLength(50),
+      Validators.pattern(this.EnglishPattern)]),
     title_AR: new FormControl(null,
       [Validators.required,
         Validators.minLength(2),
@@ -47,7 +50,8 @@ export class EditDepartmentComponent {
     description_EN: new FormControl(null,
       [Validators.required,
         Validators.minLength(3),
-        Validators.maxLength(50)]),
+        Validators.maxLength(50),
+        Validators.pattern(this.EnglishPatternForParagraph)]),
     description_AR: new FormControl(null,
       [Validators.required,
         Validators.minLength(2),
