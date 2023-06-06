@@ -11,8 +11,7 @@ a {
     text-decoration: none;
 }
 
-.favorite-icon a ,
-.favorite-icon button {
+.favorite-icon a  {
     display: inline-block;
     width: 30px;
     height: 30px;
@@ -24,6 +23,9 @@ a {
     -webkit-transition: all .5s ease;
     transition: all .5s ease;
     margin-right: 10px;
+}
+.icon{
+    margin-top: 13px;
 }
 .candidate-list-box .favorite-icon {
     position: absolute;

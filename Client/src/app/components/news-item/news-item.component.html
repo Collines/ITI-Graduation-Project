@@ -1,0 +1,28 @@
+
+      <div class="box">
+          <div class="post-bx">
+
+              <div class="post-thum" style="width: 90%;margin: auto;">
+                <img title="title" alt="news" src="{{new.image}}" class="w-100" style="height: 250px;">
+              </div>
+              <div class="post-info" style="width: 90%;margin: auto;">
+                <div class="post-meta">
+                    <p class="post-date"><span>{{new.postedAt | date}}</span></p>
+                </div>
+
+                <div class="post-text text-center "style="overflow-wrap: break-word">
+                  <h5 class="post-title mb-3" style="overflow: hidden;
+                  text-overflow: ellipsis;
+                  white-space: nowrap;">
+                    <a >{{new.title}}</a>
+                  </h5>
+                </div>
+
+                <div class="post-read-more">
+                    <a routerLink="/news/{{ new.id }}" class="button-link">{{"ReadMore" | translate}}</a>
+                </div>
+
+              </div>
+          </div>
+      </div>
+

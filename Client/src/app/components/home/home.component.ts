@@ -5,6 +5,10 @@ import { DepartmentService } from 'src/app/Services/department.service';
 import { DoctorsService } from 'src/app/Services/doctors.service';
 import { PatientsService } from 'src/app/Services/patients.service';
 import { ReservationService } from 'src/app/Services/reservation.service';
+import { ArticleService } from './../../Services/article.service';
+import { Article } from 'src/app/Interfaces/Article';
+import { ActivatedRoute, Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-home',
@@ -18,6 +22,9 @@ export class HomeComponent implements OnInit {
     private departmentServices: DepartmentService,
     private reservationServices: ReservationService,
     private imageServices: CampImageService,
+    private ArticleService:ArticleService,
+    private Route: ActivatedRoute,
+    private router: Router,
   ) {}
   Images: any;
   showImages: boolean = false;
@@ -98,10 +105,28 @@ export class HomeComponent implements OnInit {
         }
       },
     });
-  }
+    this.ArticleService.getAll().subscribe({
+      next:res=> {
+        if(res) {
+          if(res.length>3){
+            for(let i=0; i<3;i++) {
+              this.news.push(res[i])
+            }
+          } else {
+            this.news = res;
+          }
+        }
+      },
+      error: e => console.log(e)
 
+    })
+
+
+  }
   doctorCount: number = 0;
   patientCount: number = 0;
   bedCount: number = 0;
   appointmentCount: number = 0;
+  news:Article[] = [];
+
 }

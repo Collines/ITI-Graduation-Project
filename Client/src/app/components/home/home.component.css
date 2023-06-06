@@ -155,19 +155,10 @@
   color: #081f3e;
   line-height: 1.6;
 }
-
 .blog {
   padding-top: var(--padding-top);
   padding-bottom: var(--padding-bootm);
   background-color: var(--backgroundColor);
-}
-.blog .card-footer img {
-  width: 40px;
-  border-radius: 50%;
-}
-
-.blog h5{
-  color: #081f3e;
 }
 .aon-med-appoint-area {
   padding: 90px 0px;

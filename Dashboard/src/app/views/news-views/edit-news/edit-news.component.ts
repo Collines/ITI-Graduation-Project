@@ -2,7 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { FormGroup, FormControl, Validators } from "@angular/forms";
 import { ArticleService } from "src/app/services/article.service";
 import { ArticleEdit } from "src/app/interfaces/ArticleEdit";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute,Router } from "@angular/router";
 
 @Component({
   selector: "app-edit-news",
@@ -15,21 +15,56 @@ export class EditNewsComponent implements OnInit {
   submitted = false;
   constructor(
     private Route: ActivatedRoute,
-    private articleService: ArticleService
-  ) {}
-  ngOnInit(): void {
-    this.articleService
-      .getEditData(this.Route.snapshot.params["id"])
+    private articleService: ArticleService,
+    private Router:Router
+  ) {
+    articleService
+      .getEditData(Route.snapshot.params["id"])
       .subscribe({
         next: (res) => {
           this.new = res;
         },
         error: (e) => console.log(e),
+        complete: () => {
+          this.Validation = new FormGroup({
+            Title: new FormControl(this.new?.title_EN, [
+              Validators.required,
+              Validators.minLength(10),
+            ]),
+            TitleAR: new FormControl(this.new?.title_AR, [
+              Validators.required,
+              Validators.minLength(10),
+              Validators.pattern(RegExp("^[\u0621-\u064A\u0660-\u0669 0-9 a-zA-Z \$&\+,:;=?@#|'<>.^*()%!\-]+\$")),
+            ]),
+            Body: new FormControl(this.new?.description_EN, [
+              Validators.required,
+              Validators.minLength(10),
+              Validators.maxLength(500),
+            ]),
+            BodyAr: new FormControl(this.new?.description_AR, [
+              Validators.required,
+              Validators.minLength(10),
+              Validators.maxLength(500),
+              Validators.pattern(RegExp("^[\u0621-\u064A\u0660-\u0669 0-9 a-zA-Z \$&\+,:;=?@#|'<>.^*()%!\-]+\$")),
+            ]),
+          });
+      
+        }
       });
+
+   
+  }
+  ngOnInit(): void {
+
+    
     this.Validation.controls["Title"].value = this.new?.title_EN;
     this.Validation.controls["TitleAR"].value = this.new?.title_AR;
     this.Validation.controls["Body"].value = this.new?.description_EN;
     this.Validation.controls["BodyAR"].value = this.new?.description_AR;
+    // this.Validation.controls["Title"].value = this.new?.title_EN;
+    // this.Validation.controls["TitleAR"].value = this.new?.title_AR;
+    // this.Validation.controls["Body"].value = this.new?.description_EN;
+    // this.Validation.controls["BodyAR"].value = this.new?.description_AR;
 
     this.Validation.controls["Title"].status = "VALID";
     this.Validation.controls["TitleAR"].status = "VALID";
@@ -40,35 +75,9 @@ export class EditNewsComponent implements OnInit {
     this.Validation.status = "VALID";
   }
   new: ArticleEdit | null = null;
-  private ArabicPattern = /^[[ء-ي\s]+$/;
-  private ArabicPatternForParagraph = /^[[ء-ي]|\s]|\.|\,+$/;
 
-  Validation: any = new FormGroup({
-    Image: new FormControl(null, [Validators.required]),
-    Title: new FormControl(null, [
-      Validators.required,
-      Validators.minLength(10),
-    ]),
-    TitleAR: new FormControl(null, [
-      Validators.required,
-      Validators.minLength(10),
-      Validators.pattern(this.ArabicPatternForParagraph),
-    ]),
-    Body: new FormControl(null, [
-      Validators.required,
-      Validators.minLength(10),
-      Validators.maxLength(500),
-    ]),
-    BodyAr: new FormControl(null, [
-      Validators.required,
-      Validators.minLength(10),
-      Validators.maxLength(500),
-      Validators.pattern(this.ArabicPatternForParagraph),
-    ]),
-  });
-  get isImageValid() {
-    return this.Validation.controls["Image"].status == "VALID";
-  }
+  Validation: any;
+
   get isTitleValid() {
     return this.Validation.controls["Title"].status == "VALID";
   }
@@ -100,19 +109,26 @@ export class EditNewsComponent implements OnInit {
     });
   };
   onSubmit() {
-    this.submitted = true;
     if (this.Validation.valid && this.new) {
+      this.submitted=true
       const formData: FormData = new FormData();
+      
       if (this.FileToUpload) formData.append("Image", this.FileToUpload);
-      else return;
+      // else return;
       formData.append("Title_EN", this.Validation.controls.Title.value!);
       formData.append("Title_AR", this.Validation.controls.TitleAR.value!);
       formData.append("Description_EN", this.Validation.controls.Body.value!);
       formData.append("Description_AR", this.Validation.controls.BodyAr.value!);
       this.articleService.update(this.new!.id, formData).subscribe({
-        next: (res) => {},
+        next: () => {alert("News Edited Successfully")
+                       this.Router.navigate(['/News'])
+      },
         error: (e) => console.log(e),
       });
     }
+    else
+    alert(`Make Sure To Fill All The Input Fields`)
+    console.log(this.Validation)
+};
   }
-}
+
