@@ -5,3 +5,6 @@
 h5{
   color: #081f3e;
 }
+.card{
+  cursor: pointer;
+}

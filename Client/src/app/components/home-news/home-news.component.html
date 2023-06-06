@@ -1,8 +1,8 @@
 <div >
-  <div class="card h-100 w-100">
-    <img src="{{new?.image}}" class="card-img-top img-fluid" alt="news" style="height: 280px;"/>
+  <div class="card h-100 w-100"  routerLink="/news/{{new?.id }}">
+    <img routerLink="/news/{{new?.id }}" src="{{new?.image}}" class="card-img-top img-fluid" alt="news" style="height: 280px;"/>
 
-    <div class="card-body p-4">
+    <div class="card-body p-4"  routerLink="/news/{{new?.id }}">
       <h5 class="card-title"  style="overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;">{{new?.title}}</h5>
