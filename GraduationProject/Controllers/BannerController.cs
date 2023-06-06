@@ -9,6 +9,7 @@ namespace GraduationProject.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class BannerController : ControllerBase
     {
         private readonly IHttpContextAccessor httpContextAccessor;

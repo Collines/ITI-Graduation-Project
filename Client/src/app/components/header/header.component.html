@@ -3,7 +3,8 @@
     <div class="carousel-item active">
       <div
         class="bg-image1 position-relative"
-        style="background-image: url('/assets/images/hero.jpg')"
+        style="background-image: url({{img1}});"
+        
       >
         <div class="container h-100 z-3">
           <div class="row h-100">
@@ -11,16 +12,12 @@
               <div class="data mt-5 me-3">
                 <header class="entry-header mt-5">
                   <h2>
-                    {{ "TheBest" | translate }} <br />{{
-                      "MedServices" | translate
-                    }}
+                    {{Banners[0].title}}
                   </h2>
                 </header>
                 <div class="entry-content mt-4">
                   <p>
-                    {{"CareForPatients" | translate}}<br>
-                   {{"Youneedthebest" | translate}} <br>
-                    {{"complexquestions" | translate}}
+                    {{Banners[0].description}}
                   </p>
                 </div>
                 <footer class="entry-footer mt-5">
@@ -34,14 +31,14 @@
         </div>
       </div>
     </div>
-    <div class="carousel-item">
+    <div class="carousel-item"  *ngIf="Banners[1]">
       <header class="site-header">
-        <img class="header-img" src="/assets/images/service-bg.png" alt="" />
+        <img class="header-img" src="{{Banners[1].imagePath}}" alt="" />
         <div class="container">
           <div class="row">
             <div class="col-12">
           <div class="data me-3">
-            <h2>{{"header2Part1" | translate}} <br />{{"header2Part2" | translate}}</h2>
+            <h2>{{Banners[1].title}}</h2>
             <footer class="entry-footer mt-5">
               <a class="button gradient-bg" routerLink="/departments">{{
                 "MakeAppointment" | translate
@@ -54,15 +51,16 @@
 
       </header>
     </div>
-    <div class="carousel-item">
+    <div class="carousel-item" *ngIf="Banners[2]">
       <header class="site-header">
-        <img class="header-img" src="/assets/images/about-bg.png" alt="" />
+        <img class="header-img" src="{{Banners[2].imagePath}}" alt="" />
         <div class="container">
           <div class="row">
             <div class="col-12">
               <div class="data me-3">
                 <div class="slider_text ">
-                <h2>{{"header3Part1" | translate}} <br />{{"header3Part2" | translate}}</h2>
+                <h2>{{Banners[2
+                  ].title}}</h2>
                 <footer class="entry-footer mt-5">
                   <a class="button gradient-bg" routerLink="/departments">{{
                     "MakeAppointment" | translate

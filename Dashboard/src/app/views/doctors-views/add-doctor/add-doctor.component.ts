@@ -33,6 +33,8 @@ export class AddDoctorComponent implements OnInit {
   // Pattern For Arabic Letters Only
   private ArabicPattern = /^[[ء-ي\s]+$/;
   private ArabicPatternForParagraph = /^[[ء-ي]|\s]|\.|\,+$/;
+  private EnglishPattern = /^[[A-Za-z\s]+$/;
+  private EnglishPatternForParagraph = /^[[A-Za-z]|\s]|\.|\,+$/;
 
   // Options For Gender Select List In Html
   Gender = Gender;
@@ -45,7 +47,8 @@ export class AddDoctorComponent implements OnInit {
     FirstName_EN: new FormControl(null,
       [Validators.required,
       Validators.minLength(3),
-      Validators.maxLength(50)]),
+      Validators.maxLength(50),
+      Validators.pattern(this.EnglishPattern)]),
     FirstName_AR: new FormControl(null,
       [Validators.required,
         Validators.minLength(2),
@@ -54,7 +57,8 @@ export class AddDoctorComponent implements OnInit {
     LastName_EN: new FormControl(null,
       [Validators.required,
         Validators.minLength(3),
-        Validators.maxLength(50)]),
+        Validators.maxLength(50),
+        Validators.pattern(this.EnglishPattern)]),
     LastName_AR: new FormControl(null,
       [Validators.required,
         Validators.minLength(2),
@@ -65,7 +69,8 @@ export class AddDoctorComponent implements OnInit {
     Title_EN: new FormControl(null,
       [Validators.required,
         Validators.minLength(5),
-        Validators.maxLength(50)]),
+        Validators.maxLength(50),
+        Validators.pattern(this.EnglishPatternForParagraph)]),
     Title_AR: new FormControl(null,
       [Validators.required,
         Validators.minLength(5),
@@ -74,13 +79,14 @@ export class AddDoctorComponent implements OnInit {
     Bio_EN: new FormControl(null,
       [Validators.required,
         Validators.minLength(10),
-        Validators.maxLength(500)]),
+        Validators.maxLength(500),
+        Validators.pattern(this.EnglishPatternForParagraph)]),
     Bio_AR: new FormControl(null,
       [Validators.required,
         Validators.minLength(10),
         Validators.maxLength(500),
         Validators.pattern(this.ArabicPatternForParagraph)]),
-    DepartmentId: new FormControl(2, [Validators.required]),
+    DepartmentId: new FormControl(1, [Validators.required]),
     Image: new FormControl(null, [Validators.required])
   });
 
