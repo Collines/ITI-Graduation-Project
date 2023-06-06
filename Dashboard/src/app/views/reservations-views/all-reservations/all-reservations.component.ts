@@ -14,6 +14,8 @@ export class AllReservationsComponent implements OnInit {
   Reservations:any;
   ReservationStatus = ReservationStatus;
   SearchResult: any;
+  NoData:boolean = false;
+  ErrorMessage:any;
 
   constructor(
     private ReservationsService:ReservationsService,
@@ -29,8 +31,16 @@ export class AllReservationsComponent implements OnInit {
     this.ReservationsService.getAll().subscribe({
       next: data => {this.Reservations = data;
         this.SearchResult = data;
+        this.NoData = false;
+        if(!this.Reservations){
+          this.NoData = true;
+          this.ErrorMessage = "No Reservations Found"
+        }
       },
-      error: err => console.log(err)
+      error: err => {
+        this.NoData = true;
+        this.ErrorMessage = "Can't Connect to Server"
+      }
     })
   }
 
