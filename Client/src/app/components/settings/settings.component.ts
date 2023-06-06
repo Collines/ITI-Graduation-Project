@@ -15,18 +15,22 @@ export class SettingsComponent implements OnInit {
       FirstName: new FormControl(null, [
         Validators.required,
         Validators.minLength(3),
+        Validators.pattern('^[a-zA-z]+$'),
       ]),
       LastName: new FormControl(null, [
         Validators.required,
         Validators.minLength(3),
+        Validators.pattern('^[a-zA-z]+$'),
       ]),
       FirstNameAr: new FormControl(null, [
         Validators.required,
         Validators.minLength(3),
+        Validators.pattern('^[\u0621-\u064A]+$'),
       ]),
       LastNameAr: new FormControl(null, [
         Validators.required,
         Validators.minLength(3),
+        Validators.pattern('^[\u0621-\u064A]+$'),
       ]),
       email: new FormControl(null, [
         Validators.required,
@@ -69,7 +73,7 @@ export class SettingsComponent implements OnInit {
               this.Validation.controls['Phone'].value = this.userEdit.phone;
               this.Validation.controls['Date'].value = this.dateStr;
 
-              this.Validation.controls['FirstName'].status = 'VALID'; 
+              this.Validation.controls['FirstName'].status = 'VALID';
               this.Validation.controls['LastName'].status = 'VALID';
               this.Validation.controls['FirstNameAr'].status = 'VALID';
               this.Validation.controls['LastNameAr'].status = 'VALID';
