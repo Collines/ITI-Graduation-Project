@@ -41,6 +41,9 @@ namespace GraduationProject
             services.AddScoped<IRepository<CampImage>, CampImageRepository>();
             services.AddScoped<ICampImageManager, CampImageManager>();
             services.AddScoped<IMessageManager, MessageManager>();
+            services.AddScoped<IArticleManager, ArticleManager>();
+            services.AddScoped<IRepository<Article>, ArticleRepository>();
+            services.AddScoped<ITranslations<ArticleTranslations>, ArticleTranslationRepository>();
 
 
             services.AddScoped<IRepository<Banners>, BannerRepository>();

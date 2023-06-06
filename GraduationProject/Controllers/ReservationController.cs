@@ -72,7 +72,7 @@ namespace GraduationProject.Controllers
             {
                 if(await manager.InsertAsync(reservation))
                     return Ok();
-                return BadRequest("This day is fully occupied");
+                return Conflict("This day is fully occupied");
             }
             return BadRequest();
         }

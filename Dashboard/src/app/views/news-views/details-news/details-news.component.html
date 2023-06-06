@@ -1,61 +1,71 @@
 <a class="btn btn-outline-primary" routerLink="/News">Back To List</a>
 
 <section>
-    <div class="py-3">
-      <div class="row">
-        <div class="col-lg-4">
-          <div class="card mb-4">
-            <div class="card-body text-center">
-              <img src="/assets/images/1.jpg" alt="avatar"
-                class="img-fluid rounded-3" style="width: 300px;height: 250px; border: 1px solid black;">
-              <div class="d-flex justify-content-center mb-2 mt-4">
-                <a routerLink="/editNews/:id" class="btn btn-outline-primary" >Edit</a>
-                <button class="btn btn-outline-danger ms-1" title="Delete">Delete</button>
+  <div class="py-3">
+    <div class="row">
+      <div class="col-lg-4">
+        <div class="card mb-4">
+          <div class="card-body text-center">
+            <img
+              src="{{ new.image }}"
+              alt="avatar"
+              class="img-fluid rounded-3"
+              style="width: 300px; height: 250px; border: 1px solid black"
+            />
+            <div class="d-flex justify-content-center mb-2 mt-4">
+              <a
+                routerLink="/editNews/{{ new.id }}"
+                class="btn btn-outline-primary"
+                >Edit</a
+              >
+              <button class="btn btn-outline-danger ms-1" title="Delete">
+                Delete
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-8">
+        <div class="card mb-4">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-sm-3">
+                <p class="mb-0 fw-semibold">ID :</p>
+              </div>
+              <div class="col-sm-9">
+                <p class="mb-0">{{ new.id }}</p>
+              </div>
+            </div>
+            <hr />
+            <div class="row">
+              <div class="col-sm-3">
+                <p class="mb-0 fw-semibold">Title :</p>
+              </div>
+              <div class="col-sm-9">
+                <p class="mb-0">{{ new.title }}</p>
+              </div>
+            </div>
+            <hr />
+            <div class="row">
+              <div class="col-sm-3">
+                <p class="mb-0 fw-semibold">Post Date :</p>
+              </div>
+              <div class="col-sm-9">
+                <p class="mb-0">{{ new.postedAt }}</p>
               </div>
             </div>
           </div>
         </div>
-      
-        <div class="col-lg-8">
-          <div class="card mb-4">
-            <div class="card-body">
-              <div class="row">
-                <div class="col-sm-3">
-                  <p class="mb-0 fw-semibold">ID : </p>
-                </div>
-                <div class="col-sm-9">
-                  <p class=" mb-0"> 1 </p>
-                </div>
-              </div>
-              <hr>
-              <div class="row">
-                <div class="col-sm-3">
-                  <p class="mb-0 fw-semibold">Title : </p>
-                </div>
-                <div class="col-sm-9">
-                  <p class=" mb-0">You’ll never be alone with home healthcare </p>
-                </div>
-              </div>
-              <hr>
-              <div class="row">
-                <div class="col-sm-3">
-                  <p class="mb-0 fw-semibold">Post Date : </p>
-                </div>
-                <div class="col-sm-9">
-                  <p class=" mb-0"> 3 / 6 / 2023</p>
-                </div>
-              </div>
-             
-            </div>
-          </div>
-          <div class="row">
-            <div class="mb-3">
-                <p class="mb-2 fw-semibold">Body :</p>
-                <textarea class="form-control border-light" rows="7"></textarea>
-              </div>
+        <div class="row">
+          <div class="mb-3">
+            <p class="mb-2 fw-semibold">Body :</p>
+            <textarea class="form-control border-light" disabled rows="7">{{
+              new.description
+            }}</textarea>
           </div>
         </div>
       </div>
     </div>
-  </section>
-
+  </div>
+</section>

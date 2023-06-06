@@ -41,13 +41,13 @@
         </li>
 
         <li class="nav-item">
-          <a class="nav-link" routerLink="/contact" routerLinkActive="active">{{
+          <a class="nav-link text-nowrap" routerLink="/contact" routerLinkActive="active">{{
             "Contact" | translate
           }}</a>
         </li>
 
         <li class="nav-item">
-          <a class="nav-link" routerLink="/about" routerLinkActive="active">{{
+          <a class="nav-link text-nowrap" routerLink="/about" routerLinkActive="active">{{
             "About" | translate
           }}</a>
         </li>
@@ -105,7 +105,7 @@
               [value]="language"
               [selected]="language === translate.currentLang"
             >
-              {{ language == "en" ? "English" : "العربية" }}
+              {{ language == "en" ? "En" : "Ar" }}
             </option>
           </select>
         </a>

@@ -16,6 +16,8 @@ export class AllPatientsComponent implements OnInit {
   searchQuery: string = "";
   private searchTimer: any;
   SearchResult: any;
+  NoData:boolean = false;
+  ErrorMessage:any;
 
   constructor(
     public myService:PatientsService,
@@ -31,8 +33,16 @@ export class AllPatientsComponent implements OnInit {
     this.myService.GetAll().subscribe({
       next:(data)=>{this.Patients = data;
         this.SearchResult = data;
+        this.NoData = false;
+        if(!this.Patients.length){
+          this.NoData = true;
+          this.ErrorMessage = "No Patients Found"
+        }
       },
-      error:(err)=>{console.log(err)}
+      error:(err)=>{
+        this.NoData = true;
+        this.ErrorMessage = "Can't Connect to Server"
+      }
     })
   }
 

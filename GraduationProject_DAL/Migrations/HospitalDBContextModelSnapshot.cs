@@ -44,6 +44,88 @@ namespace GraduationProject_DAL.Migrations
                     b.ToTable("Admins");
                 });
 
+            modelBuilder.Entity("GraduationProject_DAL.Data.Models.Article", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<DateTime>("PostedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Articles");
+                });
+
+            modelBuilder.Entity("GraduationProject_DAL.Data.Models.ArticleImage", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("ArticleId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ArticleId")
+                        .IsUnique();
+
+                    b.ToTable("ArticleImages");
+                });
+
+            modelBuilder.Entity("GraduationProject_DAL.Data.Models.ArticleTranslations", b =>
+                {
+                    b.Property<int>("Id")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ArticleId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Description_AR")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Description_EN")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Title_AR")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<string>("Title_EN")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.HasKey("Id", "ArticleId");
+
+                    b.HasIndex("ArticleId");
+
+                    b.ToTable("ArticleTranslations");
+                });
+
             modelBuilder.Entity("GraduationProject_DAL.Data.Models.BannerTranslation", b =>
                 {
                     b.Property<int>("Id")
@@ -526,6 +608,28 @@ namespace GraduationProject_DAL.Migrations
                     b.ToTable("Reservations");
                 });
 
+            modelBuilder.Entity("GraduationProject_DAL.Data.Models.ArticleImage", b =>
+                {
+                    b.HasOne("GraduationProject_DAL.Data.Models.Article", "Article")
+                        .WithOne("Image")
+                        .HasForeignKey("GraduationProject_DAL.Data.Models.ArticleImage", "ArticleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Article");
+                });
+
+            modelBuilder.Entity("GraduationProject_DAL.Data.Models.ArticleTranslations", b =>
+                {
+                    b.HasOne("GraduationProject_DAL.Data.Models.Article", "Article")
+                        .WithMany()
+                        .HasForeignKey("ArticleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Article");
+                });
+
             modelBuilder.Entity("GraduationProject_DAL.Data.Models.DepartmentTranslations", b =>
                 {
                     b.HasOne("GraduationProject_DAL.Data.Models.Department", "Department")
@@ -620,6 +724,12 @@ namespace GraduationProject_DAL.Migrations
                     b.Navigation("Doctor");
 
                     b.Navigation("Patient");
+                });
+
+            modelBuilder.Entity("GraduationProject_DAL.Data.Models.Article", b =>
+                {
+                    b.Navigation("Image")
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("GraduationProject_DAL.Data.Models.Department", b =>

@@ -127,6 +127,10 @@ namespace GraduationProject.Controllers
 
                 if (isFound)
                 {
+                    var isBlocked = await manager.IsBlocked(login.Email);
+                    if(isBlocked)
+                        return Unauthorized(new { ResponseMessage = "This Credentials Are Blocked!" });
+
                     var dto = await manager.Login(login.Email);
 
                     if (dto != null)

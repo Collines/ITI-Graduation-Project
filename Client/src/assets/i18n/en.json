@@ -19,7 +19,7 @@
   "By": "by",
   "TeamName": "Medical Team",
   "BusinessHours": "Business Hours:",
-  "WorkingTime": "From 08:00 AM To 12:00 AM",
+  "WorkingTime": "From 08:00 AM To 02:00 PM",
   "MobileNumber": "+20 1016017395",
 
   "TheBest": "The Best",
@@ -31,7 +31,7 @@
   "header3Part2": "for the whole family",
 
   "DocAtWork": "Doctors At Work",
-  "SatPatients": "Satisfied Patients",
+  "SatPatients": "Patients",
   "Beds": "Beds",
   "Appointment": "Appointments",
   "Our": "OUR",
@@ -70,7 +70,7 @@
   "Reserve with Dr.":"Reserve with Dr.",
   "ReservationDateValidation": "Please pickup a valid reservation date",
   "ReservationAdded": "Reservation Added Successfully",
-  "ReservationFailed": "This day is fully occupied try an other one",
+  "ReservationFaild": "This day is fully occupied try an other one",
 
   "YourProfile": "Your Profile",
   "SSN": "SSN",
@@ -91,6 +91,10 @@
   "Time": "Time",
   "Blank": "Leave blank for unchange",
   "ProfilePicture":"Profile Picture",
+  "Can't Connect to Server": "Can't Connect to Server",
+  "This Credentials Are Blocked!": "This Credentials Are Blocked!",
+  "Invalid Attempt!": "Invalid Attempt!",
+  "Incorrect username or password!": "Incorrect username or password!",
 
   "notfound": "Page Not Found",
   "Page404": "The Page You Are Looking For Doesn't Exist...",

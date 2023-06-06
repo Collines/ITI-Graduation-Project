@@ -33,6 +33,7 @@ export class DepartmentsComponent implements OnInit {
   SearchResult: Department[] = [];
   searchQuery: string = '';
   searchTimer: any;
+  direction = document.dir;
 
   onSearch(): void {
     clearTimeout(this.searchTimer);

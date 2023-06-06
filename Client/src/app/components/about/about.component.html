@@ -2,7 +2,10 @@
 <div class="about">
   <div class="banner ">
    <div class="container">
-    <div class="title ">
+    <div class="title" [ngClass]="{
+      'titleLeft':direction == 'ltr',
+      'titleRight':direction == 'rtl'
+    }">
       <h2 > {{"aboutus" | translate}}</h2>
       <p class="text-white link-nav">
         <a routerLink="/home">{{"Home" | translate}} </a> <i class="fa-solid fa-arrow-right" style="color: #081f3e;"></i>

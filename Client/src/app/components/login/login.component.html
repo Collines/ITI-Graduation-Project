@@ -3,7 +3,7 @@
     <div class="row d-flex align-items-center justify-content-center">
       <div class="col-lg-6 col-md-8 colsm-12">
         <div class="box boxMargin">
-          <h3 class="text-center pt-2 position-relative">Login</h3>
+          <h3 class="text-center pt-2 position-relative">{{ "Login" | translate }}</h3>
 
           <!-- <div class="social mb-2 my-3">
 
@@ -18,13 +18,14 @@
           <form
             class="w-100"
             [formGroup]="Validation"
-            (submit)="onSubmit(errorDiv)"
+            (submit)="onSubmit()"
           >
             <div
               #errorDiv
               class="alert alert-danger text-center"
               [ngClass]="submitted && !isResponseSuccess ? 'd-block' : 'd-none'"
-            ></div>
+            > {{ responseErrorMessage | translate}}</div>
+
             <div class="mb-3">
               <label for="email" class="form-label">{{
                 "Email" | translate
@@ -99,7 +100,7 @@
               {{ "Login" | translate }}
             </button>
 
-            <div class="social">
+            <!-- <div class="social">
               <div  id="g_id_onload"
                data-client_id="551365345955-tl754n7j47hofn2au1t8ouchrpon9fsq.apps.googleusercontent.com"
                data-callback="GoogleLogin"
@@ -114,7 +115,7 @@
                 data-shape="circle"
                 data-logo_alignment="left">
               </div>
-            </div>
+            </div> -->
 
 
             <div class="login mt-3 text-muted">
