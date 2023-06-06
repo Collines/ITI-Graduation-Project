@@ -24,7 +24,7 @@
     </c-row>
 
     <select #departmentselector (change)="FilterByDepartment($event)" class="form-select form-select-sm mb-4 w-25" aria-label="Department drop list">
-      <option disabled selected>Select Department</option>
+      <option value="all" selected>All Department</option>
       <option *ngFor="let d of Departments" value="{{d.id}}">{{d.title}}</option>
     </select>
   </div>

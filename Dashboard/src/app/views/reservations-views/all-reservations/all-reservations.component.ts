@@ -91,13 +91,18 @@ export class AllReservationsComponent implements OnInit {
     let temp:any =  [];
 
     if(element.target.value){
-      if (this.DateFilterResult.length > 0) {
-        this.DateFilterResult.forEach((item: any) => {
-          if (item.doctor.departmentId == element.target.value) {
-            temp.push(item);
-          }
-          this.SearchResult = temp;
-        });
+      if(element.target.value == "all"){
+        this.SearchResult = this.DateFilterResult;
+      }
+      else{
+        if (this.DateFilterResult.length > 0) {
+          this.DateFilterResult.forEach((item: any) => {
+            if (item.doctor.departmentId == element.target.value) {
+              temp.push(item);
+            }
+            this.SearchResult = temp;
+          });
+        }
       }
     }
   }
