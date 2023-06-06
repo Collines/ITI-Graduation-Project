@@ -14,6 +14,9 @@ export class AllDepartmentsComponent implements OnInit {
   searchQuery: string = "";
   private searchTimer: any;
   SearchResult: any;
+  NoDepartments:boolean = false;
+  ErrorMessage:any;
+
 
   constructor(
     public myService:DepartmentsService,
@@ -30,8 +33,16 @@ export class AllDepartmentsComponent implements OnInit {
       next:(data)=>{
         this.departments = data;
         this.SearchResult = this.departments;
+        this.NoDepartments = false;
+        if(!this.departments){
+          this.NoDepartments = true;
+          this.ErrorMessage = "No Department Found"
+        }
       },
-      error:(err)=>{console.log(err)}
+      error:(err)=>{console.log(err);
+        this.NoDepartments = true;
+        this.ErrorMessage = "Can't Connect to Server"
+      }
     })
   }
   DeleteDept(id:any) {
