@@ -17,20 +17,54 @@ export class EditNewsComponent implements OnInit {
     private Route: ActivatedRoute,
     private articleService: ArticleService,
     private Router:Router
-  ) {}
-  ngOnInit(): void {
-    this.articleService
-      .getEditData(this.Route.snapshot.params["id"])
+  ) {
+    articleService
+      .getEditData(Route.snapshot.params["id"])
       .subscribe({
         next: (res) => {
           this.new = res;
         },
         error: (e) => console.log(e),
+        complete: () => {
+          this.Validation = new FormGroup({
+            Title: new FormControl(this.new?.title_EN, [
+              Validators.required,
+              Validators.minLength(10),
+            ]),
+            TitleAR: new FormControl(this.new?.title_AR, [
+              Validators.required,
+              Validators.minLength(10),
+              Validators.pattern(RegExp("^[\u0621-\u064A\u0660-\u0669 0-9 a-zA-Z \$&\+,:;=?@#|'<>.^*()%!\-]+\$")),
+            ]),
+            Body: new FormControl(this.new?.description_EN, [
+              Validators.required,
+              Validators.minLength(10),
+              Validators.maxLength(500),
+            ]),
+            BodyAr: new FormControl(this.new?.description_AR, [
+              Validators.required,
+              Validators.minLength(10),
+              Validators.maxLength(500),
+              Validators.pattern(RegExp("^[\u0621-\u064A\u0660-\u0669 0-9 a-zA-Z \$&\+,:;=?@#|'<>.^*()%!\-]+\$")),
+            ]),
+          });
+      
+        }
       });
+
+   
+  }
+  ngOnInit(): void {
+
+    
     this.Validation.controls["Title"].value = this.new?.title_EN;
     this.Validation.controls["TitleAR"].value = this.new?.title_AR;
     this.Validation.controls["Body"].value = this.new?.description_EN;
     this.Validation.controls["BodyAR"].value = this.new?.description_AR;
+    // this.Validation.controls["Title"].value = this.new?.title_EN;
+    // this.Validation.controls["TitleAR"].value = this.new?.title_AR;
+    // this.Validation.controls["Body"].value = this.new?.description_EN;
+    // this.Validation.controls["BodyAR"].value = this.new?.description_AR;
 
     this.Validation.controls["Title"].status = "VALID";
     this.Validation.controls["TitleAR"].status = "VALID";
@@ -42,32 +76,8 @@ export class EditNewsComponent implements OnInit {
   }
   new: ArticleEdit | null = null;
 
-  Validation: any = new FormGroup({
-    Image: new FormControl(null, [Validators.required]),
-    Title: new FormControl(null, [
-      Validators.required,
-      Validators.minLength(10),
-    ]),
-    TitleAR: new FormControl(null, [
-      Validators.required,
-      Validators.minLength(10),
-      Validators.pattern(RegExp("^[\u0621-\u064A\u0660-\u0669 0-9 a-zA-Z \$&\+,:;=?@#|'<>.^*()%!\-]+\$")),
-    ]),
-    Body: new FormControl(null, [
-      Validators.required,
-      Validators.minLength(10),
-      Validators.maxLength(500),
-    ]),
-    BodyAr: new FormControl(null, [
-      Validators.required,
-      Validators.minLength(10),
-      Validators.maxLength(500),
-      Validators.pattern(RegExp("^[\u0621-\u064A\u0660-\u0669 0-9 a-zA-Z \$&\+,:;=?@#|'<>.^*()%!\-]+\$")),
-    ]),
-  });
-  get isImageValid() {
-    return this.Validation.controls["Image"].status == "VALID";
-  }
+  Validation: any;
+
   get isTitleValid() {
     return this.Validation.controls["Title"].status == "VALID";
   }
@@ -100,9 +110,11 @@ export class EditNewsComponent implements OnInit {
   };
   onSubmit() {
     if (this.Validation.valid && this.new) {
+      this.submitted=true
       const formData: FormData = new FormData();
+      
       if (this.FileToUpload) formData.append("Image", this.FileToUpload);
-      else return;
+      // else return;
       formData.append("Title_EN", this.Validation.controls.Title.value!);
       formData.append("Title_AR", this.Validation.controls.TitleAR.value!);
       formData.append("Description_EN", this.Validation.controls.Body.value!);
