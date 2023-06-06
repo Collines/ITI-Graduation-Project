@@ -44,6 +44,8 @@ export class EditDoctorComponent {
   // Pattern For Arabic Letters Only
   private ArabicPattern = /^[[ء-ي\s]+$/;
   private ArabicPatternForParagraph = /^[[ء-ي]|\s]|\.|\,+$/;
+  private EnglishPattern = /^[[A-Za-z\s]+$/;
+  private EnglishPatternForParagraph = /^[[A-Za-z]|\s]|\.|\,+$/;
 
   // Options For Gender Select List In Html
   Gender = Gender
@@ -59,7 +61,8 @@ export class EditDoctorComponent {
     FirstName_EN: new FormControl(null,
       [Validators.required,
       Validators.minLength(3),
-      Validators.maxLength(50)]),
+      Validators.maxLength(50),
+      Validators.pattern(this.EnglishPattern)]),
     FirstName_AR: new FormControl(null,
       [Validators.required,
         Validators.minLength(2),
@@ -68,7 +71,8 @@ export class EditDoctorComponent {
     LastName_EN: new FormControl(null,
       [Validators.required,
         Validators.minLength(3),
-        Validators.maxLength(50)]),
+        Validators.maxLength(50),
+        Validators.pattern(this.EnglishPattern)]),
     LastName_AR: new FormControl(null,
       [Validators.required,
         Validators.minLength(2),
@@ -79,7 +83,8 @@ export class EditDoctorComponent {
     Title_EN: new FormControl(null,
       [Validators.required,
         Validators.minLength(5),
-        Validators.maxLength(50)]),
+        Validators.maxLength(50),
+        Validators.pattern(this.EnglishPatternForParagraph)]),
     Title_AR: new FormControl(null,
       [Validators.required,
         Validators.minLength(5),
@@ -88,7 +93,8 @@ export class EditDoctorComponent {
     Bio_EN: new FormControl(null,
       [Validators.required,
         Validators.minLength(10),
-        Validators.maxLength(500)]),
+        Validators.maxLength(500),
+        Validators.pattern(this.EnglishPatternForParagraph)]),
     Bio_AR: new FormControl(null,
       [Validators.required,
         Validators.minLength(10),

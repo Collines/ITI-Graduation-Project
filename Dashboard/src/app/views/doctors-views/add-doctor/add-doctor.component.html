@@ -6,19 +6,13 @@
           <div class="mb-3 col">
             <label class="form-label" for="FirstName_EN">First Name</label>
             <input #FirstName_EN formControlName="FirstName_EN" type="text" class="form-control" id="FirstName_EN" placeholder="First Name"
-            [ngClass]="
-            !FirstName_EN_Valid && FirstName_EN.value
-              ? {
-                  'is-invalid':
-                    validator.controls.FirstName_EN.errors
-                }
-              : ''
-          " />
+            />
             <br>
             <div class="alert alert-danger" *ngIf="!FirstName_EN_Valid && FirstName_EN.value">
               <p>*First Name Must be 3 Letters or More</p>
               <p>*Less Than 50</p>
-              <p>*No Special Characters</p>
+              <p>*Must be Writen in English</p>
+              <p>*No Special Characters or Numbers</p>
             </div>
           </div>
   
@@ -29,7 +23,8 @@
             <div class="alert alert-danger" *ngIf="!LastName_EN_Valid && LastName_EN.value">
               <p>*Last Name Must be 3 Letters or More</p>
               <p>*Less Than 50</p>
-              <p>*No Special Characters</p>
+              <p>*Must be Writen in English</p>
+              <p>*No Special Characters or Numbers</p>
             </div>
           </div>
         </div>
@@ -79,6 +74,7 @@
             <div class="alert alert-danger" *ngIf="!Title_EN_Valid && Title_EN.value">
               <p>*Title Must be 5 Letters or More</p>
               <p>*Less Than 50</p>
+              <p>*Must be Writen in English</p>
             </div>
         </div>
   
@@ -100,6 +96,7 @@
           <div class="alert alert-danger" *ngIf="!Bio_EN_Valid && Bio_EN.value">
             <p>*Bio Must be 10 Letters or More</p>
             <p>*Less Than 500</p>
+            <p>*Must be Writen in English</p>
           </div>
         </div>
   
@@ -121,7 +118,7 @@
           </div>
           <label class="form-label" for="DepartmentId">Department</label>
           <select #DepartmentId class="form-select" formControlName="DepartmentId" name="DepartmentId" aria-label="DepartmentId">
-              <option *ngFor="let d of Departments" value="{{d.id}}">{{d.title}}</option>
+              <option *ngFor="let d of Departments" value="{{d.id}}">{{d.title}} </option>
           </select>
         </div>
   
