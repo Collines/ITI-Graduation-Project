@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { FormGroup, FormControl, Validators } from "@angular/forms";
 import { ArticleService } from "src/app/services/article.service";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "app-add-news",
@@ -11,7 +12,7 @@ export class AddNewsComponent implements OnInit {
   BaseImage: any = "";
   FileToUpload: any;
   submitted = false;
-  constructor(private articleService: ArticleService) {}
+  constructor(private articleService: ArticleService,  private Router:Router,) {}
   ngOnInit(): void {}
 
   // Pattern For Arabic Letters Only
@@ -85,9 +86,17 @@ export class AddNewsComponent implements OnInit {
       formData.append("Description_EN", this.Validation.controls.Body.value!);
       formData.append("Description_AR", this.Validation.controls.BodyAr.value!);
       this.articleService.create(formData).subscribe({
-        next: (res) => {},
+        next: (res) => {alert("News Added Successfully")
+                       this.Router.navigate(['/News'])
+      },
         error: (e) => console.log(e),
       });
     }
+    else
+    alert(`Make Sure To Fill All The Input Fields`);
+    console.log(this.Validation);
+   
   }
-}
+  
+  }
+

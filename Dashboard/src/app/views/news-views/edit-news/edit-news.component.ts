@@ -2,7 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { FormGroup, FormControl, Validators } from "@angular/forms";
 import { ArticleService } from "src/app/services/article.service";
 import { ArticleEdit } from "src/app/interfaces/ArticleEdit";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute,Router } from "@angular/router";
 
 @Component({
   selector: "app-edit-news",
@@ -15,7 +15,8 @@ export class EditNewsComponent implements OnInit {
   submitted = false;
   constructor(
     private Route: ActivatedRoute,
-    private articleService: ArticleService
+    private articleService: ArticleService,
+    private Router:Router
   ) {}
   ngOnInit(): void {
     this.articleService
@@ -100,7 +101,6 @@ export class EditNewsComponent implements OnInit {
     });
   };
   onSubmit() {
-    this.submitted = true;
     if (this.Validation.valid && this.new) {
       const formData: FormData = new FormData();
       if (this.FileToUpload) formData.append("Image", this.FileToUpload);
@@ -110,9 +110,15 @@ export class EditNewsComponent implements OnInit {
       formData.append("Description_EN", this.Validation.controls.Body.value!);
       formData.append("Description_AR", this.Validation.controls.BodyAr.value!);
       this.articleService.update(this.new!.id, formData).subscribe({
-        next: (res) => {},
+        next: () => {alert("News Edited Successfully")
+                       this.Router.navigate(['/News'])
+      },
         error: (e) => console.log(e),
       });
     }
+    else
+    alert(`Make Sure To Fill All The Input Fields`)
+    console.log(this.Validation)
+};
   }
-}
+
