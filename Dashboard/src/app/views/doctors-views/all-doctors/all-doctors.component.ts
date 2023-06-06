@@ -36,7 +36,7 @@ export class AllDoctorsComponent implements OnInit {
         this.NoDoctors = false;
         if(!this.Doctors){
           this.NoDoctors = true;
-          this.ErrorMessage = "No Department Found"
+          this.ErrorMessage = "No Doctors Found"
         }
     },
       error: err => {

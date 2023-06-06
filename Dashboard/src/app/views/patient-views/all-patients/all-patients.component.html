@@ -1,78 +1,90 @@
 
-<c-row class="justify-content-md-center mb-4">
-  <c-col [sm]="10">
-    <div class="input-group">
-      <input
-        type="text"
-        class="form-control app-search"
-        placeholder="Search By Name, email, SSN"
-        [(ngModel)]="searchQuery"
-        (keyup)="onSearch()"
-      />
-    </div>
-  </c-col>
-</c-row>
+<div class="text-center" *ngIf="!Patients && !NoData">
+  <div class="spinner-border text-primary" role="status">
+    <span class="visually-hidden">Loading...</span>
+  </div>
+</div>
 
-<div class="w-100" style="background-color: #ebedef;">
-<table class="table align-middle mb-0 bg-white">
-    <thead class="table-dark">
-      <tr>
-        <th>ID</th>
-        <th>Name</th>
-        <th>SSN</th>
-        <th>Email</th>
-        <th>Gender</th>
-        <th>Blocked</th>
-        <th class="text-center">Actions</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let p of SearchResult">
-        <td>{{p.id}}</td>
-        <td>
-          <div class="d-flex align-items-center">
-            <img
-                *ngIf="p.image"
-                src="{{p.image}}"
-                alt=""
-                style="width: 50px; height: 50px; border: 1px solid black;"
-                class="rounded-circle"/>
-                <img
-                *ngIf="!p.image && p.gender === Gender.Male"
-                src="/assets/images/User-Profile-PNG.png"
-                alt=""
-                style="width: 45px; height: 45px; border: 1px solid black;"
-                class="rounded-circle"/>
-                <img
-                *ngIf="!p.image&& p.gender === Gender.Female"
-                src="/assets/images/woman.jpg"
-                alt=""
-                style="width: 45px; height: 45px; border: 1px solid black;"
-                class="rounded-circle"/>
-            <div class="ms-3">
-              <p class="fw-bold mb-1">{{p.fullName}}</p>
+<h1 class="text-center">
+  {{ErrorMessage}}
+</h1>
+
+<div *ngIf="Patients.length > 0">
+  <c-row class="justify-content-md-center mb-4">
+    <c-col [sm]="10">
+      <div class="input-group">
+        <input
+          type="text"
+          class="form-control app-search"
+          placeholder="Search By Name, email, SSN"
+          [(ngModel)]="searchQuery"
+          (keyup)="onSearch()"
+        />
+      </div>
+    </c-col>
+  </c-row>
+
+  <div class="w-100" style="background-color: #ebedef;">
+  <table class="table align-middle mb-0 bg-white">
+      <thead class="table-dark">
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>SSN</th>
+          <th>Email</th>
+          <th>Gender</th>
+          <th>Blocked</th>
+          <th class="text-center">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let p of SearchResult">
+          <td>{{p.id}}</td>
+          <td>
+            <div class="d-flex align-items-center">
+              <img
+                  *ngIf="p.image"
+                  src="{{p.image}}"
+                  alt=""
+                  style="width: 50px; height: 50px; border: 1px solid black;"
+                  class="rounded-circle"/>
+                  <img
+                  *ngIf="!p.image && p.gender === Gender.Male"
+                  src="/assets/images/User-Profile-PNG.png"
+                  alt=""
+                  style="width: 45px; height: 45px; border: 1px solid black;"
+                  class="rounded-circle"/>
+                  <img
+                  *ngIf="!p.image&& p.gender === Gender.Female"
+                  src="/assets/images/woman.jpg"
+                  alt=""
+                  style="width: 45px; height: 45px; border: 1px solid black;"
+                  class="rounded-circle"/>
+              <div class="ms-3">
+                <p class="fw-bold mb-1">{{p.fullName}}</p>
+              </div>
             </div>
-          </div>
-        </td>
-        <td>
-          <p class="fw-bold text-muted mb-1">{{p.ssn}}</p>
-        </td>
-        <td>
-          <p class="fw-bold text-muted mb-1">{{p.email}}</p>
-        </td>
-        <td>
-          <p class="fw-normal mb-1">{{Gender[p.gender]}}</p>
-          <span *ngIf="p.gender == 2" class="badge badge-info rounded-pill text-bg-info d-inline"><i class="fa-solid fa-mars fa-lg" style="color: #ffffff;"></i></span>
-          <span *ngIf="p.gender == 1" class="badge badge-info rounded-pill d-inline" style="background-color: #f77b94;"><i class="fa-solid fa-venus fa-lg" style="color: #ffffff;"></i></span>
-        </td>
-        <td class="text-center">
-          <input id="BlockStatus" type="checkbox" class="form-check-input" [checked]="p.blocked" (change)="ChangePatientBlockStatus($event,p.id)">
-        </td>
-        <td class="text-center">
-          <a routerLink="/Patients/{{p.id}}" class="btn" title="Details"><i class="fa-solid fa-desktop text-info" ></i></a>
-          <button (click)="DeletePatient(p.id)" class="btn " title="Delete"><i class="fa-solid fa-trash text-danger" ></i></button>
-        </td>
-      </tr>
-    </tbody>
-</table>
+          </td>
+          <td>
+            <p class="fw-bold text-muted mb-1">{{p.ssn}}</p>
+          </td>
+          <td>
+            <p class="fw-bold text-muted mb-1">{{p.email}}</p>
+          </td>
+          <td>
+            <p class="fw-normal mb-1">{{Gender[p.gender]}}</p>
+            <span *ngIf="p.gender == 2" class="badge badge-info rounded-pill text-bg-info d-inline"><i class="fa-solid fa-mars fa-lg" style="color: #ffffff;"></i></span>
+            <span *ngIf="p.gender == 1" class="badge badge-info rounded-pill d-inline" style="background-color: #f77b94;"><i class="fa-solid fa-venus fa-lg" style="color: #ffffff;"></i></span>
+          </td>
+          <td class="text-center">
+            <input id="BlockStatus" type="checkbox" class="form-check-input" [checked]="p.blocked" (change)="ChangePatientBlockStatus($event,p.id)">
+          </td>
+          <td class="text-center">
+            <a routerLink="/Patients/{{p.id}}" class="btn" title="Details"><i class="fa-solid fa-desktop text-info" ></i></a>
+            <button (click)="DeletePatient(p.id)" class="btn " title="Delete"><i class="fa-solid fa-trash text-danger" ></i></button>
+          </td>
+        </tr>
+      </tbody>
+  </table>
+  </div>
 </div>
