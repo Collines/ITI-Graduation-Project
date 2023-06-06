@@ -91,6 +91,10 @@
   "Time": "الوقت",
   "Blank": "اتركه فارغ لعدم التعديل",
   "ProfilePicture":"الصورة الشخصية",
+  "Can't Connect to Server": "تعذر الاتصال بالخادم",
+  "This Credentials Are Blocked!": "هذا الحساب تم حظره",
+  "Invalid Attempt!": "محاولة غير صحيحة",
+  "Incorrect username or password!": "خطأ فى اسم المستخدم او كلمة المرور",
 
   "QueueNumber": "دورك",
   "Cancel": "الغاء",

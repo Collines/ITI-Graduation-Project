@@ -3,7 +3,7 @@
     <div class="row d-flex align-items-center justify-content-center">
       <div class="col-lg-6 col-md-8 colsm-12">
         <div class="box boxMargin">
-          <h3 class="text-center pt-2 position-relative">Login</h3>
+          <h3 class="text-center pt-2 position-relative">{{ "Login" | translate }}</h3>
 
           <!-- <div class="social mb-2 my-3">
 
@@ -24,7 +24,8 @@
               #errorDiv
               class="alert alert-danger text-center"
               [ngClass]="submitted && !isResponseSuccess ? 'd-block' : 'd-none'"
-            ></div>
+            > {{ responseErrorMessage | translate}}</div>
+
             <div class="mb-3">
               <label for="email" class="form-label">{{
                 "Email" | translate
