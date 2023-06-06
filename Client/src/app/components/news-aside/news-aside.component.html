@@ -59,42 +59,24 @@
     <div id="carouselExampleCaptions" class="carousel slide">
 
       <div class="carousel-inner mt-4">
-        <div class="carousel-item active">
-          <div class="card text-center">
-            <img src="/assets/images/1.jpg" class="d-block w-100" alt="...">
+        <div class="carousel-item active" *ngFor="let n of news">
+          <div class="card text-center" >
+            <img src="{{n.image}}" class="d-block w-100" alt="news" style="height: 300px;">
             <div class="card-body">
-              <h5 class="card-title"> New drug release soon</h5>
-              <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+           <h5 class="card-title" style="overflow: hidden;
+              text-overflow: ellipsis;
+              white-space: nowrap;"> {{n.title}}</h5>
+
+              <p class="card-text" style="overflow: hidden;
+              text-overflow: ellipsis;
+              white-space: nowrap;">{{n.description}}</p>
               <div class="post-read-more">
                 <a routerLink="/news/:id" class="button-link">{{"ReadMore" | translate}}</a>
             </div>
             </div>
           </div>
         </div>
-        <div class="carousel-item">
-          <div class="card text-center">
-            <img src="/assets/images/4.jpg" class="d-block w-100" alt="...">
-            <div class="card-body">
-              <h5 class="card-title"> Good news for the pacients</h5>
-              <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-              <div class="post-read-more">
-                <a routerLink="/news/:id" class="button-link">{{"ReadMore" | translate}}</a>
-            </div>
-            </div>
-          </div>
-        </div>
-        <div class="carousel-item">
-          <div class="card text-center">
-            <img src="/assets/images/new.jpg" class="d-block w-100" alt="...">
-            <div class="card-body">
-              <h5 class="card-title"> Free post-operative care</h5>
-              <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-              <div class="post-read-more">
-                <a routerLink="/news/:id" class="button-link">{{"ReadMore" | translate}}</a>
-            </div>
-            </div>
-          </div>
-        </div>
+
       </div>
 
       <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
