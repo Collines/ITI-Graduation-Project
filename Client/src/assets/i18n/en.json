@@ -59,6 +59,7 @@
   "ViewProfile": "View Profile",
   "Book": "Book",
   "SearchByDoctor": "Search by name...",
+  "SearchByNews":"Search by name...",
   "Dr.": "Dr.",
   "Name": "Name",
   "Title": "Title",
@@ -172,7 +173,7 @@
   "AboutHealthcare": "About Healthcare",
   "Vision": "Our Vision",
   "medical": "Positioning Egypt as a One Country Brand showcasing its exceptional medical, wellness, hospitality and concierge services globally.",
-  "mission": "our mission",
+  "mission": "Our mission",
   "wellness": "Enhancing patients’ experience through integrating medical, wellness, hospitality and concierge services by using technology.",
   "CoreValues": " Our Core Values",
   "Justice": "Justice",
@@ -198,7 +199,12 @@
   "CareForPatients":"When you care for patients, the stakes are high and every decision counts.",
   "Youneedthebest":" You need the best evidence and clinical guidance at your fingertips to answer",
   "complexquestions":"even the most complex questions with confidence.",
-  "footerData":"When you care for patients, the stakes are high and every decision counts. You need the best evidence and clinical guidance at your fingertips to answer even the most complex questions with confidence."
+  "footerData":"When you care for patients, the stakes are high and every decision counts. You need the best evidence and clinical guidance at your fingertips to answer even the most complex questions with confidence.",
+
+  "news":"News",
+  "RecentPosts":"Recent Posts",
+  "ReadMore":"Read More"
+
 
 
 

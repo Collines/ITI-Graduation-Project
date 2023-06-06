@@ -11,32 +11,14 @@
           <div class="col-lg-8">
             <div class="mb-3 mb-lg-0"><h2 class="fs-16 mb-0">News</h2></div>
           </div>
-          <div class="col-lg-4">
-            <div class="candidate-list-widgets">
-              <div class="row">
-                <div class="col-lg-6 offset-lg-5">
-                  <div class="selection-widget">
-                    <select
-                      class="form-select"
-                      data-trigger="true"
-                      name="choices-single-filter-orderby"
-                      id="choices-single-filter-orderby"
-                      aria-label="Default select example"
-                    >
-                      <option value="df">Default</option>
-                      <option value="ne">Newest</option>
-                      <option value="od">Oldest</option>
-                      <option value="rd">Random</option>
-                    </select>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+          
         </div>
 
         <div class="candidate-list">
-          <app-news [new]="n" *ngFor="let n of news"></app-news>
+
+          <app-news   [new]="n" *ngFor="let n of news"
+          (removeNewsEvent)="removeNews($event)"
+          ></app-news>
         </div>
       </div>
     </div>

@@ -1,0 +1,36 @@
+<div class="news">
+  <div class="banner ">
+   <div class="container">
+    <div class="title ">
+      <h2 > {{"news" | translate}}</h2>
+      <p class="text-white link-nav">
+        <a routerLink="/home">{{"Home" | translate}} </a> <i class="fa-solid fa-arrow-right" style="color: #081f3e;"></i>
+        <a routerLink="/news"> {{"news" | translate}}</a></p>
+     </div>
+   </div>
+  </div>
+
+  <div class="newsPage">
+    <div class="container">
+        <div class="row mt-5">
+            <div class="col-lg-12">
+              <div class="row  gy-4">
+
+                <app-news-item class="col-lg-4 col-md-16"
+                [new]="n"
+                *ngFor="let n of news"
+                ></app-news-item>
+              </div>
+
+            </div>
+
+
+        </div>
+    </div>
+  </div>
+
+</div>
+
+
+
+

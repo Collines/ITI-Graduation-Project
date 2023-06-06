@@ -1,0 +1,14 @@
+<div >
+  <div class="card h-100 w-100">
+    <img src="{{new?.image}}" class="card-img-top img-fluid" alt="news" style="height: 280px;"/>
+
+    <div class="card-body p-4">
+      <h5 class="card-title"  style="overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;">{{new?.title}}</h5>
+    </div>
+    <div class="card-footer p-3">
+        <p class=" mb-0 float-start"> {{new?.postedAt|date}}</p>
+    </div>
+  </div>
+</div>
