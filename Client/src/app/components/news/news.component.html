@@ -13,10 +13,10 @@
   <div class="newsPage">
     <div class="container">
         <div class="row mt-5">
-            <div class="col-lg-8">
+            <div class="col-lg-12">
               <div class="row  gy-4">
 
-                <app-news-item class="col-lg-6 col-md-12"
+                <app-news-item class="col-lg-4 col-md-16"
                 [new]="n"
                 *ngFor="let n of news"
                 ></app-news-item>
@@ -24,12 +24,6 @@
 
             </div>
 
-            <div class="col-lg-4">
-
-            <app-news-aside
-            ></app-news-aside>
-
-          </div>
 
         </div>
     </div>

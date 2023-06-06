@@ -39,7 +39,6 @@ import { HomeNewsComponent } from './components/home-news/home-news.component';
 import { NewsComponent } from './components/news/news.component';
 import { NewsItemComponent } from './components/news-item/news-item.component';
 import { NewsDetailComponent } from './components/news-detail/news-detail.component';
-import { NewsAsideComponent } from './components/news-aside/news-aside.component';
 //
 
 @NgModule({
@@ -67,7 +66,6 @@ import { NewsAsideComponent } from './components/news-aside/news-aside.component
     NewsComponent,
     NewsItemComponent,
     NewsDetailComponent,
-    NewsAsideComponent,
   ],
   imports: [
     BrowserModule,
