@@ -1,3 +1,4 @@
+import { DepartmentsService } from './../../../services/departments.service';
 import { ReservationStatus } from 'src/app/enums/reservationStatus';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
@@ -14,13 +15,22 @@ export class AllReservationsComponent implements OnInit {
   Reservations:any;
   ReservationStatus = ReservationStatus;
   SearchResult: any;
+  DateFilterResult: any;
   NoData:boolean = false;
   ErrorMessage:any;
+  Departments:any
 
   constructor(
     private ReservationsService:ReservationsService,
     private Router:Router,
-    private AccountService:AccountService){}
+    private AccountService:AccountService,
+    private DepartmentsService:DepartmentsService){
+
+      this.DepartmentsService.GetAllDepartments().subscribe({
+        next: data => this.Departments = data,
+        error: err => console.log(err)
+      })
+    }
 
   ngOnInit(): void {
     let admin = this.AccountService.getAdmin()
@@ -31,6 +41,7 @@ export class AllReservationsComponent implements OnInit {
     this.ReservationsService.getAll().subscribe({
       next: data => {this.Reservations = data;
         this.SearchResult = data;
+        this.DateFilterResult = data
         this.NoData = false;
         if(!this.Reservations.length){
           this.NoData = true;
@@ -57,20 +68,37 @@ export class AllReservationsComponent implements OnInit {
     });
   }
 
-  FilterByDate(element:any){
+  FilterByDate(element:any,departmentSelector:HTMLSelectElement){
     this.SearchResult = [];
-
+    departmentSelector.selectedIndex = 0;
     if(element.target.value){
       if (this.Reservations.length > 0) {
         this.Reservations.forEach((item: any) => {
           if (new Date(item.dateTime).toISOString().split('T')[0] === element.target.value) {
             this.SearchResult.push(item);
           }
+          this.DateFilterResult = this.SearchResult;
         });
       }
     }
     else{
       this.SearchResult = this.Reservations;
+      this.DateFilterResult = this.Reservations;
+    }
+  }
+
+  FilterByDepartment(element:any){
+    let temp:any =  [];
+
+    if(element.target.value){
+      if (this.DateFilterResult.length > 0) {
+        this.DateFilterResult.forEach((item: any) => {
+          if (item.doctor.departmentId == element.target.value) {
+            temp.push(item);
+          }
+          this.SearchResult = temp;
+        });
+      }
     }
   }
 }

@@ -10,17 +10,24 @@
 </h1>
 
 <div *ngIf="Reservations.length > 0">
-  <c-row class="justify-content-md-center mb-4">
-    <c-col [sm]="10">
-      <div class="input-group">
-        <input
-          type="date"
-          class="form-control app-search"
-          (change)="FilterByDate($event)"
-        />
-      </div>
-    </c-col>
-  </c-row>
+  <div class="d-flex flex-column flex-md-row justify-content-md-between">
+    <c-row class="justify-content-md-start mb-4 w-50">
+      <c-col [sm]="10">
+        <div class="input-group">
+          <input
+            type="date"
+            class="form-control app-search"
+            (change)="FilterByDate($event, departmentselector)"
+          />
+        </div>
+      </c-col>
+    </c-row>
+
+    <select #departmentselector (change)="FilterByDepartment($event)" class="form-select form-select-sm mb-4 w-25" aria-label="Department drop list">
+      <option disabled selected>Select Department</option>
+      <option *ngFor="let d of Departments" value="{{d.id}}">{{d.title}}</option>
+    </select>
+  </div>
 
   <table class="table align-middle mb-0 bg-white">
       <thead class="table-dark">
