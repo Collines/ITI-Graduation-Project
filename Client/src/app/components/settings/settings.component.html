@@ -51,7 +51,9 @@
                   #ErrDiv
                   [ngClass]="submitted && error ? 'd-block' : 'd-none'"
                   class="alert alert-danger text-center"
-                ></div>
+                >
+                  {{ "error" | translate }}
+                </div>
                 <div class="form-group row mb-2">
                   <label for="ssn" class="col-4 col-form-label">{{
                     "SSN" | translate
@@ -78,7 +80,7 @@
                       formControlName="FirstName"
                       id="name"
                       name="fname"
-                      placeholder="{{'FirstName' | translate}}"
+                      placeholder="{{ 'FirstName' | translate }}"
                       class="form-control here"
                       type="text"
                       value="{{ userEdit.firstName_EN }}"
@@ -120,7 +122,7 @@
                       formControlName="LastName"
                       id="lname"
                       name="lastname"
-                      placeholder="{{'LastName' | translate}}"
+                      placeholder="{{ 'LastName' | translate }}"
                       class="form-control here"
                       type="text"
                       value="{{ userEdit.lastName_EN }}"
@@ -162,7 +164,7 @@
                       formControlName="FirstNameAr"
                       id="fnameAR"
                       name="text"
-                      placeholder="{{'FirstNameAr' | translate}}"
+                      placeholder="{{ 'FirstNameAr' | translate }}"
                       class="form-control here"
                       type="text"
                       value="{{ userEdit.firstName_AR }}"
@@ -204,7 +206,7 @@
                       formControlName="LastNameAr"
                       id="lnameAR"
                       name="text"
-                      placeholder="{{'LastNameAr' | translate}}"
+                      placeholder="{{ 'LastNameAr' | translate }}"
                       class="form-control here"
                       type="text"
                       value="{{ userEdit.lastName_AR }}"
@@ -263,7 +265,7 @@
                       formControlName="email"
                       id="email"
                       name="email"
-                      placeholder="{{ 'Email' | translate}}"
+                      placeholder="{{ 'Email' | translate }}"
                       class="form-control here"
                       type="email"
                       value="{{ userEdit.email }}"
@@ -306,7 +308,7 @@
                       name="password"
                       class="form-control here"
                       type="password"
-                      placeholder="{{ 'Blank' | translate}}"
+                      placeholder="{{ 'Blank' | translate }}"
                       [ngClass]="
                         !isPasswordValid
                           ? {
@@ -382,7 +384,7 @@
                       formControlName="Phone"
                       id="phone"
                       name="phone"
-                      placeholder="{{'Phone' | translate}}"
+                      placeholder="{{ 'Phone' | translate }}"
                       class="form-control here"
                       type="text"
                       value="{{ userEdit.phone }}"
@@ -424,14 +426,16 @@
                       class="form-control"
                       id="MH"
                       rows="3"
-                      placeholder="{{'MedicalHistory' | translate}}"
+                      placeholder="{{ 'MedicalHistory' | translate }}"
                       >{{ userEdit.medicalHistory }}</textarea
                     >
                   </div>
                 </div>
 
                 <div class="form-group row mb-2">
-                  <label for="PP" class="col-4 col-form-label">{{"ProfilePicture" | translate}}</label>
+                  <label for="PP" class="col-4 col-form-label">{{
+                    "ProfilePicture" | translate
+                  }}</label>
                   <div class="col-8">
                     <input
                       type="file"

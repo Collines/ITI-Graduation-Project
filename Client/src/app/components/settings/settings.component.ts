@@ -115,7 +115,6 @@ export class SettingsComponent implements OnInit {
   isDataLoaded = false;
   isResponsed = false;
   textArea: string = '';
-  test: any;
 
   get isFirstNameValid() {
     return this.Validation.controls['FirstName'].status == 'VALID';
@@ -168,7 +167,6 @@ export class SettingsComponent implements OnInit {
       if (accessToken) {
         const formData: FormData = new FormData();
         if (this.FileToUpload) formData.append('Image', this.FileToUpload);
-
         formData.append(
           'FirstName_EN',
           this.Validation.controls['FirstName'].value
@@ -193,26 +191,7 @@ export class SettingsComponent implements OnInit {
         formData.append('SSN', this.userEdit.ssn);
         let pass = this.Validation.controls['password'].value;
         formData.append('Password', pass == '' ? null : pass);
-        if (this.FileToUpload) {
-          // this.DoctorsService.AddDoctor(formData).subscribe({
-          //   next: data => {alert("Doctor Added Successfully")
-          //                   this.Router.navigate(['/Doctors'])},
-          //   error: err => console.log(err)});
-        }
-        this.test = formData;
-        // let user: UserUpdate = {
-        //   firstName_EN: this.Validation.controls['FirstName'].value,
-        //   firstName_AR: this.Validation.controls['FirstNameAr'].value,
-        //   lastName_EN: this.Validation.controls['LastName'].value,
-        //   lastName_AR: this.Validation.controls['LastNameAr'].value,
-        //   email: this.Validation.controls['email'].value,
-        //   phone: this.Validation.controls['Phone'].value,
-        //   dob: this.Validation.controls['Date'].value,
-        //   medicalHistory: this.textArea,
-        //   password: this.Validation.controls['password'].value,
-        //   image: { id: 0, name: this.BaseImage, patientId: this.userEdit.id },
-        //   gender:this.userEdit.gender
-        // };
+
         this.accountService.update(accessToken, formData).subscribe({
           next: (r: any) => {
             this.error = false;
@@ -223,11 +202,7 @@ export class SettingsComponent implements OnInit {
           error: (e: any) => {
             this.error = true;
             this.isResponsed = false;
-            errorElement.innerHTML = e.error;
-            this.test.forEach((el: any, key: any) => {
-              console.log(el, key);
-            });
-            console.log(e);
+            // errorElement.innerHTML = 'An error occurred';
           },
         });
       }
