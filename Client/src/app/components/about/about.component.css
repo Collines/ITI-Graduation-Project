@@ -13,11 +13,21 @@ h6 {
   color: #081f3e;
 }
 .title {
+  transform: translateY(-40%);
+}
+
+.titleLeft{
   position: absolute;
   top: 60%;
   left: 20%;
-  transform: translateY(-40%);
 }
+
+.titleRight{
+  position: absolute;
+  top: 60%;
+  right: 20%;
+}
+
 .title h2 {
   font-size: 50px;
 }
