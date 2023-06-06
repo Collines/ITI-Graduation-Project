@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { UserEdit } from 'src/app/Interfaces/User/UserEdit';
-import { UserUpdate } from 'src/app/Interfaces/User/userUpdate';
 import { AccountService } from 'src/app/Services/account.service';
 
 @Component({
@@ -70,7 +69,7 @@ export class SettingsComponent implements OnInit {
               this.Validation.controls['Phone'].value = this.userEdit.phone;
               this.Validation.controls['Date'].value = this.dateStr;
 
-              this.Validation.controls['FirstName'].status = 'VALID';
+              this.Validation.controls['FirstName'].status = 'VALID'; 
               this.Validation.controls['LastName'].status = 'VALID';
               this.Validation.controls['FirstNameAr'].status = 'VALID';
               this.Validation.controls['LastNameAr'].status = 'VALID';
