@@ -1,171 +1,26 @@
-<div class="row  gy-4">
-  <!-- COLUMNS 1 -->
-  <div class="col-lg-6 col-md-12">
+
       <div class="box">
           <div class="post-bx">
-              <!-- Content section for blogs start -->
+
               <div class="post-thum" style="width: 90%;margin: auto;">
-                <img title="title" alt="news" src="/assets/images/10.jpg" class="img-fluid">
+                <img title="title" alt="news" src="{{new.image}}" class="w-100" style="height: 250px;">
               </div>
               <div class="post-info" style="width: 90%;margin: auto;">
                 <div class="post-meta">
-                    <p class="post-date"><span>June 18, 2022</span></p>
+                    <p class="post-date"><span>{{new.postedAt | date}}</span></p>
                 </div>
 
-                <div class="post-text">
+                <div class="post-text text-center "style="overflow-wrap: break-word">
                   <h5 class="post-title mb-3">
-                    <a >Helping Companies in  Their Green Transition</a>
+                    <a >{{new.title}}</a>
                   </h5>
                 </div>
 
                 <div class="post-read-more">
-                    <a routerLink="/news/:id" class="button-link">{{"ReadMore" | translate}}</a>
+                    <a routerLink="/news/{{ new.id }}" class="button-link">{{"ReadMore" | translate}}</a>
                 </div>
 
               </div>
-              <!-- Content section for blogs end -->
           </div>
       </div>
-  </div>
-  <!-- COLUMNS 2 -->
-  <div class="col-lg-6 col-md-12">
-    <div class="box">
-        <div class="post-bx">
-            <!-- Content section for blogs start -->
-            <div class="post-thum" style="width: 90%;margin: auto;">
-              <img title="title" alt="news" src="/assets/images/11.jpg" class="img-fluid">
-            </div>
-            <div class="post-info" style="width: 90%;margin: auto;">
-              <div class="post-meta">
-                  <p class="post-date"><span>June 18, 2022</span></p>
-              </div>
 
-              <div class="post-text">
-                <h5 class="post-title mb-3">
-                  <a >Helping Companies in  Their Green Transition</a>
-                </h5>
-              </div>
-
-              <div class="post-read-more">
-                  <a routerLink="/news/:id" class="button-link">{{"ReadMore" | translate}}</a>
-              </div>
-
-            </div>
-            <!-- Content section for blogs end -->
-        </div>
-    </div>
-</div>
-  <!-- COLUMNS 3 -->
-  <div class="col-lg-6 col-md-12">
-    <div class="box">
-        <div class="post-bx">
-            <!-- Content section for blogs start -->
-            <div class="post-thum" style="width: 90%;margin: auto;">
-              <img title="title" alt="news" src="/assets/images/12.jpg" class="img-fluid">
-            </div>
-            <div class="post-info" style="width: 90%;margin: auto;">
-              <div class="post-meta">
-                  <p class="post-date"><span>June 18, 2022</span></p>
-              </div>
-
-              <div class="post-text">
-                <h5 class="post-title mb-3">
-                  <a >Helping Companies in  Their Green Transition</a>
-                </h5>
-              </div>
-
-              <div class="post-read-more">
-                  <a routerLink="/news/:id" class="button-link">{{"ReadMore" | translate}}</a>
-              </div>
-
-            </div>
-            <!-- Content section for blogs end -->
-        </div>
-    </div>
-</div>
-  <!-- COLUMNS 4 -->
-  <div class="col-lg-6 col-md-12">
-    <div class="box">
-        <div class="post-bx">
-            <!-- Content section for blogs start -->
-            <div class="post-thum" style="width: 90%;margin: auto;">
-              <img title="title" alt="news" src="/assets/images/13.jpg" class="img-fluid">
-            </div>
-            <div class="post-info" style="width: 90%;margin: auto;">
-              <div class="post-meta">
-                  <p class="post-date"><span>June 18, 2022</span></p>
-              </div>
-
-              <div class="post-text">
-                <h5 class="post-title mb-3">
-                  <a >Helping Companies in  Their Green Transition</a>
-                </h5>
-              </div>
-
-              <div class="post-read-more">
-                  <a routerLink="/news/:id" class="button-link">{{"ReadMore" | translate}}</a>
-              </div>
-
-            </div>
-            <!-- Content section for blogs end -->
-        </div>
-    </div>
-</div>
-  <!-- COLUMNS 5 -->
-  <div class="col-lg-6 col-md-12">
-    <div class="box">
-        <div class="post-bx">
-            <!-- Content section for blogs start -->
-            <div class="post-thum" style="width: 90%;margin: auto;">
-              <img title="title" alt="news" src="/assets/images/5.jpg" class="img-fluid">
-            </div>
-            <div class="post-info" style="width: 90%;margin: auto;">
-              <div class="post-meta">
-                  <p class="post-date"><span>June 18, 2022</span></p>
-              </div>
-
-              <div class="post-text">
-                <h5 class="post-title mb-3">
-                  <a >Helping Companies in  Their Green Transition</a>
-                </h5>
-              </div>
-
-              <div class="post-read-more">
-                  <a routerLink="/news/:id" class="button-link">R{{"ReadMore" | translate}}</a>
-              </div>
-
-            </div>
-            <!-- Content section for blogs end -->
-        </div>
-    </div>
-</div>
-  <!-- COLUMNS 6 -->
-<div class="col-lg-6 col-md-12">
-  <div class="box">
-      <div class="post-bx">
-          <!-- Content section for blogs start -->
-          <div class="post-thum" style="width: 90%;margin: auto;">
-            <img title="title" alt="news" src="/assets/images/6.jpg" class="img-fluid">
-          </div>
-          <div class="post-info" style="width: 90%;margin: auto;">
-            <div class="post-meta">
-                <p class="post-date"><span>June 18, 2022</span></p>
-            </div>
-
-            <div class="post-text">
-              <h5 class="post-title mb-3">
-                <a >Helping Companies in  Their Green Transition</a>
-              </h5>
-            </div>
-
-            <div class="post-read-more">
-                <a routerLink="/news/:id" class="button-link">{{"ReadMore" | translate}}</a>
-            </div>
-
-          </div>
-          <!-- Content section for blogs end -->
-      </div>
-  </div>
-</div>
-
-</div>
