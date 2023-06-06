@@ -17,6 +17,8 @@ export class AllDoctorsComponent implements OnInit {
   searchQuery: string = "";
   private searchTimer: any;
   SearchResult: any;
+  NoDoctors:boolean = false;
+  ErrorMessage:any;
 
   constructor(
     private DoctorsService:DoctorsService,private Router:Router,
@@ -31,8 +33,16 @@ export class AllDoctorsComponent implements OnInit {
     this.DoctorsService.GetAllDoctors().subscribe({
       next: data => {this.Doctors = data;
         this.SearchResult = data;
+        this.NoDoctors = false;
+        if(!this.Doctors){
+          this.NoDoctors = true;
+          this.ErrorMessage = "No Department Found"
+        }
     },
-      error: err => console.log(err)
+      error: err => {
+        this.NoDoctors = true;
+        this.ErrorMessage = "Can't Connect to Server"
+      }
     })
   }
 
