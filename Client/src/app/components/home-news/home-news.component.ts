@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { Article } from 'src/app/Interfaces/Article';
 
 @Component({
   selector: 'app-home-news',
@@ -6,5 +7,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./home-news.component.css']
 })
 export class HomeNewsComponent {
-
+@Input() new:Article|null= null;
 }
