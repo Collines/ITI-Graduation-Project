@@ -55,7 +55,7 @@ export class AccountService {
   logout() {
     localStorage.removeItem('user');
     this.CurrentUserSource.next(null);
-    this.location.back();
+    this.router.navigate(['/login']);
   }
 
   update(accessToken: string, model: FormData) {

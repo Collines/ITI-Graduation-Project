@@ -19,8 +19,8 @@
   "By": "بواسطة",
   "TeamName": "الفريق الطبي",
   "BusinessHours": "ساعات العمل:",
-  "WorkingTime": "من 8 صباحاً الي 12 صباحاً",
-  "MobileNumber": "+۲۰ ۱۰۱٦۰۱۷۳۹٥",
+  "WorkingTime": "من 8 صباحاً الي 2 مساءً",
+  "MobileNumber": "۱۰۱٦۰۱۷۳۹٥ ۲۰+",
 
   "TheBest": "افضل",
   "MedServices": "الخدمات الطبية",
@@ -31,7 +31,7 @@
   "header3Part2": "لجميع أفراد الأسرة",
 
   "DocAtWork": "طبيب",
-  "SatPatients": "مرضى راضون",
+  "SatPatients": "مريض",
   "Beds": "سرير",
   "Appointment": "فحص طبى",
   "Our": " ",
@@ -91,6 +91,10 @@
   "Time": "الوقت",
   "Blank": "اتركه فارغ لعدم التعديل",
   "ProfilePicture":"الصورة الشخصية",
+  "Can't Connect to Server": "تعذر الاتصال بالخادم",
+  "This Credentials Are Blocked!": "هذا الحساب تم حظره",
+  "Invalid Attempt!": "محاولة غير صحيحة",
+  "Incorrect username or password!": "خطأ فى اسم المستخدم او كلمة المرور",
 
   "QueueNumber": "دورك",
   "Cancel": "الغاء",

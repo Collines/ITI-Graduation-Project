@@ -44,6 +44,7 @@ export class ContactComponent {
   submitted = false;
   isError = false;
   isSuccess = false;
+  direction = document.dir;
 
   get isSenderNameValid() {
     return this.Validation.controls.SenderName.valid;

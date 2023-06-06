@@ -1,13 +1,15 @@
-<div class="aon-med-team">
+<div class="aon-med-team h-100">
   <a routerLink="/department/{{ department.id }}"
-    ><div class="aon-med-team-info ms-3 mt-3">
-      <h5 class="card-title mb-2">
+    ><div class="aon-med-team-info ms-3 mt-3 d-flex flex-column justify-content-between h-100">
+      <div>
+        <h5 class="card-title mb-2">
         <a>{{ department.title }}</a>
       </h5>
       <h6 class="card-subtitle mb-2 text-muted">
         {{ department.description }}
       </h6>
-      <a routerLink="/department/{{ department.id }}" class="btn btn1 my-2">{{
+    </div>
+      <a routerLink="/department/{{ department.id }}" class="btn btn1 my-3 align-self-end text-center col-4">{{
         "View" | translate
       }}</a>
     </div></a

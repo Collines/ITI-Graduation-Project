@@ -1,7 +1,10 @@
 <div class="contact">
   <div class="banner">
     <div class="container">
-      <div class="title">
+      <div class="title" [ngClass]="{
+        'titleLeft':direction == 'ltr',
+        'titleRight':direction == 'rtl'
+      }">
         <h2>{{ "Contactus" | translate }}</h2>
         <p class="text-white link-nav">
           <a routerLink="/home">{{ "Home" | translate }} </a>
