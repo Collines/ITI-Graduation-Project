@@ -34,12 +34,12 @@ export class AllDepartmentsComponent implements OnInit {
         this.departments = data;
         this.SearchResult = this.departments;
         this.NoDepartments = false;
-        if(!this.departments){
+        if(!this.departments.length){
           this.NoDepartments = true;
           this.ErrorMessage = "No Department Found"
         }
       },
-      error:(err)=>{console.log(err);
+      error:(err)=>{
         this.NoDepartments = true;
         this.ErrorMessage = "Can't Connect to Server"
       }

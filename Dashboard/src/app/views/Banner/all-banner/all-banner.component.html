@@ -1,39 +1,52 @@
 <div class="text-center">
     <a routerLink="/AddBanner" class="btn btn-outline-primary rounded-pill mb-4">Create New Banner</a>
 </div>
-<table class="table align-middle mb-0 bg-white">
-    <thead class="table-dark">
-      <tr>
-        <th>ID</th>
-        <th>Title</th>
-        <th>Description</th>
-        <th class="text-center">Actions</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let d of Banners">
-        <td>{{d.id}}</td>
-        <td>
-          <div class="d-flex align-items-center">
-            <img
-                src="{{d.imagePath}}"
-                alt=""
-                style="width: 45px; height: 45px; border: 1px solid black;"
-                class="rounded-circle"
-                />
-            <div class="ms-3">
-              <p class="fw-bold mb-1">{{d.title}}</p>
+
+<div class="text-center" *ngIf="!Banners && !NoData">
+  <div class="spinner-border text-primary" role="status">
+    <span class="visually-hidden">Loading...</span>
+  </div>
+</div>
+
+<h1 class="text-center">
+  {{ErrorMessage}}
+</h1>
+
+<div *ngIf="Banners.length > 0">
+  <table class="table align-middle mb-0 bg-white">
+      <thead class="table-dark">
+        <tr>
+          <th>ID</th>
+          <th>Title</th>
+          <th>Description</th>
+          <th class="text-center">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let d of Banners">
+          <td>{{d.id}}</td>
+          <td>
+            <div class="d-flex align-items-center">
+              <img
+                  src="{{d.imagePath}}"
+                  alt=""
+                  style="width: 45px; height: 45px; border: 1px solid black;"
+                  class="rounded-circle"
+                  />
+              <div class="ms-3">
+                <p class="fw-bold mb-1">{{d.title}}</p>
+              </div>
             </div>
-          </div>
-        </td>
-        <td>
-          <p class="fw-normal mb-1">{{d.Description}}</p>
-        </td>
-        <td class="text-center">
-          <a routerLink="/Banners/{{d.id}}" class="btn" title="Details"><i class="fa-solid fa-desktop text-info" ></i></a>
-          <a routerLink="/EditBanner/{{d.id}}" class="btn" title="Edit"><i class="fa-solid fa-pen-to-square text-warning" ></i></a>
-          <button (click)="DeleteBanner(d.id)" class="btn " title="Delete"><i class="fa-solid fa-trash text-danger" ></i></button>
-        </td>
-      </tr>
-    </tbody>
-</table>
+          </td>
+          <td>
+            <p class="fw-normal mb-1">{{d.Description}}</p>
+          </td>
+          <td class="text-center">
+            <a routerLink="/Banners/{{d.id}}" class="btn" title="Details"><i class="fa-solid fa-desktop text-info" ></i></a>
+            <a routerLink="/EditBanner/{{d.id}}" class="btn" title="Edit"><i class="fa-solid fa-pen-to-square text-warning" ></i></a>
+            <button (click)="DeleteBanner(d.id)" class="btn " title="Delete"><i class="fa-solid fa-trash text-danger" ></i></button>
+          </td>
+        </tr>
+      </tbody>
+  </table>
+</div>

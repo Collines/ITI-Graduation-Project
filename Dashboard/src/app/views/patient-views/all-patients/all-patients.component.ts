@@ -34,7 +34,7 @@ export class AllPatientsComponent implements OnInit {
       next:(data)=>{this.Patients = data;
         this.SearchResult = data;
         this.NoData = false;
-        if(!this.Patients){
+        if(!this.Patients.length){
           this.NoData = true;
           this.ErrorMessage = "No Patients Found"
         }

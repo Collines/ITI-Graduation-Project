@@ -32,7 +32,7 @@ export class AllReservationsComponent implements OnInit {
       next: data => {this.Reservations = data;
         this.SearchResult = data;
         this.NoData = false;
-        if(!this.Reservations){
+        if(!this.Reservations.length){
           this.NoData = true;
           this.ErrorMessage = "No Reservations Found"
         }
