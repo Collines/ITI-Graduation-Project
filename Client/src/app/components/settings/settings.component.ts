@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { UserEdit } from 'src/app/Interfaces/User/UserEdit';
 import { AccountService } from 'src/app/Services/account.service';
+import { User } from 'src/app/Interfaces/User/user';
 
 @Component({
   selector: 'app-settings',
@@ -15,18 +16,22 @@ export class SettingsComponent implements OnInit {
       FirstName: new FormControl(null, [
         Validators.required,
         Validators.minLength(3),
+        Validators.pattern('^[a-zA-z]+$'),
       ]),
       LastName: new FormControl(null, [
         Validators.required,
         Validators.minLength(3),
+        Validators.pattern('^[a-zA-z]+$'),
       ]),
       FirstNameAr: new FormControl(null, [
         Validators.required,
         Validators.minLength(3),
+        Validators.pattern('^[\u0621-\u064A]+$'),
       ]),
       LastNameAr: new FormControl(null, [
         Validators.required,
         Validators.minLength(3),
+        Validators.pattern('^[\u0621-\u064A]+$'),
       ]),
       email: new FormControl(null, [
         Validators.required,
@@ -69,7 +74,7 @@ export class SettingsComponent implements OnInit {
               this.Validation.controls['Phone'].value = this.userEdit.phone;
               this.Validation.controls['Date'].value = this.dateStr;
 
-              this.Validation.controls['FirstName'].status = 'VALID'; 
+              this.Validation.controls['FirstName'].status = 'VALID';
               this.Validation.controls['LastName'].status = 'VALID';
               this.Validation.controls['FirstNameAr'].status = 'VALID';
               this.Validation.controls['LastNameAr'].status = 'VALID';
@@ -111,7 +116,6 @@ export class SettingsComponent implements OnInit {
   isDataLoaded = false;
   isResponsed = false;
   textArea: string = '';
-  test: any;
 
   get isFirstNameValid() {
     return this.Validation.controls['FirstName'].status == 'VALID';
@@ -164,7 +168,6 @@ export class SettingsComponent implements OnInit {
       if (accessToken) {
         const formData: FormData = new FormData();
         if (this.FileToUpload) formData.append('Image', this.FileToUpload);
-
         formData.append(
           'FirstName_EN',
           this.Validation.controls['FirstName'].value
@@ -189,41 +192,31 @@ export class SettingsComponent implements OnInit {
         formData.append('SSN', this.userEdit.ssn);
         let pass = this.Validation.controls['password'].value;
         formData.append('Password', pass == '' ? null : pass);
-        if (this.FileToUpload) {
-          // this.DoctorsService.AddDoctor(formData).subscribe({
-          //   next: data => {alert("Doctor Added Successfully")
-          //                   this.Router.navigate(['/Doctors'])},
-          //   error: err => console.log(err)});
-        }
-        this.test = formData;
-        // let user: UserUpdate = {
-        //   firstName_EN: this.Validation.controls['FirstName'].value,
-        //   firstName_AR: this.Validation.controls['FirstNameAr'].value,
-        //   lastName_EN: this.Validation.controls['LastName'].value,
-        //   lastName_AR: this.Validation.controls['LastNameAr'].value,
-        //   email: this.Validation.controls['email'].value,
-        //   phone: this.Validation.controls['Phone'].value,
-        //   dob: this.Validation.controls['Date'].value,
-        //   medicalHistory: this.textArea,
-        //   password: this.Validation.controls['password'].value,
-        //   image: { id: 0, name: this.BaseImage, patientId: this.userEdit.id },
-        //   gender:this.userEdit.gender
-        // };
+
         this.accountService.update(accessToken, formData).subscribe({
           next: (r: any) => {
             this.error = false;
             errorElement.classList.add('d-none');
             SuccessElement.innerHTML = r.message;
             this.isResponsed = true;
+            let user = localStorage.getItem('user');
+            let language: string | null = localStorage.getItem('language');
+            if (user) {
+              let userObj: User = JSON.parse(user);
+              userObj.fullName =
+                language && language == 'en'
+                  ? this.Validation.controls['FirstName'].value +
+                    ' ' +
+                    this.Validation.controls['LastName'].value
+                  : this.Validation.controls['FirstNameAr'].value +
+                    ' ' +
+                    this.Validation.controls['LastNameAr'].value;
+              localStorage.setItem('user', JSON.stringify(userObj));
+            }
           },
           error: (e: any) => {
             this.error = true;
             this.isResponsed = false;
-            errorElement.innerHTML = e.error;
-            this.test.forEach((el: any, key: any) => {
-              console.log(el, key);
-            });
-            console.log(e);
           },
         });
       }

@@ -2,7 +2,6 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { User } from '../Interfaces/User/user';
 import { BehaviorSubject, Observable, map } from 'rxjs';
-import { UserUpdate } from '../Interfaces/User/userUpdate';
 import { Router } from '@angular/router';
 import { UserEdit } from '../Interfaces/User/UserEdit';
 import { HeaderService } from './header.service';

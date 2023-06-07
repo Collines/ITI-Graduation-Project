@@ -14,10 +14,10 @@ namespace GraduationProject_DAL.Data.Models
         [Required, StringLength(14)]
         public required string SSN { get; set; }
 
-        [Required, MaxLength(50)]
+        [Required, MaxLength(50), RegularExpression("^[a-zA-z]+$")]
         public required string FirstName { get; set; }
 
-        [Required, MaxLength(50)]
+        [Required, MaxLength(50), RegularExpression("^[a-zA-z]+$")]
         public required string LastName { get; set; }
 
         [Required]
