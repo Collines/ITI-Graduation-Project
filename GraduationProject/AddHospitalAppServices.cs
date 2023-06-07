@@ -50,6 +50,8 @@ namespace GraduationProject
             services.AddScoped<ITranslations<BannerTranslation>, BannerTranslationRepository>();
             services.AddScoped<IBannerManger, BannerManager>();
 
+            services.AddScoped<ISeeder, AdminSeeder>();
+
 
             // Adding Authentication using JWT
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
