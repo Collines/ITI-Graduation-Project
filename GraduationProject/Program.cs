@@ -1,9 +1,12 @@
 using GraduationProject;
 using GraduationProject.Middlewares;
+using GraduationProject_DAL.Interfaces;
+using GraduationProject_DAL.Repositories;
+using Microsoft.AspNetCore.Identity;
 
 internal class Program
 {
-    private static void Main(string[] args)
+    private static async Task Main(string[] args)
     {
         string CorsPolicy = "";
         var builder = WebApplication.CreateBuilder(args);
@@ -49,7 +52,12 @@ internal class Program
 
         app.MapControllers();
 
-        
+        using (var scope = app.Services.CreateScope())
+        {
+            var adminSeeders = scope.ServiceProvider.GetRequiredService<ISeeder>();
+
+            await adminSeeders.Seed();
+        }
 
         app.Run();
     }
