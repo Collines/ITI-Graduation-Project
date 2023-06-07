@@ -64,7 +64,7 @@ export class EditBannerComponent implements OnInit {
         Validators.minLength(10),
         Validators.maxLength(500),
         Validators.pattern(this.ArabicPatternForParagraph)]),
-    Image: new FormControl(null, [Validators.required])
+    Image: new FormControl(null)
   });
 
 
