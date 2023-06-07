@@ -10,7 +10,7 @@
   "Profile": "Profile",
   "Settings": "Settings",
 
-  "aboutus":"About Us",
+  "aboutus": "About Us",
   "Contactus": "Contact Us",
 
   "HaveQuestion": "Have a Question?",
@@ -59,7 +59,7 @@
   "ViewProfile": "View Profile",
   "Book": "Book",
   "SearchByDoctor": "Search by name...",
-  "SearchByNews":"Search by name...",
+  "SearchByNews": "Search by name...",
   "Dr.": "Dr.",
   "Name": "Name",
   "Title": "Title",
@@ -68,7 +68,7 @@
   "Doctors": "Doctors",
   "Doctor": "Doctors",
   "NoDoctors": "No Doctors in this department",
-  "Reserve with Dr.":"Reserve with Dr.",
+  "Reserve with Dr.": "Reserve with Dr.",
   "ReservationDateValidation": "Please pickup a valid reservation date",
   "ReservationAdded": "Reservation Added Successfully",
   "ReservationFaild": "This day is fully occupied try an other one",
@@ -91,7 +91,7 @@
   "Date": "Date",
   "Time": "Time",
   "Blank": "Leave blank for unchange",
-  "ProfilePicture":"Profile Picture",
+  "ProfilePicture": "Profile Picture",
   "Can't Connect to Server": "Can't Connect to Server",
   "This Credentials Are Blocked!": "This Credentials Are Blocked!",
   "Invalid Attempt!": "Invalid Attempt!",
@@ -154,10 +154,10 @@
   "Cancelled": "Cancelled",
   "Status": "Status",
 
-  "Welcome":"Welcome Back",
-  "EDIT":"EDIT PROFILE",
-  "NEWAPPOINTMENT":" CREATE NEW APPOINTMENT",
-  "Trust":"Your Trust is Our Greatest Incentive!",
+  "Welcome": "Welcome Back",
+  "EDIT": "EDIT PROFILE",
+  "NEWAPPOINTMENT": " CREATE NEW APPOINTMENT",
+  "Trust": "Your Trust is Our Greatest Incentive!",
   "FNameValidation": "First Name Should be 3 characters or more",
   "LNameValidation": "Last Name Should be 3 characters or more",
   "FNameARValidation": "Arabic First Name Should be 3 characters or more",
@@ -183,29 +183,24 @@
   "Professionalism": "Professionalism",
   "Professionalismtext": "a staff who is trained on the latest scientific and technical developments and responsive to the needs of patients.",
 
-  "Goodnews":"Good news for the pacients",
-  "drug":"New drug release soon",
-  "post-operative":"Free post-operative care",
-  "AlexAnder":"Alex Ander",
-  "30min":"30 min",
-  "MorganFree":"Morgan Free",
-  "20min":"20 min",
-  "MartaSocrate":"Marta Socrate",
-  "10min":"10 min",
+  "Goodnews": "Good news for the pacients",
+  "drug": "New drug release soon",
+  "post-operative": "Free post-operative care",
+  "AlexAnder": "Alex Ander",
+  "30min": "30 min",
+  "MorganFree": "Morgan Free",
+  "20min": "20 min",
+  "MartaSocrate": "Marta Socrate",
+  "10min": "10 min",
+  "news": "News",
+  "RecentPosts": "Recent Posts",
+  "ReadMore": "Read More",
+  "HealthCare": "Better Health Care",
+  "Healthdepartment": "Health department advice",
 
-  "HealthCare":"Better Health Care",
-  "Healthdepartment":"Health department advice",
-
-  "CareForPatients":"When you care for patients, the stakes are high and every decision counts.",
-  "Youneedthebest":" You need the best evidence and clinical guidance at your fingertips to answer",
-  "complexquestions":"even the most complex questions with confidence.",
-  "footerData":"When you care for patients, the stakes are high and every decision counts. You need the best evidence and clinical guidance at your fingertips to answer even the most complex questions with confidence.",
-
-  "news":"News",
-  "RecentPosts":"Recent Posts",
-  "ReadMore":"Read More"
-
-
-
-
+  "CareForPatients": "When you care for patients, the stakes are high and every decision counts.",
+  "Youneedthebest": " You need the best evidence and clinical guidance at your fingertips to answer",
+  "complexquestions": "even the most complex questions with confidence.",
+  "footerData": "When you care for patients, the stakes are high and every decision counts. You need the best evidence and clinical guidance at your fingertips to answer even the most complex questions with confidence.",
+  "error": "error occured"
 }

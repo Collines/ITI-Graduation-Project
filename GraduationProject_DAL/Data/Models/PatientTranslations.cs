@@ -11,10 +11,10 @@ namespace GraduationProject_DAL.Data.Models
         [Key]
         public int Id { get; set; }
 
-        [Required, MaxLength(50)]
+        [Required, MaxLength(50), RegularExpression("^[a-zA-z]+$")]
         public required string FirstName_EN { get; set; }
 
-        [Required, MaxLength(50)]
+        [Required, MaxLength(50), RegularExpression("^[a-zA-z]+$")]
         public required string FirstName_AR { get; set; }
 
         [Required, MaxLength(50)]
